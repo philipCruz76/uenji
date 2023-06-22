@@ -1,2 +1,2 @@
-# mixa
-Temp repo for mixa website
+# Uenji
+Temp repo for Uenji website
