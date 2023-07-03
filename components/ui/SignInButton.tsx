@@ -22,7 +22,7 @@ const SignInButton = () => {
 
   return (
     <>
-      <Link href="/" onClick={openModal} className={cn("text-center items-center  hidden sm:flex font-semibold text-sm focus:border-none focus:outline-none")} > Sign in </Link>
+      <Link href="/" onClick={openModal} className={cn("text-center items-center  hidden sm:flex font-semibold text-base focus:border-none focus:outline-none")} > Sign in </Link>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" onClose={closeModal}>

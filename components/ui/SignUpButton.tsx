@@ -22,7 +22,7 @@ const SignUpButton = () => {
 
   return (
     <>
-      <Link href="/" onClick={openModal} className={cn(buttonVariants({variant:"default"}),"w-[80px] font-semibold text-sm")} > Join </Link>
+      <Link href="/" onClick={openModal} className={cn(buttonVariants({variant:"default"}),"w-[80px] font-semibold text-base")} > Join </Link>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" onClose={closeModal}>

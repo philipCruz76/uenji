@@ -50,64 +50,8 @@ export const authOptions: NextAuthOptions = {
     ],
     debug: process.env.NODE_ENV === 'development',
     secret: process.env.NEXTAUTH_SECRET,
-    callbacks: {
-        async session({ token, session }) {
-            if (token) {
-                session.user.id = token.id
-                session.user.name = token.name
-                session.user.email = token.email
-                session.user.image = token.picture
-                session.user.username = token.username
-                session.user.isSeller = token.isSeller
-            }
+    
 
-            return session
-        },
-        async signIn({ user }: { user: AdapterUser | User }) {
-            try {
-                return true
-            } catch (error: any) {
-                console.log(error)
-                return false
-            }
-        },
-
-        async jwt({ token, user }) {
-            const dbUser = await db.user.findFirst({
-                where: {
-                    email: token.email,
-                },
-            })
-
-            if (!dbUser) {
-                token.id = user!.id
-                return token
-            }
-
-            if (!dbUser.username) {
-                await db.user.update({
-                    where: {
-                        id: dbUser.id,
-                    },
-                    data: {
-                        username: nanoid(10),
-                    },
-                })
-            }
-
-            return {
-                id: dbUser.id,
-                name: dbUser.name,
-                email: dbUser.email,
-                picture: dbUser.image,
-                username: dbUser.username,
-                isSeller: dbUser.isSeller,
-            }
-        },
-        redirect() {
-            return '/'
-        },
-    },
 }
 
 export const getAuthSession = () => getServerSession(authOptions)

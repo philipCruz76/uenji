@@ -35,7 +35,14 @@ const NavBar = () => {
         <nav className={navbar ? activeNavBar : inactiveNavBar}>
 
             {/*Mobile Nav Button*/}
-            <MobileNav />
+            <div className="flex lg:hidden ml-auto justify-between items-center focus:outline-none">
+                    <button className="flex items-center px-3 py-2 text-gray-600 ">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-8 h-10">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                </div>
+            
 
             {/*Logo*/}
             <div className="flex-1 flex items-center  justify-center sm:justify-start gap-8 ">
