@@ -38,11 +38,11 @@ const NavBar = () => {
             <MobileNav />
 
             {/*Logo*/}
-            <div className="flex-1 flex items-center  justify-center sm:justify-start gap-8">
-                <div className="flex font-sans font-bold text-[34px] lg:mr-6">
+            <div className="flex-1 flex items-center  justify-center sm:justify-start gap-8 ">
+                <div className="flex font-sans font-bold text-[34px] lg:mr-6  sm:px-0 px-32">
                     <Link href="/">Uenji</Link>
                 </div>
-                
+
 
                 {/*Search Bar*/}
                 <div className="sm:flex lg:max-w-md hidden flex-1 px-2">
@@ -64,14 +64,17 @@ const NavBar = () => {
                     ))}
                 </ul>
 
-                        {/*Auth Button*/}
-                <SignInButton />
-                <SignUpButton />
+                {/*Auth Button*/}
+                <div className="flex flex-row gap-3 ">
+                    <SignInButton />
+                    <SignUpButton />
+                </div>
+
             </div>
 
-            
+
             <div className="flex justify-center items-center gap-4">
-               
+
             </div>
         </nav>
     )
