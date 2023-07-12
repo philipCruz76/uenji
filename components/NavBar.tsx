@@ -2,10 +2,9 @@
 
 import { NavLinks } from "@/constants"
 import Link from "next/link"
-import { useEffect, useState } from "react";
-import MobileNav from "@/components/MobileNav";
-import SignInButton from "@/components/ui/SignInButton";
-import SignUpButton from "./ui/SignUpButton";
+import { useCallback, useEffect, useState } from "react";
+import AuthModal from "@/components/AuthModal";
+import MobileNav from "./MobileNav";
 
 const activeNavBar = "antialiased fixed top-0 z-10 flex w-full justify-between items-center px-6 py-4 bg-white shadow-md transition duration-500 ease-in-out"
 const inactiveNavBar = "antialiased fixed top-0 z-10 flex w-full justify-between items-center px-6 py-4 bg-transparent text-white transition duration-500 ease-in-out"
@@ -13,15 +12,19 @@ const inactiveNavBar = "antialiased fixed top-0 z-10 flex w-full justify-between
 
 const NavBar = () => {
 
-    const [navbar, setNavbar] = useState(false);
+    let [navbar, setNavbar] = useState(false);
+
 
     const changeBackground = () => {
-        if (window.scrollY >= 80) {
+        if (window.scrollY >= 60) {
             setNavbar(true);
         } else {
             setNavbar(false);
         }
     }
+
+
+
     useEffect(() => {
         window.addEventListener('scroll', changeBackground);
 
@@ -36,13 +39,8 @@ const NavBar = () => {
 
             {/*Mobile Nav Button*/}
             <div className="flex lg:hidden ml-auto justify-between items-center focus:outline-none">
-                    <button className="flex items-center px-3 py-2 text-gray-600 ">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-8 h-10">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
-                    </button>
-                </div>
-            
+                <MobileNav />
+            </div>
 
             {/*Logo*/}
             <div className="flex-1 flex items-center  justify-center sm:justify-start gap-8 ">
@@ -73,8 +71,8 @@ const NavBar = () => {
 
                 {/*Auth Button*/}
                 <div className="flex flex-row gap-3 ">
-                    <SignInButton />
-                    <SignUpButton />
+                    <AuthModal signIn={true} />
+                    <AuthModal signIn={false} />
                 </div>
 
             </div>

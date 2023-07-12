@@ -1,11 +1,9 @@
 import { db } from '@/lib/db'
 import bcrypt from 'bcrypt'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { nanoid } from 'nanoid'
-import { NextAuthOptions, User, getServerSession } from 'next-auth'
+import { NextAuthOptions, getServerSession } from 'next-auth'
 import  CredentialsProvider  from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
-import { AdapterUser } from 'next-auth/adapters'
 
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(db),
@@ -22,7 +20,6 @@ export const authOptions: NextAuthOptions = {
             credentials: {
                 email: { label: 'Email', type: 'email'},
                 password: { label: 'Password', type: 'password'},
-                username: { label: 'Username', type: 'text', placeholder: 'Username', required: false},
             },
             async authorize(credentials) {
                 if(!credentials?.email || !credentials?.password) {
@@ -50,7 +47,20 @@ export const authOptions: NextAuthOptions = {
     ],
     debug: process.env.NODE_ENV === 'development',
     secret: process.env.NEXTAUTH_SECRET,
-    
+    callbacks: {
+        async jwt({ token, user }) {
+            
+            const dbUser = await db.user.findFirst(
+                
+            )
+            return {...token, ...user};
+        },
+
+        async session({ session, token, user }) {
+            session.user = token as any;
+            return session;
+        }
+    }
 
 }
 

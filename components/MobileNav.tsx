@@ -1,7 +1,10 @@
-import { NavLinks } from "@/constants"
+'use client'
+
+
 
 
 const MobileNav = () => {
+
     return (
         <div>
 
