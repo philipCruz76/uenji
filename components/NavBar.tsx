@@ -6,14 +6,13 @@ import { useEffect, useState } from "react";
 import AuthModal from "@/components/AuthModal";
 import MobileNav from "./MobileNav";
 
-const activeNavBar = "antialiased container fixed top-0 z-10 flex w-full justify-between items-center px-6 py-4 bg-white shadow-md transition duration-500 ease-in-out"
-const inactiveNavBar = "antialiased container fixed top-0 z-10 flex w-full justify-between items-center px-6 py-4 bg-transparent text-white transition duration-500 ease-in-out"
+const activeNavBar = "antialiased container fixed top-0 z-10 flex w-full justify-between items-center px-4 py-4 bg-white shadow-md transition duration-500 ease-in-out"
+const inactiveNavBar = "antialiased container fixed top-0 z-10 flex  w-full justify-between items-center px-4 py-4 bg-transparent text-white transition duration-500 ease-in-out"
 
 
 const NavBar = () => {
 
     let [navbar, setNavbar] = useState(false);
-
 
     const changeBackground = () => {
         if (window.scrollY >= 60) {
@@ -22,8 +21,6 @@ const NavBar = () => {
             setNavbar(false);
         }
     }
-
-
 
     useEffect(() => {
         window.addEventListener('scroll', changeBackground);
@@ -38,12 +35,12 @@ const NavBar = () => {
         <nav className={navbar ? activeNavBar : inactiveNavBar}>
 
             {/*Mobile Nav Button*/}
-            <div className="flex lg:hidden ml-auto justify-between items-center focus:outline-none">
+            <div className="lg:hidden justify-between items-center focus:outline-none">
                 <MobileNav />
             </div>
 
             {/*Logo*/}
-            <div className="flex-1 flex items-center  justify-center sm:justify-start gap-8 ">
+            <div className="flex items-center justify-center sm:justify-start sm:gap-8 ">
                 <div className="flex font-sans font-bold text-[34px] lg:mr-6  sm:px-0 px-32">
                     <Link href="/">Uenji</Link>
                 </div>
@@ -61,7 +58,7 @@ const NavBar = () => {
 
 
                 {/*Nav Links*/}
-                <ul className=" lg:flex hidden text-base font-semibold px-2 gap-[20px]">
+                <ul className="lg:flex hidden text-base font-semibold px-2 gap-[20px]">
                     {NavLinks.map((link) => (
                         <Link href={link.href} key={link.key}>
                             {link.text}
@@ -70,17 +67,13 @@ const NavBar = () => {
                 </ul>
 
                 {/*Auth Button*/}
-                <div className="flex flex-row gap-3 ">
+                <div className="flex flex-row sm:gap-3">
                     <AuthModal signIn={true} />
                     <AuthModal signIn={false} />
                 </div>
 
             </div>
 
-
-            <div className="flex justify-center items-center gap-4">
-
-            </div>
         </nav>
     )
 }

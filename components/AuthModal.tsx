@@ -40,7 +40,7 @@ const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
 
   return (
     <>
-      {!signIn ? <Link href="/" onClick={openModal} className={cn(buttonVariants({ variant: "default" }), "w-[80px] font-semibold text-base focus:outline-none")} > Join </Link> :
+      {!signIn ? <Link href="/" onClick={openModal} className={cn(buttonVariants({ variant: "default" }), " sm:w-[80px] w-[60px] font-semibold text-base focus:outline-none")} > Join </Link> :
         <Link href="/" onClick={openModal} className={cn("text-center items-center  hidden sm:flex font-semibold text-base focus:border-none focus:outline-none")} > Sign in </Link>}
 
       {!isMobile ? <DesktopAuthModal opened={isOpen} signedIn={signIn} setOpenState={setIsOpen} /> :
