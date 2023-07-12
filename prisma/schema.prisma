@@ -1,0 +1,172 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String   @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?  @db.String
+  access_token      String?  @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?  @db.String
+  session_state     String?
+  createdAt         DateTime @default(now()) @map(name: "created_at")
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map(name: "accounts")
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map(name: "sessions")
+}
+
+model User {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  username       String?   @unique @map(name: "user_name")
+  name           String?
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?   @map(name: "hashed_password")
+  country        String?
+  phoneNumber    String?
+  description    String?
+  isSeller       Boolean?  @default(false) @map(name: "is_seller")
+  sellerId       String?   @unique @map(name: "seller_id")
+  createdAt      DateTime  @default(now()) @map(name: "created_at")
+  updatedAt      DateTime  @updatedAt
+  accounts       Account[]
+  sessions       Session[]
+
+  stripeCustomerId       String?        @unique @map(name: "stripe_customer_id")
+  stripeSubscriptionId   String?        @unique @map(name: "stripe_subscription_id")
+  stripePriceId          String?        @map(name: "stripe_price_id")
+  stripeCurrentPeriodEnd DateTime?      @map(name: "stripe_current_period_end")
+  Gig                    Gig[]
+  Order                  Order[]
+  Review                 Review[]
+  Conversation           Conversation[]
+  Message                Message[]
+
+  @@map(name: "users")
+}
+
+model Gig {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  description    String
+  totalRatings   Int?     @default(0) @map(name: "total_ratings")
+  ratingNumber   Int?     @default(0) @map(name: "rating_number")
+  category       String
+  price          Float
+  coverImage     String?  @map(name: "cover_image")
+  images         String[]
+  shortTitle     String   @map(name: "short_title")
+  deliveryTime   Int      @map(name: "delivery_time")
+  revisionNumber Int      @default(0) @map(name: "revision_number")
+  features       String[]
+  sales          Int?     @default(0)
+  userId         String   @db.ObjectId
+  createdAt      DateTime @default(now()) @map(name: "created_at")
+  updatedAt      DateTime @updatedAt
+
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Order  Order[]
+  Review Review[]
+
+  @@map(name: "gigs")
+}
+
+model Order {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  gigId         String   @db.ObjectId
+  userId        String   @db.ObjectId
+  sellerId      String   @db.ObjectId
+  image         String?
+  title         String
+  price         Float
+  status        String
+  isCompleted   Boolean? @default(false) @map(name: "is_completed")
+  paymentIntent String   @map(name: "payment_intent")
+  createdAt     DateTime @default(now()) @map(name: "created_at")
+  updatedAt     DateTime @updatedAt
+
+  gig    Gig     @relation(fields: [gigId], references: [id], onDelete: Cascade)
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  review Review?
+
+  @@map(name: "orders")
+}
+
+model Review {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  orderId   String   @unique @db.ObjectId
+  gigId     String   @db.ObjectId
+  userId    String   @db.ObjectId
+  rating    Int
+  comment   String?
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  gig   Gig   @relation(fields: [gigId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map(name: "reviews")
+}
+
+model Conversation {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  sellerId     String    @db.ObjectId
+  buyerId      String    @db.ObjectId
+  readBySeller Boolean   @default(false) @map(name: "read_by_seller")
+  readByBuyer  Boolean   @default(false) @map(name: "read_by_user")
+  lastMessage  String?   @map(name: "last_message")
+  createdAt    DateTime  @default(now()) @map(name: "created_at")
+  updatedAt    DateTime  @updatedAt
+  User         User?     @relation(fields: [userId], references: [id])
+  userId       String?   @db.ObjectId
+  Message      Message[]
+
+  @@map(name: "conversations")
+}
+
+model Message {
+  id             String @id @default(auto()) @map("_id") @db.ObjectId
+  conversationId String @db.ObjectId
+
+  body      String?
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  sellerId String @db.ObjectId
+
+  @@map(name: "messages")
+}
