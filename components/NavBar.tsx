@@ -2,12 +2,12 @@
 
 import { NavLinks } from "@/constants"
 import Link from "next/link"
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AuthModal from "@/components/AuthModal";
 import MobileNav from "./MobileNav";
 
-const activeNavBar = "antialiased fixed top-0 z-10 flex w-full justify-between items-center px-6 py-4 bg-white shadow-md transition duration-500 ease-in-out"
-const inactiveNavBar = "antialiased fixed top-0 z-10 flex w-full justify-between items-center px-6 py-4 bg-transparent text-white transition duration-500 ease-in-out"
+const activeNavBar = "antialiased container fixed top-0 z-10 flex w-full justify-between items-center px-6 py-4 bg-white shadow-md transition duration-500 ease-in-out"
+const inactiveNavBar = "antialiased container fixed top-0 z-10 flex w-full justify-between items-center px-6 py-4 bg-transparent text-white transition duration-500 ease-in-out"
 
 
 const NavBar = () => {

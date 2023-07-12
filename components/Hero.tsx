@@ -12,12 +12,12 @@ const Hero = () => {
 
                 {/*Slogan*/}
                 <div className="flex flex-row  md:gap-4 gap-2 ">
-                    <div className="md:text-5xl text-4xl font-bold text-white ">Find the right</div>
-                    <div className="md:text-5xl  text-4xl font-serif italic text-white">freelance</div>
+                    <div className="md:text-5xl text-3xl font-bold text-white ">Find the right</div>
+                    <div className="md:text-5xl  text-3xl font-serif italic text-white">freelance</div>
                 </div>
                 <div className='flex relative gap-2' >
-                    <div className="md:text-5xl  text-4xl font-serif italic text-white"> service, </div>
-                    <div className="text-5xl font-bold text-white">right away</div>
+                    <div className="md:text-5xl  text-3xl font-serif italic text-white"> service, </div>
+                    <div className="md:text-5xl text-3xl font-bold text-white">right away</div>
                 </div>
                 
 
