@@ -5,7 +5,7 @@ const Hero = () => {
         <div>
 
             {/*Background Image*/}
-            <img className="flex w-full" src="./bg-image.jpeg" alt="backgroung image" />
+            <img className="flex object-fill w-full" src="./bg-image.jpeg" alt="backgroung image" />
 
             {/*Overlay*/}
             <div className="container flex absolute z-1 inset-0 mt-64 px-6 flex-col items-start justify-start ">

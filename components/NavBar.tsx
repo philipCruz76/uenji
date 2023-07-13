@@ -6,8 +6,8 @@ import { useEffect, useState } from "react";
 import AuthModal from "@/components/AuthModal";
 import MobileNav from "./MobileNav";
 
-const activeNavBar = "antialiased container fixed top-0 z-10 flex w-full justify-between items-center px-4 py-4 bg-white shadow-md transition duration-500 ease-in-out"
-const inactiveNavBar = "antialiased container fixed top-0 z-10 flex  w-full justify-between items-center px-4 py-4 bg-transparent text-white transition duration-500 ease-in-out"
+const activeNavBar = " fixed top-0 z-10 flex  max-w-full w-full mx-auto justify-between items-center px-4 py-4 bg-white shadow-md transition duration-500 ease-in-out"
+const inactiveNavBar = " fixed top-0 z-10 flex max-w-full w-full mx-auto justify-between items-center px-4 py-4 bg-transparent text-white transition duration-500 ease-in-out"
 
 
 const NavBar = () => {
@@ -34,20 +34,25 @@ const NavBar = () => {
     return (
         <nav className={navbar ? activeNavBar : inactiveNavBar}>
 
-            {/*Mobile Nav Button*/}
-            <div className="lg:hidden justify-between items-center focus:outline-none">
-                <MobileNav />
-            </div>
 
-            {/*Logo*/}
-            <div className="flex items-center justify-center sm:justify-start sm:gap-8 ">
-                <div className="flex font-sans font-bold text-[34px] lg:mr-6  sm:px-0 px-32">
-                    <Link href="/">Uenji</Link>
+
+            {/*NavBar items*/}
+            <div className="flex items-center w-full justify-between  xl:gap-8 ">
+                {/*Mobile Nav Button*/}
+                <div className="lg:hidden flex focus:outline-none">
+                    <MobileNav />
                 </div>
+
+                {/*Logo*/}
+
+                <Link href="/" className="flex font-sans font-bold text-[34px] sm:px-4">
+                    Uenji
+                </Link>
+
 
 
                 {/*Search Bar*/}
-                <div className="sm:flex lg:max-w-md hidden flex-1 px-2">
+                <div className="sm:flex  hidden px-2">
                     <input type="text" placeholder="Encontre o serviço que precisa aqui" className="border-2 border-slate-300 bg-white h-10 px-5 w-full rounded-l-md text-sm text-black focus:outline-none focus:border-slate-500" />
                     <button type="submit" className="relative w-12 border-black bg-black rounded-r-md overflow-visible ">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 8 28" strokeWidth="2" stroke="currentColor" className="w-[28px] h-[22px]">
