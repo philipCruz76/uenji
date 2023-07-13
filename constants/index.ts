@@ -5,6 +5,13 @@ export const NavLinks = [
     { href: '/', key: 'Hire Developers', text: 'Hire Developers' }
 ];
 
+
+export const MobileNavLinks = [
+    { href: '/', key: 'Sign in', text: 'Sign in' },
+    { href: '/', key: 'Browse Categories', text: 'Browse categories' },
+    { href: '/', key: 'Explore', text: 'Explore' },
+];
+
 export const categoryFilters = [
     "Graphics & Design",
     "Digital Marketing",

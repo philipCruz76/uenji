@@ -13,6 +13,7 @@ const inactiveNavBar = " fixed top-0 z-10 flex max-w-full w-full mx-auto justify
 const NavBar = () => {
 
     let [navbar, setNavbar] = useState(false);
+    let [mobileNav, setMobileNav] = useState(false);
 
     const changeBackground = () => {
         if (window.scrollY >= 60) {
@@ -40,7 +41,13 @@ const NavBar = () => {
             <div className="flex items-center w-full justify-between  xl:gap-8 ">
                 {/*Mobile Nav Button*/}
                 <div className="lg:hidden flex focus:outline-none">
-                    <MobileNav />
+                    <button className="flex items-center py-2 text-gray-600 " onClick={() => setMobileNav(true)} >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-8 h-10">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </button>
+                    {mobileNav && <MobileNav sidebarOpen={mobileNav} setOpenState={setMobileNav} />}
+
                 </div>
 
                 {/*Logo*/}

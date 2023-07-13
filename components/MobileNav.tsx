@@ -1,15 +1,70 @@
-'use client'
+
+import { MobileNavLinks } from "@/constants"
+import Link from "next/link"
+import AuthModal from "./AuthModal"
+import { FC, Fragment } from "react"
+import { Dialog, Transition } from "@headlessui/react"
 
 
+interface MobileNavProps {
+    sidebarOpen: boolean
+    setOpenState: React.Dispatch<React.SetStateAction<boolean>>
+}
 
-const MobileNav = () => {
+const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
 
+    // TODO - Fix transitions
     return (
-        <button className="flex items-center py-2 text-gray-600 ">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-8 h-10">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-        </button>
+        <Transition appear show={sidebarOpen} as={Fragment}>
+
+            <Dialog as="div" onClose={() => setOpenState(false)} className="lg:hidden flex  fixed inset-0 z-40 overflow-y-auto" >
+
+
+                <Transition.Child
+                    as={Fragment}
+                    enter=" ease-out duration-300"
+                    enterFrom="opacity-0"
+                    enterTo="opacity-100"
+                    leave=" ease-in duration-300"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                >
+                    <Dialog.Overlay className="lg:hidden fixed  inset-0 bg-black bg-opacity-50 " onClick={() => setOpenState(false)} />
+                </Transition.Child>
+
+
+                <Transition.Child as={Fragment}
+                    enter="transform transition duration-300 ease-out"
+                    enterFrom="-translate-x-full"
+                    enterTo="translate-x-0"
+                    leave="transform transition duration-300 ease-in"
+                    leaveFrom="translate-x-0"
+                    leaveTo="-translate-x-full"
+                >
+                    <Dialog.Panel className="lg:hidden flex flex-col left-0  h-full  min-h-screen  w-72 px-4 py-6 bg-white border-r border-gray-200" >
+
+
+                        {/* Mobile Menu Content */}
+                        <div className="overflow-y-auto flex-1">
+
+                            {/*Join Button*/}
+                            <AuthModal signIn={false} />
+
+                            {/*Nav Links*/}
+                            <ul className="flex flex-col text-gray-400 text-base font-light py-8 gap-[20px]">
+                                {MobileNavLinks.map((link) => (
+                                    <Link href={link.href} key={link.key}>
+                                        {link.text}
+                                    </Link>
+                                ))}
+                            </ul>
+                        </div>
+                    </Dialog.Panel>
+                </Transition.Child>
+
+            </Dialog>
+        </Transition>
+
     )
 }
 

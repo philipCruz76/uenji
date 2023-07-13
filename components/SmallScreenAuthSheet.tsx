@@ -34,7 +34,9 @@ const SmallScreenAuthSheet: FC<SmallScreenAuthSheetProps> = ({ opened, signedIn,
   return (
 
     <Transition appear show={opened} as={Fragment}>
-      <section className='container flex fixed top-0 left-0 right-0 bottom-0 z-20 border text-black border-white bg-white rounded-md'>
+
+      <Dialog as="div" className='container flex fixed top-0 left-0 right-0 bottom-0 z-20 border text-black border-white bg-white rounded-md' onClose={() => setOpenState(false)}>
+      
 
         <div className='flex relative items-start mx-auto px-4 py-4  font-bold text-3xl'>
           <h2> Join Uenji</h2>
@@ -50,8 +52,7 @@ const SmallScreenAuthSheet: FC<SmallScreenAuthSheetProps> = ({ opened, signedIn,
         </div>
 
 
-
-      </section>
+     </Dialog>
     </Transition>
   );
 }
