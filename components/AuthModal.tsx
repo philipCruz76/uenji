@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "./ui/Button"
 import DesktopAuthModal from "./DesktopAuthModal"
 import MobileAuthModal from "./MobileAuthModal"
+import SmallScreenAuthSheet from "./SmallScreenAuthSheet"
 
 
 interface AuthModalProps {
@@ -44,8 +45,8 @@ const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
         <Link href="/" onClick={openModal} className={cn("text-center items-center  hidden sm:flex font-semibold text-base focus:border-none focus:outline-none")} > Sign in </Link>}
 
       {!isMobile ? <DesktopAuthModal opened={isOpen} signedIn={signIn} setOpenState={setIsOpen} /> :
-        <MobileAuthModal opened={isOpen} signedIn={signIn} setOpenState={setIsOpen}/>}
-
+        <SmallScreenAuthSheet isOpen={isOpen} onClose={() => setIsOpen(false)} />}
+        {/*<MobileAuthModal opened={isOpen} signedIn={signIn} setOpenState={setIsOpen}/> :*/}
 
     </>
 

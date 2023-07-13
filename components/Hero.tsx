@@ -11,7 +11,7 @@ const Hero = () => {
             <div className="container flex absolute z-1 inset-0 mt-64 px-6 flex-col items-start justify-start ">
 
                 {/*Slogan*/}
-                <div className="flex flex-row  md:gap-4 gap-2 ">
+                <div className="flex flex-row  md:gap-4 sm:gap-2 gap-[4px]">
                     <div className="md:text-5xl text-3xl font-bold text-white ">Find the right</div>
                     <div className="md:text-5xl  text-3xl font-serif italic text-white">freelance</div>
                 </div>

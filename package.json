@@ -40,6 +40,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.4.0",
     "prisma": "^4.16.1"
   }
 }
