@@ -2,14 +2,15 @@
 
 import { Dialog, Transition } from "@headlessui/react"
 import Link from "next/link";
-import { FC, Fragment, useEffect, useState } from 'react';
+import { FC, Fragment, useState } from 'react';
 import SmallScreenJoinSheet from "./SmallScreenJoinSheet";
 import useSwipeDetection from "@/lib/touchDetection";
 
 interface SmallScreenSignInSheetProps {
-    opened: boolean;
-    setOpenState?: React.Dispatch<React.SetStateAction<boolean>>
+    openModal: boolean;
+    setOpenState?: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 
 const signInText = {
     title: 'Sign In to Uenji',
@@ -19,7 +20,7 @@ const signInText = {
 }
 
 
-const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({ opened, setOpenState }) => {
+const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({openModal, setOpenState}) => {
 
     let [showNewComponent, setShowNewComponent] = useState(false);
     const swipeDirection = useSwipeDetection();
@@ -37,16 +38,16 @@ const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({ opened, setOp
     return (
         <Transition
             appear
-            show={opened}
+            show={openModal}
             as={Fragment}
-            enter="transition ease-in-out duration-300 transform"
+            enter="transition ease-out duration-450 transform"
             enterFrom="translate-y-full"
             enterTo="translate-y-0"
-            leave="transition ease-in duration-500 transform"
+            leave="transition ease-in duration-0 transform"
             leaveFrom="translate-y-0"
             leaveTo="translate-y-full"
         >
-            <Dialog as="div" className='container flex flex-col fixed top-0 left-0 right-0 bottom-0 z-20 border text-black border-white bg-white rounded-md overflow-y-scroll' onClose={() => setOpenState?.(false)} onTouchEnd={()=> handleSwipe }>
+            <Dialog as="div" className='container flex flex-col fixed top-0 left-0 right-0 bottom-0 z-20 border text-black border-white bg-white rounded-2xl overflow-y-scroll' onClose={() => setOpenState?.(false)} onTouchEnd={()=> handleSwipe }>
 
 
                 <div className='flex relative items-start mx-auto px-4 py-4  font-bold text-3xl'>
@@ -127,7 +128,7 @@ const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({ opened, setOp
                         handleClick()
                     }}>
                         {signInText.hyperlinkText}
-                        {showNewComponent && <SmallScreenJoinSheet opened={opened} />}
+                        {showNewComponent && <SmallScreenJoinSheet openModal={true} />}
                     </Link>
                 </div>
 

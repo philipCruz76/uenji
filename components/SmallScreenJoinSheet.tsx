@@ -3,19 +3,13 @@
 
 import { Dialog, Transition } from "@headlessui/react"
 import Link from "next/link";
-import { FC, Fragment, useState } from 'react';
+import { Fragment, FC, useState } from 'react';
 import SmallScreenSignInSheet from "./SmallScreenSignInSheet";
+import useSwipeDetection from "@/lib/touchDetection";
 
-interface SmallScreenAuthSheetProps {
-  opened: boolean;
-  setOpenState?: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-const signInText = {
-  title: 'Sign In to Uenji',
-  subtext: 'Dont have an account?',
-  hyperlinkText: 'Join here',
-  credentialsText: 'Continue with email/username'
+interface SmallScreenJoinSheetProps {
+  openModal: boolean;
+  setOpenState?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const signUpText = {
@@ -24,9 +18,18 @@ const signUpText = {
   hyperlinkText: 'Sign in',
   credentialsText: 'Continue with email'
 }
-const SmallScreenJoinSheet: FC<SmallScreenAuthSheetProps> = ({ opened, setOpenState }) => {
+const SmallScreenJoinSheet: FC<SmallScreenJoinSheetProps>= ({openModal, setOpenState}) => {
 
+  
   let [showNewComponent, setShowNewComponent] = useState(false);
+
+  const swipeDirection = useSwipeDetection();
+
+    const handleSwipe=() => {
+        if(swipeDirection === 'DOWN'){
+          setOpenState?.(false);
+        }
+    }
 
   const handleClick = () => {
     setShowNewComponent(true);
@@ -35,20 +38,18 @@ const SmallScreenJoinSheet: FC<SmallScreenAuthSheetProps> = ({ opened, setOpenSt
 
   return (
 
-    // TODO implement sliding transition
-
     <Transition
       appear
-      show={opened}
+      show={openModal}
       as={Fragment}
-      enter="transition ease-in-out duration-300 transform"
+      enter="transition ease-out duration-450 transform"
       enterFrom="translate-y-full"
       enterTo="translate-y-0"
-      leave="transition ease-in duration-500 transform"
+      leave="transition ease-in duration-0 transform"
       leaveFrom="translate-y-0"
       leaveTo="translate-y-full"
     >
-      <Dialog as="div" className='container flex flex-col fixed top-0 left-0 right-0 bottom-0 z-20 border text-black border-white bg-white rounded-md overflow-y-scroll' onClose={() => setOpenState?.(false)}>
+      <Dialog as="div" className='container flex flex-col fixed top-0 left-0 right-0 bottom-0 z-20 border text-black border-white bg-white rounded-2xl overflow-y-scroll' onClose={() => setOpenState?.(false)} onTouchEnd={() => handleSwipe}>
 
 
         <div className='flex relative items-start mx-auto px-4 py-4  font-bold text-3xl'>
@@ -123,7 +124,7 @@ const SmallScreenJoinSheet: FC<SmallScreenAuthSheetProps> = ({ opened, setOpenSt
             handleClick()
           }}>
             {signUpText.hyperlinkText}
-            {showNewComponent && <SmallScreenSignInSheet opened={true}/>}
+            {showNewComponent && <SmallScreenSignInSheet openModal={true}/>}
           </Link>
         </div>
 
