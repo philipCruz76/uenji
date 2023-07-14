@@ -1,13 +1,11 @@
 export const NavLinks = [
-    { href: '/', key: 'Explorar', text: 'Explorar' },
-    { href: '/', key: 'English', text: 'English' },
+    { href: '/', key: 'Explore', text: 'Explore' },
+    {href:'/', key:'English', text:'English'},
     { href: '/', key: 'Become a Seller', text: 'Become a Seller' },
-    { href: '/', key: 'Hire Developers', text: 'Hire Developers' }
 ];
 
 
 export const MobileNavLinks = [
-    { href: '/', key: 'Sign in', text: 'Sign in' },
     { href: '/', key: 'Browse Categories', text: 'Browse categories' },
     { href: '/', key: 'Explore', text: 'Explore' },
 ];

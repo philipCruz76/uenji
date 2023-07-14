@@ -4,11 +4,11 @@
 import { Dialog, Transition } from "@headlessui/react"
 import Link from "next/link";
 import { FC, Fragment, useState } from 'react';
+import SmallScreenSignInSheet from "./SmallScreenSignInSheet";
 
 interface SmallScreenAuthSheetProps {
   opened: boolean;
-  setOpenState: React.Dispatch<React.SetStateAction<boolean>>
-  signedIn: boolean;
+  setOpenState?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const signInText = {
@@ -24,13 +24,14 @@ const signUpText = {
   hyperlinkText: 'Sign in',
   credentialsText: 'Continue with email'
 }
+const SmallScreenJoinSheet: FC<SmallScreenAuthSheetProps> = ({ opened, setOpenState }) => {
 
-const SmallScreenAuthSheet: FC<SmallScreenAuthSheetProps> = ({ opened, signedIn, setOpenState }) => {
+  let [showNewComponent, setShowNewComponent] = useState(false);
 
-  let [signInView, setSignInView] = useState(signedIn)
-  const handleSignIn = () => {
-    setSignInView((current) => !current)
-  }
+  const handleClick = () => {
+    setShowNewComponent(true);
+  };
+
 
   return (
 
@@ -47,16 +48,16 @@ const SmallScreenAuthSheet: FC<SmallScreenAuthSheetProps> = ({ opened, signedIn,
       leaveFrom="translate-y-0"
       leaveTo="translate-y-full"
     >
-      <Dialog as="div" className='container flex flex-col fixed top-0 left-0 right-0 bottom-0 z-20 border text-black border-white bg-white rounded-md overflow-y-scroll' onClose={() => setOpenState(false)}>
+      <Dialog as="div" className='container flex flex-col fixed top-0 left-0 right-0 bottom-0 z-20 border text-black border-white bg-white rounded-md overflow-y-scroll' onClose={() => setOpenState?.(false)}>
 
 
         <div className='flex relative items-start mx-auto px-4 py-4  font-bold text-3xl'>
-          {signInView ? signInText.title : signUpText.title}
+          {signUpText.title}
         </div>
 
         {/* Close Button*/}
         <div className="absolute top-6 right-6">
-          <button className="h-6 p-0 w-6 rounded-md" onClick={(curr) => setOpenState(!curr)} >
+          <button className="h-6 p-0 w-6 rounded-md" onClick={(curr) => setOpenState?.(!curr)} >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -102,13 +103,6 @@ const SmallScreenAuthSheet: FC<SmallScreenAuthSheetProps> = ({ opened, signedIn,
               <input className="flex-1 h-full px-4 text-sm font-normal" placeholder="Enter your email" />
             </div>
 
-            {/*[Sign-in only] Password input field */}
-            {signInView &&
-              <div className="flex flex-row mx-auto border w-[350px] h-[50px] items-center space-x-4 ">
-                <input className="flex-1 h-full px-4 text-sm font-normal" placeholder="Password" />
-              </div>}
-
-
             <button className="flex flex-row mx-auto border bg-sky-500 w-[350px] h-[50px] items-center space-x-4 ">
               <p className="flex mx-auto text-white items-center justify-center text-center" >Continue</p>
             </button>
@@ -121,16 +115,23 @@ const SmallScreenAuthSheet: FC<SmallScreenAuthSheetProps> = ({ opened, signedIn,
         {/* Bottom Text */}
         <div className="flex text-center justify-center space-x-1 py-4">
           <p className="text-sm">
-            {signInView ? signInText.subtext : signUpText.subtext}
+            {signUpText.subtext}
           </p>
-          <Link href="/" className="text-sm text-sky-500 underline cursor-pointer" onClick={handleSignIn}>{signInView ? signInText.hyperlinkText : signUpText.hyperlinkText}</Link>
+          <Link href="/" className="text-sm text-sky-500 underline cursor-pointer" 
+          onClick={() => {
+            setOpenState?.(false)
+            handleClick()
+          }}>
+            {signUpText.hyperlinkText}
+            {showNewComponent && <SmallScreenSignInSheet opened={true}/>}
+          </Link>
         </div>
 
-        
+
 
       </Dialog>
     </Transition>
   );
 }
 
-export default SmallScreenAuthSheet;
+export default SmallScreenJoinSheet;

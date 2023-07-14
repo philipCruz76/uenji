@@ -51,8 +51,12 @@ const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
                             {/*Join Button*/}
                             <AuthModal signIn={false} />
 
+
+
                             {/*Nav Links*/}
                             <ul className="flex flex-col text-gray-400 text-base font-light py-8 gap-[20px]">
+                                <AuthModal signIn={true} />
+
                                 {MobileNavLinks.map((link) => (
                                     <Link href={link.href} key={link.key}>
                                         {link.text}

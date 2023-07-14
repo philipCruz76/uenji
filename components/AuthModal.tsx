@@ -1,14 +1,13 @@
-'use client'
 
 import { useState, FC } from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "./ui/Button"
+import { useMediaQuery } from "react-responsive"
 import DesktopAuthModal from "./DesktopAuthModal"
 import MobileAuthModal from "./MobileAuthModal"
 import SmallScreenJoinSheet from "./SmallScreenJoinSheet"
-import { useMediaQuery } from "react-responsive"
-
+import SmallScreenSignInSheet from "./SmallScreenSignInSheet"
 
 
 interface AuthModalProps {
@@ -19,9 +18,11 @@ interface AuthModalProps {
 const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
 
   let [isOpen, setIsOpen] = useState(false)
-  let  isDekstopOrLaptop = useMediaQuery({minWidth: 900})
-  let isTablet = useMediaQuery({minWidth: 600, maxWidth: 899})
-  let isMobile = useMediaQuery({maxWidth: 599})
+  let isDekstopOrLaptop = useMediaQuery({ minWidth: 900 })
+  let isTablet = useMediaQuery({ minWidth: 600, maxWidth: 899 })
+  let isMobile = useMediaQuery({ maxWidth: 599 })
+
+
   function openModal() {
     setIsOpen(true)
   }
@@ -29,9 +30,9 @@ const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
 
   return (
     <>
-      {!signIn ? <Link href="/" onClick={openModal} className={cn(buttonVariants({ variant: "default" }), "flex max-auto sm:w-[80px] w-[60px] font-semibold text-base focus:outline-none")} > Join </Link> :
-        <Link href="/" onClick={openModal} className={cn("text-center items-center  hidden sm:flex font-semibold text-base focus:border-none focus:outline-none")} > Sign in </Link>}
-        
+      {!signIn ?
+        <Link href="/" onClick={openModal} className={cn(buttonVariants({ variant: "default" }))} > Join </Link> : <Link href="/" onClick={openModal} > Sign in </Link>}
+
 
       {/* Desktop Auth Modal */}
       {isDekstopOrLaptop && <DesktopAuthModal opened={isOpen} signedIn={signIn} setOpenState={setIsOpen} />}
@@ -39,7 +40,9 @@ const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
       {/* Mobile Auth Modal */}
       {isTablet && <MobileAuthModal opened={isOpen} signedIn={signIn} setOpenState={setIsOpen} />}
 
-      {isMobile && <SmallScreenJoinSheet opened={isOpen} signedIn={signIn} setOpenState={setIsOpen} />}
+      {isMobile && signIn && <SmallScreenSignInSheet opened={isOpen} setOpenState={setIsOpen} />}
+
+      {isMobile && !signIn && <SmallScreenJoinSheet opened={isOpen} setOpenState={setIsOpen} />}
 
     </>
 
