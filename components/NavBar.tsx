@@ -42,7 +42,7 @@ const NavBar = () => {
                 <div className="flex tablet:px-2  tablet:w-auto w-full justify-between items-center">
 
                     {/*Mobile Nav Button*/}
-                    <div className="lg:hidden flex focus:outline-none">
+                    <div className=" flex lg:hidden focus:outline-none px-2">
                         <button className="flex items-center py-2 text-gray-600 " onClick={() => setMobileNav(true)} >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-8 h-10">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
