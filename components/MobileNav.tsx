@@ -33,12 +33,13 @@ const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
                 </Transition.Child>
 
 
-                <Transition.Child as={Fragment}
-                    enter="transform transition duration-300 ease-out"
+                <Transition.Child
+                    as={Fragment}
+                    enter="transition ease-in-out duration-500 transform"
                     enterFrom="-translate-x-full"
                     enterTo="translate-x-0"
-                    leave="transform transition duration-300 ease-in"
-                    leaveFrom="translate-x-0"
+                    leave="transition ease-in duration-500 transform"
+                    leaveFrom="-translate-x-0"
                     leaveTo="-translate-x-full"
                 >
                     <Dialog.Panel className="lg:hidden flex flex-col left-0  h-full  min-h-screen  w-72 px-4 py-6 bg-white border-r border-gray-200" >

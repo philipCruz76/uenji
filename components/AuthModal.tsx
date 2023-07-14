@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "./ui/Button"
 import DesktopAuthModal from "./DesktopAuthModal"
 import MobileAuthModal from "./MobileAuthModal"
-import SmallScreenAuthSheet from "./SmallScreenAuthSheet"
+import SmallScreenJoinSheet from "./SmallScreenJoinSheet"
 import { useMediaQuery } from "react-responsive"
 
 
@@ -39,7 +39,7 @@ const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
       {/* Mobile Auth Modal */}
       {isTablet && <MobileAuthModal opened={isOpen} signedIn={signIn} setOpenState={setIsOpen} />}
 
-      {isMobile && <SmallScreenAuthSheet opened={isOpen} signedIn={signIn} setOpenState={setIsOpen} />}
+      {isMobile && <SmallScreenJoinSheet opened={isOpen} signedIn={signIn} setOpenState={setIsOpen} />}
 
     </>
 
