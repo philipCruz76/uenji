@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import AuthModal from "@/components/AuthModal";
 import MobileNav from "./MobileNav";
 
-const activeNavBar = " fixed top-0 z-10 flex  max-w-full w-full mx-auto px-4 py-4 bg-white shadow-md transition duration-500 ease-in-out"
+const activeNavBar = " fixed top-0 z-10 flex  max-w-full w-full mx-auto px-4 py-4 bg-white text-black shadow-md transition duration-500 ease-in-out"
 const inactiveNavBar = " fixed top-0 z-10 flex max-w-full w-full mx-auto px-4 py-4 bg-transparent text-white transition duration-500 ease-in-out"
 
 
@@ -43,7 +43,7 @@ const NavBar = () => {
 
                     {/*Mobile Nav Button*/}
                     <div className=" flex lg:hidden focus:outline-none px-2">
-                        <button className="flex items-center py-2 text-gray-600 " onClick={() => setMobileNav(true)} >
+                        <button className="flex items-center py-2 " onClick={() => setMobileNav(true)} >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" className="w-8 h-10">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
