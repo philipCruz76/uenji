@@ -1,18 +1,16 @@
-import { useState, FC } from "react"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "./ui/Button"
-import { useMediaQuery } from "react-responsive"
-import DesktopAuthModal from "./DesktopAuthModal"
-import MobileAuthModal from "./MobileAuthModal"
-import SmallScreenJoinSheet from "./SmallScreenJoinSheet"
-import SmallScreenSignInSheet from "./SmallScreenSignInSheet"
-
+import { useState, FC } from "react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "./ui/Button";
+import { useMediaQuery } from "react-responsive";
+import DesktopAuthModal from "./DesktopAuthModal";
+import MobileAuthModal from "./MobileAuthModal";
+import SmallScreenJoinSheet from "./SmallScreenJoinSheet";
+import SmallScreenSignInSheet from "./SmallScreenSignInSheet";
 
 interface AuthModalProps {
   signIn: boolean;
 }
-
 
 const useModalState = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,13 +28,8 @@ const useModalState = () => {
 };
 
 const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
-  const {
-    isOpen,
-    setIsOpen,
-    isDesktopOrLaptop,
-    isTablet,
-    isMobile,
-  } = useModalState();
+  const { isOpen, setIsOpen, isDesktopOrLaptop, isTablet, isMobile } =
+    useModalState();
 
   function openModal() {
     setIsOpen(true);
@@ -45,18 +38,36 @@ const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
   return (
     <>
       {!signIn ? (
-        <Link href="/" onClick={openModal} className={cn(buttonVariants({ variant: "default" }))}> Join </Link>
+        <Link
+          href="/"
+          onClick={openModal}
+          className={cn(buttonVariants({ variant: "default" }))}
+        >
+          {" "}
+          Join{" "}
+        </Link>
       ) : (
-        <Link href="/" onClick={openModal}> Sign in </Link>
+        <Link href="/" onClick={openModal}>
+          {" "}
+          Sign in{" "}
+        </Link>
       )}
 
       {/* Auth Modals */}
       {isDesktopOrLaptop && (
-        <DesktopAuthModal opened={isOpen} signedIn={signIn} setOpenState={setIsOpen} />
+        <DesktopAuthModal
+          opened={isOpen}
+          signedIn={signIn}
+          setOpenState={setIsOpen}
+        />
       )}
 
       {isTablet && (
-        <MobileAuthModal opened={isOpen} signedIn={signIn} setOpenState={setIsOpen} />
+        <MobileAuthModal
+          opened={isOpen}
+          signedIn={signIn}
+          setOpenState={setIsOpen}
+        />
       )}
 
       {isMobile && signIn && (

@@ -1,20 +1,22 @@
-import { withAuth } from 'next-auth/middleware'
-import { NextResponse } from 'next/server'
-
+import { withAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
 
 export default withAuth(
   function middleware(req) {
-    if (req.nextUrl.pathname.startsWith('/gig') && req.nextauth.token?.isSeller !== false)
-      return NextResponse.redirect(new URL('/login', req.nextUrl))
+    if (
+      req.nextUrl.pathname.startsWith("/gig") &&
+      req.nextauth.token?.isSeller !== false
+    )
+      return NextResponse.redirect(new URL("/login", req.nextUrl));
   },
   {
     callbacks: {
       authorized: ({ token }) => !!token,
-    }
-  }
-)
+    },
+  },
+);
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/gig/:path*', '/user/:path*'],
-}
+  matcher: ["/gig/:path*", "/user/:path*"],
+};

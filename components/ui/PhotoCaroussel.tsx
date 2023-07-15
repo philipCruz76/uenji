@@ -1,24 +1,15 @@
-'use client'
+"use client";
 
-import { FC, useState } from 'react';
+import { FC, useState } from "react";
 
+interface PhotoCarousselProps {}
 
-interface PhotoCarousselProps { }
+const PhotoCaroussel: FC<PhotoCarousselProps> = ({}) => {
+  let [photos, setPhotos] = useState([]);
 
-const PhotoCaroussel: FC<PhotoCarousselProps> = ({ }) => {
+  const handleRightClick = () => {};
 
-    let [photos, setPhotos] = useState([]);
-
-    const handleRightClick = () => {
-
-    }
-    
-    
-
-
-    return (
-        <div>PhotoCaroussel</div>
-    );
-}
+  return <div>PhotoCaroussel</div>;
+};
 
 export default PhotoCaroussel;

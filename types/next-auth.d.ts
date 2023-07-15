@@ -1,9 +1,9 @@
-import { User } from '@/types/common.types'
+import { User } from "@/types/common.types";
 
-type UserId = string
+type UserId = string;
 
-declare module 'next-auth' {
-    interface Session {
-        user: User
-    }
+declare module "next-auth" {
+  interface Session {
+    user: User;
+  }
 }
