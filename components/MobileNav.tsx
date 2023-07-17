@@ -10,7 +10,7 @@ interface MobileNavProps {
 }
 
 const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
-  // TODO - Fix transitions
+  
   return (
     <Transition appear show={sidebarOpen} as={Fragment}>
       <Dialog
@@ -32,7 +32,7 @@ const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
           leaveFrom="translate-x-0"
           leaveTo="-translate-x-full"
         >
-          <Dialog.Panel className="lg:hidden  fixed  z-39 flex flex-col h-full  min-h-screen  w-72 px-4 py-6 bg-white border-r border-gray-200">
+          <Dialog.Panel className="lg:hidden flex flex-col fixed   h-full  min-h-screen  w-72 px-4 py-6 bg-white border-r border-gray-200  z-50 gap-4 p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500">
             {/* Mobile Menu Content */}
             <div className="overflow-y-auto flex-1">
               {/*Join Button*/}
