@@ -1,7 +1,8 @@
-import { useState, FC } from "react";
+import { useState, FC, use } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/Button";
+import { useMediaQuery } from "react-responsive";
 import DesktopAuthModal from "./DesktopAuthModal";
 import MobileAuthModal from "./MobileAuthModal";
 import SmallScreenJoinSheet from "./SmallScreenJoinSheet";
@@ -14,7 +15,9 @@ interface AuthModalProps {
 const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
 
   const [isOpen, setIsOpen] = useState(false);
-
+  const isDesktopOrLaptop = useMediaQuery({ minWidth:900 });
+  const isTablet = useMediaQuery({minWidth: 600, maxWidth: 899})
+  const isMobile = useMediaQuery({maxWidth: 599})
   function openModal() {
     setIsOpen(true);
   }
@@ -36,34 +39,34 @@ const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
       )}
 
       {/*Desktop Auth Modal*/}
-      <div className="hidden desktop:flex">
-        <DesktopAuthModal
-          opened={isOpen}
-          signedIn={signIn}
-          setOpenState={setIsOpen}
-        />
-      </div>
+
+      {isDesktopOrLaptop && <DesktopAuthModal
+        opened={isOpen}
+        signedIn={signIn}
+        setOpenState={setIsOpen}
+      />}
+
 
       {/*Tablet Auth Modal*/}
-      <div className="desktop:hidden tablet:flex hidden">
-        <MobileAuthModal
-          opened={isOpen}
-          signedIn={signIn}
-          setOpenState={setIsOpen}
-        />
-      </div>
+
+      {isTablet && <MobileAuthModal
+        opened={isOpen}
+        signedIn={signIn}
+        setOpenState={setIsOpen} />}
+
 
 
       {/*Mobile Auth Modal*/}
-      <div className="tablet:hidden flex ">
-        {signIn && (
-          <SmallScreenSignInSheet openModal={isOpen} setOpenState={setIsOpen} />
-        )}
 
-        {!signIn && (
-          <SmallScreenJoinSheet openModal={isOpen} setOpenState={setIsOpen} />
-        )}
-      </div>
+
+      {isMobile && signIn && (
+        <SmallScreenSignInSheet openModal={isOpen} setOpenState={setIsOpen} />
+      )}
+
+      {isMobile && !signIn && (
+        <SmallScreenJoinSheet openModal={isOpen} setOpenState={setIsOpen} />
+      )}
+
 
     </>
   );
