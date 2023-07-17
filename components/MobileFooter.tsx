@@ -76,11 +76,11 @@ const MobileFooter: FC<MobileFooterProps> = ({ }) => {
                 </Accordion>
 
                 {/* Footer Bottom */}
-                <div className="flex flex-col justify-between items-center py-4">
-                    <h2 className='flex flex-1 text-2xl font-extrabold text-slate-500'>
+                <div className="flex flex-col justify-between items-center py-4 gap-1">
+                    <p className='text-2xl font-extrabold text-slate-500'>
                         Uenji
-                    </h2>
-                    <span className="text-slate-500 font-light text-sm">
+                    </p>
+                    <span className=" text-slate-500 font-light text-sm">
                         © 2023 Uenji. All rights reserved
                     </span>
 

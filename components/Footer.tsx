@@ -22,9 +22,9 @@ const FooterColumn = ({ title, links }: ColumnProps) => (
 const Footer = () => {
   return (
     <>
-      <div className="flex bottom-0 w-full h-px bg-gray-200 " />
+      <div className="flex w-full h-px bg-gray-200 " />
 
-      <footer className=" bottom-0 w-full bg-slate-50">
+      <footer className=" flex min-w-full bg-slate-50">
         <div className="flex flex-col lg:px-20 py-6 px-5 gap-6">
           <div className="flex flex-col gap-12 w-full">
             <div className="flex items-start flex-col">Uenji</div>
