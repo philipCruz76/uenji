@@ -96,7 +96,7 @@ const MobileAuthModal: FC<MobileAuthModalProps> = ({
                   <p className="text-2xl font-semibold">
                     {signInView ? signInText.title : signUpText.title}
                   </p>
-                  <div className="flex text-base font-thin text-slate-500 space-x-1">
+                  <div className="flex text-base font-extralight text-slate-500 space-x-1">
                     <p>
                       {signInView ? signInText.subtext : signUpText.subtext}
                     </p>

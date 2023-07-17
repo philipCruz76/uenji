@@ -16,33 +16,23 @@ const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
       <Dialog
         as="div"
         onClose={() => setOpenState(false)}
-        className="lg:hidden flex  fixed inset-0 z-40 overflow-y-auto"
+        className="lg:hidden flex  fixed  inset-0 z-40 overflow-y-auto"
       >
-        <Transition.Child
-          as={Fragment}
-          enter="transition ease-out duration-500"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="transition ease-in duration-0"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <Dialog.Overlay
-            className="lg:hidden fixed translate-x-0  inset-0 bg-black bg-opacity-50 "
-            onClick={() => setOpenState(false)}
-          />
-        </Transition.Child>
+        <div
+          className="lg:hidden fixed z-38 translate-x-0 inset-0 bg-black bg-opacity-50 "
+          onClick={() => setOpenState(false)}
+        />
 
         <Transition.Child
           as={Fragment}
           enter="transition ease-out duration-500 transform"
           enterFrom="-translate-x-full"
           enterTo="translate-x-0"
-          leave="transition ease-in duration-0 transform"
+          leave="transition ease-in duration-200 transform"
           leaveFrom="translate-x-0"
           leaveTo="-translate-x-full"
         >
-          <Dialog.Panel className="lg:hidden flex flex-col left-0  h-full  min-h-screen  w-72 px-4 py-6 bg-white border-r border-gray-200">
+          <Dialog.Panel className="lg:hidden  fixed  z-39 flex flex-col h-full  min-h-screen  w-72 px-4 py-6 bg-white border-r border-gray-200">
             {/* Mobile Menu Content */}
             <div className="overflow-y-auto flex-1">
               {/*Join Button*/}

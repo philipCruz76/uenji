@@ -13,11 +13,10 @@ interface AuthModalProps {
 }
 
 const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
-
   const [isOpen, setIsOpen] = useState(false);
-  const isDesktopOrLaptop = useMediaQuery({ minWidth:900 });
-  const isTablet = useMediaQuery({minWidth: 600, maxWidth: 899})
-  const isMobile = useMediaQuery({maxWidth: 599})
+  const isDesktopOrLaptop = useMediaQuery({ minWidth: 900 });
+  const isTablet = useMediaQuery({ minWidth: 600, maxWidth: 899 });
+  const isMobile = useMediaQuery({ maxWidth: 599 });
   function openModal() {
     setIsOpen(true);
   }
@@ -30,34 +29,37 @@ const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
           onClick={openModal}
           className={cn(buttonVariants({ variant: "default" }))}
         >
-          {" "}Join{" "}
+          {" "}
+          Join{" "}
         </Link>
       ) : (
         <Link href="/" onClick={openModal}>
-          {" "}Sign in{" "}
+          {" "}
+          Sign in{" "}
         </Link>
       )}
 
       {/*Desktop Auth Modal*/}
 
-      {isDesktopOrLaptop && <DesktopAuthModal
-        opened={isOpen}
-        signedIn={signIn}
-        setOpenState={setIsOpen}
-      />}
-
+      {isDesktopOrLaptop && (
+        <DesktopAuthModal
+          opened={isOpen}
+          signedIn={signIn}
+          setOpenState={setIsOpen}
+        />
+      )}
 
       {/*Tablet Auth Modal*/}
 
-      {isTablet && <MobileAuthModal
-        opened={isOpen}
-        signedIn={signIn}
-        setOpenState={setIsOpen} />}
-
-
+      {isTablet && (
+        <MobileAuthModal
+          opened={isOpen}
+          signedIn={signIn}
+          setOpenState={setIsOpen}
+        />
+      )}
 
       {/*Mobile Auth Modal*/}
-
 
       {isMobile && signIn && (
         <SmallScreenSignInSheet openModal={isOpen} setOpenState={setIsOpen} />
@@ -66,8 +68,6 @@ const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
       {isMobile && !signIn && (
         <SmallScreenJoinSheet openModal={isOpen} setOpenState={setIsOpen} />
       )}
-
-
     </>
   );
 };

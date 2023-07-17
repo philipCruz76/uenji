@@ -26,12 +26,11 @@ export default function RootLayout({
         <main>{children}</main>
         <div className="flex flex-1 bottom-0 w-full h-px bg-gray-200" />
         <div className="tablet:flex hidden flex-1 min-w-full">
-        <Footer />
+          <Footer />
         </div>
         <div className="flex flex-1 tablet:hidden min-w-full">
-        <MobileFooter />
+          <MobileFooter />
         </div>
-        
       </body>
     </html>
   );
