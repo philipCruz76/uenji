@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import MobileNav from "@/components/MobileNav";
+import MobileFooter from "@/components/MobileFooter";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,14 @@ export default function RootLayout({
         <NavBar />
 
         <main>{children}</main>
+        <div className="flex bottom-0 w-full h-px bg-gray-200" />
+        <div className="tablet:flex hidden">
         <Footer />
+        </div>
+        <div className="flex flex-1 tablet:hidden min-w-full">
+        <MobileFooter />
+        </div>
+        
       </body>
     </html>
   );

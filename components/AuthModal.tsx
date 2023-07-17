@@ -2,7 +2,6 @@ import { useState, FC } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/Button";
-import { useMediaQuery } from "react-responsive";
 import DesktopAuthModal from "./DesktopAuthModal";
 import MobileAuthModal from "./MobileAuthModal";
 import SmallScreenJoinSheet from "./SmallScreenJoinSheet";
@@ -12,24 +11,9 @@ interface AuthModalProps {
   signIn: boolean;
 }
 
-const useModalState = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const isDesktopOrLaptop = useMediaQuery({ minWidth: 900 });
-  const isTablet = useMediaQuery({ minWidth: 600, maxWidth: 899 });
-  const isMobile = useMediaQuery({ maxWidth: 599 });
-
-  return {
-    isOpen,
-    setIsOpen,
-    isDesktopOrLaptop,
-    isTablet,
-    isMobile,
-  };
-};
-
 const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
-  const { isOpen, setIsOpen, isDesktopOrLaptop, isTablet, isMobile } =
-    useModalState();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   function openModal() {
     setIsOpen(true);
@@ -43,40 +27,44 @@ const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
           onClick={openModal}
           className={cn(buttonVariants({ variant: "default" }))}
         >
-          {" "}
-          Join{" "}
+          {" "}Join{" "}
         </Link>
       ) : (
         <Link href="/" onClick={openModal}>
-          {" "}
-          Sign in{" "}
+          {" "}Sign in{" "}
         </Link>
       )}
 
-      {/* Auth Modals */}
-      {isDesktopOrLaptop && (
+      {/*Desktop Auth Modal*/}
+      <div className="hidden desktop:flex">
         <DesktopAuthModal
           opened={isOpen}
           signedIn={signIn}
           setOpenState={setIsOpen}
         />
-      )}
+      </div>
 
-      {isTablet && (
+      {/*Tablet Auth Modal*/}
+      <div className="desktop:hidden tablet:flex hidden">
         <MobileAuthModal
           opened={isOpen}
           signedIn={signIn}
           setOpenState={setIsOpen}
         />
-      )}
+      </div>
 
-      {isMobile && signIn && (
-        <SmallScreenSignInSheet openModal={isOpen} setOpenState={setIsOpen} />
-      )}
 
-      {isMobile && !signIn && (
-        <SmallScreenJoinSheet openModal={isOpen} setOpenState={setIsOpen} />
-      )}
+      {/*Mobile Auth Modal*/}
+      <div className="tablet:hidden flex ">
+        {signIn && (
+          <SmallScreenSignInSheet openModal={isOpen} setOpenState={setIsOpen} />
+        )}
+
+        {!signIn && (
+          <SmallScreenJoinSheet openModal={isOpen} setOpenState={setIsOpen} />
+        )}
+      </div>
+
     </>
   );
 };

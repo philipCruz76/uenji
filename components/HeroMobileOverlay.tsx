@@ -1,6 +1,7 @@
 const HeroMobileOverlay = () => {
   return (
     <div className="bg-zinc-900 w-full h-[420px] flex flex-col items-center justify-center">
+      
       {/*Slogan*/}
       <div className="py-6 max-w-[440px] w-full">
         <div className="flex desktop:gap-4 tablet:gap-2 gap-[4px]">
