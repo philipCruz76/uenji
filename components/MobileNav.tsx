@@ -10,7 +10,6 @@ interface MobileNavProps {
 }
 
 const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
-  
   return (
     <Transition appear show={sidebarOpen} as={Fragment}>
       <Dialog

@@ -1,12 +1,18 @@
+import Image from "next/image";
+
 const HeroDesktopOverlay = () => {
   return (
     <>
       {/*Background Image*/}
-      <img
-        className="flex object-fill w-full"
-        src="./bg-image.jpeg"
+      <Image
         alt="backgroung image"
+        src="/bg-image.jpeg"
+        className="flex object-fill w-full"
+        width={500}
+        height={700}
+        loading="lazy"
       />
+
       {/*Overlay*/}
       <div className="container flex absolute z-1 inset-0 mt-56 px-6 flex-col items-start justify-start ">
         {/*Slogan*/}
