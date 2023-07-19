@@ -33,7 +33,7 @@ const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
           Join{" "}
         </Link>
       ) : (
-        <Link href="/" onClick={openModal}>
+        <Link href="/" onClick={openModal} className="hover:underline">
           {" "}
           Sign in{" "}
         </Link>

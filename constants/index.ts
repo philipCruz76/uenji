@@ -5,8 +5,8 @@ export const NavLinks = [
 ];
 
 export const MobileNavLinks = [
-  { href: "/", key: "Browse Categories", text: "Browse categories" },
   { href: "/", key: "Explore", text: "Explore" },
+  { href: "/", key: "Home", text: "Home" },
 ];
 
 export const categoryFilters = [
@@ -20,6 +20,12 @@ export const categoryFilters = [
   "Business",
   "Lifestyle",
   "Photography",
+];
+
+export const languageFilters = [
+  "English",
+  "French",
+  "Portuguese",
 ];
 
 export const footerLinks = [

@@ -64,7 +64,7 @@ const NavBar = () => {
           </div>
 
           {/*Logo*/}
-          <Link href="/" className="flex font-sans font-bold text-[34px] ">
+          <Link href="/" className="tablet:w-full w-[40px] justify-center text-center font-sans font-bold text-[34px] ">
             Uenji
           </Link>
         </div>

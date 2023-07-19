@@ -1,13 +1,25 @@
-import { MobileNavLinks } from "@/constants";
+import { footerLinks, languageFilters } from "@/constants";
 import Link from "next/link";
 import AuthModal from "./AuthModal";
 import { FC, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/Accordion";
+import Image from "next/image";
 
 interface MobileNavProps {
   sidebarOpen: boolean;
   setOpenState: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+const MobileNavLinks = ({ links }: { links: string[] }) => (
+  <ul className="flex flex-col items-start">
+    {links.map((link) => (
+      <Link href="/" key={link} className="hover:underline">
+        {link}
+      </Link>
+    ))}
+  </ul>
+);
 
 const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
   return (
@@ -38,14 +50,52 @@ const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
               <AuthModal signIn={false} />
 
               {/*Nav Links*/}
-              <ul className="flex flex-col text-gray-400 text-base font-light py-8 gap-[20px]">
+              <ul className="flex flex-col text-gray-400 text-base font-light py-8 ">
+
                 <AuthModal signIn={true} />
 
-                {MobileNavLinks.map((link) => (
-                  <Link href={link.href} key={link.key}>
-                    {link.text}
-                  </Link>
-                ))}
+                <Accordion type="multiple" >
+                  <AccordionItem value="1">
+                    <AccordionTrigger className="py-2">
+                      <span className="font-light"> Browse Categories</span>
+                    </AccordionTrigger>
+
+                    <AccordionContent className="pt-0">
+                      <MobileNavLinks links={footerLinks[0].links} />
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+
+
+                <div className="flex flex-col py-5 gap-4">
+                  <span className="text-sm text-black font-semibold">
+                    General
+                  </span>
+                  <div className="w-full h-px bg-slate-200" />
+                </div>
+                <Link href="/" className="hover:underline" onClick={() => setOpenState(false)}>Home</Link>
+
+                <Accordion type="multiple" >
+                  <AccordionItem value="2" >
+                    <AccordionTrigger className="flex flex-row gap-2 py-2">
+                      <Link href="/" >English</Link>
+                      <Image alt="Language" src="./icons/globe-thin.svg" width={20} height={20} />
+                    </AccordionTrigger>
+
+                    <AccordionContent>
+                      {languageFilters.map((filter) => (
+                         <ul className="flex relative flex-col items-start">
+                        <Link href="/" key={filter} className="hover:underline">
+                          {filter}
+                        </Link>
+                        </ul>
+                      ))}
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+
+
+
               </ul>
             </div>
           </Dialog.Panel>

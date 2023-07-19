@@ -16,26 +16,16 @@ const HeroDesktopOverlay = () => {
       {/*Overlay*/}
       <div className="container flex absolute z-1 inset-0 mt-56 px-6 flex-col items-start justify-start ">
         {/*Slogan*/}
-        <div className="flex flex-row  desktop:gap-4 tablet:gap-2 gap-[4px]">
-          <div className="tablet:text-5xl text-3xl font-bold text-white ">
-            Find the right
-          </div>
-          <div className="tablet:text-5xl  text-3xl font-serif italic text-white">
-            freelance
-          </div>
-        </div>
-        <div className="flex relative gap-2">
-          <div className="tablet:text-5xl  text-3xl font-serif italic text-white">
-            {" "}
-            service,{" "}
-          </div>
-          <div className="tablet:text-5xl text-3xl font-bold text-white">
-            right away
-          </div>
+        <div className="flex lg:w-[640px]  h-[100px] tablet:w-[440px] desktop:gap-4 tablet:gap-2 gap-[4px]">
+          <span className="lg:text-5xl tablet:text-4xl text-3xl font-bold text-white ">
+            {""}Find the right {" "}
+            <i className="font-serif font-medium">freelance service,</i>
+            {" "}right away
+          </span>
         </div>
 
         {/*Search Bar*/}
-        <div className="flex py-6">
+        <div className="flex lg:w-[600px] tablet:w-[500px] lg:py-6 py-2">
           <input
             type="text"
             placeholder="Pesquise pelo serviço "

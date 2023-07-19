@@ -17,9 +17,10 @@ module.exports = {
       },
     },
     screens: {
-      lg: "1024px",
+      lg: "1160px",
       desktop: "900px",
       tablet: "600px",
+      mobile: "400px"
     },
     extend: {
       colors: {

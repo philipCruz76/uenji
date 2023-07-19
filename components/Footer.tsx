@@ -24,22 +24,23 @@ const Footer = () => {
     <>
       <div className="flex w-full h-px bg-gray-200 " />
 
-      <footer className=" flex min-w-full bg-slate-50">
-        <div className="flex flex-col lg:px-20 py-6 px-5 gap-6">
+      <footer className="container flex min-w-full bg-slate-50">
+        <div className="container justify-between flex flex-col lg:px-20 py-6 px-5 gap-6">
           <div className="flex flex-col gap-12 w-full">
-            <div className="flex items-start flex-col">Uenji</div>
-            <div className="flex flex-wrap gap-12 overflow-hidden">
+            <h1 className="items-start">Uenji</h1>
+
+            <div className="flex flex-wrap items-start justify-between text-start gap-[50px] w-full">
+              
               <FooterColumn
                 title={footerLinks[0].title}
                 links={footerLinks[0].links}
               />
-              <div className="flex-1 flex flex-col gap-4">
+              
                 <FooterColumn
                   title={footerLinks[1].title}
                   links={footerLinks[1].links}
                 />
-              </div>
-              <div className="flex-1 flex flex-col gap-4">
+              
                 <FooterColumn
                   title={footerLinks[2].title}
                   links={footerLinks[2].links}
@@ -48,7 +49,7 @@ const Footer = () => {
                   title={footerLinks[3].title}
                   links={footerLinks[3].links}
                 />
-              </div>
+              
             </div>
           </div>
 
