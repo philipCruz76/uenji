@@ -87,7 +87,7 @@ const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
                 <Accordion type="multiple">
                   <AccordionItem value="2">
                     <AccordionTrigger className="flex flex-row gap-2 py-2">
-                      <Link href="/">English</Link>
+                      <span className="font-light">English</span>
                       <Image
                         alt="Language"
                         src="./icons/globe-thin.svg"
