@@ -1,11 +1,9 @@
-import { FC } from 'react';
+import { FC } from "react";
 
 interface categoryTitleCardProps {}
 
-const categoryTitleCard: FC<categoryTitleCardProps> = ({  }) => {
-  return (
-       <div>categoryTitleCard</div>
-   );
-}
+const categoryTitleCard: FC<categoryTitleCardProps> = ({}) => {
+  return <div>categoryTitleCard</div>;
+};
 
 export default categoryTitleCard;

@@ -22,11 +22,7 @@ export const categoryFilters = [
   "Photography",
 ];
 
-export const languageFilters = [
-  "English",
-  "French",
-  "Portuguese",
-];
+export const languageFilters = ["English", "French", "Portuguese"];
 
 export const footerLinks = [
   {

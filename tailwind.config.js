@@ -20,7 +20,7 @@ module.exports = {
       lg: "1160px",
       desktop: "900px",
       tablet: "600px",
-      mobile: "400px"
+      mobile: "400px",
     },
     extend: {
       colors: {

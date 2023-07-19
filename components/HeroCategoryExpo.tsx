@@ -26,7 +26,7 @@ const HeroCategoryExpo = () => {
           </li>
 
           <li>
-          <a className="flex flex-col group gap-[10px] w-[150px] h-[150px] cursor-pointer items-center justify-center text-center">
+            <a className="flex flex-col group gap-[10px] w-[150px] h-[150px] cursor-pointer items-center justify-center text-center">
               <Image
                 alt="Tutoring"
                 src="./icons/graduation-cap-duotone.svg"
@@ -159,7 +159,6 @@ const HeroCategoryExpo = () => {
               <div className="flex transition ease-in-out duration-300 h-[3px] w-12 bg-slate-500 group-hover:bg-sky-600  group-hover:scale-x-150 " />
             </a>
           </li>
-
         </ul>
       </section>
     </>

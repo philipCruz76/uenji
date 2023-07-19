@@ -18,9 +18,9 @@ const HeroDesktopOverlay = () => {
         {/*Slogan*/}
         <div className="flex lg:w-[640px]  h-[100px] tablet:w-[440px] desktop:gap-4 tablet:gap-2 gap-[4px]">
           <span className="lg:text-5xl tablet:text-4xl text-3xl font-bold text-white ">
-            {""}Find the right {" "}
-            <i className="font-serif font-medium">freelance service,</i>
-            {" "}right away
+            {""}Find the right{" "}
+            <i className="font-serif font-medium">freelance service,</i> right
+            away
           </span>
         </div>
 
