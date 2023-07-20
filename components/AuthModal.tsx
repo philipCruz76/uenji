@@ -27,7 +27,7 @@ const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
         <Link
           href="/"
           onClick={openModal}
-          className={cn(buttonVariants({ variant: "default" }))}
+          className={cn(buttonVariants({ variant: "outline" }))}
         >
           {" "}
           Join{" "}

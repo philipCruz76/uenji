@@ -109,7 +109,7 @@ const NavBar = () => {
           {/*Nav Links*/}
           <ul className="desktop:flex hidden  text-base font-semibold px-2 gap-[20px]">
             {NavLinks.map((link) => (
-              <Link href={link.href} key={link.key}>
+              <Link href={link.href} key={link.key} className="hover:underline">
                 {link.text}
               </Link>
             ))}
@@ -121,7 +121,7 @@ const NavBar = () => {
               <AuthModal signIn={true} />
             </div>
 
-            <div className="flex mx-auto sm:w-[80px] w-[60px] font-semibold text-base focus:outline-none">
+            <div className="flex mx-auto sm:w-[80px] w-[60px] ">
               <AuthModal signIn={false} />
             </div>
           </div>

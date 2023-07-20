@@ -1,5 +1,7 @@
 import HeroCategoryExpo from "./HeroCategoryExpo";
+import HeroCategorySlider from "./HeroCategorySlider";
 import HeroDesktopOverlay from "./HeroDesktopOverlay";
+import HeroEyeCatch from "./HeroEyeCatch";
 import HeroMobileOverlay from "./HeroMobileOverlay";
 
 const Hero = () => {
@@ -12,8 +14,11 @@ const Hero = () => {
       <div className="desktop:hidden flex">
         <HeroMobileOverlay />
       </div>
-
+      <HeroCategorySlider />
+      <HeroEyeCatch />
       <HeroCategoryExpo />
+
+
     </section>
   );
 };

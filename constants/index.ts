@@ -1,12 +1,26 @@
 export const NavLinks = [
-  { href: "/", key: "Explore", text: "Explore" },
+  { href: "/", key: "Explorar", text: "Explorar" },
   { href: "/", key: "English", text: "English" },
-  { href: "/", key: "Become a Seller", text: "Become a Seller" },
+  { href: "/", key: "Torne-se num Freelancer", text: "Torne-se num Freelancer" },
 ];
 
 export const MobileNavLinks = [
-  { href: "/", key: "Explore", text: "Explore" },
+  { href: "/", key: "Explar", text: "Explar" },
   { href: "/", key: "Home", text: "Home" },
+];
+
+export const catCards = [
+  { title: "Fotografia", description: "Captura o momento certo", image: "/camera.jpg", alt: "Fotografia" },
+  { title: "Formação", description: "Aprende novos conceitos", image: "/formacao.jpg", alt: "Formação" },
+  { title: "Escrita", description: "Elabora documentação", image: "/writing-pen.jpg", alt: "Escrita" },
+  { title: "Música", description: "Cria a tua música", image: "/music.jpg", alt: "Música" },
+  { title: "Análises", description: "Descobre os KPIs", image: "/analytics.jpg", alt: "Análises" },
+  { title: "Programação", description: "Executa os teus projectos", image: "/coding.jpg", alt: "Programação" },
+  { title: "Negócios", description: "Aumenta a tua audiência", image: "/business.jpg", alt: "Business" },
+  { title: "Edição de Vídeo", description: "Cria o teu vídeo", image: "/video-editing.jpg", alt: "Vídeo Editing" },
+  { title: "Branding", description: "Constrói a tua marca", image: "/design-stock.jpg", alt: "Design" },
+  { title: "Design", description: "Traduz o teu conteúdo", image: "/design-sketch.jpg", alt: "Design" },
+
 ];
 
 export const categoryFilters = [
@@ -22,11 +36,11 @@ export const categoryFilters = [
   "Photography",
 ];
 
-export const languageFilters = ["English", "French", "Portuguese"];
+export const languageFilters = ["English", "Português"];
 
 export const footerLinks = [
   {
-    title: "Categories",
+    title: "Categorias",
     links: [
       "Graphics & Design",
       "Digital Marketing",
@@ -41,7 +55,7 @@ export const footerLinks = [
     ],
   },
   {
-    title: "About",
+    title: "Sobre nós",
     links: [
       "Careers",
       "Press & News",
@@ -64,7 +78,7 @@ export const footerLinks = [
     ],
   },
   {
-    title: "Community",
+    title: "Comunidade",
     links: ["Customer Success Stories", "Invite a Friend", "Become a Seller"],
   },
 ];

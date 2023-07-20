@@ -3,9 +3,9 @@ import Image from "next/image";
 const HeroCategoryExpo = () => {
   return (
     <>
-      <section className="container flex flex-col justify-center tablet:p-[100px,0px] bg-white">
+      <section className="container flex flex-col justify-center tablet:p-[100px,0px] desktop:py-24 tablet:py-14 py-8 bg-white">
         <h1 className="flex py-6 text-3xl font-bold">
-          You need it, we've got it
+          Voçê precisa, nós temos
         </h1>
 
         {/* Category Cards */}
@@ -20,7 +20,7 @@ const HeroCategoryExpo = () => {
                 width={10}
                 height={10}
               />
-              <p className="flex text-sm font-medium">Photography</p>
+              <p className="flex text-sm font-medium">Fotografia</p>
               <div className="flex transition ease-in-out duration-300 h-[3px] w-12 bg-slate-500 group-hover:bg-sky-600  group-hover:scale-x-150" />
             </a>
           </li>
@@ -35,7 +35,7 @@ const HeroCategoryExpo = () => {
                 width={10}
                 height={10}
               />
-              <p className="flex text-sm font-medium">Tutoring</p>
+              <p className="flex text-sm font-medium">Formações</p>
               <div className="flex transition ease-in-out duration-300 h-[3px] w-12 bg-slate-500 group-hover:bg-sky-600  group-hover:scale-x-150 " />
             </a>
           </li>
@@ -50,7 +50,7 @@ const HeroCategoryExpo = () => {
                 width={10}
                 height={10}
               />
-              <p className="flex text-sm font-medium">Writing</p>
+              <p className="flex text-sm font-medium">Escrita</p>
               <div className="flex transition ease-in-out duration-300 h-[3px] w-12 bg-slate-500 group-hover:bg-sky-600  group-hover:scale-x-150 " />
             </a>
           </li>
@@ -65,7 +65,7 @@ const HeroCategoryExpo = () => {
                 width={10}
                 height={10}
               />
-              <p className="flex text-sm font-medium">Music</p>
+              <p className="flex text-sm font-medium">Música</p>
               <div className="flex transition ease-in-out duration-300 h-[3px] w-12 bg-slate-500 group-hover:bg-sky-600  group-hover:scale-x-150 " />
             </a>
           </li>
@@ -80,7 +80,7 @@ const HeroCategoryExpo = () => {
                 width={10}
                 height={10}
               />
-              <p className="flex text-sm font-medium">Analytics</p>
+              <p className="flex text-sm font-medium">Análises</p>
               <div className="flex transition ease-in-out duration-300 h-[3px] w-12 bg-slate-500 group-hover:bg-sky-600  group-hover:scale-x-150 " />
             </a>
           </li>
@@ -95,7 +95,7 @@ const HeroCategoryExpo = () => {
                 width={10}
                 height={10}
               />
-              <p className="flex text-sm font-medium">Programming</p>
+              <p className="flex text-sm font-medium">Programação</p>
               <div className="flex transition ease-in-out duration-300 h-[3px] w-12 bg-slate-500 group-hover:bg-sky-600  group-hover:scale-x-150 " />
             </a>
           </li>
@@ -110,7 +110,7 @@ const HeroCategoryExpo = () => {
                 width={10}
                 height={10}
               />
-              <p className="flex text-sm font-medium">Business</p>
+              <p className="flex text-sm font-medium">Negócios</p>
               <div className="flex transition ease-in-out duration-300 h-[3px] w-12 bg-slate-500 group-hover:bg-sky-600  group-hover:scale-x-150 " />
             </a>
           </li>
@@ -125,7 +125,7 @@ const HeroCategoryExpo = () => {
                 width={10}
                 height={10}
               />
-              <p className="flex text-sm font-medium">Video Editing</p>
+              <p className="flex text-sm font-medium">Edição de Vídeo</p>
               <div className="flex transition ease-in-out duration-300 h-[3px] w-12 bg-slate-500 group-hover:bg-sky-600  group-hover:scale-x-150 " />
             </a>
           </li>
