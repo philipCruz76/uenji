@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import AuthModal from "@/components/AuthModal";
 import MobileNav from "./MobileNav";
+import Image from "next/image";
 
 const activeNavBar =
   " fixed top-0 z-10 flex  max-w-full w-full mx-auto px-4 py-4 bg-white text-black shadow-md transition duration-500 ease-in-out";
@@ -109,8 +110,16 @@ const NavBar = () => {
           {/*Nav Links*/}
           <ul className="desktop:flex hidden  text-base font-semibold px-2 gap-[20px]">
             {NavLinks.map((link) => (
-              <Link href={link.href} key={link.key} className="hover:underline">
+              <Link href={link.href} key={link.key} className="flex flex-row hover:underline">
                 {link.text}
+                {link.key === "English" && (
+                  <Image
+                  alt="Language"
+                  src="./icons/globe-thin.svg"
+                  width={20}
+                  height={20}
+                />
+                )}
               </Link>
             ))}
           </ul>

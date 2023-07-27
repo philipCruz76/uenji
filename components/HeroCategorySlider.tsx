@@ -8,18 +8,14 @@ const images = [
 
 const HeroCategorySlider = () => {
   return (
-    <section className="flex container w-full h-[700px] desktop:py-24 tablet:py-14 py-8">
-      <div className="flex flex-col gap-6">
-        <span className="font-bold text-3xl">
+    <section className="flex flex-col container w-full tablet:h-[700px] h-[500px] box-border desktop:py-24 tablet:py-14 py-8">
+      
+        <span className="px-2 font-bold text-3xl">
           Serviços em destaque
         </span>
 
-        <div className='tablet:flex hidden'>
-          <PhotoCaroussel slidesTOShow={5} />
-        </div>
-
-
-      </div>
+     
+      <PhotoCaroussel slidesTOShow={5} />
     </section>
   )
 }

@@ -20,48 +20,37 @@ const PhotoCaroussel: FC<PhotoCarousselProps> = ({ slidesTOShow }) => {
   return (
     <>
 
-      <div className="flex container items-center justify-center  lg:w-[1200px] desktop:w-[800px] tablet:w-[560px]">
-        <Swiper
-          slidesPerView={slidesTOShow}
-          loop={true}
-          pagination={{ clickable: true }}
-          modules={[Pagination]}
-          breakpoints={{
-            500: {
-              slidesPerView: 2,
-              spaceBetween: 20,
-            },
-            600: {
-              slidesPerView: 2,
-              spaceBetween: 50,
-            },
-            900: {
-              slidesPerView: 3,
-              spaceBetween: 220,
-            },
-            1200: {
-              slidesPerView: slidesTOShow,
-              spaceBetween: 270,
-            },
+      <Swiper
+        centeredSlides={true}
+        slidesPerView={1}
+        loop={true}
+        breakpoints={{
+          600: {
+            slidesPerView: 2,
+            spaceBetween: 50,
+          },
+          900: {
+            slidesPerView: slidesTOShow,
+            spaceBetween: 200,
+          }
+        }}
+        className="flex max-w-[1200px] relative w-full mx-auto my-8 items-center justify-start">
 
-          }}>
+          {catCards.map((card) => (
+            <SwiperSlide key={card.alt}>
+              <CategoryCard key={card.title} title={card.title} description={card.description} image={card.image} alt={card.alt} />
+            </SwiperSlide>
+          ))}
+       
 
-          <div className="flex box-border w-full">
-            {catCards.map((card) => (
-              <SwiperSlide key={card.alt} className="flex gap-4">
-                <CategoryCard key={card.title} title={card.title} description={card.description} image={card.image} alt={card.alt} />
-              </SwiperSlide>
-            ))}
-          </div>
+        {/* Swiper Buttons */}
+        <div className="flex flex-row">
+          <PrevButton />
+          <NextButton />
+        </div>
 
-          {/* Swiper Buttons */}
-          <div className="flex flex-row">
-            <PrevButton />
-            <NextButton />
-          </div>
+      </Swiper>
 
-        </Swiper>
-      </div>
     </>
   );
 };
