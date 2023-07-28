@@ -161,7 +161,6 @@ const HeroCategoryExpo = () => {
               </a>
             </li>
           </ul>
-
         </div>
       </section>
     </>

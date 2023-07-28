@@ -111,15 +111,19 @@ const NavBar = () => {
           {/*Nav Links*/}
           <ul className="desktop:flex hidden  text-base font-semibold px-2 gap-[20px]">
             {NavLinks.map((link) => (
-              <Link href={link.href} key={link.key} className="flex flex-row hover:underline">
+              <Link
+                href={link.href}
+                key={link.key}
+                className="flex flex-row hover:underline"
+              >
                 {link.text}
                 {link.key === "English" && (
                   <Image
-                  alt="Language"
-                  src="./icons/globe-thin.svg"
-                  width={20}
-                  height={20}
-                />
+                    alt="Language"
+                    src="./icons/globe-thin.svg"
+                    width={20}
+                    height={20}
+                  />
                 )}
               </Link>
             ))}

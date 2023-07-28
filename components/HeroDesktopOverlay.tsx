@@ -3,10 +3,7 @@ import Image from "next/image";
 const HeroDesktopOverlay = () => {
   return (
     <>
-
-      <div className="bg-amber-800 w-full">
-
-      </div>
+      <div className="bg-amber-800 w-full"></div>
       {/*Background Image*/}
       <Image
         alt="backgroung image"
@@ -22,8 +19,9 @@ const HeroDesktopOverlay = () => {
         {/*Slogan*/}
         <div className="flex lg:w-[640px]  h-[100px] tablet:w-[440px] desktop:gap-4 tablet:gap-2 gap-[4px]">
           <span className="lg:text-5xl tablet:text-4xl text-3xl font-bold text-white ">
-            {""}Encontre o {" "}
-            <i className="font-serif font-medium">serviço de freelance</i> {" "} certo para si
+            {""}Encontre o{" "}
+            <i className="font-serif font-medium">serviço de freelance</i> certo
+            para si
           </span>
         </div>
 
@@ -61,32 +59,31 @@ const HeroDesktopOverlay = () => {
             Popular :
           </span>
           <ul className="flex flex-row gap-2 text-white text-sm ">
-            <li >
+            <li>
               <a className="flex border font-medium w-[100px] items-center justify-center rounded-full cursor-pointer hover:bg-white hover:text-black">
                 Fotografia
               </a>
             </li>
 
-            <li >
+            <li>
               <a className="flex border font-medium w-[100px] items-center justify-center rounded-full cursor-pointer hover:bg-white hover:text-black">
                 Design
               </a>
             </li>
 
-            <li >
+            <li>
               <a className="flex border font-medium w-[120px] items-center justify-center rounded-full cursor-pointer hover:bg-white hover:text-black">
                 Programação
               </a>
             </li>
 
-            <li >
+            <li>
               <a className="flex border font-medium w-[120px] items-center justify-center rounded-full cursor-pointer hover:bg-white hover:text-black">
                 Escrita
               </a>
             </li>
           </ul>
         </div>
-
       </div>
     </>
   );

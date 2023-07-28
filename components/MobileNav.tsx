@@ -76,11 +76,7 @@ const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
                   </span>
                   <div className="w-full h-px bg-slate-200" />
                 </div>
-                <Link
-                  href="/"
-                  className="hover:underline"
-                  onClick={() => setOpenState(false)}
-                >
+                <Link href="/" className="hover:underline">
                   Home
                 </Link>
 
