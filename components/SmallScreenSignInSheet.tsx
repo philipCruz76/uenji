@@ -2,8 +2,7 @@
 
 import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
-import { FC, Fragment, useState } from "react";
-import SmallScreenJoinSheet from "./SmallScreenJoinSheet";
+import { FC, Fragment, useState , lazy} from "react";
 import useSwipeDetection from "@/lib/touchDetection";
 
 interface SmallScreenSignInSheetProps {
@@ -17,6 +16,9 @@ const signInText = {
   hyperlinkText: "Join here",
   credentialsText: "Continue with email/username",
 };
+
+
+const SmallScreenJoinSheet = lazy(() => import("./SmallScreenJoinSheet"));
 
 const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
   openModal,

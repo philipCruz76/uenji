@@ -1,16 +1,18 @@
-import { useState, FC } from "react";
+import { useState, FC , lazy} from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "./ui/Button";
 import { useMediaQuery } from "react-responsive";
-import DesktopAuthModal from "./DesktopAuthModal";
-import MobileAuthModal from "./MobileAuthModal";
-import SmallScreenJoinSheet from "./SmallScreenJoinSheet";
-import SmallScreenSignInSheet from "./SmallScreenSignInSheet";
 
 interface AuthModalProps {
   signIn: boolean;
 }
+
+const DesktopAuthModal = lazy(() => import("./DesktopAuthModal"));
+const MobileAuthModal = lazy(() => import("./MobileAuthModal"));
+const SmallScreenSignInSheet = lazy(() => import("./SmallScreenSignInSheet"));
+const SmallScreenJoinSheet = lazy(() => import("./SmallScreenJoinSheet"));
+
 
 const AuthModal: FC<AuthModalProps> = ({ signIn }) => {
   const [isOpen, setIsOpen] = useState(false);

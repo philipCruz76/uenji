@@ -18,7 +18,7 @@ export const catCards = [
   { title: "Programação", description: "Executa os teus projectos", image: "/coding.jpg", alt: "Programação" },
   { title: "Negócios", description: "Aumenta a tua audiência", image: "/business.jpg", alt: "Business" },
   { title: "Edição de Vídeo", description: "Cria o teu vídeo", image: "/video-editing.jpg", alt: "Vídeo Editing" },
-  { title: "Branding", description: "Constrói a tua marca", image: "/design-stock.jpg", alt: "Design" },
+  { title: "Branding", description: "Constrói a tua marca", image: "/design-stock.jpg", alt: "Branding" },
   { title: "Design", description: "Traduz o teu conteúdo", image: "/design-sketch.jpg", alt: "Design" },
 
 ];

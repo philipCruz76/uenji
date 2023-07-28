@@ -1,11 +1,12 @@
-import NavBar from "@/components/NavBar";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
-import Footer from "@/components/Footer";
-import MobileFooter from "@/components/MobileFooter";
+import { lazy } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
+const NavBar = lazy(() => import("@/components/NavBar"));
+const Footer = lazy(() => import("@/components/Footer"));
+const MobileFooter = lazy(() => import("@/components/MobileFooter"));
 
 export const metadata = {
   title: "Uenji",

@@ -2,15 +2,16 @@
 
 import { NavLinks } from "@/constants";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import AuthModal from "@/components/AuthModal";
-import MobileNav from "./MobileNav";
+import { useEffect, useState, lazy } from "react";
 import Image from "next/image";
 
 const activeNavBar =
   " fixed top-0 z-10 flex  max-w-full w-full mx-auto px-4 py-4 bg-white text-black shadow-md transition duration-500 ease-in-out";
 const inactiveNavBar =
   " fixed top-0 z-10 flex max-w-full w-full mx-auto px-4 py-4 bg-transparent text-white transition duration-500 ease-in-out";
+
+const AuthModal = lazy(() => import("@/components/AuthModal"));
+const MobileNav = lazy(() => import("@/components/MobileNav"));
 
 const NavBar = () => {
   let [navbar, setNavbar] = useState(false);

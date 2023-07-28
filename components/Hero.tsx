@@ -1,8 +1,10 @@
-import HeroCategoryExpo from "./HeroCategoryExpo";
-import HeroCategorySlider from "./HeroCategorySlider";
-import HeroDesktopOverlay from "./HeroDesktopOverlay";
-import HeroEyeCatch from "./HeroEyeCatch";
-import HeroMobileOverlay from "./HeroMobileOverlay";
+import { lazy } from "react";
+
+const HeroCategoryExpo = lazy(() => import("@/components/HeroCategoryExpo"));
+const HeroCategorySlider = lazy(() => import("@/components/HeroCategorySlider"));
+const HeroDesktopOverlay = lazy(() => import("@/components/HeroDesktopOverlay"));
+const HeroEyeCatch = lazy(() => import("@/components/HeroEyeCatch"));
+const HeroMobileOverlay = lazy(() => import("@/components/HeroMobileOverlay"));
 
 const Hero = () => {
   return (
