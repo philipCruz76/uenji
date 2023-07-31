@@ -4,6 +4,8 @@ import { NavLinks } from "@/constants";
 import Link from "next/link";
 import { useEffect, useState, lazy } from "react";
 import Image from "next/image";
+import { UserDropContextMenu } from "./UserContextMenu";
+import { useSession } from "next-auth/react";
 
 const activeNavBar =
   " fixed top-0 z-10 flex  max-w-full w-full mx-auto px-4 py-4 bg-white text-black shadow-md transition duration-500 ease-in-out";
@@ -16,6 +18,8 @@ const MobileNav = lazy(() => import("@/components/MobileNav"));
 const NavBar = () => {
   let [navbar, setNavbar] = useState(false);
   let [mobileNav, setMobileNav] = useState(false);
+
+  const session = useSession();
 
   const changeBackground = () => {
     if (window.scrollY >= 60) {
@@ -129,16 +133,26 @@ const NavBar = () => {
             ))}
           </ul>
 
-          {/*Auth Button*/}
-          <div className="flex tablet:flex-row tablet:gap-3">
-            <div className="text-center items-center hidden tablet:flex font-semibold text-base focus:border-none focus:outline-none">
-              <AuthModal signIn={true} />
-            </div>
+          {/*Auth Button & User Avatar*/}
+          {session.data?.user ? (
+            <UserDropContextMenu
+              user={{
+                username: session.data.user.username || null,
+                image: session.data.user.image || null,
+              }}
+              className="tablet:flex hidden h-full"
+            />
+          ) : (
+            <div className="flex tablet:flex-row tablet:gap-3">
+              <div className="text-center items-center hidden tablet:flex font-semibold text-base focus:border-none focus:outline-none">
+                <AuthModal signIn={true} />
+              </div>
 
-            <div className="flex mx-auto sm:w-[80px] w-[60px] ">
-              <AuthModal signIn={false} />
+              <div className="flex mx-auto sm:w-[80px] w-[60px] ">
+                <AuthModal signIn={false} />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </nav>

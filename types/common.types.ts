@@ -1,5 +1,5 @@
 export interface User {
-  name?: string | null | undefined;
+  name?: string | null;
   username?: string;
   email?: string;
   accessToken?: string;

@@ -10,6 +10,10 @@ import {
   AccordionTrigger,
 } from "./ui/Accordion";
 import Image from "next/image";
+import { signOut, useSession } from "next-auth/react";
+import { UserAvatar } from "./UserAvatar";
+import LoggedInMobileNavContent from "./navigation/LoggedInMobileNavContent";
+import LoggedOutMobileNavContent from "./navigation/LoggedOutMobileNavContent";
 
 interface MobileNavProps {
   sidebarOpen: boolean;
@@ -27,6 +31,8 @@ const MobileNavLinks = ({ links }: { links: string[] }) => (
 );
 
 const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
+  const session = useSession();
+
   return (
     <Transition appear show={sidebarOpen} as={Fragment}>
       <Dialog
@@ -49,66 +55,11 @@ const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
           leaveTo="-translate-x-full"
         >
           <Dialog.Panel className="lg:hidden flex flex-col fixed   h-full  min-h-screen  w-[270px] px-4 py-6 bg-white border-r border-gray-200  z-50 gap-4 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500">
-            {/* Mobile Menu Content */}
-            <div className="overflow-y-auto flex-1">
-              {/*Join Button*/}
-              <AuthModal signIn={false} />
-
-              {/*Nav Links*/}
-              <ul className="flex flex-col text-gray-400 text-base font-light py-8 ">
-                <AuthModal signIn={true} />
-
-                <Accordion type="multiple">
-                  <AccordionItem value="1">
-                    <AccordionTrigger className="py-2">
-                      <span className="font-light"> Browse Categories</span>
-                    </AccordionTrigger>
-
-                    <AccordionContent className="pt-0">
-                      <MobileNavLinks links={footerLinks[0].links} />
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-
-                <div className="flex flex-col py-5 gap-4">
-                  <span className="text-sm text-black font-semibold">
-                    General
-                  </span>
-                  <div className="w-full h-px bg-slate-200" />
-                </div>
-                <Link href="/" className="hover:underline">
-                  Home
-                </Link>
-
-                <Accordion type="multiple">
-                  <AccordionItem value="2">
-                    <AccordionTrigger className="flex flex-row gap-2 py-2">
-                      <span className="font-light">English</span>
-                      <Image
-                        alt="Language"
-                        src="./icons/globe-thin.svg"
-                        width={20}
-                        height={20}
-                      />
-                    </AccordionTrigger>
-
-                    <AccordionContent>
-                      {languageFilters.map((filter) => (
-                        <ul className="flex relative flex-col items-start">
-                          <Link
-                            href="/"
-                            key={filter}
-                            className="hover:underline"
-                          >
-                            {filter}
-                          </Link>
-                        </ul>
-                      ))}
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </ul>
-            </div>
+            {session.status === "authenticated" ? (
+              <LoggedInMobileNavContent />
+            ) : (
+              <LoggedOutMobileNavContent />
+            )}
           </Dialog.Panel>
         </Transition.Child>
       </Dialog>

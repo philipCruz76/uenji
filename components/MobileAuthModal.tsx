@@ -1,6 +1,9 @@
 import { FC, Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 interface MobileAuthModalProps {
   opened: boolean;
@@ -28,8 +31,26 @@ const MobileAuthModal: FC<MobileAuthModalProps> = ({
   setOpenState,
 }) => {
   let [signInView, setSignInView] = useState(signedIn);
+  let [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const handleSignIn = () => {
     setSignInView((current) => !current);
+  };
+
+  const socialAction = (action: string) => {
+    setIsLoading(true);
+
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error("Invalid Credentials");
+        }
+
+        if (callback?.ok) {
+          router.push("/");
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
   return (
     <Transition appear show={opened} as={Fragment}>
@@ -143,7 +164,11 @@ const MobileAuthModal: FC<MobileAuthModalProps> = ({
                       </p>
                     </button>
 
-                    <button className="flex flex-row mx-auto border w-[350px] h-[60px] space-x-4 text-center items-center justify-center">
+                    {/* Google Button */}
+                    <button
+                      className="flex flex-row mx-auto border w-[350px] h-[60px] space-x-4 text-center items-center justify-center"
+                      onClick={() => socialAction("google")}
+                    >
                       <svg
                         width="24px"
                         height="24px"

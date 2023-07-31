@@ -18,5 +18,5 @@ export default withAuth(
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/gig/:path*", "/user/:path*"],
+  matcher: ["/gig/:path*", "/user/:path*", "/categories/:path*"],
 };

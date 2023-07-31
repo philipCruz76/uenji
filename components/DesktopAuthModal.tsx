@@ -1,6 +1,14 @@
 import { FC, Fragment, useState } from "react";
+import axios from "axios";
 import { Dialog, Transition } from "@headlessui/react";
+import { signIn } from "next-auth/react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+
 import Link from "next/link";
+import { LoginCredentials, LoginValidator } from "@/types/login.types";
+import { toast } from "react-hot-toast";
 
 interface DesktopAuthModalProps {
   opened: boolean;
@@ -22,15 +30,45 @@ const signUpText = {
   credentialsText: "Continue with email",
 };
 
+// Form Validation
+
 const DesktopAuthModal: FC<DesktopAuthModalProps> = ({
   opened,
   signedIn,
   setOpenState,
 }) => {
   let [signInView, setSignInView] = useState(signedIn);
+  let [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   const handleSignIn = () => {
     setSignInView((current) => !current);
   };
+
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+  } = useForm<LoginCredentials>({
+    resolver: zodResolver(LoginValidator),
+  });
+
+  const socialAction = (action: string) => {
+    setIsLoading(true);
+
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error("Invalid Credentials");
+        }
+
+        if (callback?.ok) {
+          router.push("/");
+        }
+      })
+      .finally(() => setIsLoading(false));
+  };
+
   return (
     <Transition appear show={opened} as={Fragment}>
       <Dialog
@@ -141,7 +179,11 @@ const DesktopAuthModal: FC<DesktopAuthModalProps> = ({
                         </p>
                       </button>
 
-                      <button className="flex flex-row mx-auto border w-[360px] h-[50px] space-x-4 text-center items-center justify-center">
+                      {/* Google Auth */}
+                      <button
+                        className="flex flex-row mx-auto border w-[360px] h-[50px] space-x-4 text-center items-center justify-center"
+                        onClick={() => socialAction("google")}
+                      >
                         <svg
                           width="24px"
                           height="24px"

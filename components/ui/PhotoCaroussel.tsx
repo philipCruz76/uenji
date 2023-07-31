@@ -4,7 +4,6 @@ import { FC } from "react";
 import CategoryCard from "../categories/CategoryCard";
 import { catCards } from "@/constants";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
 import PrevButton from "./PrevButton";
 import NextButton from "./NextButton";
 
@@ -18,15 +17,22 @@ const PhotoCaroussel: FC<PhotoCarousselProps> = ({ slidesTOShow }) => {
   return (
     <>
       <Swiper
-        centeredSlides={true}
         slidesPerView={1}
         loop={true}
         breakpoints={{
           600: {
             slidesPerView: 2,
-            spaceBetween: 50,
+            spaceBetween: 5,
+          },
+          750: {
+            slidesPerView: 3,
+            spaceBetween: 70,
           },
           900: {
+            slidesPerView: 4,
+            spaceBetween: 180,
+          },
+          1100: {
             slidesPerView: slidesTOShow,
             spaceBetween: 200,
           },
@@ -34,7 +40,7 @@ const PhotoCaroussel: FC<PhotoCarousselProps> = ({ slidesTOShow }) => {
         className="flex max-w-[1200px] relative w-full mx-auto my-8 items-center justify-start"
       >
         {catCards.map((card) => (
-          <SwiperSlide key={card.alt}>
+          <SwiperSlide key={card.alt} className="w-full">
             <CategoryCard
               key={card.title}
               title={card.title}

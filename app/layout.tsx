@@ -2,6 +2,8 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { lazy } from "react";
+import ProvidersContext from "@/lib/context/ProvidersContext";
+import ToasterContext from "@/lib/context/ToasterContext";
 
 const inter = Inter({ subsets: ["latin"] });
 const NavBar = lazy(() => import("@/components/NavBar"));
@@ -21,16 +23,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(inter.className, "antialiased")}>
-        <NavBar />
-
-        <main>{children}</main>
-        <div className="flex flex-1 bottom-0 w-full h-px bg-gray-200" />
-        <div className="tablet:flex hidden flex-1 min-w-full">
-          <Footer />
-        </div>
-        <div className="flex flex-1 tablet:hidden min-w-full">
-          <MobileFooter />
-        </div>
+        <ProvidersContext>
+          <ToasterContext />
+          <NavBar />
+          <main>{children}</main>
+          <div className="flex flex-1 bottom-0 w-full h-px bg-gray-200" />
+          <div className="tablet:flex hidden flex-1 min-w-full">
+            <Footer />
+          </div>
+          <div className="flex flex-1 tablet:hidden min-w-full">
+            <MobileFooter />
+          </div>
+        </ProvidersContext>
       </body>
     </html>
   );
