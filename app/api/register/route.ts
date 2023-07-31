@@ -1,10 +1,11 @@
-import bcrypt from "bcrypt";
+
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { LoginValidator } from "@/types/login.types";
 
 export async function POST(request: Request) {
   try {
+    const bcrypt = require("bcrypt");
     const body = await request.json();
     const { email, password } = LoginValidator.parse(body);
 

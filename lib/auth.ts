@@ -1,5 +1,4 @@
 import { db } from "@/lib/db";
-import bcrypt from "bcrypt";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextAuthOptions, getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -29,6 +28,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         try {
+          const bcrypt = require("bcrypt");
           const dbUser = await db.user.findUnique({
             where: {
               email: credentials.email,
