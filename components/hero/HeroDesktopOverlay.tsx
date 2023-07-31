@@ -11,7 +11,6 @@ const HeroDesktopOverlay = () => {
         className="flex bg-amber-800 items-end justify-end object-right h-[700px]"
         width={500}
         height={700}
-        loading="lazy"
       />
 
       {/*Overlay*/}

@@ -1,14 +1,18 @@
 import { lazy } from "react";
 
-const HeroCategoryExpo = lazy(() => import("@/components/HeroCategoryExpo"));
+const HeroCategoryExpo = lazy(
+  () => import("@/components/hero/HeroCategoryExpo"),
+);
 const HeroCategorySlider = lazy(
-  () => import("@/components/HeroCategorySlider"),
+  () => import("@/components/hero/HeroCategorySlider"),
 );
 const HeroDesktopOverlay = lazy(
-  () => import("@/components/HeroDesktopOverlay"),
+  () => import("@/components/hero/HeroDesktopOverlay"),
 );
-const HeroEyeCatch = lazy(() => import("@/components/HeroEyeCatch"));
-const HeroMobileOverlay = lazy(() => import("@/components/HeroMobileOverlay"));
+const HeroEyeCatch = lazy(() => import("@/components/hero/HeroEyeCatch"));
+const HeroMobileOverlay = lazy(
+  () => import("@/components/hero/HeroMobileOverlay"),
+);
 
 const Hero = () => {
   return (

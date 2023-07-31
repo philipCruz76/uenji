@@ -4,7 +4,6 @@ import { NavLinks } from "@/constants";
 import Link from "next/link";
 import { useEffect, useState, lazy } from "react";
 import Image from "next/image";
-import { UserDropContextMenu } from "./UserContextMenu";
 import { useSession } from "next-auth/react";
 
 const activeNavBar =
@@ -12,8 +11,11 @@ const activeNavBar =
 const inactiveNavBar =
   " fixed top-0 z-10 flex max-w-full w-full mx-auto px-4 py-4 bg-transparent text-white transition duration-500 ease-in-out";
 
-const AuthModal = lazy(() => import("@/components/AuthModal"));
-const MobileNav = lazy(() => import("@/components/MobileNav"));
+const AuthModal = lazy(() => import("@/components/auth/AuthModal"));
+const MobileNav = lazy(() => import("@/components/navigation/MobileNav"));
+const UserDropContextMenu = lazy(
+  () => import("@/components/users/UserContextMenu"),
+);
 
 const NavBar = () => {
   let [navbar, setNavbar] = useState(false);
@@ -134,7 +136,7 @@ const NavBar = () => {
           </ul>
 
           {/*Auth Button & User Avatar*/}
-          {session.data?.user ? (
+          {session.status === "authenticated" ? (
             <UserDropContextMenu
               user={{
                 username: session.data.user.username || null,

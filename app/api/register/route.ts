@@ -1,4 +1,3 @@
-
 import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
 import { LoginValidator } from "@/types/login.types";

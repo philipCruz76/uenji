@@ -10,13 +10,13 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./ui/DropdownMenu";
+} from "../ui/DropdownMenu";
 
 type UserContextMenuProps = React.HTMLAttributes<HTMLDivElement> & {
   user: Pick<User, "image" | "username">;
 };
 
-export function UserDropContextMenu({ user }: UserContextMenuProps) {
+export default function UserDropContextMenu({ user }: UserContextMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

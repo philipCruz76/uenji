@@ -1,4 +1,4 @@
-import PhotoCaroussel from "./ui/PhotoCaroussel";
+import PhotoCaroussel from "../ui/PhotoCaroussel";
 
 const images = ["/bg-image.jpeg", "/deskWork.jpg", "/design-stock.jpg"];
 

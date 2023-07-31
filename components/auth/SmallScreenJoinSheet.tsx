@@ -2,38 +2,51 @@
 
 import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
-import { FC, Fragment, useState, lazy } from "react";
-import useSwipeDetection from "@/lib/touchDetection";
+import { Fragment, FC, useState, lazy } from "react";
+import { signIn } from "next-auth/react";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
-interface SmallScreenSignInSheetProps {
+interface SmallScreenJoinSheetProps {
   openModal: boolean;
   setOpenState?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const signInText = {
-  title: "Sign In to Uenji",
-  subtext: "Dont have an account?",
-  hyperlinkText: "Join here",
-  credentialsText: "Continue with email/username",
+const signUpText = {
+  title: "Join Uenji",
+  subtext: "Already have an account?",
+  hyperlinkText: "Sign in",
+  credentialsText: "Continue with email",
 };
 
-const SmallScreenJoinSheet = lazy(() => import("./SmallScreenJoinSheet"));
+const SmallScreenSignInSheet = lazy(() => import("./SmallScreenSignInSheet"));
 
-const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
+const SmallScreenJoinSheet: FC<SmallScreenJoinSheetProps> = ({
   openModal,
   setOpenState,
 }) => {
   let [showNewComponent, setShowNewComponent] = useState(false);
-  const swipeDirection = useSwipeDetection();
+  let [isLoading, setIsLoading] = useState(false);
 
-  const handleSwipe = () => {
-    if (swipeDirection === "DOWN") {
-      setOpenState?.(false);
-    }
-  };
-
+  const router = useRouter();
   const handleClick = () => {
     setShowNewComponent(true);
+  };
+
+  const socialAction = (action: string) => {
+    setIsLoading(true);
+
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error("Invalid Credentials");
+        }
+
+        if (callback?.ok) {
+          router.push("/");
+        }
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -52,10 +65,9 @@ const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
         as="div"
         className="container flex flex-col fixed top-0 left-0 right-0 bottom-0 z-20 border text-black border-white bg-white rounded-2xl overflow-y-scroll"
         onClose={() => setOpenState?.(false)}
-        onTouchEnd={() => handleSwipe}
       >
         <div className="flex relative items-start mx-auto px-4 py-4  font-bold text-3xl">
-          {signInText.title}
+          {signUpText.title}
         </div>
 
         {/* Close Button*/}
@@ -138,7 +150,11 @@ const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
               </p>
             </button>
 
-            <button className="flex flex-row mx-auto border w-[350px] h-[50px] space-x-4 text-center items-center justify-center">
+            {/* Google button */}
+            <button
+              className="flex flex-row mx-auto border w-[350px] h-[50px] space-x-4 text-center items-center justify-center"
+              onClick={() => socialAction("google")}
+            >
               <svg
                 width="24px"
                 height="24px"
@@ -193,15 +209,6 @@ const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
               />
             </div>
 
-            {/*[Sign-in only] Password input field */}
-
-            <div className="flex flex-row mx-auto border w-[350px] h-[50px] items-center space-x-4 ">
-              <input
-                className="flex-1 h-full px-4 text-sm font-normal"
-                placeholder="Password"
-              />
-            </div>
-
             <button className="flex flex-row mx-auto border bg-sky-500 w-[350px] h-[50px] items-center space-x-4 ">
               <p className="flex mx-auto text-white items-center justify-center text-center">
                 Continue
@@ -214,7 +221,7 @@ const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
 
         {/* Bottom Text */}
         <div className="flex text-center justify-center space-x-1 py-4">
-          <p className="text-sm">{signInText.subtext}</p>
+          <p className="text-sm">{signUpText.subtext}</p>
           <Link
             href="/"
             className="text-sm text-sky-500 underline cursor-pointer"
@@ -223,8 +230,8 @@ const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
               handleClick();
             }}
           >
-            {signInText.hyperlinkText}
-            {showNewComponent && <SmallScreenJoinSheet openModal={true} />}
+            {signUpText.hyperlinkText}
+            {showNewComponent && <SmallScreenSignInSheet openModal={true} />}
           </Link>
         </div>
       </Dialog>
@@ -232,4 +239,4 @@ const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
   );
 };
 
-export default SmallScreenSignInSheet;
+export default SmallScreenJoinSheet;

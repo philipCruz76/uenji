@@ -1,5 +1,4 @@
-import { signOut } from "next-auth/react";
-import AuthModal from "../AuthModal";
+import AuthModal from "../auth/AuthModal";
 import Link from "next/link";
 import {
   Accordion,
@@ -27,13 +26,13 @@ const LoggedOutMobileNavContent = () => {
       <div className="overflow-y-auto flex-1">
         {/*Join Button*/}
 
-        <AuthModal signIn={false} />
+        <AuthModal signIn={false} key="Join" />
 
         {/*Nav Links*/}
         <ul className="flex flex-col text-[#62646a] text-base font-light py-8 ">
-          <AuthModal signIn={true} />
+          <AuthModal signIn={true} key="Sign In" />
 
-          <Accordion type="multiple">
+          <Accordion type="multiple" key="Categories">
             <AccordionItem value="1">
               <AccordionTrigger className="py-2">
                 <span className="font-light"> Browse Categories</span>
@@ -49,11 +48,11 @@ const LoggedOutMobileNavContent = () => {
             <span className="text-sm text-black font-semibold">General</span>
             <div className="w-full h-px bg-slate-200" />
           </div>
-          <Link href="/" className="hover:underline">
+          <Link href="/" className="hover:underline" key="Home">
             Home
           </Link>
 
-          <Accordion type="multiple">
+          <Accordion type="multiple" key="Language">
             <AccordionItem value="2">
               <AccordionTrigger className="flex flex-row gap-2 py-2">
                 <span className="font-light">English</span>

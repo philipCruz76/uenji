@@ -6,9 +6,9 @@ import ProvidersContext from "@/lib/context/ProvidersContext";
 import ToasterContext from "@/lib/context/ToasterContext";
 
 const inter = Inter({ subsets: ["latin"] });
-const NavBar = lazy(() => import("@/components/NavBar"));
-const Footer = lazy(() => import("@/components/Footer"));
-const MobileFooter = lazy(() => import("@/components/MobileFooter"));
+const NavBar = lazy(() => import("@/components/navigation/NavBar"));
+const Footer = lazy(() => import("@/components/navigation/Footer"));
+const MobileFooter = lazy(() => import("@/components/navigation/MobileFooter"));
 
 export const metadata = {
   title: "Uenji",

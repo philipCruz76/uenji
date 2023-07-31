@@ -1,6 +1,6 @@
 import { footerLinks, languageFilters } from "@/constants";
 import Link from "next/link";
-import AuthModal from "./AuthModal";
+import AuthModal from "../auth/AuthModal";
 import { FC, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
@@ -8,12 +8,12 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./ui/Accordion";
+} from "../ui/Accordion";
 import Image from "next/image";
 import { signOut, useSession } from "next-auth/react";
-import { UserAvatar } from "./UserAvatar";
-import LoggedInMobileNavContent from "./navigation/LoggedInMobileNavContent";
-import LoggedOutMobileNavContent from "./navigation/LoggedOutMobileNavContent";
+import { UserAvatar } from "../users/UserAvatar";
+import LoggedInMobileNavContent from "./LoggedInMobileNavContent";
+import LoggedOutMobileNavContent from "./LoggedOutMobileNavContent";
 
 interface MobileNavProps {
   sidebarOpen: boolean;

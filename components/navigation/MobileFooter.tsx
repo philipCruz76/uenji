@@ -8,7 +8,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "./ui/Accordion";
+} from "../ui/Accordion";
 
 interface MobileFooterProps {}
 
