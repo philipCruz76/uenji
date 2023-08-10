@@ -1,6 +1,5 @@
 import { signOut, useSession } from "next-auth/react";
 import { UserAvatar } from "../users/UserAvatar";
-import AuthModal from "../auth/AuthModal";
 import Link from "next/link";
 import {
   Accordion,
