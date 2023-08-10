@@ -1,16 +1,11 @@
 "use client";
 
 import { Dialog, Transition } from "@headlessui/react";
-import Link from "next/link";
-import { FC, Fragment, useState, lazy } from "react";
+import { Fragment, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
-
-interface SmallScreenSignInSheetProps {
-  openModal: boolean;
-  setOpenState?: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { useOpenModalStore } from "@/lib/stores/modal-store";
 
 const signInText = {
   title: "Sign In to Uenji",
@@ -19,19 +14,11 @@ const signInText = {
   credentialsText: "Continue with email/username",
 };
 
-const SmallScreenJoinSheet = lazy(() => import("./SmallScreenJoinSheet"));
+const SmallScreenSignInSheet = () => {
+  let { isOpen, setIsOpen } = useOpenModalStore();
 
-const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
-  openModal,
-  setOpenState,
-}) => {
-  let [showNewComponent, setShowNewComponent] = useState(false);
   let [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-
-  const handleClick = () => {
-    setShowNewComponent(true);
-  };
 
   const socialAction = (action: string) => {
     setIsLoading(true);
@@ -51,7 +38,7 @@ const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
   return (
     <Transition
       appear
-      show={openModal}
+      show={isOpen}
       as={Fragment}
       enter="transition ease-out duration-450 transform"
       enterFrom="translate-y-full"
@@ -63,7 +50,7 @@ const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
       <Dialog
         as="div"
         className="container flex flex-col fixed top-0 left-0 right-0 bottom-0 z-20 border text-black border-white bg-white rounded-2xl overflow-y-scroll"
-        onClose={() => setOpenState?.(false)}
+        onClose={() => setIsOpen(false)}
       >
         <div className="flex relative items-start mx-auto px-4 py-4  font-bold text-3xl">
           {signInText.title}
@@ -73,7 +60,7 @@ const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
         <div className="absolute top-6 right-6">
           <button
             className="h-6 p-0 w-6 rounded-md"
-            onClick={(curr) => setOpenState?.(!curr)}
+            onClick={() => setIsOpen(false)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -223,23 +210,6 @@ const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
               </p>
             </button>
           </div>
-        </div>
-
-        <div className="w-full h-px bg-gray-200 " />
-
-        {/* Bottom Text */}
-        <div className="flex text-center justify-center space-x-1 py-4">
-          <p className="text-sm">{signInText.subtext}</p>
-          <Link
-            href="/"
-            className="text-sm text-sky-500 underline cursor-pointer"
-            onClick={() => {
-              setOpenState?.(false);
-              handleClick();
-            }}
-          >
-            {signInText.hyperlinkText}
-          </Link>
         </div>
       </Dialog>
     </Transition>

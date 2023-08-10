@@ -7,7 +7,7 @@ import { buttonVariants } from "@/constants/ui/button";
 
 const DesktopAuthModal = lazy(() => import("./DesktopAuthModal"));
 const MobileAuthModal = lazy(() => import("./MobileAuthModal"));
-const SmallScreenJoinSheet = lazy(() => import("./SmallScreenJoinSheet"));
+const SmallScreenSignInSheet = lazy(() => import("./SmallScreenSignInSheet"));
 
 const JoinButton = () => {
   let { setIsOpen } = useOpenModalStore();
@@ -51,7 +51,7 @@ const JoinButton = () => {
       {isTablet && <MobileAuthModal />}
 
       {/*Mobile Auth Modal*/}
-      {isMobile && <SmallScreenJoinSheet />}
+      {isMobile && <SmallScreenSignInSheet />}
     </>
   );
 };

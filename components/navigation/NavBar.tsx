@@ -15,9 +15,7 @@ const inactiveNavBar =
 const MobileNavTest = lazy(
   () => import("@/components/navigation/MobileNavTest"),
 );
-const SignInButton = lazy(() => import("@/components/auth/SignInButton"));
 const JoinButton = lazy(() => import("@/components/auth/JoinButton"));
-
 const UserContextMenu = lazy(
   () => import("@/components/users/UserContextMenu"),
 );
