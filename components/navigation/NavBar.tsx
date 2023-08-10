@@ -5,21 +5,26 @@ import Link from "next/link";
 import { useEffect, useState, lazy } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
 
 const activeNavBar =
   " fixed top-0 z-10 flex  max-w-full w-full mx-auto px-4 py-4 bg-white text-black shadow-md transition duration-500 ease-in-out";
 const inactiveNavBar =
   " fixed top-0 z-10 flex max-w-full w-full mx-auto px-4 py-4 bg-transparent text-white transition duration-500 ease-in-out";
 
-const AuthModal = lazy(() => import("@/components/auth/AuthModal"));
-const MobileNav = lazy(() => import("@/components/navigation/MobileNav"));
-const UserDropContextMenu = lazy(
+const MobileNavTest = lazy(
+  () => import("@/components/navigation/MobileNavTest"),
+);
+const SignInButton = lazy(() => import("@/components/auth/SignInButton"));
+const JoinButton = lazy(() => import("@/components/auth/JoinButton"));
+
+const UserContextMenu = lazy(
   () => import("@/components/users/UserContextMenu"),
 );
 
 const NavBar = () => {
   let [navbar, setNavbar] = useState(false);
-  let [mobileNav, setMobileNav] = useState(false);
+  let { mobileNav, setMobileNav } = useOpenMobileNavStore();
 
   const session = useSession();
 
@@ -66,9 +71,7 @@ const NavBar = () => {
                 />
               </svg>
             </button>
-            {mobileNav && (
-              <MobileNav sidebarOpen={mobileNav} setOpenState={setMobileNav} />
-            )}
+            {mobileNav && <MobileNavTest />}
           </div>
 
           {/*Logo*/}
@@ -137,21 +140,22 @@ const NavBar = () => {
 
           {/*Auth Button & User Avatar*/}
           {session.status === "authenticated" ? (
-            <UserDropContextMenu
-              user={{
-                username: session.data.user.username || null,
-                image: session.data.user.image || null,
-              }}
-              className="tablet:flex hidden h-full"
-            />
+            <div className="hidden tablet:flex">
+              <UserContextMenu
+                user={{
+                  username: session.data.user.username || null,
+                  image: session.data.user.image || null,
+                }}
+              />
+            </div>
           ) : (
             <div className="flex tablet:flex-row tablet:gap-3">
               <div className="text-center items-center hidden tablet:flex font-semibold text-base focus:border-none focus:outline-none">
-                <AuthModal signIn={true} />
+                <span className="hover:underline">Sign In</span>
               </div>
 
               <div className="flex mx-auto sm:w-[80px] w-[60px] ">
-                <AuthModal signIn={false} />
+                <JoinButton />
               </div>
             </div>
           )}

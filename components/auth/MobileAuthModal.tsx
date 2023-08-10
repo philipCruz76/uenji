@@ -1,15 +1,11 @@
-import { FC, Fragment, useState } from "react";
+"use client";
+import { Fragment, useCallback, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-
-interface MobileAuthModalProps {
-  opened: boolean;
-  setOpenState: React.Dispatch<React.SetStateAction<boolean>>;
-  signedIn: boolean;
-}
+import { useLogInVariantStore } from "@/lib/stores/auth-store";
+import { useOpenModalStore } from "@/lib/stores/modal-store";
 
 const signInText = {
   title: "Sign into your account",
@@ -25,17 +21,19 @@ const signUpText = {
   credentialsText: "Continue with email",
 };
 
-const MobileAuthModal: FC<MobileAuthModalProps> = ({
-  opened,
-  signedIn,
-  setOpenState,
-}) => {
-  let [signInView, setSignInView] = useState(signedIn);
+const MobileAuthModal = () => {
+  let { isOpen, setIsOpen } = useOpenModalStore();
+  let { isLogin, setLogin } = useLogInVariantStore();
   let [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const handleSignIn = () => {
-    setSignInView((current) => !current);
-  };
+
+  const toggleVariant = useCallback(() => {
+    if (isLogin === "login") {
+      setLogin("register");
+    } else {
+      setLogin("login");
+    }
+  }, [isLogin]);
 
   const socialAction = (action: string) => {
     setIsLoading(true);
@@ -53,11 +51,11 @@ const MobileAuthModal: FC<MobileAuthModalProps> = ({
       .finally(() => setIsLoading(false));
   };
   return (
-    <Transition appear show={opened} as={Fragment}>
+    <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="fixed flex inset-0 z-10 "
-        onClose={() => setOpenState(false)}
+        onClose={() => setIsOpen(false)}
       >
         <Transition.Child
           as={Fragment}
@@ -93,7 +91,7 @@ const MobileAuthModal: FC<MobileAuthModalProps> = ({
                 <div className="absolute top-6 right-6">
                   <button
                     className="h-6 p-0 w-6 rounded-md"
-                    onClick={() => setOpenState(false)}
+                    onClick={() => setIsOpen(false)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -115,21 +113,22 @@ const MobileAuthModal: FC<MobileAuthModalProps> = ({
                 {/* Modal Content */}
                 <div className="flex flex-col space-y-3 text-left mt-12 px-3">
                   <p className="text-2xl font-semibold">
-                    {signInView ? signInText.title : signUpText.title}
+                    {isLogin === "login" ? signInText.title : signUpText.title}
                   </p>
                   <div className="flex text-base font-extralight text-slate-500 space-x-1">
                     <p>
-                      {signInView ? signInText.subtext : signUpText.subtext}
+                      {isLogin === "login"
+                        ? signInText.subtext
+                        : signUpText.subtext}
                     </p>
-                    <Link
-                      href="/"
+                    <a
                       className="underline cursor-pointer"
-                      onClick={handleSignIn}
+                      onClick={toggleVariant}
                     >
-                      {signInView
+                      {isLogin === "login"
                         ? signInText.hyperlinkText
                         : signUpText.hyperlinkText}
-                    </Link>
+                    </a>
                   </div>
 
                   {/* Auth buttons */}
@@ -157,8 +156,8 @@ const MobileAuthModal: FC<MobileAuthModalProps> = ({
                         </svg>
                       </div>
 
-                      <p className={signInView ? "pl-10" : "pl-16"}>
-                        {signInView
+                      <p className={isLogin === "login" ? "pl-10" : "pl-16"}>
+                        {isLogin === "login"
                           ? signInText.credentialsText
                           : signUpText.credentialsText}
                       </p>

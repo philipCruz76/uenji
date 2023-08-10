@@ -16,7 +16,7 @@ type UserContextMenuProps = React.HTMLAttributes<HTMLDivElement> & {
   user: Pick<User, "image" | "username">;
 };
 
-export default function UserDropContextMenu({ user }: UserContextMenuProps) {
+export default function UserContextMenu({ user }: UserContextMenuProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>

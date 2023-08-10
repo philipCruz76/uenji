@@ -1,20 +1,13 @@
-import { FC, Fragment, useState } from "react";
-import axios from "axios";
+import { Fragment, useCallback, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { signIn } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-
-import Link from "next/link";
 import { LoginCredentials, LoginValidator } from "@/types/login.types";
 import { toast } from "react-hot-toast";
-
-interface DesktopAuthModalProps {
-  opened: boolean;
-  setOpenState: React.Dispatch<React.SetStateAction<boolean>>;
-  signedIn: boolean;
-}
+import { useOpenModalStore } from "@/lib/stores/modal-store";
+import { useLogInVariantStore } from "@/lib/stores/auth-store";
 
 const signInText = {
   title: "Sign into your account",
@@ -30,19 +23,20 @@ const signUpText = {
   credentialsText: "Continue with email",
 };
 
-// Form Validation
+const DesktopAuthModal = () => {
+  const { isOpen, setIsOpen } = useOpenModalStore();
+  const { isLogin, setLogin } = useLogInVariantStore();
 
-const DesktopAuthModal: FC<DesktopAuthModalProps> = ({
-  opened,
-  signedIn,
-  setOpenState,
-}) => {
-  let [signInView, setSignInView] = useState(signedIn);
   let [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  const handleSignIn = () => {
-    setSignInView((current) => !current);
-  };
+
+  const toggleVariant = useCallback(() => {
+    if (isLogin === "login") {
+      setLogin("register");
+    } else {
+      setLogin("login");
+    }
+  }, [isLogin]);
 
   const {
     register,
@@ -70,11 +64,11 @@ const DesktopAuthModal: FC<DesktopAuthModalProps> = ({
   };
 
   return (
-    <Transition appear show={opened} as={Fragment}>
+    <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="fixed flex inset-0 z-10 overflow-y-auto"
-        onClose={() => setOpenState(false)}
+        onClose={() => setIsOpen(false)}
       >
         <Transition.Child
           as={Fragment}
@@ -108,7 +102,7 @@ const DesktopAuthModal: FC<DesktopAuthModalProps> = ({
                   <div className="absolute top-6 right-6">
                     <button
                       className="h-6 p-0 w-6 rounded-md"
-                      onClick={() => setOpenState(false)}
+                      onClick={() => setIsOpen(false)}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -130,21 +124,24 @@ const DesktopAuthModal: FC<DesktopAuthModalProps> = ({
                   {/* Modal Content */}
                   <div className="container flex flex-col space-y-3 text-left mt-12">
                     <p className="text-2xl font-semibold">
-                      {signInView ? signInText.title : signUpText.title}
+                      {isLogin === "login"
+                        ? signInText.title
+                        : signUpText.title}
                     </p>
                     <div className="flex text-base font-extralight text-slate-500 space-x-1">
                       <p>
-                        {signInView ? signInText.subtext : signUpText.subtext}
+                        {isLogin === "login"
+                          ? signInText.subtext
+                          : signUpText.subtext}
                       </p>
-                      <Link
-                        href="/"
+                      <a
                         className="underline cursor-pointer"
-                        onClick={handleSignIn}
+                        onClick={toggleVariant}
                       >
-                        {signInView
+                        {isLogin === "login"
                           ? signInText.hyperlinkText
                           : signUpText.hyperlinkText}
-                      </Link>
+                      </a>
                     </div>
 
                     {/* Auth buttons */}
@@ -172,8 +169,8 @@ const DesktopAuthModal: FC<DesktopAuthModalProps> = ({
                           </svg>
                         </div>
 
-                        <p className={signInView ? "pl-10" : "pl-16"}>
-                          {signInView
+                        <p className={isLogin === "login" ? "pl-10" : "pl-16"}>
+                          {isLogin === "login"
                             ? signInText.credentialsText
                             : signUpText.credentialsText}
                         </p>

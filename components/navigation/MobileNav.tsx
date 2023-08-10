@@ -1,48 +1,34 @@
-import { footerLinks, languageFilters } from "@/constants";
-import Link from "next/link";
-import AuthModal from "../auth/AuthModal";
-import { FC, Fragment } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "../ui/Accordion";
-import Image from "next/image";
-import { signOut, useSession } from "next-auth/react";
-import { UserAvatar } from "../users/UserAvatar";
+import { useSession } from "next-auth/react";
 import LoggedInMobileNavContent from "./LoggedInMobileNavContent";
 import LoggedOutMobileNavContent from "./LoggedOutMobileNavContent";
+import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
 
-interface MobileNavProps {
-  sidebarOpen: boolean;
-  setOpenState: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const MobileNavLinks = ({ links }: { links: string[] }) => (
-  <ul className="flex flex-col items-start">
-    {links.map((link) => (
-      <Link href="/" key={link} className="hover:underline">
-        {link}
-      </Link>
-    ))}
-  </ul>
-);
-
-const MobileNav: FC<MobileNavProps> = ({ sidebarOpen, setOpenState }) => {
+const MobileNav = () => {
   const session = useSession();
+  let { mobileNav, setMobileNav } = useOpenMobileNavStore();
+  const isClickInsideRef = useRef(false);
+
+  useEffect(() => {
+    const handleClick = () => {
+      if (isClickInsideRef.current) setMobileNav(false);
+      isClickInsideRef.current = false;
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
 
   return (
-    <Transition appear show={sidebarOpen} as={Fragment}>
+    <Transition appear show={mobileNav} as={Fragment}>
       <Dialog
         as="div"
-        onClose={() => setOpenState(false)}
-        className="lg:hidden flex  fixed  inset-0 z-40 overflow-y-auto"
+        onClose={() => setMobileNav(false)}
+        className="lg:hidden flex  fixed  inset-0 z-40 "
       >
         <div
-          className="lg:hidden fixed z-38 translate-x-0 inset-0 bg-black bg-opacity-50 "
-          onClick={() => setOpenState(false)}
+          className="lg:hidden fixed translate-x-0 inset-0 bg-black bg-opacity-50 "
+          onClickCapture={() => (isClickInsideRef.current = true)}
         />
 
         <Transition.Child

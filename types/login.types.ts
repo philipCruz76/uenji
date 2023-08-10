@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export type LoginVariant = "signIn" | "join";
+
 export const LoginValidator = z.object({
   email: z.string().email(),
   password: z

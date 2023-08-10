@@ -1,4 +1,3 @@
-import AuthModal from "../auth/AuthModal";
 import Link from "next/link";
 import {
   Accordion,
@@ -8,6 +7,8 @@ import {
 } from "../ui/Accordion";
 import Image from "next/image";
 import { footerLinks, languageFilters } from "@/constants";
+import { useMediaQuery } from "react-responsive";
+import JoinButton from "../auth/JoinButton";
 
 const MobileNavLinks = ({ links }: { links: string[] }) => (
   <ul className="flex flex-col items-start">
@@ -20,18 +21,17 @@ const MobileNavLinks = ({ links }: { links: string[] }) => (
 );
 
 const LoggedOutMobileNavContent = () => {
+  const isMobile = useMediaQuery({ maxWidth: 599 });
+
   return (
     <>
       {/* Mobile Menu Content */}
-      <div className="overflow-y-auto flex-1">
+      <div className=" flex-1">
         {/*Join Button*/}
-
-        <AuthModal signIn={false} key="Join" />
+        <JoinButton />
 
         {/*Nav Links*/}
         <ul className="flex flex-col text-[#62646a] text-base font-light py-8 ">
-          <AuthModal signIn={true} key="Sign In" />
-
           <Accordion type="multiple" key="Categories">
             <AccordionItem value="1">
               <AccordionTrigger className="py-2">

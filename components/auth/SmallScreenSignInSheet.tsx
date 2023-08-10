@@ -239,7 +239,6 @@ const SmallScreenSignInSheet: FC<SmallScreenSignInSheetProps> = ({
             }}
           >
             {signInText.hyperlinkText}
-            {showNewComponent && <SmallScreenJoinSheet openModal={true} />}
           </Link>
         </div>
       </Dialog>
