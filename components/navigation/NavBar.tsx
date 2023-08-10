@@ -12,9 +12,7 @@ const activeNavBar =
 const inactiveNavBar =
   " fixed top-0 z-10 flex max-w-full w-full mx-auto px-4 py-4 bg-transparent text-white transition duration-500 ease-in-out";
 
-const MobileNavTest = lazy(
-  () => import("@/components/navigation/MobileNavTest"),
-);
+const MobileNav = lazy(() => import("@/components/navigation/MobileNav"));
 const JoinButton = lazy(() => import("@/components/auth/JoinButton"));
 const UserContextMenu = lazy(
   () => import("@/components/users/UserContextMenu"),
@@ -69,7 +67,7 @@ const NavBar = () => {
                 />
               </svg>
             </button>
-            {mobileNav && <MobileNavTest />}
+            {mobileNav && <MobileNav />}
           </div>
 
           {/*Logo*/}
@@ -152,7 +150,10 @@ const NavBar = () => {
                 <span className="hover:underline">Sign In</span>
               </div>
 
-              <div className="flex mx-auto sm:w-[80px] w-[60px] ">
+              <div className="tablet:flex hidden mx-auto sm:w-[80px] w-[60px] ">
+                <JoinButton isButton />
+              </div>
+              <div className="tablet:hidden flex mx-auto sm:w-[80px] w-[60px] ">
                 <JoinButton />
               </div>
             </div>

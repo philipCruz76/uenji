@@ -1,4 +1,4 @@
-import React, { lazy } from "react";
+import React, { FC, lazy } from "react";
 import { useLogInVariantStore } from "@/lib/stores/auth-store";
 import { useOpenModalStore } from "@/lib/stores/modal-store";
 import { useMediaQuery } from "react-responsive";
@@ -9,7 +9,11 @@ const DesktopAuthModal = lazy(() => import("./DesktopAuthModal"));
 const MobileAuthModal = lazy(() => import("./MobileAuthModal"));
 const SmallScreenSignInSheet = lazy(() => import("./SmallScreenSignInSheet"));
 
-const JoinButton = () => {
+type JoinButtonProps = {
+  isButton?: boolean;
+};
+
+const JoinButton: FC<JoinButtonProps> = ({ isButton }) => {
   let { setIsOpen } = useOpenModalStore();
   let { setLogin } = useLogInVariantStore();
 
@@ -19,29 +23,33 @@ const JoinButton = () => {
   const isMobile = useMediaQuery({ maxWidth: 599 });
   return (
     <>
-      <span
-        onClick={() => {
-          setIsOpen(true);
-          setLogin("register");
-        }}
-        className={cn(
-          buttonVariants({ variant: "outline" }),
-          "hidden tablet:flex hover:bg-sky-600 hover:border-sky-600",
-        )}
-      >
-        {" "}
-        Join{" "}
-      </span>
-      <span
-        onClick={() => {
-          setIsOpen(true);
-          setLogin("register");
-        }}
-        className="tablet:hidden flex cursor-pointer font-semibold hover:opacity-60"
-      >
-        {" "}
-        Join{" "}
-      </span>
+      {isButton ? (
+        <span
+          onClick={() => {
+            setIsOpen(true);
+            setLogin("register");
+          }}
+          className={cn(
+            buttonVariants({ variant: "outline" }),
+            "flex hover:bg-sky-600 hover:border-sky-600 max-w-[80px]",
+          )}
+        >
+          {" "}
+          Join{" "}
+        </span>
+      ) : (
+        <span
+          onClick={() => {
+            setIsOpen(true);
+            setLogin("register");
+          }}
+          className="flex cursor-pointer font-semibold hover:opacity-60"
+        >
+          {" "}
+          Join{" "}
+        </span>
+      )}
+
       {/*Desktop Auth Modal*/}
 
       {isDesktopOrLaptop && <DesktopAuthModal />}

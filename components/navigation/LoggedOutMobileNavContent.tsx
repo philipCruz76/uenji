@@ -28,7 +28,7 @@ const LoggedOutMobileNavContent = () => {
       {/* Mobile Menu Content */}
       <div className=" flex-1">
         {/*Join Button*/}
-        <JoinButton />
+        <JoinButton isButton={true} />
 
         {/*Nav Links*/}
         <ul className="flex flex-col text-[#62646a] text-base font-light py-8 ">
