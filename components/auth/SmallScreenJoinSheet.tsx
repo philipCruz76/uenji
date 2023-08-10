@@ -58,7 +58,7 @@ const SmallScreenJoinSheet = () => {
 
   return (
     <>
-      <Drawer.Root open={isOpen}>
+      <Drawer.Root open={isOpen} dismissible={false}>
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 bg-black bg-opacity-50" />
 
