@@ -7,8 +7,10 @@ import {
 } from "../ui/Accordion";
 import Image from "next/image";
 import { footerLinks, languageFilters } from "@/constants";
-import { useMediaQuery } from "react-responsive";
-import JoinButton from "../auth/JoinButton";
+import { useOpenModalStore } from "@/lib/stores/modal-store";
+import { useLogInVariantStore } from "@/lib/stores/auth-store";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/constants/ui/button";
 
 const MobileNavLinks = ({ links }: { links: string[] }) => (
   <ul className="flex flex-col items-start">
@@ -21,17 +23,40 @@ const MobileNavLinks = ({ links }: { links: string[] }) => (
 );
 
 const LoggedOutMobileNavContent = () => {
-  const isMobile = useMediaQuery({ maxWidth: 599 });
+  let { setIsOpen } = useOpenModalStore();
+  let { setLogin } = useLogInVariantStore();
 
   return (
     <>
       {/* Mobile Menu Content */}
       <div className=" flex-1">
         {/*Join Button*/}
-        <JoinButton isButton={true} />
+        <span
+          onClick={() => {
+            setIsOpen(true);
+            setLogin("register");
+          }}
+          className={cn(
+            buttonVariants({ variant: "outline" }),
+            "flex bg-sky-500 border-sky-500 hover:bg-sky-600 hover:border-sky-600 max-w-[120px] cursor-pointer text-white font-semibold",
+          )}
+        >
+          {" "}
+          Join Uenji{" "}
+        </span>
 
         {/*Nav Links*/}
         <ul className="flex flex-col text-[#62646a] text-base font-light py-8 ">
+          <span
+            className="cursor-pointer hover:underline hover:text-[#4e5055]"
+            onClick={() => {
+              setLogin("login");
+              setIsOpen(true);
+            }}
+          >
+            Sign In
+          </span>
+
           <Accordion type="multiple" key="Categories">
             <AccordionItem value="1">
               <AccordionTrigger className="py-2">
