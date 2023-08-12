@@ -8,8 +8,6 @@ import { useSession } from "next-auth/react";
 import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
 import { useOpenModalStore } from "@/lib/stores/modal-store";
 import { useLogInVariantStore } from "@/lib/stores/auth-store";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/constants/ui/button";
 
 const activeNavBar =
   " fixed top-0 z-10 flex  max-w-full w-full mx-auto px-4 py-4 bg-white text-black shadow-md transition duration-500 ease-in-out";
@@ -17,6 +15,7 @@ const inactiveNavBar =
   " fixed top-0 z-10 flex max-w-full w-full mx-auto px-4 py-4 bg-transparent text-white transition duration-500 ease-in-out";
 
 const MobileNav = lazy(() => import("@/components/navigation/MobileNav"));
+const JoinButton = lazy(() => import("@/components/auth/JoinButton"));
 const UserContextMenu = lazy(
   () => import("@/components/users/UserContextMenu"),
 );
@@ -152,33 +151,16 @@ const NavBar = () => {
           ) : (
             <div className="flex tablet:flex-row tablet:gap-3">
               <div className="text-center items-center hidden tablet:flex font-semibold text-base focus:border-none focus:outline-none">
-                <span
-                  className="hover:underline"
-                  onClick={() => {
-                    setLogin("login");
-                    setIsOpen(true);
-                  }}
-                >
-                  Sign In
-                </span>
+                <span className="hover:underline" onClick={() => {
+                  setLogin('login')
+                  setIsOpen(true)
+                }}>Sign In</span>
               </div>
 
               <div className="tablet:flex hidden  mx-auto sm:w-[80px] w-[60px] ">
-                <span
-                  onClick={() => {
-                    setIsOpen(true);
-                    setLogin("register");
-                  }}
-                  className={cn(
-                    buttonVariants({ variant: "outline" }),
-                    "flex hover:bg-sky-600 hover:border-sky-600 max-w-[80px] cursor-pointer",
-                  )}
-                >
-                  {" "}
-                  Join{" "}
-                </span>
+                <JoinButton isButton />
               </div>
-
+              
               <div className="tablet:hidden flex mx-auto sm:w-[80px] w-[60px]">
                 <span
                   onClick={() => {
