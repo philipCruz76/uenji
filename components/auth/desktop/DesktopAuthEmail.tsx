@@ -1,4 +1,4 @@
-import { SubmitHandler, set, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { LoginCredentials } from "@/types/login.types";
 import {
   useEmailCredentialsStore,
@@ -25,6 +25,7 @@ const DesktopAuthEmail = ({}) => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors, isSubmitting, isValidating },
     reset,
   } = useForm<LoginCredentials>({
@@ -169,6 +170,31 @@ const DesktopAuthEmail = ({}) => {
               </span>
             </>
           )}
+          {isLogin === "register" ? (
+            <>
+              <label className="font-semibold">Confirm Password</label>
+              <Input
+                disabled={isSubmitting}
+                {...register("confirmPassword", {
+                  required: true,
+                  validate: (value) =>
+                    value === getValues("password") ||
+                    "The passwords do not match",
+                })}
+                className={cn(
+                  "border border-zinc-400 rounded-sm h-[40px] px-2 focus:outline-none",
+                )}
+                required
+                type="password"
+                id="confirmPassword"
+              />
+              {errors.confirmPassword && (
+                <span className="text-red-500 text-sm">
+                  {errors.confirmPassword.message}
+                </span>
+              )}
+            </>
+          ) : null}
 
           <button
             type="submit"
