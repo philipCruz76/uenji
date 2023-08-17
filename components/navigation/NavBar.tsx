@@ -15,7 +15,7 @@ const inactiveNavBar =
   " fixed top-0 z-10 flex max-w-full w-full mx-auto px-4 py-4 bg-transparent text-white transition duration-500 ease-in-out";
 
 const MobileNav = lazy(() => import("@/components/navigation/MobileNav"));
-const JoinButton = lazy(() => import("@/components/auth/JoinButton"));
+const JoinButton = lazy(() => import("@/components/auth/signIn/JoinButton"));
 const UserContextMenu = lazy(
   () => import("@/components/users/UserContextMenu"),
 );
@@ -151,16 +151,21 @@ const NavBar = () => {
           ) : (
             <div className="flex tablet:flex-row tablet:gap-3">
               <div className="text-center items-center hidden tablet:flex font-semibold text-base focus:border-none focus:outline-none">
-                <span className="hover:underline" onClick={() => {
-                  setLogin('login')
-                  setIsOpen(true)
-                }}>Sign In</span>
+                <span
+                  className="hover:underline"
+                  onClick={() => {
+                    setLogin("login");
+                    setIsOpen(true);
+                  }}
+                >
+                  Sign In
+                </span>
               </div>
 
               <div className="tablet:flex hidden  mx-auto sm:w-[80px] w-[60px] ">
                 <JoinButton isButton />
               </div>
-              
+
               <div className="tablet:hidden flex mx-auto sm:w-[80px] w-[60px]">
                 <span
                   onClick={() => {

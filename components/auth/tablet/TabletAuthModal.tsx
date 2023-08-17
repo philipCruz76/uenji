@@ -2,22 +2,29 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   useEmailCredentialsStore,
+  useOTPStore,
   useOpenModalStore,
 } from "@/lib/stores/modal-store";
 import TabletAuthInitial from "./TabletAuthInitial";
-import TabletAuthEmail from "./TabletAuthEmail";
 import { cn } from "@/lib/utils";
+import EmailRegistrationForm from "../EmailRegistrationForm";
+import OTPRegistrationForm from "../OTPRegistrationForm";
 
 const MobileAuthModal = () => {
   let { isOpen, setIsOpen } = useOpenModalStore();
   const { isEmail, setShowEmailCredentials } = useEmailCredentialsStore();
+  const { isOTP, setShowOTP } = useOTPStore();
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="fixed flex inset-0 z-10 "
-        onClose={() => setIsOpen(false)}
+        onClose={() => {
+          setIsOpen(false);
+          setShowEmailCredentials(false);
+          setShowOTP(false);
+        }}
       >
         <Transition.Child
           as={Fragment}
@@ -30,7 +37,7 @@ const MobileAuthModal = () => {
         >
           <div className="fixed inset-0 bg-black bg-opacity-25" />
         </Transition.Child>
-        <div className="fixed inset-0 overflow-y-scroll">
+        <div className="fixed inset-0 overflow-y-scroll overflow-x-hidden">
           <div className="flex items-center justify-center py-6">
             <Transition.Child
               as={Fragment}
@@ -49,26 +56,6 @@ const MobileAuthModal = () => {
                     isEmail && "justify-between",
                   )}
                 >
-                  {/* Back Button */}
-                  {isEmail && (
-                    <div
-                      className="flex flex-row items-center justify-center absolute top-6 left-2 cursor-pointer"
-                      onClick={() => setShowEmailCredentials(false)}
-                    >
-                      <button className="h-6 p-0 w-6 ">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          fill="#000000"
-                          viewBox="0 0 256 256"
-                        >
-                          <path d="M220,128a4,4,0,0,1-4,4H49.66l65.17,65.17a4,4,0,0,1-5.66,5.66l-72-72a4,4,0,0,1,0-5.66l72-72a4,4,0,0,1,5.66,5.66L49.66,124H216A4,4,0,0,1,220,128Z"></path>
-                        </svg>
-                      </button>
-                    </div>
-                  )}
-
                   {/* Title */}
                   <span
                     className={cn(
@@ -87,6 +74,7 @@ const MobileAuthModal = () => {
                     onClick={() => {
                       setIsOpen(false);
                       setShowEmailCredentials(false);
+                      setShowOTP(false);
                     }}
                   >
                     <svg
@@ -107,7 +95,13 @@ const MobileAuthModal = () => {
                 </div>
 
                 {/* Modal Content */}
-                {!isEmail ? <TabletAuthInitial /> : <TabletAuthEmail />}
+                {!isEmail ? (
+                  <TabletAuthInitial />
+                ) : isOTP ? (
+                  <OTPRegistrationForm />
+                ) : (
+                  <EmailRegistrationForm />
+                )}
 
                 {/* Footer */}
                 <div className="mx-4 py-4 mt-12">

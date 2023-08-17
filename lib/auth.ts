@@ -3,6 +3,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextAuthOptions, getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvier from "next-auth/providers/facebook";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
@@ -15,6 +16,12 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      allowDangerousEmailAccountLinking: true,
+    }),
+    FacebookProvier({
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!,
+      allowDangerousEmailAccountLinking: true,
     }),
     CredentialsProvider({
       name: "credentials",
@@ -37,6 +44,10 @@ export const authOptions: NextAuthOptions = {
 
           if (!dbUser || !dbUser?.hashedPassword) {
             throw new Error("Invalid credentials");
+          }
+
+          if (!dbUser.active) {
+            throw new Error("User is not active. Please check your email.");
           }
 
           if (!dbUser.username) {
@@ -120,9 +131,6 @@ export const authOptions: NextAuthOptions = {
         picture: dbUser.image,
         username: dbUser.username,
       };
-    },
-    redirect() {
-      return "/";
     },
   },
 };

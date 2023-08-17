@@ -25,8 +25,8 @@ export function UserAvatar({ user, ...props }: UserAvatarProps) {
           <Image
             src="./icons/default-user.svg"
             alt="user icon"
-            width={4}
-            height={4}
+            width={20}
+            height={20}
           />
         </AvatarFallback>
       )}

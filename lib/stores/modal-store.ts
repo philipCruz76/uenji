@@ -21,3 +21,13 @@ export const useEmailCredentialsStore = create<EmailCredentialsState>()(
     setShowEmailCredentials: (isEmail: boolean) => set({ isEmail }),
   }),
 );
+
+type OTPState = {
+  isOTP: boolean;
+  setShowOTP: (isOTP: boolean) => void;
+};
+
+export const useOTPStore = create<OTPState>()((set) => ({
+  isOTP: false,
+  setShowOTP: (isOTP: boolean) => set({ isOTP }),
+}));

@@ -2,21 +2,28 @@ import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   useEmailCredentialsStore,
+  useOTPStore,
   useOpenModalStore,
 } from "@/lib/stores/modal-store";
 import DesktopAuthInitial from "./DesktopAuthInitial";
 import DesktopAuthEmail from "./DesktopAuthEmail";
+import DesktopAuthOTP from "./DesktopAuthOTP";
 
 const DesktopAuthModal = () => {
   const { isOpen, setIsOpen } = useOpenModalStore();
   const { isEmail, setShowEmailCredentials } = useEmailCredentialsStore();
+  const { isOTP, setShowOTP } = useOTPStore();
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="fixed flex inset-0 z-10 overflow-y-auto"
-        onClose={() => setIsOpen(false)}
+        onClose={() => {
+          setIsOpen(false);
+          setShowEmailCredentials(false);
+          setShowOTP(false);
+        }}
       >
         <Transition.Child
           as={Fragment}
@@ -45,7 +52,7 @@ const DesktopAuthModal = () => {
                 <Dialog.Title as="div" className="flex h-[560px] ">
                   <img src="./deskWork.jpg" alt="" />
                 </Dialog.Title>
-                <div className="p-6">
+                <div className="w-full p-6">
                   {/* Close Button */}
                   <div className="absolute top-6 right-6">
                     <button
@@ -53,6 +60,7 @@ const DesktopAuthModal = () => {
                       onClick={() => {
                         setIsOpen(false);
                         setShowEmailCredentials(false);
+                        setShowOTP(false);
                       }}
                     >
                       <svg
@@ -73,7 +81,13 @@ const DesktopAuthModal = () => {
                   </div>
 
                   {/* Modal Content */}
-                  {!isEmail ? <DesktopAuthInitial /> : <DesktopAuthEmail />}
+                  {!isEmail ? (
+                    <DesktopAuthInitial />
+                  ) : isOTP ? (
+                    <DesktopAuthOTP />
+                  ) : (
+                    <DesktopAuthEmail />
+                  )}
                 </div>
               </Dialog.Panel>
             </Transition.Child>

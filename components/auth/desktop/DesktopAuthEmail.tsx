@@ -1,65 +1,67 @@
-import { useState } from "react";
-import axios from "axios";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { LoginCredentials, LoginValidator } from "@/types/login.types";
-import { useEmailCredentialsStore } from "@/lib/stores/modal-store";
+import { SubmitHandler, set, useForm } from "react-hook-form";
+import { LoginCredentials } from "@/types/login.types";
+import {
+  useEmailCredentialsStore,
+  useOTPStore,
+  useOpenModalStore,
+} from "@/lib/stores/modal-store";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Input } from "../../ui/Input";
+import { useLogInVariantStore, useNewUserStore } from "@/lib/stores/auth-store";
+
+import Image from "next/image";
+import { checkIfUserExists } from "@/lib/actions/auth/checkIfUserExists";
+import registerNewUser from "@/lib/actions/auth/registerNewUser";
 
 const DesktopAuthEmail = ({}) => {
+  const { setIsOpen } = useOpenModalStore();
   const { setShowEmailCredentials } = useEmailCredentialsStore();
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+  const { isLogin } = useLogInVariantStore();
+  const { setNewUser } = useNewUserStore();
+  const { setShowOTP } = useOTPStore();
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isValidating },
     reset,
   } = useForm<LoginCredentials>({
-    resolver: zodResolver(LoginValidator),
+    mode: "onChange",
   });
 
   const loginHandler: SubmitHandler<LoginCredentials> = async (data) => {
-    // register functionality
-    axios
-      .post("/api/register", data)
-      .then(() =>
-        signIn("credentials", {
-          ...data,
-          redirect: false,
-        }),
-      )
-      .then((callback) => {
-        if (callback?.error) {
-          toast.error("Invalid Credentials!");
-        }
-        if (callback?.ok) {
-          router.push("/");
-        }
+    // login functionality
+    setNewUser({
+      email: data.email,
+      password: data.password,
+    });
+
+    if (isLogin === "login") {
+      signIn("credentials", {
+        ...data,
+        redirect: false,
       })
-      .catch((e) => toast.error(e));
+        .then((callback) => {
+          if (callback?.error) {
+            toast.error(callback.error);
+          }
+          if (callback?.ok) {
+            setShowEmailCredentials(false);
+            setIsOpen(false);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+          toast.error(e);
+        });
+    } else {
+      setShowOTP(true);
+      registerNewUser(data).catch((e) => toast.error(e));
+    }
 
     reset();
-    /* login functionality
-            signIn('credentials', {
-                ...data,
-                redirect: false,
-            })
-            .then((callback)=>{
-                if(callback?.error){
-                    toast.error("Invalid Credentials!");
-                }
-                if(callback?.ok){
-                    router.push("/");
-                }
-            })
-            .finally(()=> setIsLoading(false))
-            */
   };
 
   return (
@@ -85,7 +87,11 @@ const DesktopAuthEmail = ({}) => {
 
       {/* Auth form */}
       <div className="container w-[438px] flex flex-col space-y-3 text-left mt-12">
-        <p className="flex text-2xl font-semibold mb-8 ">Continue with Email</p>
+        <p className="flex text-2xl font-semibold mb-8 ">
+          {isLogin === "login"
+            ? "Continue with your email or username"
+            : "Continue with Email"}{" "}
+        </p>
 
         {/* User input form */}
         <form
@@ -93,39 +99,75 @@ const DesktopAuthEmail = ({}) => {
           onSubmit={handleSubmit(loginHandler)}
         >
           <label className="font-semibold">Email</label>
-          <Input
-            disabled={isSubmitting}
-            {...register("email")}
-            className={cn(
-              "border border-zinc-400 rounded-sm h-[40px] px-2 focus:outline-none",
-              errors.email && "border-red-500",
+          <div className="flex relative">
+            <Input
+              disabled={isSubmitting}
+              {...register("email", {
+                required: true,
+                validate: async (value) => checkIfUserExists(value, isLogin),
+                pattern: {
+                  value: /^\S+@\S+\.[a-zA-Z]{2,}$/,
+                  message: "Please enter a valid email address.",
+                },
+              })}
+              className={cn(
+                "border border-zinc-400 rounded-sm h-[40px] px-2 focus:outline-none",
+                errors.email && "border-red-500",
+              )}
+              required
+              type="email"
+              id="email"
+              autoFocus
+              placeholder="name@email.com"
+            />
+            {isValidating && (
+              <div
+                className="flex absolute right-10 top-[12px] h-[16px] w-[16px] animate-spin rounded-full border-2 border-solid border-zinc-400 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                role="status"
+              ></div>
             )}
-            required
-            type="email"
-            id="email"
-            autoFocus
-            placeholder="name@email.com"
-          />
+            {errors.email && !isValidating ? (
+              <Image
+                className="flex absolute right-10 top-[12px]"
+                src="/icons/error-warning.svg"
+                alt="error"
+                height={16}
+                width={16}
+              />
+            ) : null}
+          </div>
           {errors.email && (
             <span className="text-red-500 text-sm">{errors.email.message}</span>
           )}
-
           <label className="font-semibold">Password</label>
           <Input
             disabled={isSubmitting}
-            {...register("password")}
+            {...register("password", {
+              required: true,
+              minLength: { value: 8, message: "At least 8 characters long." },
+              maxLength: {
+                value: 20,
+                message: "Password must be at most 20 characters long.",
+              },
+              pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/,
+                message:
+                  "Password must contain at least one uppercase letter, one lowercase letter and one number",
+              },
+            })}
             className={cn(
               "border border-zinc-400 rounded-sm h-[40px] px-2 focus:outline-none",
-              errors.password && "border-red-500",
             )}
             required
             type="password"
             id="password"
           />
-          {errors.password && (
-            <span className="text-red-500 text-sm">
-              {errors.password.message}
-            </span>
+          {isLogin === "register" && errors.password && (
+            <>
+              <span className="text-red-500 text-sm">
+                {errors.password.message}
+              </span>
+            </>
           )}
 
           <button

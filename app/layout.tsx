@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import { lazy } from "react";
 import ProvidersContext from "@/lib/context/ProvidersContext";
 import ToasterContext from "@/lib/context/ToasterContext";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 const NavBar = lazy(() => import("@/components/navigation/NavBar"));
@@ -34,6 +35,7 @@ export default function RootLayout({
           <div className="flex flex-1 tablet:hidden min-w-full">
             <MobileFooter />
           </div>
+          <Analytics />
         </ProvidersContext>
       </body>
     </html>

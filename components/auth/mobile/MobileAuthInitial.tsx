@@ -1,39 +1,12 @@
-import { signIn } from "next-auth/react";
-import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import { useEmailCredentialsStore } from "@/lib/stores/modal-store";
 import { useLogInVariantStore } from "@/lib/stores/auth-store";
-
-const signInText = {
-  title: "Sign into your account",
-  subtext: "Dont have an account?",
-  hyperlinkText: "Join here",
-  credentialsText: "Continue with email/username",
-};
-
-const signUpText = {
-  title: "Create a new account",
-  subtext: "Already have an account?",
-  hyperlinkText: "Sign in",
-  credentialsText: "Continue with email",
-};
+import { socialAction } from "@/lib/actions/auth/socialAction";
+import { signInText, signUpText } from "@/constants/auth/signInConstants";
 
 const MobileAuthInitial = () => {
-  let { isLogin, setLogin } = useLogInVariantStore();
+  let { isLogin } = useLogInVariantStore();
   const { setShowEmailCredentials } = useEmailCredentialsStore();
-  const router = useRouter();
 
-  const socialAction = (action: string) => {
-    signIn(action, { redirect: false }).then((callback) => {
-      if (callback?.error) {
-        toast.error("Invalid Credentials");
-      }
-
-      if (callback?.ok) {
-        router.push("/");
-      }
-    });
-  };
   return (
     <section className="flex flex-col space-y-3 ">
       {/* Auth buttons */}
@@ -72,6 +45,7 @@ const MobileAuthInitial = () => {
             </p>
           </button>
         </div>
+
         {/* Google Button */}
         <div className="flex flex-row space-x-2  w-screen h-[40px] px-6 ">
           <button
@@ -121,7 +95,10 @@ const MobileAuthInitial = () => {
         </div>
 
         <div className="flex flex-row  space-x-2  w-screen h-[40px] items-center justify-between px-6 ">
-          <button className="flex flex-row w-full space-x-2 border  h-[40px] items-center justify-center text-center rounded-sm">
+          <button
+            className="flex flex-row w-full space-x-2 border  h-[40px] items-center justify-center text-center rounded-sm"
+            onClick={() => socialAction("facebook")}
+          >
             <svg
               width="24px"
               height="24px"
