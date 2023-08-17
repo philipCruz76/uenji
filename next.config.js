@@ -2,6 +2,7 @@
 const nextConfig = {
   experimental: {
     serverActions: true,
+    serverComponentsExternalPackages: ["bcrypt"],
   },
   images: {
     domains: ["localhost", "res.cloudinary.com", "lh3.googleusercontent.com"],
