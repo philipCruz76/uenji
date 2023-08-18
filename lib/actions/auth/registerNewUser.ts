@@ -43,8 +43,7 @@ export async function registerNewUser(data: LoginCredentials) {
 
   } catch (error: any) {
     console.error("REGISTRATION_ERROR");
-    console.error(error);
-    throw new Error("Internal server error");
+    throw new Error(error);
   }
 }
 
