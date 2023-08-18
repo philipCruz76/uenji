@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
         }
 
         try {
-          const bcrypt = require("bcrypt");
+          const bcrypt = require("bcryptjs");
           const dbUser = await db.user.findUnique({
             where: {
               email: credentials.email,

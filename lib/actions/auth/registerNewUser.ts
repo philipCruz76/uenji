@@ -5,7 +5,7 @@ import { sendEmailVerificationToken } from "../sendEmailVerificationToken";
 
 export async function registerNewUser(data: LoginCredentials) {
   try {
-    const bcrypt = require("bcrypt");
+    const bcrypt = require("bcryptjs");
     const { email, password } = data;
 
     let verificationToken = "";
