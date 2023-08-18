@@ -12,7 +12,6 @@ import {
 import { Fragment, useEffect, useRef, useState } from "react";
 import verifyOTP from "@/lib/actions/auth/verifyOTP";
 
-
 const OTPRegistrationForm = () => {
   const { setIsOpen } = useOpenModalStore();
   const { setShowOTP } = useOTPStore();
@@ -135,9 +134,10 @@ const OTPRegistrationForm = () => {
         <span className="flex justify-start font-bold text-2xl">
           Confirm your email
         </span>
-        <span className="flex justify-start pb-14">
-          Enter the verification code we emailed to:{" "}
-        </span>
+        <div className="flex flex-col justify-start pb-14">
+          <span>Enter the verification code we emailed to: </span>
+          <span className=" text-sm font-light">{newUser.email}</span>
+        </div>
         <form className="flex flex-row justify-between items-center space-x-2">
           {otp.map((_, index) => {
             return (

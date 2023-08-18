@@ -40,10 +40,9 @@ export async function registerNewUser(data: LoginCredentials) {
     });
 
     console.log("New User Created Successfully : %s", email);
-
   } catch (error: any) {
     console.error("REGISTRATION_ERROR");
-    throw new Error(error);
+    console.error(error);
   }
 }
 

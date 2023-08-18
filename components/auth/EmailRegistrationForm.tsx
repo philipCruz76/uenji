@@ -14,8 +14,6 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import registerNewUser from "@/lib/actions/auth/registerNewUser";
 import { checkIfUserExists } from "@/lib/actions/auth/checkIfUserExists";
 
-
-
 const EmailRegistrationForm = () => {
   const { setIsOpen } = useOpenModalStore();
   const { setShowEmailCredentials } = useEmailCredentialsStore();
