@@ -41,9 +41,6 @@ export async function registerNewUser(data: LoginCredentials) {
 
     console.log("New User Created Successfully : %s", email);
 
-    return {
-      success: true,
-    };
   } catch (error: any) {
     console.error("REGISTRATION_ERROR");
     console.error(error);
