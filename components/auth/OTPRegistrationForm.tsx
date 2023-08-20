@@ -87,22 +87,25 @@ const OTPRegistrationForm = () => {
   };
   const handleInput = async (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
-
+    event.currentTarget.value = event.currentTarget.value.replace(
+      /[^0-9]/g,
+      "",
+    );
     const inputFields = document.querySelectorAll<HTMLInputElement>(
       'input[type="number"]',
     );
     const lastInput = inputFields[inputFields.length - 1];
-    if (event.currentTarget === lastInput) {
-      setIsValidating(true);
-      const validToken = await verifyOTP(otp.join(""));
+    const newOtp = [...otp];
+    newOtp[activeInput] = event.currentTarget.value;
 
+    if (event.currentTarget === lastInput) {
+      const validToken = await verifyOTP(newOtp.join(""));
       if (!validToken) {
         setFailedValidation(true);
       } else {
         setFailedValidation(false);
         setValidatedUser(true);
       }
-      setIsValidating(false);
     }
   };
 
@@ -150,15 +153,9 @@ const OTPRegistrationForm = () => {
                     failedValidation && "border-red-500 focus:border-red-500",
                   )}
                   onChange={(e) => handleOtpChange(e, index)}
-                  onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                    e.currentTarget.value = e.currentTarget.value.replace(
-                      /[^0-9]/g,
-                      "",
-                    );
-                  }}
+                  onInput={handleInput}
                   value={otp[index]}
                   onKeyDown={handleKeyDown}
-                  onInputCapture={handleInput}
                 />
               </Fragment>
             );

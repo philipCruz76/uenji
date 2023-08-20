@@ -10,7 +10,6 @@ import {
 import { cn } from "@/lib/utils";
 import { signIn } from "next-auth/react";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { set } from "react-hook-form";
 import { toast } from "react-hot-toast";
 
 const DesktopAuthOTP = ({}) => {
@@ -89,20 +88,25 @@ const DesktopAuthOTP = ({}) => {
 
   const handleInput = async (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
+    event.currentTarget.value = event.currentTarget.value.replace(
+      /[^0-9]/g,
+      "",
+    );
     const inputFields = document.querySelectorAll<HTMLInputElement>(
       'input[type="number"]',
     );
     const lastInput = inputFields[inputFields.length - 1];
+    const newOtp = [...otp];
+    newOtp[activeInput] = event.currentTarget.value;
+
     if (event.currentTarget === lastInput) {
-      const validToken = await verifyOTP(otp.join(""));
-      setIsValidating(true);
+      const validToken = await verifyOTP(newOtp.join(""));
       if (!validToken) {
         setFailedValidation(true);
       } else {
         setFailedValidation(false);
         setValidatedUser(true);
       }
-      setIsValidating(false);
     }
   };
 
@@ -151,16 +155,10 @@ const DesktopAuthOTP = ({}) => {
                     "w-12 h-12 text-center text-xl text-gray-400 border border-zinc-300 rounded-sm focus:outline-none focus:border-zinc-700 focus:text-gray-700 transition-colors duration-150 ease-in-out",
                     failedValidation && "border-red-500 focus:border-red-500",
                   )}
+                  onInput={handleInput}
                   onChange={(e) => handleOtpChange(e, index)}
-                  onInput={(e: React.FormEvent<HTMLInputElement>) => {
-                    e.currentTarget.value = e.currentTarget.value.replace(
-                      /[^0-9]/g,
-                      "",
-                    );
-                  }}
                   value={otp[index]}
                   onKeyDown={handleKeyDown}
-                  onInputCapture={handleInput}
                 />
               </Fragment>
             );

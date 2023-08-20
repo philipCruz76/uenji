@@ -8,6 +8,7 @@ import PrevButton from "./PrevButton";
 import NextButton from "./NextButton";
 
 import "swiper/css/bundle";
+import MobileCategoryCard from "../categories/MobileCategoryCard";
 
 interface PhotoCarousselProps {
   slidesTOShow: number;
@@ -17,7 +18,8 @@ const PhotoCaroussel: FC<PhotoCarousselProps> = ({ slidesTOShow }) => {
   return (
     <>
       <Swiper
-        slidesPerView={1}
+        slidesPerView={2}
+        spaceBetween={10}
         loop={true}
         breakpoints={{
           600: {
@@ -37,10 +39,11 @@ const PhotoCaroussel: FC<PhotoCarousselProps> = ({ slidesTOShow }) => {
             spaceBetween: 200,
           },
         }}
-        className="flex max-w-[1200px] relative w-full mx-auto my-8 items-center justify-start"
+        className="flex max-w-[1200px] relative w-full mx-auto my-8 items-center justify-center"
       >
         {catCards.map((card) => (
-          <SwiperSlide key={card.alt} className="w-full">
+          <SwiperSlide key={card.alt} className="w-screen">
+            <div className="tablet:flex hidden">
             <CategoryCard
               key={card.title}
               title={card.title}
@@ -48,11 +51,21 @@ const PhotoCaroussel: FC<PhotoCarousselProps> = ({ slidesTOShow }) => {
               image={card.image}
               alt={card.alt}
             />
+            </div>
+            <div className="tablet:hidden flex">
+              <MobileCategoryCard
+                key={card.title}
+                title={card.title}
+                description={card.description}
+                image={card.image}
+                alt={card.alt}
+              />
+            </div>
           </SwiperSlide>
         ))}
 
         {/* Swiper Buttons */}
-        <div className="flex flex-row">
+        <div className="tablet:flex hidden flex-row">
           <PrevButton />
           <NextButton />
         </div>
