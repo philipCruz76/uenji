@@ -16,7 +16,7 @@ const HeroMobileOverlay = lazy(
 
 const Hero = () => {
   return (
-    <section>
+    <section className="overflow-x-hidden">
       <div className="desktop:flex hidden">
         <HeroDesktopOverlay />
       </div>

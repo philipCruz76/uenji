@@ -42,8 +42,8 @@ const PhotoCaroussel: FC<PhotoCarousselProps> = ({ slidesTOShow }) => {
         className="flex max-w-[1200px] relative w-full mx-auto my-8 items-center justify-center"
       >
         {catCards.map((card) => (
-          <SwiperSlide key={card.alt} className="w-screen">
-            <div className="tablet:flex hidden">
+          <SwiperSlide key={card.alt} className="w-full">
+            <div className="tablet:flex w-fit hidden">
             <CategoryCard
               key={card.title}
               title={card.title}
@@ -52,7 +52,7 @@ const PhotoCaroussel: FC<PhotoCarousselProps> = ({ slidesTOShow }) => {
               alt={card.alt}
             />
             </div>
-            <div className="tablet:hidden flex">
+            <div className="tablet:hidden w-fit flex">
               <MobileCategoryCard
                 key={card.title}
                 title={card.title}
