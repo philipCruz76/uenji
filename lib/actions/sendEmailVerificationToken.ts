@@ -5,6 +5,7 @@ import { htmlEmail } from "@/constants/email/activateAccountEmail";
 export async function sendEmailVerificationToken(
   email: string,
   verificationToken: string,
+  activateLinkToken: string,
 ) {
   try {
     const emailVerification = await await createTransport({
@@ -19,7 +20,7 @@ export async function sendEmailVerificationToken(
       from: "Uenji" + "<" + process.env.EMAIL_USER_NOREPLY + ">",
       to: email,
       subject: "Activate your new account",
-      html: htmlEmail(verificationToken),
+      html: htmlEmail(email, verificationToken, activateLinkToken),
     });
     console.log("Message sent: %s", emailVerification.messageId);
     return emailVerification;

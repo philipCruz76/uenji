@@ -11,6 +11,7 @@ import { useOpenModalStore } from "@/lib/stores/modal-store";
 import { useLogInVariantStore } from "@/lib/stores/auth-store";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/constants/ui/button";
+import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
 
 const MobileNavLinks = ({ links }: { links: string[] }) => (
   <ul className="flex flex-col items-start">
@@ -25,6 +26,7 @@ const MobileNavLinks = ({ links }: { links: string[] }) => (
 const LoggedOutMobileNavContent = () => {
   let { setIsOpen } = useOpenModalStore();
   let { setLogin } = useLogInVariantStore();
+  const { setMobileNav } = useOpenMobileNavStore();
 
   return (
     <>
@@ -73,7 +75,7 @@ const LoggedOutMobileNavContent = () => {
             <span className="text-sm text-black font-semibold">General</span>
             <div className="w-full h-px bg-slate-200" />
           </div>
-          <Link href="/" className="hover:underline" key="Home">
+          <Link href="/" className="hover:underline" key="Home" onClick={()=> setMobileNav(false)}>
             Home
           </Link>
 

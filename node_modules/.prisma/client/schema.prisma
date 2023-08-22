@@ -47,7 +47,9 @@ model User {
   username       String?   @unique @map(name: "user_name")
   name           String?   @db.String
   email          String?   @unique
-  emailVerified  DateTime? @map("email_verified")
+  achievement    String?   @db.String
+  business       String?   @db.String
+  isOnline       Boolean?  @default(false) @map(name: "is_online")
   active         Boolean?  @default(false)
   image          String?   @db.String
   hashedPassword String?   @map(name: "hashed_password")
@@ -75,13 +77,14 @@ model User {
 }
 
 model ActivateToken {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId      String    @map(name: "user_id") @db.ObjectId
-  token       String    @unique
-  userEmail   String    @map(name: "user_email")
-  activatedAt DateTime? @map(name: "activated_at")
-  createdAt   DateTime  @default(now()) @map(name: "created_at")
-  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId         String    @map(name: "user_id") @db.ObjectId
+  token          String    @unique
+  activationLink String    @map(name: "activation_link")
+  userEmail      String    @map(name: "user_email")
+  activatedAt    DateTime? @map(name: "activated_at")
+  createdAt      DateTime  @default(now()) @map(name: "created_at")
+  updatedAt      DateTime  @updatedAt @map(name: "updated_at")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

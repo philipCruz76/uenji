@@ -38,7 +38,7 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
               height={12}
               className="mr-2"
             />
-            <Link href="/">Profile</Link>
+            <Link href={`/${user.username}`}>Profile</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Link href="/">Post a Request</Link>

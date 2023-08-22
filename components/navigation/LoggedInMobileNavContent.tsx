@@ -9,6 +9,7 @@ import {
 } from "../ui/Accordion";
 import Image from "next/image";
 import { footerLinks, languageFilters } from "@/constants";
+import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
 
 const MobileNavLinks = ({ links }: { links: string[] }) => (
   <ul className="flex flex-col items-start">
@@ -22,6 +23,7 @@ const MobileNavLinks = ({ links }: { links: string[] }) => (
 
 const LoggedInMobileNavContent = () => {
   const session = useSession();
+  const { setMobileNav } = useOpenMobileNavStore();
 
   return (
     <>
@@ -35,14 +37,14 @@ const LoggedInMobileNavContent = () => {
             }}
           />
 
-          <a className="text-black font-bold py-2">
+          <a href={`/${session.data?.user.username}`} className="text-black font-bold py-2">
             {session.data?.user.username}
           </a>
         </div>
 
         {/*Nav Links*/}
         <ul className="flex flex-col text-[#62646a] text-base gap-[20px] font-normal py-8 ">
-          <Link href="/" className="hover:underline" key="Home">
+          <Link href="/" className="hover:underline" key="Home" onClick={()=> setMobileNav(false)}>
             Home
           </Link>
           <Link href="/" className="hover:underline" key="Inbox">

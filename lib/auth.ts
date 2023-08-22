@@ -82,6 +82,36 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  events: {
+    async signIn(message) {
+      try {
+        await db.user.update({
+          where: {
+            id: message.user.id,
+          },
+          data: {
+            isOnline: true,
+          },
+        });
+      } catch (error: any) {
+        console.error(error);
+      }
+    },
+    async signOut(message) {
+      try {
+        await db.user.update({
+          where: {
+            id: message.token.id,
+          },
+          data: {
+            isOnline: false,
+          },
+        });
+      } catch (error: any) {
+        console.error(error);
+      }
+    },
+  },
   callbacks: {
     async session({ token, session }) {
       if (token) {
@@ -90,6 +120,7 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email;
         session.user.isSeller = token.isSeller;
         session.user.image = token.picture;
+        session.user.isOnline = token.isOnline;
         session.user.username = token.username;
       }
       return session;
@@ -130,6 +161,7 @@ export const authOptions: NextAuthOptions = {
         isSeller: dbUser.isSeller,
         picture: dbUser.image,
         username: dbUser.username,
+        isOnline: dbUser.isOnline,
       };
     },
   },

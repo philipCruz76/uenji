@@ -25,7 +25,6 @@ const NavBar = () => {
   let { mobileNav, setMobileNav } = useOpenMobileNavStore();
   let { setIsOpen } = useOpenModalStore();
   let { setLogin } = useLogInVariantStore();
-
   const session = useSession();
 
   const changeBackground = () => {
@@ -150,7 +149,7 @@ const NavBar = () => {
             </div>
           ) : (
             <div className="flex tablet:flex-row tablet:gap-3">
-              <div className="text-center items-center hidden tablet:flex font-semibold text-base focus:border-none focus:outline-none">
+              <div className="text-center items-center hidden tablet:flex font-semibold text-base focus:border-none focus:outline-none cursor-pointer">
                 <span
                   className="hover:underline"
                   onClick={() => {

@@ -2,12 +2,16 @@
 import { db } from "@/lib/db";
 import { LoginCredentials } from "@/types/login.types";
 import { sendEmailVerificationToken } from "../sendEmailVerificationToken";
+import { randomUUID } from "crypto";
 
 export async function registerNewUser(data: LoginCredentials) {
   try {
     const bcrypt = require("bcryptjs");
     const { email, password } = data;
-
+    const activateLinkToken = `${randomUUID()}${randomUUID()}`.replace(
+      /-/g,
+      "",
+    );
     let verificationToken = "";
     const lenght = 6;
 
@@ -21,7 +25,7 @@ export async function registerNewUser(data: LoginCredentials) {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    sendEmailVerificationToken(email, verificationToken);
+    sendEmailVerificationToken(email, verificationToken, activateLinkToken);
 
     const user = await db.user.create({
       data: {
@@ -35,6 +39,7 @@ export async function registerNewUser(data: LoginCredentials) {
         token: `${verificationToken}`,
         userId: user.id,
         userEmail: email,
+        activationLink: activateLinkToken,
         activatedAt: null,
       },
     });

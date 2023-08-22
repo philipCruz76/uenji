@@ -7,7 +7,7 @@ export default withAuth(
       req.nextUrl.pathname.startsWith("/gig") &&
       req.nextauth.token?.isSeller !== false
     )
-      return NextResponse.redirect(new URL("/login", req.nextUrl));
+      return NextResponse.redirect(new URL("/", req.nextUrl));
   },
   {
     callbacks: {

@@ -44,13 +44,13 @@ const PhotoCaroussel: FC<PhotoCarousselProps> = ({ slidesTOShow }) => {
         {catCards.map((card) => (
           <SwiperSlide key={card.alt} className="w-full">
             <div className="tablet:flex w-fit hidden">
-            <CategoryCard
-              key={card.title}
-              title={card.title}
-              description={card.description}
-              image={card.image}
-              alt={card.alt}
-            />
+              <CategoryCard
+                key={card.title}
+                title={card.title}
+                description={card.description}
+                image={card.image}
+                alt={card.alt}
+              />
             </div>
             <div className="tablet:hidden w-fit flex">
               <MobileCategoryCard
