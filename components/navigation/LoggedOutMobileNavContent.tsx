@@ -75,7 +75,12 @@ const LoggedOutMobileNavContent = () => {
             <span className="text-sm text-black font-semibold">General</span>
             <div className="w-full h-px bg-slate-200" />
           </div>
-          <Link href="/" className="hover:underline" key="Home" onClick={()=> setMobileNav(false)}>
+          <Link
+            href="/"
+            className="hover:underline"
+            key="Home"
+            onClick={() => setMobileNav(false)}
+          >
             Home
           </Link>
 

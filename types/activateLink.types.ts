@@ -1,10 +1,7 @@
 import { z } from "zod";
 
 export const ActivateLinkParamsValidator = z.object({
-  token: z
-    .string()
-    .min(64)
-    .max(64),
+  token: z.string().min(64).max(64),
   email: z
     .string()
     .regex(/^\S+@\S+\.\S+$/)

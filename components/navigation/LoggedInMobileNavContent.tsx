@@ -37,14 +37,22 @@ const LoggedInMobileNavContent = () => {
             }}
           />
 
-          <a href={`/${session.data?.user.username}`} className="text-black font-bold py-2">
+          <a
+            href={`/${session.data?.user.username}`}
+            className="text-black font-bold py-2"
+          >
             {session.data?.user.username}
           </a>
         </div>
 
         {/*Nav Links*/}
         <ul className="flex flex-col text-[#62646a] text-base gap-[20px] font-normal py-8 ">
-          <Link href="/" className="hover:underline" key="Home" onClick={()=> setMobileNav(false)}>
+          <Link
+            href="/"
+            className="hover:underline"
+            key="Home"
+            onClick={() => setMobileNav(false)}
+          >
             Home
           </Link>
           <Link href="/" className="hover:underline" key="Inbox">

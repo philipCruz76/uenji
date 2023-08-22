@@ -1,19 +1,18 @@
-
 import { db } from "@/lib/db";
 import { FC } from "react";
 import { redirect } from "next/navigation";
 import { ActivateLinkParamsValidator } from "@/types/activateLink.types";
 
 type ActivateLinkPageProps = {
-    params: {
-        token: string
-    },
-    searchParams: {
-        email: string
-    }
-}
+  params: {
+    token: string;
+  };
+  searchParams: {
+    email: string;
+  };
+};
 
-const ActivateLinkPage: FC<ActivateLinkPageProps>= async({
+const ActivateLinkPage: FC<ActivateLinkPageProps> = async ({
   params,
   searchParams,
 }: ActivateLinkPageProps) => {
@@ -52,23 +51,23 @@ const ActivateLinkPage: FC<ActivateLinkPageProps>= async({
     console.log("user", user);
 
     if (!user) {
-        console.log("ACTIVATE_IVALID_LINK_ERROR")
-      redirect("/")
+      console.log("ACTIVATE_IVALID_LINK_ERROR");
+      redirect("/");
     } else {
       console.log("user found");
     }
   }
-  const isValid =
-    ActivateLinkParamsValidator.parseAsync(activateLinkParams).then(()=> {
-        return true;
-    }).catch((e)=> {
-        redirect("/");
+  const isValid = ActivateLinkParamsValidator.parseAsync(activateLinkParams)
+    .then(() => {
+      return true;
+    })
+    .catch((e) => {
+      redirect("/");
     });
 
-  
   return (
     <section>
-      {await isValid ? (
+      {(await isValid) ? (
         <div className="flex container py-20">
           <h1>Activate your account</h1>
           <p>Enter the code we sent to {activateLinkParams.email}</p>
@@ -80,6 +79,6 @@ const ActivateLinkPage: FC<ActivateLinkPageProps>= async({
       ) : null}
     </section>
   );
-}
+};
 
 export default ActivateLinkPage;

@@ -195,7 +195,10 @@ export const htmlEmail = (
                           <div style="font-family:helvetica;font-size:12px;line-height:1;text-align:left;color:#5f5f5f;">
                               <span>If you're having trouble finding where to enter the code
                               </span>
-                              <a href="${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/activate/${activateLinkToken}?email=${userEmail}" style="color:#5f5f5f">click here </a>
+                              <a href="${
+                                process.env.NEXTAUTH_URL ||
+                                "http://localhost:3000"
+                              }/activate/${activateLinkToken}?email=${userEmail}" style="color:#5f5f5f">click here </a>
                               </div>
                         </td>
                       </tr>
