@@ -2,15 +2,17 @@
 
 import { NavLinks } from "@/constants";
 import Link from "next/link";
-import { useEffect, useState, lazy } from "react";
+import { useEffect, lazy } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
 import { useOpenModalStore } from "@/lib/stores/modal-store";
 import { useLogInVariantStore } from "@/lib/stores/auth-store";
+import { useActiveNavBarStore } from "@/lib/stores/navbar-store";
+import { useMediaQuery } from "react-responsive";
 
 const activeNavBar =
-  " fixed top-0 z-10 flex  max-w-full w-full mx-auto px-4 py-4 bg-white text-black shadow-md transition duration-500 ease-in-out";
+  "  top-0 z-10 flex  max-w-full w-full mx-auto px-4 py-4 bg-white text-black shadow-md transition duration-500 ease-in-out";
 const inactiveNavBar =
   " fixed top-0 z-10 flex max-w-full w-full mx-auto px-4 py-4 bg-transparent text-white transition duration-500 ease-in-out";
 
@@ -21,30 +23,41 @@ const UserContextMenu = lazy(
 );
 
 const NavBar = () => {
-  let [navbar, setNavbar] = useState(false);
+  const { isActiveNavBar, setActiveNavBar } = useActiveNavBarStore();
   let { mobileNav, setMobileNav } = useOpenMobileNavStore();
   let { setIsOpen } = useOpenModalStore();
   let { setLogin } = useLogInVariantStore();
   const session = useSession();
+  const isMobile = useMediaQuery({ maxWidth: 600 });
 
   const changeBackground = () => {
     if (window.scrollY >= 60) {
-      setNavbar(true);
+      setActiveNavBar(true);
     } else {
-      setNavbar(false);
+      setActiveNavBar(false);
     }
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", changeBackground);
+    if (!isMobile) {
+      window.addEventListener("scroll", changeBackground);
 
-    return () => {
-      window.removeEventListener("scroll", changeBackground);
-    };
+      return () => {
+        window.removeEventListener("scroll", changeBackground);
+      };
+    }
   }, []);
 
+  useEffect(() => {
+    if (isMobile) {
+      setActiveNavBar(true);
+    } else {
+      setActiveNavBar(false);
+    }
+  }, [isMobile]);
+
   return (
-    <nav className={navbar ? activeNavBar : inactiveNavBar}>
+    <nav className={isActiveNavBar ? activeNavBar : inactiveNavBar}>
       {/*NavBar items*/}
       <div className="flex w-full items-center justify-between xl:gap-8 ">
         {/* Hambuger Menu and Logo Container */}
@@ -84,7 +97,7 @@ const NavBar = () => {
 
         <div className="tablet:flex hidden items-end justify-end w-full">
           {/*Search Bar*/}
-          {navbar && (
+          {isActiveNavBar && (
             <div className=" tablet:flex hidden w-full  px-2">
               <input
                 type="text"

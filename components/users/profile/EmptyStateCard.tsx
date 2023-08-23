@@ -4,7 +4,7 @@ import React from "react";
 
 const EmptyStateCard = () => {
   return (
-    <div className="flex flex-col space-y-4 items-center justify-center text-center relative border bg-white my-40 w-[730px] h-[450px]">
+    <div className="flex flex-col space-y-4 items-center justify-center text-center relative border bg-white  desktop:w-[730px] tablet:w-[500px]  h-[450px]">
       <svg
         width="83px"
         height="83px"

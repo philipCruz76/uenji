@@ -48,6 +48,7 @@ model User {
   name           String?   @db.String
   email          String?   @unique
   achievement    String?   @db.String
+  emailVerified  DateTime? @map("email_verified")
   business       String?   @db.String
   isOnline       Boolean?  @default(false) @map(name: "is_online")
   active         Boolean?  @default(false)

@@ -21,7 +21,7 @@ const SellerCard: FC<SellerCardProps> = ({
     year: "numeric",
   });
   return (
-    <div className="flex relative bg-white my-40  w-[400px] h-[450px]">
+    <div className="flex relative bg-white  tablet:w-[400px] h-[450px]">
       <div className=" flex-col px-[30px] py-[30px]  border border-zinc-200 w-full max-h-full items-center justify-center space-y-3">
         {/* user profile info */}
 
@@ -53,7 +53,7 @@ const SellerCard: FC<SellerCardProps> = ({
           <h1 className="text-2xl font-bold text-gray-800">{username}</h1>
           <p className="text-sm text-zinc-600">@{username}</p>
         </div>
-        <div className="flex h-auto">
+        <div className="tablet:flex hidden h-auto">
           <a className="border border-zinc-600 text-zinc-600 px-4 py-2 rounded-sm  cursor-pointer hover:bg-zinc-600 hover:text-white transform transition-colors ease-in-out duration-300 w-full h-fit  font-semibold  text-sm text-center">
             Preview Uenji Profile
           </a>

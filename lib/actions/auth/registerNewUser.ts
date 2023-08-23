@@ -25,7 +25,11 @@ export async function registerNewUser(data: LoginCredentials) {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    sendEmailVerificationToken(email, verificationToken, activateLinkToken);
+    await sendEmailVerificationToken(
+      email,
+      verificationToken,
+      activateLinkToken,
+    );
 
     const user = await db.user.create({
       data: {
@@ -47,7 +51,7 @@ export async function registerNewUser(data: LoginCredentials) {
     console.log("New User Created Successfully : %s", email);
   } catch (error: any) {
     console.error("REGISTRATION_ERROR");
-    console.error(error);
+    throw new Error(error);
   }
 }
 

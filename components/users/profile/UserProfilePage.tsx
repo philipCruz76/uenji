@@ -19,8 +19,8 @@ const UserProfilePage: FC<UserProfilePageProps> = ({ user }) => {
     isOnline,
   } = user;
   return (
-    <div className="flex flex-row flex-wrap  min-h-[2000px] justify-between w-screen ">
-      <div className="block w-[400px] max-h-[2000px] ">
+    <div className="flex flex-row flex-wrap  desktop:min-h-[2000px] justify-between w-screen ">
+      <div className="block w-[400px] my-20 desktop:max-h-[2000px] ">
         <SellerCard
           username={username}
           profilePicture={image}
@@ -29,7 +29,7 @@ const UserProfilePage: FC<UserProfilePageProps> = ({ user }) => {
           isOnline={isOnline}
         />
       </div>
-      <div className="block">
+      <div className="block my-20">
         <EmptyStateCard />
       </div>
     </div>
