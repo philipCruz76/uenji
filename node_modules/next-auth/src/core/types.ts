@@ -52,8 +52,8 @@ export interface AuthOptions {
    */
   secret?: string
   /**
-   * Configure your session like if you want to use JWT or a database,
-   * how long until an idle session expires, or to throttle write operations in case you are using a database.
+   * Configure your session settings, such as determining whether to use JWT or a database,
+   * setting the idle session expiration duration, or implementing write operation throttling for database usage.
    * * **Default value**: See the documentation page
    * * **Required**: No
    *
@@ -580,11 +580,12 @@ export type AuthAction =
   | "error"
   | "_log"
 
+type NonNullableFields<T> = {
+  [P in keyof T]-?: NonNullable<T[P]>
+}
+
 /** @internal */
-export interface InternalOptions<
-  TProviderType = ProviderType,
-  WithVerificationToken = TProviderType extends "email" ? true : false
-> {
+export interface InternalOptions<TProviderType = ProviderType> {
   providers: InternalProvider[]
   /**
    * Parsed from `NEXTAUTH_URL` or `x-forwarded-host` and `x-forwarded-proto` if the host is trusted.
@@ -603,9 +604,7 @@ export interface InternalOptions<
   pages: Partial<PagesOptions>
   jwt: JWTOptions
   events: Partial<EventCallbacks>
-  adapter: WithVerificationToken extends true
-    ? Adapter<WithVerificationToken>
-    : Adapter<WithVerificationToken> | undefined
+  adapter?: NonNullableFields<Adapter>
   callbacks: CallbacksOptions
   cookies: CookiesOptions
   callbackUrl: string

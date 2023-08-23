@@ -1,4 +1,4 @@
-import type { EventCallbacks, LoggerInstance } from "..";
+import type { EventCallbacks, InternalOptions, LoggerInstance } from "..";
 /**
  * Same as the default `Error`, but it is JSON serializable.
  * @source https://iaincollins.medium.com/error-handling-in-javascript-a6172ccdf9af
@@ -57,5 +57,5 @@ export declare function capitalize(s: string): string;
  */
 export declare function eventsErrorHandler(methods: Partial<EventCallbacks>, logger: LoggerInstance): Partial<EventCallbacks>;
 /** Handles adapter induced errors. */
-export declare function adapterErrorHandler<TAdapter>(adapter: TAdapter | undefined, logger: LoggerInstance): TAdapter | undefined;
+export declare function adapterErrorHandler<TAdapter>(adapter: TAdapter | undefined, logger: LoggerInstance): InternalOptions["adapter"] | undefined;
 //# sourceMappingURL=errors.d.ts.map
