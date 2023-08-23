@@ -46,12 +46,9 @@ export async function activateUser(email: string, token: string) {
       },
     });
 
-    await db.activateToken.update({
+    await db.activateToken.delete({
       where: {
         token,
-      },
-      data: {
-        activatedAt: new Date(Date.now()),
       },
     });
 
