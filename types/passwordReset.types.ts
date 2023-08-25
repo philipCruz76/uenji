@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const ActivateLinkParamsValidator = z.object({
+export const PasswordResetLinkValidator = z.object({
   token: z.string().min(20).max(20),
   email: z
     .string()
@@ -9,4 +9,6 @@ export const ActivateLinkParamsValidator = z.object({
     .max(255),
 });
 
-export type ActivateLinkParams = z.infer<typeof ActivateLinkParamsValidator>;
+export type PasswordResetLinkParams = z.infer<
+  typeof PasswordResetLinkValidator
+>;

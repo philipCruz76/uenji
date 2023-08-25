@@ -13,11 +13,12 @@ import { LoginCredentials } from "@/types/login.types";
 import { SubmitHandler, useForm } from "react-hook-form";
 import registerNewUser from "@/lib/actions/auth/registerNewUser";
 import { checkIfUserExists } from "@/lib/actions/auth/checkIfUserExists";
+import { sendPasswordResetEmail } from "@/lib/actions/sentPasswordResetEmail";
 
 const EmailRegistrationForm = () => {
   const { setIsOpen } = useOpenModalStore();
   const { setShowEmailCredentials } = useEmailCredentialsStore();
-  const { isLogin } = useLogInVariantStore();
+  const { isLogin, setLogin } = useLogInVariantStore();
   const { setNewUser } = useNewUserStore();
   const { setShowOTP } = useOTPStore();
 
@@ -86,12 +87,7 @@ const EmailRegistrationForm = () => {
 
       {/* Auth form */}
       <div className=" flex flex-col space-y-3 text-left mt-6">
-        <p className="flex text-2xl font-semibold mb-8 ">
-          {" "}
-          {isLogin === "login"
-            ? "Continue with your email or username"
-            : "Continue with Email"}{" "}
-        </p>
+        <p className="flex text-2xl font-semibold mb-8 ">Continue with Email</p>
 
         {/* User input form */}
         <form
@@ -104,7 +100,15 @@ const EmailRegistrationForm = () => {
               disabled={isSubmitting}
               {...register("email", {
                 required: true,
-                validate: async (value) => checkIfUserExists(value, isLogin),
+                validate: async (value) =>
+                  checkIfUserExists(value).then((res) => {
+                    if (res) {
+                      setLogin("login");
+                    } else {
+                      setLogin("register");
+                    }
+                    return true;
+                  }),
                 pattern: {
                   value: /^\S+@\S+\.\S+$/,
                   message: "Please enter a valid email address.",
@@ -170,7 +174,19 @@ const EmailRegistrationForm = () => {
               </span>
             </>
           )}
-
+          {isLogin === "login" ? (
+            <a
+              className="flex cursor-pointer text-sm underline text-end justify-end items-center"
+              onClick={async () => {
+                await sendPasswordResetEmail(getValues("email"));
+                setIsOpen(false);
+                setShowEmailCredentials(false);
+                toast.success("Password reset email sent");
+              }}
+            >
+              Forgot password?
+            </a>
+          ) : null}
           {isLogin === "register" ? (
             <>
               <label className="font-semibold">Confirm Password</label>

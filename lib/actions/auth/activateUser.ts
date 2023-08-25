@@ -1,39 +1,11 @@
 "use server";
 import { db } from "@/lib/db";
 
-export async function activateUserViaLink(
-  activationLink: string,
-  userEmail: string,
+export async function activateUser(
+  email: string,
+  token: string,
+  activatedViaLink?: boolean,
 ) {
-  console.log("validating link");
-  const user = await db.user.findFirstOrThrow({
-    where: {
-      ActivateToken: {
-        some: {
-          userEmail,
-          activationLink,
-          createdAt: {
-            gte: new Date(Date.now() - 1000 * 60 * 60 * 1.5),
-          },
-          activatedAt: null,
-        },
-      },
-    },
-  });
-
-  console.log("result", user ? "valid" : "invalid");
-  if (!user) {
-    throw new Error("Invalid activation link");
-  } else {
-    return {
-      userEmail: user.email!,
-      hashedPassword: user.hashedPassword!,
-      validLink: true,
-    };
-  }
-}
-
-export async function activateUser(email: string, token: string) {
   try {
     console.log("Activating user with token %s", token);
 
@@ -46,11 +18,14 @@ export async function activateUser(email: string, token: string) {
       },
     });
 
-    await db.activateToken.delete({
-      where: {
-        token,
-      },
-    });
+    if (!activatedViaLink) {
+      await db.activateToken.delete({
+        where: {
+          token,
+        },
+      });
+      console.log("Token deleted successfully");
+    }
 
     console.log("User %s activated successfully ", email);
   } catch (error: any) {

@@ -2,16 +2,13 @@
 import { db } from "@/lib/db";
 import { LoginCredentials } from "@/types/login.types";
 import { sendEmailVerificationToken } from "../sendEmailVerificationToken";
-import { randomUUID } from "crypto";
+import { generateRandomString } from "@/lib/utils";
 
 export async function registerNewUser(data: LoginCredentials) {
   try {
     const bcrypt = require("bcryptjs");
     const { email, password } = data;
-    const activateLinkToken = `${randomUUID()}${randomUUID()}`.replace(
-      /-/g,
-      "",
-    );
+    const activateLinkToken = generateRandomString(20);
     let verificationToken = "";
     const lenght = 6;
 

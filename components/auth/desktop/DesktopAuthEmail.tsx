@@ -14,11 +14,12 @@ import { useLogInVariantStore, useNewUserStore } from "@/lib/stores/auth-store";
 import Image from "next/image";
 import { checkIfUserExists } from "@/lib/actions/auth/checkIfUserExists";
 import registerNewUser from "@/lib/actions/auth/registerNewUser";
+import { sendPasswordResetEmail } from "@/lib/actions/sentPasswordResetEmail";
 
 const DesktopAuthEmail = ({}) => {
   const { setIsOpen } = useOpenModalStore();
   const { setShowEmailCredentials } = useEmailCredentialsStore();
-  const { isLogin } = useLogInVariantStore();
+  const { isLogin, setLogin } = useLogInVariantStore();
   const { setNewUser } = useNewUserStore();
   const { setShowOTP } = useOTPStore();
 
@@ -88,11 +89,7 @@ const DesktopAuthEmail = ({}) => {
 
       {/* Auth form */}
       <div className="container w-[438px] flex flex-col space-y-3 text-left mt-12">
-        <p className="flex text-2xl font-semibold mb-8 ">
-          {isLogin === "login"
-            ? "Continue with your email or username"
-            : "Continue with Email"}{" "}
-        </p>
+        <p className="flex text-2xl font-semibold mb-8 ">Continue with Email</p>
 
         {/* User input form */}
         <form
@@ -105,7 +102,15 @@ const DesktopAuthEmail = ({}) => {
               disabled={isSubmitting}
               {...register("email", {
                 required: true,
-                validate: async (value) => checkIfUserExists(value, isLogin),
+                validate: async (value) =>
+                  checkIfUserExists(value).then((res) => {
+                    if (res) {
+                      setLogin("login");
+                    } else {
+                      setLogin("register");
+                    }
+                    return true;
+                  }),
                 pattern: {
                   value: /^\S+@\S+\.[a-zA-Z]{2,}$/,
                   message: "Please enter a valid email address.",
@@ -170,30 +175,18 @@ const DesktopAuthEmail = ({}) => {
               </span>
             </>
           )}
-          {isLogin === "register" ? (
-            <>
-              <label className="font-semibold">Confirm Password</label>
-              <Input
-                disabled={isSubmitting}
-                {...register("confirmPassword", {
-                  required: true,
-                  validate: (value) =>
-                    value === getValues("password") ||
-                    "The passwords do not match",
-                })}
-                className={cn(
-                  "border border-zinc-400 rounded-sm h-[40px] px-2 focus:outline-none",
-                )}
-                required
-                type="password"
-                id="confirmPassword"
-              />
-              {errors.confirmPassword && (
-                <span className="text-red-500 text-sm">
-                  {errors.confirmPassword.message}
-                </span>
-              )}
-            </>
+          {isLogin === "login" ? (
+            <a
+              className="flex cursor-pointer text-sm underline text-end justify-end items-center"
+              onClick={async () => {
+                await sendPasswordResetEmail(getValues("email"));
+                setIsOpen(false);
+                setShowEmailCredentials(false);
+                toast.success("Password reset email sent");
+              }}
+            >
+              Forgot password?
+            </a>
           ) : null}
 
           <button
@@ -201,7 +194,7 @@ const DesktopAuthEmail = ({}) => {
             disabled={isSubmitting}
             className="h-[40px] border text-white bg-black border-black rounded-sm hover:bg-opacity-60"
           >
-            Continue
+            {isLogin === "register" ? "Continue" : "Sign In"}
           </button>
         </form>
       </div>

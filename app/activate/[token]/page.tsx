@@ -2,6 +2,7 @@ import { db } from "@/lib/db";
 import { FC } from "react";
 import { redirect } from "next/navigation";
 import { ActivateLinkParamsValidator } from "@/types/activateLink.types";
+import { activateUser } from "@/lib/actions/auth/activateUser";
 
 type ActivateLinkPageProps = {
   params: {
@@ -28,37 +29,34 @@ const ActivateLinkPage: FC<ActivateLinkPageProps> = async ({
       return;
     }
 
-    console.log("starting validation");
     const { token, email } = activateLinkParams;
-    console.log("token", token);
-    console.log("email", email);
     const user = await db.user.findUnique({
       where: {
         email,
+        active: false,
         ActivateToken: {
           some: {
             activationLink: token,
+            userEmail: email,
             activatedAt: null,
             createdAt: {
               gte: new Date(Date.now() - 1000 * 60 * 60 * 1.5),
             },
-            userEmail: email,
           },
         },
       },
     });
 
-    console.log("user", user);
-
     if (!user) {
-      console.log("ACTIVATE_IVALID_LINK_ERROR");
-      redirect("/");
+      console.error("USER_ACTIVATION_LINK_ERROR");
     } else {
-      console.log("user found");
+      activateUser(email, token, true);
     }
+    redirect("/");
   }
   const isValid = ActivateLinkParamsValidator.parseAsync(activateLinkParams)
     .then(() => {
+      activateViaLink();
       return true;
     })
     .catch((e) => {
@@ -66,17 +64,8 @@ const ActivateLinkPage: FC<ActivateLinkPageProps> = async ({
     });
 
   return (
-    <section>
-      {(await isValid) ? (
-        <div className="flex container py-20">
-          <h1>Activate your account</h1>
-          <p>Enter the code we sent to {activateLinkParams.email}</p>
-          <form action={activateViaLink}>
-            <input type="text" name="code" />
-            <button type="submit">Activate</button>
-          </form>
-        </div>
-      ) : null}
+    <section className="flex flex-col items-center justify-center w-screen h-screen">
+      {(await isValid) ? redirect("/") : null}
     </section>
   );
 };

@@ -1,6 +1,6 @@
 "use server";
 import { createTransport } from "nodemailer";
-import { htmlEmail } from "@/constants/email/activateAccountEmail";
+import { activateAccountEmail } from "@/constants/email/activateAccountEmail";
 
 export async function sendEmailVerificationToken(
   email: string,
@@ -8,7 +8,7 @@ export async function sendEmailVerificationToken(
   activateLinkToken: string,
 ) {
   try {
-    const emailVerification = await await createTransport({
+    const emailVerification = await createTransport({
       host: "smtp.hostinger.com",
       port: 465,
       secure: true,
@@ -20,10 +20,9 @@ export async function sendEmailVerificationToken(
       from: "Uenji" + "<" + process.env.EMAIL_USER_NOREPLY + ">",
       to: email,
       subject: "Activate your new account",
-      html: htmlEmail(email, verificationToken, activateLinkToken),
+      html: activateAccountEmail(email, verificationToken, activateLinkToken),
     });
     console.log("Message sent: %s", emailVerification.messageId);
-    return emailVerification;
   } catch (error) {
     console.log(error);
     return error;
