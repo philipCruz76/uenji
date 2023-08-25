@@ -110,7 +110,7 @@ const EmailRegistrationForm = () => {
                     return true;
                   }),
                 pattern: {
-                  value: /^\S+@\S+\.\S+$/,
+                  value: /^\S+@\S+\.[a-zA-Z]{2,}$/,
                   message: "Please enter a valid email address.",
                 },
               })}
@@ -187,38 +187,13 @@ const EmailRegistrationForm = () => {
               Forgot password?
             </a>
           ) : null}
-          {isLogin === "register" ? (
-            <>
-              <label className="font-semibold">Confirm Password</label>
-              <Input
-                disabled={isSubmitting}
-                {...register("confirmPassword", {
-                  required: true,
-                  validate: (value) =>
-                    value === getValues("password") ||
-                    "The passwords do not match",
-                })}
-                className={cn(
-                  "border border-zinc-400 rounded-sm h-[40px] px-2 focus:outline-none",
-                )}
-                required
-                type="password"
-                id="confirmPassword"
-              />
-              {errors.confirmPassword && (
-                <span className="text-red-500 text-sm">
-                  {errors.confirmPassword.message}
-                </span>
-              )}
-            </>
-          ) : null}
 
           <button
             type="submit"
             disabled={isSubmitting}
             className="h-[40px] border text-white bg-black border-black rounded-sm hover:bg-opacity-60"
           >
-            Continue
+           {isLogin === "register" ? "Continue" : "Sign In"}
           </button>
         </form>
       </div>
