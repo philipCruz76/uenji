@@ -1,12 +1,14 @@
-import { useEffect, useRef } from "react";
-import { useSession } from "next-auth/react";
+import { FC, useEffect, useRef } from "react";
 import LoggedInMobileNavContent from "./LoggedInMobileNavContent";
 import LoggedOutMobileNavContent from "./LoggedOutMobileNavContent";
 import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
 import { Drawer } from "vaul";
+import { Session } from "next-auth";
 
-const MobileNavTest = () => {
-  const session = useSession();
+type MobileNavProps = {
+  session: Session | null;
+};
+const MobileNav: FC<MobileNavProps> = ({ session }) => {
   let { mobileNav, setMobileNav } = useOpenMobileNavStore();
   const isClickInsideRef = useRef(false);
 
@@ -46,7 +48,7 @@ const MobileNavTest = () => {
             onClickCapture={() => (isClickInsideRef.current = true)}
           />
           <Drawer.Content className="bg-white  mt-24 z-50 bottom-0 left-0 right-0 lg:hidden flex flex-col fixed   h-full  min-h-screen  w-[240px] px-4 py-6  border-r border-gray-200   gap-4 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500">
-            {session.status === "authenticated" ? (
+            {session ? (
               <LoggedInMobileNavContent />
             ) : (
               <LoggedOutMobileNavContent />
@@ -58,4 +60,4 @@ const MobileNavTest = () => {
   );
 };
 
-export default MobileNavTest;
+export default MobileNav;

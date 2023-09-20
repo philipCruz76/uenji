@@ -55,7 +55,12 @@ const LoggedInMobileNavContent = () => {
           >
             Home
           </Link>
-          <Link href="/" className="hover:underline" key="Inbox">
+          <Link
+            href="/inbox"
+            className="hover:underline"
+            key="Inbox"
+            onClick={() => setMobileNav(false)}
+          >
             Inbox
           </Link>
           <Link href="/" className="hover:underline" key="Manage Orders">

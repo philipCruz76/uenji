@@ -32,6 +32,7 @@ export async function registerNewUser(data: LoginCredentials) {
       data: {
         email,
         hashedPassword,
+        image: "https://res.cloudinary.com/dqe71igxe/image/upload/v1694603551/default-user_avatar.svg",
       },
     });
 
@@ -47,8 +48,7 @@ export async function registerNewUser(data: LoginCredentials) {
 
     console.log("New User Created Successfully : %s", email);
   } catch (error: any) {
-    console.error("REGISTRATION_ERROR");
-    throw new Error(error);
+    console.error(error, "REGISTRATION_ERROR");
   }
 }
 

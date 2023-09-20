@@ -63,17 +63,22 @@ model User {
   accounts       Account[]
   sessions       Session[]
 
-  stripeCustomerId       String?              @unique @map(name: "stripe_customer_id")
-  stripeSubscriptionId   String?              @unique @map(name: "stripe_subscription_id")
-  stripePriceId          String?              @map(name: "stripe_price_id")
-  stripeCurrentPeriodEnd DateTime?            @map(name: "stripe_current_period_end")
+  stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
+  stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
+  stripePriceId          String?   @map(name: "stripe_price_id")
+  stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
   Gig                    Gig[]
   Order                  Order[]
   Review                 Review[]
-  Conversation           Conversation[]
-  Message                Message[]
-  ActivateToken          ActivateToken[]
-  PasswordResetToken     PasswordResetToken[]
+
+  conversationIds String[]       @db.ObjectId
+  conversations   Conversation[] @relation(fields: [conversationIds], references: [id])
+
+  seenMessageIds     String[]             @db.ObjectId
+  seenMessages       Message[]            @relation("Seen", fields: [seenMessageIds], references: [id])
+  messages           Message[]
+  activateToken      ActivateToken[]
+  passwordResetToken PasswordResetToken[]
 
   @@map(name: "users")
 }
@@ -170,32 +175,38 @@ model Review {
 }
 
 model Conversation {
-  id           String    @id @default(auto()) @map("_id") @db.ObjectId
-  buyerId      String    @db.ObjectId
-  readBySeller Boolean   @default(false) @map(name: "read_by_seller")
-  readByBuyer  Boolean   @default(false) @map(name: "read_by_user")
-  lastMessage  String?   @map(name: "last_message")
-  createdAt    DateTime  @default(now()) @map(name: "created_at")
-  updatedAt    DateTime  @updatedAt
-  User         User?     @relation(fields: [userId], references: [id])
-  userId       String?   @db.ObjectId
-  Message      Message[]
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sellerId     String?   @map("seller_id") @db.ObjectId
+  buyerId      String?   @map("buyer_id") @db.ObjectId
+  readBySeller Boolean  @default(false) @map(name: "read_by_seller")
+  readByBuyer  Boolean  @default(false) @map(name: "read_by_user")
+  lastMessage  String?  @map(name: "last_message")
+  createdAt    DateTime @default(now()) @map(name: "created_at")
+  updatedAt    DateTime @updatedAt
+
+  userIds String[] @db.ObjectId
+  users   User[]   @relation(fields: [userIds], references: [id])
+
+  messagesIds String[]  @db.ObjectId
+  messages    Message[]
 
   @@map(name: "conversations")
 }
 
 model Message {
-  id             String @id @default(auto()) @map("_id") @db.ObjectId
-  conversationId String @db.ObjectId
-
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   body      String?  @db.String
+  image     String?  @db.String
   createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  seenIds String[] @db.ObjectId
+  seen    User[]   @relation("Seen", fields: [seenIds], references: [id])
 
-  userId String @map(name: "user_id") @db.ObjectId
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  conversationId String       @db.ObjectId
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  senderId String @db.ObjectId
+  sender   User   @relation(fields: [senderId], references: [id], onDelete: Cascade)
 
   @@map(name: "messages")
 }

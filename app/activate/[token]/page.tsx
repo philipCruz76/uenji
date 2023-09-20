@@ -34,7 +34,7 @@ const ActivateLinkPage: FC<ActivateLinkPageProps> = async ({
       where: {
         email,
         active: false,
-        ActivateToken: {
+        activateToken: {
           some: {
             activationLink: token,
             userEmail: email,

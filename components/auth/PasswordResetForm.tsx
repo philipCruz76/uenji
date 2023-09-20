@@ -2,31 +2,16 @@
 import { FC, FormEvent, useState } from "react";
 import { Input } from "../ui/Input";
 import { resetPassword } from "@/lib/actions/resetUserPassword";
-import { z } from "zod";
-import { set } from "react-hook-form";
-import { toast } from "react-hot-toast";
-import { redirect } from "next/dist/server/api-utils";
+import { PasswordResetSchema } from "@/types/passwordReset.types";
 
-interface PasswordResetFormProps {
+type PasswordResetFormProps = {
   userEmail: string;
 }
-
-const PasswordResetSchema = z
-  .string({
-    required_error: "Password is required",
-  })
-  .min(8, { message: "At least 8 characters long." })
-  .max(20, { message: "Password must be at most 20 characters long." })
-  .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/, {
-    message:
-      "Password must contain at least one uppercase letter, one lowercase letter and one number",
-  });
 
 const PasswordResetForm: FC<PasswordResetFormProps> = ({ userEmail }) => {
   const [validPassword, setValidPassword] = useState<string>("");
   const [passWordErrorMessage, setPasswordErrorMessage] = useState<string>("");
   const confirmPasswordErrorMessage = "Passwords do not match";
-  let passwordMatch = true;
 
   const validatePassword = async ({
     target,

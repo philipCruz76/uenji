@@ -1,10 +1,8 @@
-import { FC } from "react";
+import { FC, lazy } from "react";
 import { redirect } from "next/navigation";
-import { PasswordResetLinkValidator } from "@/types/passwordReset.types";
-import { db } from "@/lib/db";
-import PasswordResetForm from "@/components/auth/PasswordResetForm";
+import getPasswordResetToken from "@/lib/actions/getPasswordResetToken";
 
-interface PasswordResetPageProps {
+type PasswordResetPageProps = {
   params: {
     token: string;
   };
@@ -12,6 +10,7 @@ interface PasswordResetPageProps {
     email: string;
   };
 }
+const PasswordResetForm = lazy(() => import("@/components/auth/PasswordResetForm"));
 
 const PasswordResetPage: FC<PasswordResetPageProps> = async ({
   params,
@@ -20,29 +19,7 @@ const PasswordResetPage: FC<PasswordResetPageProps> = async ({
   const token = params.token;
   const email = searchParams.email;
 
-  const findToken = async () => {
-    "use server";
-    const resetToken = await db.passwordResetToken.findUnique({
-      where: {
-        token,
-        userEmail: email,
-        createdAt: {
-          gte: new Date(Date.now() - 1000 * 60 * 60 * 24), // 24 hours
-        },
-      },
-    });
-    if (!resetToken) {
-      return false;
-    } else {
-      return true;
-    }
-  };
-
-  const isValid = PasswordResetLinkValidator.parseAsync({ token, email })
-    .then(async () => await findToken())
-    .catch((e) => {
-      return false;
-    });
+  const isValid =   await getPasswordResetToken(token, email);
 
   return (
     <section className="flex flex-col container w-screen h-screen overflow-x-hidden bg-neutral-100">

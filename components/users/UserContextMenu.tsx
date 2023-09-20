@@ -32,7 +32,7 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <Image
-              src="./icons/default-user.svg"
+              src="/icons/default-user.svg"
               alt="user icon"
               width={12}
               height={12}
@@ -45,7 +45,7 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Image
-              src="./icons/friends.svg"
+              src="/icons/friends.svg"
               alt="Settings"
               width={12}
               height={12}
@@ -63,7 +63,7 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Image
-              src="./icons/settings.svg"
+              src="/icons/settings.svg"
               alt="Settings"
               width={12}
               height={12}

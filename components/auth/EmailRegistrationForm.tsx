@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { toast } from "react-hot-toast";
-import { Input } from "../ui/Input";
+import { Input } from "@/components/ui/Input";
 import { signIn } from "next-auth/react";
 import { useLogInVariantStore, useNewUserStore } from "@/lib/stores/auth-store";
 import {
@@ -14,6 +14,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import registerNewUser from "@/lib/actions/auth/registerNewUser";
 import { checkIfUserExists } from "@/lib/actions/auth/checkIfUserExists";
 import { sendPasswordResetEmail } from "@/lib/actions/sentPasswordResetEmail";
+import { useRouter } from "next/navigation";
 
 const EmailRegistrationForm = () => {
   const { setIsOpen } = useOpenModalStore();
@@ -21,6 +22,7 @@ const EmailRegistrationForm = () => {
   const { isLogin, setLogin } = useLogInVariantStore();
   const { setNewUser } = useNewUserStore();
   const { setShowOTP } = useOTPStore();
+  const router = useRouter();
 
   const {
     register,
@@ -40,7 +42,7 @@ const EmailRegistrationForm = () => {
     });
 
     if (isLogin === "login") {
-      signIn("credentials", {
+      await signIn("credentials", {
         ...data,
         redirect: false,
       })
@@ -49,6 +51,7 @@ const EmailRegistrationForm = () => {
             toast.error(callback.error);
           }
           if (callback?.ok) {
+            router.refresh();
             setShowEmailCredentials(false);
             setIsOpen(false);
           }
@@ -59,7 +62,7 @@ const EmailRegistrationForm = () => {
         });
     } else {
       setShowOTP(true);
-      registerNewUser(data).catch((e) => toast.error(e));
+      await registerNewUser(data).catch((e) => toast.error(e));
     }
 
     reset();
@@ -193,7 +196,7 @@ const EmailRegistrationForm = () => {
             disabled={isSubmitting}
             className="h-[40px] border text-white bg-black border-black rounded-sm hover:bg-opacity-60"
           >
-           {isLogin === "register" ? "Continue" : "Sign In"}
+            {isLogin === "register" ? "Continue" : "Sign In"}
           </button>
         </form>
       </div>

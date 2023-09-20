@@ -1,13 +1,15 @@
 import { User } from "@prisma/client";
-import { FC } from "react";
-import SellerCard from "./SellerCard";
-import EmptyStateCard from "./EmptyStateCard";
+import { FC, lazy} from "react";
+import getCurrentUser from "@/lib/actions/getCurrentUser";
 
 interface UserProfilePageMobileProps {
   user: User;
 }
+const EmptyStateCard = lazy(() => import("./EmptyStateCard"));
+const SellerCard = lazy(() => import("./SellerCard"));
 
-const UserProfileMobilePage: FC<UserProfilePageMobileProps> = ({ user }) => {
+const UserProfileMobilePage: FC<UserProfilePageMobileProps> = async({ user }) => {
+  const currentUser = await getCurrentUser();
   const {
     username,
     email,
@@ -18,16 +20,20 @@ const UserProfileMobilePage: FC<UserProfilePageMobileProps> = ({ user }) => {
     createdAt,
     isOnline,
   } = user;
+
+  const publicMode = currentUser?.username !== user.username;
   return (
     <div className="flex flex-col w-screen h-screen">
       <SellerCard
+        userId={user.id}
         username={username}
-        profilePicture={image}
+        image={image}
         country={country}
-        joinedDate={createdAt}
+        createdAt={createdAt}
         isOnline={isOnline}
       />
-      <EmptyStateCard />
+      {!publicMode ?  <EmptyStateCard /> : (<div className="w-full h-full"> To be implemented Gig showcase</div>) }
+     
     </div>
   );
 };

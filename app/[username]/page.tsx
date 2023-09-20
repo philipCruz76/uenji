@@ -1,15 +1,16 @@
 import { db } from "@/lib/db";
-import { FC } from "react";
+import { FC, lazy } from "react";
 import { redirect } from "next/navigation";
-import UserProfilePage from "@/components/users/profile/UserProfilePage";
 import getSession from "@/lib/actions/getSession";
-import UserProfileMobilePage from "@/components/users/profile/UserProfilePageMobile";
 
 type ProfilePageProps = {
   params: {
     username: string;
   };
 };
+
+const UserProfilePage = lazy(() => import("@/components/users/profile/UserProfilePage"));
+const UserProfileMobilePage = lazy(() => import("@/components/users/profile/UserProfilePageMobile"));
 
 const ProfilePage: FC<ProfilePageProps> = async ({
   params,

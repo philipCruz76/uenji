@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 export default async function verifyOTP(otp: string) {
   const user = await db.user.findFirst({
     where: {
-      ActivateToken: {
+      activateToken: {
         some: {
           token: otp,
           createdAt: {

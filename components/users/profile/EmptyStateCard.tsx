@@ -1,5 +1,6 @@
 import { buttonVariants } from "@/constants/ui/button";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import React from "react";
 
 const EmptyStateCard = () => {
@@ -70,14 +71,14 @@ const EmptyStateCard = () => {
       <span className="flex text-zinc-600 text-lg font-semibold">
         Ready to start selling?
       </span>
-      <button
+      <Link href='/freelancer_onboarding/overview'
         className={cn(
           buttonVariants({ variant: "outline" }),
-          " hover:bg-zinc-600 hover:border-zinc-600 hover:text-white hover:shadow-md hover:shadow-slate-900  transform transition-shadow ease-in-out duration-300 w-[200px]",
+          " hover:bg-zinc-600 hover:border-zinc-600 hover:text-white   transform transition-shadow ease-in-out duration-300 w-[200px]",
         )}
       >
         Become a Seller
-      </button>
+      </Link>
     </div>
   );
 };

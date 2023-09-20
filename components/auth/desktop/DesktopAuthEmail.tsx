@@ -1,20 +1,21 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { LoginCredentials } from "@/types/login.types";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { toast } from "react-hot-toast";
+import Image from "next/image";
+
 import {
   useEmailCredentialsStore,
   useOTPStore,
   useOpenModalStore,
 } from "@/lib/stores/modal-store";
-import { signIn } from "next-auth/react";
-import { toast } from "react-hot-toast";
 import { cn } from "@/lib/utils";
-import { Input } from "../../ui/Input";
+import { Input } from "@/components/ui/Input";
 import { useLogInVariantStore, useNewUserStore } from "@/lib/stores/auth-store";
-
-import Image from "next/image";
 import { checkIfUserExists } from "@/lib/actions/auth/checkIfUserExists";
 import registerNewUser from "@/lib/actions/auth/registerNewUser";
 import { sendPasswordResetEmail } from "@/lib/actions/sentPasswordResetEmail";
+import { LoginCredentials } from "@/types/login.types";
 
 const DesktopAuthEmail = ({}) => {
   const { setIsOpen } = useOpenModalStore();
@@ -22,6 +23,7 @@ const DesktopAuthEmail = ({}) => {
   const { isLogin, setLogin } = useLogInVariantStore();
   const { setNewUser } = useNewUserStore();
   const { setShowOTP } = useOTPStore();
+  const router = useRouter();
 
   const {
     register,
@@ -41,7 +43,7 @@ const DesktopAuthEmail = ({}) => {
     });
 
     if (isLogin === "login") {
-      signIn("credentials", {
+      await signIn("credentials", {
         ...data,
         redirect: false,
       })
@@ -50,6 +52,7 @@ const DesktopAuthEmail = ({}) => {
             toast.error(callback.error);
           }
           if (callback?.ok) {
+            router.refresh();
             setShowEmailCredentials(false);
             setIsOpen(false);
           }
@@ -59,8 +62,11 @@ const DesktopAuthEmail = ({}) => {
           toast.error(e);
         });
     } else {
-      setShowOTP(true);
-      registerNewUser(data).catch((e) => toast.error(e));
+      await registerNewUser(data)
+        .then(() => {
+          setShowOTP(true);
+        })
+        .catch((e) => toast.error(e));
     }
 
     reset();

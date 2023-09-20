@@ -1,25 +1,42 @@
+'use client'
 import Image from "next/image";
-import { FC } from "react";
+import { useRouter } from "next/navigation";
+import { FC, useCallback } from "react";
+import { toast } from "react-hot-toast";
 
 interface SellerCardProps {
+  publicMode?: boolean;
+  userId: string | null;
   username: string | null;
-  profilePicture: string | null;
-  country?: string | null;
-  joinedDate: Date | null;
-  isOnline: boolean | null;
+  image: string | null;
+  country: string | null;
+  createdAt: Date | null;
+  isOnline : boolean| null;
 }
 
-const SellerCard: FC<SellerCardProps> = ({
-  username,
-  profilePicture,
-  country,
-  joinedDate,
-  isOnline,
+const SellerCard: FC<SellerCardProps> =  ({
+  publicMode, username, image, country, createdAt, isOnline,userId
 }) => {
-  const memberSince = new Date(joinedDate!).toLocaleDateString("en-US", {
+
+  const memberSince = new Date(createdAt!).toLocaleDateString("en-US", {
     month: "long",
     year: "numeric",
   });
+
+  const router = useRouter();
+  const handleClick = useCallback(() => {
+    fetch('/api/conversations', {
+      method: 'POST',
+      body: JSON.stringify({userId})})
+      .then((data) => {
+        data.json().then((data) => {
+        router.push(`/inbox/${username}?chatId=${data.id}`)})
+      }).catch((error) => {
+        toast.error(error.message)
+      })
+    
+  }, [username]);
+
   return (
     <div className="flex relative bg-white  tablet:w-[400px] h-[450px]">
       <div className=" flex-col px-[30px] py-[30px]  border border-zinc-200 w-full max-h-full items-center justify-center space-y-3">
@@ -43,7 +60,7 @@ const SellerCard: FC<SellerCardProps> = ({
           <Image
             width={150}
             height={150}
-            src={profilePicture! || "./icons/default-user.svg"}
+            src={image! || "./icons/default-user.svg"}
             alt="profile picture"
             referrerPolicy="no-referrer"
             className="rounded-full hover:opacity-80 transition duration-150 ease-in-out cursor-pointer"
@@ -54,9 +71,18 @@ const SellerCard: FC<SellerCardProps> = ({
           <p className="text-sm text-zinc-600">@{username}</p>
         </div>
         <div className="tablet:flex hidden h-auto">
-          <a className="border border-zinc-600 text-zinc-600 px-4 py-2 rounded-sm  cursor-pointer hover:bg-zinc-600 hover:text-white transform transition-colors ease-in-out duration-300 w-full h-fit  font-semibold  text-sm text-center">
-            Preview Uenji Profile
-          </a>
+          {publicMode ? (
+            <a
+              onClick={handleClick}
+              className="border border-cyan-500 text-cyan-500 px-4 py-2 rounded-sm  cursor-pointer hover:bg-cyan-500 hover:text-white transform transition-colors ease-in-out duration-300 w-full h-fit  font-semibold  text-sm text-center"
+            >
+              Contact {username}
+            </a>
+          ) : (
+            <a className="border border-zinc-600 text-zinc-600 px-4 py-2 rounded-sm  cursor-pointer hover:bg-zinc-600 hover:text-white transform transition-colors ease-in-out duration-300 w-full h-fit  font-semibold  text-sm text-center">
+              Preview Uenji Profile
+            </a>
+          )}
         </div>
 
         {/* user stats */}

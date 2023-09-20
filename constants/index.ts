@@ -1,11 +1,6 @@
 export const NavLinks = [
   { href: "/", key: "Explorar", text: "Explorar" },
   { href: "/", key: "English", text: "English" },
-  {
-    href: "/",
-    key: "Torne-se num Freelancer",
-    text: "Torne-se num Freelancer",
-  },
 ];
 
 export const MobileNavLinks = [

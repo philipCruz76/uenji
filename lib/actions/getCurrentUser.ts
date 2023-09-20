@@ -1,6 +1,7 @@
 "use server";
 import { db } from "@/lib/db";
 import getSession from "./getSession";
+import { redirect } from "next/navigation";
 
 const getCurrentUser = async () => {
   try {
@@ -17,7 +18,7 @@ const getCurrentUser = async () => {
     });
 
     if (!currentUser) {
-      return null;
+      return redirect("/");
     }
 
     return currentUser;
