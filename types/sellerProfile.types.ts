@@ -1,4 +1,4 @@
-import { Category } from "./common.types";
+import { FullCategoryType } from "./common.types";
 
 export type SellerPersonalInfo = {
     fullName : string;
@@ -13,7 +13,7 @@ export type SellerPersonalInfo = {
 
 export type SellerProfessionalInfo = {
     ocupation: {
-        category: Category;
+        category: FullCategoryType;
         startYear: number;
         endYear?: number;
         bestSkills?: string[];

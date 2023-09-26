@@ -10,23 +10,36 @@ type HeaderProps = {
 };
 
 const Header: FC<HeaderProps> = async ({ chatPartner }) => {
+  const timeLastSeen = () => {
+    if (chatPartner.isOnline) {
+      return "Online";
+    } else {
+      const lastSeen = new Date(Date.now() - chatPartner.updatedAt.getTime());
+
+      if (lastSeen.getHours() > 1) {
+        return `Last seen: ${lastSeen.getHours()} hours ago`;
+      }
+      return `Last seen: ${new Date(
+        Date.now() - chatPartner.updatedAt.getTime()
+      ).getMinutes()} minutes ago`;
+    }
+  };
   return (
     <header className="container flex w-full h-[80px] border-b py-4  items-center">
       <div className="flex w-full justify-between">
-      <Link href="/inbox" className="flex tablet:flex cursor-pointer">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              fill="#0e0e0e"
-              viewBox="0 0 256 256"
-            >
-              <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
-            </svg>
-            </Link>
+        <Link href="/inbox" className="flex tablet:hidden cursor-pointer">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="28"
+            height="28"
+            fill="#0e0e0e"
+            viewBox="0 0 256 256"
+          >
+            <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+          </svg>
+        </Link>
         <div className="flex flex-col">
           <div className="flex flex-row  min-w-fit items-center gap-2">
-            
             <div className="rounded-full bg-gray-300 h-[14px] w-[14px]" />
             <h1 className="flex w-full">
               <a
@@ -40,12 +53,8 @@ const Header: FC<HeaderProps> = async ({ chatPartner }) => {
               </span>
             </h1>
           </div>
-          <small className="flex flex-row">
-            <span className="px-2">
-              {chatPartner.isOnline ? "Active" : "Offline"}
-            </span>
-            <span>Last seen:</span>
-            <span>2 hours ago</span>
+          <small className="flex flex-row text-gray-500 text-xs">
+            <span>{timeLastSeen()}</span>
           </small>
         </div>
 

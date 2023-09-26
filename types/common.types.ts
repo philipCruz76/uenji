@@ -20,7 +20,7 @@ export type FullConversationType = Conversation & {
   messages: FullMessageType[];
 };
 
-export type Category =
+export type FullCategoryType =
   | "Fotografia"
   | "Formação"
   | "Escrita"
@@ -28,6 +28,18 @@ export type Category =
   | "Análises"
   | "Programação"
   | "Negócios"
-  | "Edição de Vídeo"
+  | "Vídeo"
   | "Branding"
   | "Design";
+
+export type Category =
+  | "fotografia"
+  | "formacao"
+  | "escrita"
+  | "musica"
+  | "analises"
+  | "programacao"
+  | "negocios"
+  | "video"
+  | "branding"
+  | "design";

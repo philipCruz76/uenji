@@ -4,7 +4,7 @@ const nextConfig = {
     serverActions: true,
   },
   images: {
-    domains: ["localhost", "res.cloudinary.com", "lh3.googleusercontent.com"],
+    domains: ["localhost", "res.cloudinary.com", "lh3.googleusercontent.com","uploadthing.com", "utfs.io"],
   },
 };
 
