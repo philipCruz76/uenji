@@ -9,16 +9,16 @@ interface pageProps {}
 
 const page: FC<pageProps> = ({}) => {
   return (
-    <section className="flex container max-w-screen max-h-screen overflow-y-scroll">
-      <div className="flex flex-col-reverse desktop:flex-row-reverse w-full h-full items-center justify-between py-8 tablet:pl-[25px] ">
+    <section className="flex container py-8 max-w-screen max-h-screen overflow-y-scroll">
+      <div className="flex flex-col-reverse desktop:flex-row-reverse w-full h-full items-center justify-between  tablet:pl-[25px] ">
         <div className="flex container flex-col max-w-[900px] h-full tablet:px-[60px] items-start justify-center">
           <h1 className="flex text-[#303030] font-bold box-border tablet:max-w-[590px] tablet:pr-[80px] text-2xl">
             {" "}
-            What makes a successful Uenji profile?
+            O que caracteriza um perfil Uenji bem-sucedido?
           </h1>
           <h3 className="text-sm text-gray-600 ">
-            Your first impression matters! Create a profile that will stand out
-            from the crowd on Uenji.
+            A sua primeira impressão é fundamental! Crie um perfil que se
+            destaque da multidão no Uenji.
           </h3>
           <ul className="grid desktop:grid-cols-3 tablet:grid-cols-2 grid-cols-1 min-h-[310px] box-border flex-wrap w-full h-full pt-[42px]  justify-between">
             {sellerOnBoardingDos.map((item) => (
@@ -32,24 +32,23 @@ const page: FC<pageProps> = ({}) => {
             ))}
           </ul>
           <div className="flex tablet:flex-row flex-col gap-2  tablet:justify-start items-center w-full justify-center">
-          <Link
-            href="/freelancer_onboarding/overview/dont"
-            className={cn(
-              buttonVariants({ variant: "default" }),
-              "flex bg-sky-500 tablet:w-[160px] w-full text-white"
-            )}
-          >
-            Continue
-          </Link>
-          <Link
-            href="/freelancer_onboarding/overview"
-            className="underline text-blue-700"
-          >
-            {" "}
-            Back
-          </Link>
+            <Link
+              href="/freelancer_onboarding/overview/dont"
+              className={cn(
+                buttonVariants({ variant: "default" }),
+                "flex bg-sky-500 tablet:w-[160px] w-full text-white"
+              )}
+            >
+              Continuar
+            </Link>
+            <Link
+              href="/freelancer_onboarding/overview"
+              className="underline text-blue-700"
+            >
+              {" "}
+              Voltar
+            </Link>
           </div>
-         
         </div>
         <div className="hidden lg:block  min-w-[300px] h-[500px] py-[60px] border rounded-md ">
           Dos photo

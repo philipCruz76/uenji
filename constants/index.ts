@@ -130,3 +130,81 @@ export const footerLinks = [
     links: ["Customer Success Stories", "Invite a Friend", "Become a Seller"],
   },
 ];
+
+export const CATEGORIES = [
+  "fotografia",
+  "formacao",
+  "escrita",
+  "musica",
+  "analises",
+  "programacao",
+  "negocios",
+  "video",
+  "branding",
+  "design",
+] as const;
+
+export const CategoryDesciptions = [
+  {
+    category: "fotografia",
+    categoryTitle: "Fotografia",
+    titlecardImage: "https://res.cloudinary.com/dqe71igxe/image/upload/v1695893990/category%20bg.jpg",
+    thumbnailIcon:"/icons/camera-duotone.svg",
+    categoryTagline: "Captura o momento certo",
+  },
+  {
+    category: "formacao",
+    categoryTitle: "Formação",
+    thumbnailIcon:"/icons/graduation-cap-duotone.svg",
+    categoryTagline: "Aprende novos conceitos",
+  },
+  {
+    category: "escrita",
+    categoryTitle: "Escrita",
+    thumbnailIcon:"/icons/article-medium-duotone.svg",
+    categoryTagline: "Elabora documentação",
+  },
+  {
+    category: "musica",
+    categoryTitle: "Música",
+    thumbnailIcon:"/icons/microphone-duotone.svg",
+    categoryTagline: "Cria a tua música",
+  },
+  {
+    category: "analises",
+    categoryTitle: "Análises",
+    thumbnailIcon:"/icons/chart-line-duotone.svg",
+    categoryTagline: "Descobre os KPIs",
+  },
+  {
+    category: "programacao",
+    categoryTitle: "Programação",
+    thumbnailIcon:"/icons/laptop-duotone.svg",
+    categoryTagline: "Executa os teus projectos",
+  },
+  {
+    category: "negocios",
+    categoryTitle: "Negócios",
+    thumbnailIcon:"/icons/briefcase-duotone.svg",
+    categoryTagline: "Aumenta a tua audiência",
+  },
+  {
+    category: "video",
+    categoryTitle: "Vídeo",
+    thumbnailIcon:"/icons/video-duotone.svg",
+    categoryTagline: "Cria o teu vídeo",
+  },
+  {
+    category: "branding",
+    categoryTitle: "Branding",
+    thumbnailIcon:"/icons/copyright-duotone.svg",
+    categoryTagline: "Constrói a tua marca",
+  },
+  {
+    category: "design",
+    categoryTitle: "Design",
+    thumbnailIcon:"/icons/paint-brush-duotone.svg",
+    categoryTagline: "Traduz o teu conteúdo",
+  }
+]
+

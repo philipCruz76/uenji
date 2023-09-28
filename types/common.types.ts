@@ -32,14 +32,3 @@ export type FullCategoryType =
   | "Branding"
   | "Design";
 
-export type Category =
-  | "fotografia"
-  | "formacao"
-  | "escrita"
-  | "musica"
-  | "analises"
-  | "programacao"
-  | "negocios"
-  | "video"
-  | "branding"
-  | "design";
