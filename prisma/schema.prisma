@@ -43,25 +43,33 @@ model Session {
 }
 
 model User {
-  id             String    @id @default(auto()) @map("_id") @db.ObjectId
-  username       String?   @unique @map(name: "user_name")
-  name           String?   @db.String
-  email          String?   @unique
-  achievement    String?   @db.String
-  emailVerified  DateTime? @map("email_verified")
-  business       String?   @db.String
-  isOnline       Boolean?  @default(false) @map(name: "is_online")
-  active         Boolean?  @default(false)
-  image          String?   @db.String
-  hashedPassword String?   @map(name: "hashed_password")
-  country        String?   @db.String
-  phoneNumber    String?   @map("phone_number") @db.String
-  description    String?
-  isSeller       Boolean?  @default(false) @map(name: "is_seller")
-  createdAt      DateTime  @default(now()) @map(name: "created_at")
-  updatedAt      DateTime  @updatedAt @map(name: "updated_at")
-  accounts       Account[]
-  sessions       Session[]
+  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+  username            String?   @unique @map(name: "user_name")
+  name                String?   @db.String
+  email               String?   @unique
+  achievement         String?   @db.String
+  emailVerified       DateTime? @map("email_verified")
+  business            String?   @db.String
+  isOnline            Boolean?  @default(false) @map(name: "is_online")
+  active              Boolean?  @default(false)
+  image               String?   @db.String
+  hashedPassword      String?   @map(name: "hashed_password")
+  country             String?   @db.String
+  phoneNumber         String?   @map("phone_number") @db.String
+  description         String?
+  displayName         String?   @map("display_name") @db.String
+  languages           Json?     @db.Json
+  occupation          Json?     @db.Json
+  skills              Json?     @db.Json
+  education           Json?     @db.Json
+  certification       Json?     @db.Json
+  personalWebsite     String?   @map(name: "personal_website")
+  phoneNumberVerified DateTime? @map(name: "phone_number_verified")
+  isSeller            Boolean?  @default(false) @map(name: "is_seller")
+  createdAt           DateTime  @default(now()) @map(name: "created_at")
+  updatedAt           DateTime  @updatedAt @map(name: "updated_at")
+  accounts            Account[]
+  sessions            Session[]
 
   stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
   stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
@@ -176,8 +184,8 @@ model Review {
 
 model Conversation {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  sellerId     String?   @map("seller_id") @db.ObjectId
-  buyerId      String?   @map("buyer_id") @db.ObjectId
+  sellerId     String?  @map("seller_id") @db.ObjectId
+  buyerId      String?  @map("buyer_id") @db.ObjectId
   readBySeller Boolean  @default(false) @map(name: "read_by_seller")
   readByBuyer  Boolean  @default(false) @map(name: "read_by_user")
   lastMessage  String?  @map(name: "last_message")

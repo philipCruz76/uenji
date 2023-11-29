@@ -11,6 +11,7 @@ import {
 } from "@/lib/stores/modal-store";
 import { Fragment, useEffect, useRef, useState } from "react";
 import verifyOTP from "@/lib/actions/auth/verifyOTP";
+import {useRouter} from "next/navigation";
 
 const OTPRegistrationForm = () => {
   const { setIsOpen } = useOpenModalStore();
@@ -22,6 +23,7 @@ const OTPRegistrationForm = () => {
   const [isValidating, setIsValidating] = useState<boolean>(false);
   const [failedValidation, setFailedValidation] = useState<boolean>(false);
   const [activeInput, setActiveInput] = useState<number>(0);
+  const router = useRouter();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -66,6 +68,7 @@ const OTPRegistrationForm = () => {
     }
     const { email, password } = newUser;
     const otpString = otp.join("");
+    
     activateUser(email, otpString)
       .then(() =>
         signIn("credentials", {
@@ -80,6 +83,7 @@ const OTPRegistrationForm = () => {
             setShowOTP(false);
             setShowEmailCredentials(false);
             setIsOpen(false);
+            router.refresh();
           }
         }),
       )

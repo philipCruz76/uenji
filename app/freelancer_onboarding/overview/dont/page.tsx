@@ -9,7 +9,7 @@ interface pageProps {}
 
 const page: FC<pageProps> = ({}) => {
   return (
-    <section className="flex container max-w-screen max-h-screen overflow-y-scroll">
+    <section className="flex container max-w-screen max-h-screen min-h-screen">
       <div className="flex flex-col-reverse desktop:flex-row-reverse w-full h-full items-center justify-between py-8 tablet:pl-[25px] ">
         <div className="flex container flex-col max-w-[900px] h-full tablet:px-[60px] items-start justify-center">
           <h1 className="flex text-[#303030] font-bold box-border tablet:max-w-[590px] tablet:pr-[80px] text-2xl">
@@ -33,10 +33,10 @@ const page: FC<pageProps> = ({}) => {
           </ul>
           <div className="flex tablet:flex-row flex-col gap-2  tablet:justify-start items-center w-full justify-center">
             <Link
-              href="/freelancer_onboarding/overview/dont"
+              href="/freelancer_onboarding/personal_info"
               className={cn(
                 buttonVariants({ variant: "default" }),
-                "flex bg-sky-500 tablet:w-[160px] w-full text-white"
+                "flex bg-sky-500 tablet:w-[160px] w-full text-white",
               )}
             >
               Continuar
@@ -50,8 +50,13 @@ const page: FC<pageProps> = ({}) => {
             </Link>
           </div>
         </div>
-        <div className="hidden lg:block  min-w-[300px] h-[500px] py-[60px] border rounded-md justify-center items-center text-center ">
-          <span>Dos Photo</span>
+        <div className="hidden lg:block  h-fit max-h-screen overflow-hidden  border rounded-md ">
+          <video autoPlay muted className="flex max-h-screen box-content">
+            <source
+              src="https://res.cloudinary.com/dqe71igxe/video/upload/f_auto:video,q_auto/v1/videos/SellerDont"
+              type="video/mp4"
+            />
+          </video>
         </div>
       </div>
     </section>

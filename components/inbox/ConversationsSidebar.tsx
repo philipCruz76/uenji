@@ -13,11 +13,12 @@ const UserChatList = lazy(() => import("./UserChatList"));
 const InboxTypeComboBox = lazy(() => import("./InboxTypeComboBox"));
 
 const ConversationsSidebar: FC<ConversationsSidebarProps> = ({
-  initialConversations, currentUserEmail
+  initialConversations,
+  currentUserEmail,
 }) => {
   const [conversations, setConversations] = useState(initialConversations);
 
-  const pusher = usePusherStore((state)=> state.pusherClient);
+  const pusher = usePusherStore((state) => state.pusherClient);
   const pusherKey = useMemo(() => {
     return currentUserEmail;
   }, [currentUserEmail]);
@@ -34,7 +35,7 @@ const ConversationsSidebar: FC<ConversationsSidebarProps> = ({
             return { ...currentConversation, messages: conversation.messages };
           }
           return currentConversation;
-        })
+        }),
       );
     };
 
@@ -58,15 +59,14 @@ const ConversationsSidebar: FC<ConversationsSidebarProps> = ({
     channel.bind("conversation:remove", removeHandler);
 
     return () => {
-      channel.unsubscribe();
       channel.unbind("conversation:update", updateHandler);
       channel.unbind("conversation:new", newHandler);
       channel.unbind("conversation:remove", removeHandler);
-    }
+    };
   }, [pusherKey]);
 
   return (
-    <aside className="flex  flex-col  w-full  h-full tablet:h-[600px] space-y-6">
+    <section className="flex  flex-col  w-full  h-full space-y-6">
       <div className=" flex flex-row w-full items-center justify-between pr-4">
         <InboxTypeComboBox />
         <svg
@@ -83,17 +83,23 @@ const ConversationsSidebar: FC<ConversationsSidebarProps> = ({
 
       {conversations.length !== 0 ? (
         conversations.map((conversation) => {
-          const chatParner =  conversation.users.filter((user)=> {
-            return user.email !== currentUserEmail
-           })
-          return <UserChatList data={conversation} key={conversation.id} chatPartner={chatParner[0]} />;
+          const chatParner = conversation.users.filter((user) => {
+            return user.email !== currentUserEmail;
+          });
+          return (
+            <UserChatList
+              data={conversation}
+              key={conversation.id}
+              chatPartner={chatParner[0]}
+            />
+          );
         })
       ) : (
         <p className="items-center justify-center text-sm text-zinc-500">
           Nothing to show here...
         </p>
       )}
-    </aside>
+    </section>
   );
 };
 

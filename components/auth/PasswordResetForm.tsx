@@ -6,7 +6,7 @@ import { PasswordResetSchema } from "@/types/passwordReset.types";
 
 type PasswordResetFormProps = {
   userEmail: string;
-}
+};
 
 const PasswordResetForm: FC<PasswordResetFormProps> = ({ userEmail }) => {
   const [validPassword, setValidPassword] = useState<string>("");

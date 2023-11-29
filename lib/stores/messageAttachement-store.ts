@@ -7,11 +7,13 @@ export type MessageAttachment = {
 };
 
 type MessageAttachmentState = {
-    file: MessageAttachment;
-    setFile: (file: MessageAttachment ) => void;
+  file: MessageAttachment;
+  setFile: (file: MessageAttachment) => void;
 };
 
-export const useMessageAttachmentStore = create<MessageAttachmentState>()((set) => ({
+export const useMessageAttachmentStore = create<MessageAttachmentState>()(
+  (set) => ({
     file: {} as MessageAttachment,
-    setFile: (file: MessageAttachment ) => set({ file }),
-}));
+    setFile: (file: MessageAttachment) => set({ file }),
+  }),
+);

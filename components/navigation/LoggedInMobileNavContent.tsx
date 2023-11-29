@@ -10,16 +10,7 @@ import {
 import Image from "next/image";
 import { footerLinks, languageFilters } from "@/constants";
 import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
-
-const MobileNavLinks = ({ links }: { links: string[] }) => (
-  <ul className="flex flex-col items-start">
-    {links.map((link) => (
-      <Link href="/" key={link} className="hover:underline">
-        {link}
-      </Link>
-    ))}
-  </ul>
-);
+import FooterColumn from "./FooterColumn";
 
 const LoggedInMobileNavContent = () => {
   const session = useSession();
@@ -30,12 +21,7 @@ const LoggedInMobileNavContent = () => {
       {/* Mobile Menu Content */}
       <div className="overflow-y-auto flex-1">
         <div className="flex flex-row gap-4">
-          <UserAvatar
-            user={{
-              username: session.data?.user.username || null,
-              image: session.data?.user.image || null,
-            }}
-          />
+          <UserAvatar avatarPhoto={session.data?.user.image!} />
 
           <a
             href={`/${session.data?.user.username}`}
@@ -72,7 +58,7 @@ const LoggedInMobileNavContent = () => {
                 <span className="font-normal"> Browse Categories</span>
               </AccordionTrigger>
               <AccordionContent className="pt-0">
-                <MobileNavLinks links={footerLinks[0].links} />
+                <FooterColumn links={footerLinks[0].links} />
               </AccordionContent>
             </AccordionItem>
           </Accordion>

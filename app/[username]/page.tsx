@@ -9,8 +9,12 @@ type ProfilePageProps = {
   };
 };
 
-const UserProfilePage = lazy(() => import("@/components/users/profile/UserProfilePage"));
-const UserProfileMobilePage = lazy(() => import("@/components/users/profile/UserProfilePageMobile"));
+const UserProfilePage = lazy(
+  () => import("@/components/users/profile/UserProfilePage"),
+);
+const UserProfileMobilePage = lazy(
+  () => import("@/components/users/profile/UserProfilePageMobile"),
+);
 
 const ProfilePage: FC<ProfilePageProps> = async ({
   params,

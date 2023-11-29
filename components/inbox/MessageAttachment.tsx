@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { notFound } from "next/navigation";
 import { FC } from "react";
 
 interface MessageAttachmentProps {
@@ -9,17 +8,18 @@ interface MessageAttachmentProps {
 
 const MessageAttachment: FC<MessageAttachmentProps> = ({ fileUrl }) => {
   let isImage = false;
-  const fileLink = fileUrl.match(/^[^;]+/)?.[0]
-  const fileType = (fileLink)?.split(".").pop();
+  const fileLink = fileUrl.match(/^[^;]+/)?.[0];
+  const fileType = fileLink?.split(".").pop();
   const fileName = fileUrl.match(/fileName=([^;]+)/)?.[1];
   let fileSize = fileUrl.match(/fileSize=([^;]+)/)?.[1];
 
-  if (!fileLink || !fileType || !fileName || !fileSize) return <div>Something went wrong with the file attachment {fileUrl}</div>;
+  if (!fileLink || !fileType || !fileName || !fileSize)
+    return <div>Something went wrong with the file attachment {fileUrl}</div>;
 
   const fileSizeNumeric = parseInt(fileSize);
 
   if (fileSizeNumeric > 1000000000) {
-    fileSize = (fileSizeNumeric / 1073741824 )+ " GB";
+    fileSize = fileSizeNumeric / 1073741824 + " GB";
   } else if (fileSizeNumeric > 1000000) {
     fileSize = (fileSizeNumeric / 1048576).toFixed(2) + " MB";
   } else if (fileSizeNumeric > 1000) {

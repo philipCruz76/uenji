@@ -12,16 +12,7 @@ import { useLogInVariantStore } from "@/lib/stores/auth-store";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/constants/ui/button";
 import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
-
-const MobileNavLinks = ({ links }: { links: string[] }) => (
-  <ul className="flex flex-col items-start">
-    {links.map((link) => (
-      <Link href="/" key={link} className="hover:underline">
-        {link}
-      </Link>
-    ))}
-  </ul>
-);
+import FooterColumn from "./FooterColumn";
 
 const LoggedOutMobileNavContent = () => {
   let { setIsOpen } = useOpenModalStore();
@@ -66,7 +57,7 @@ const LoggedOutMobileNavContent = () => {
               </AccordionTrigger>
 
               <AccordionContent className="pt-0">
-                <MobileNavLinks links={footerLinks[0].links} />
+                <FooterColumn links={footerLinks[0].links} />
               </AccordionContent>
             </AccordionItem>
           </Accordion>

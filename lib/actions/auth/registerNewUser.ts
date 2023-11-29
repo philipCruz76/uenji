@@ -1,10 +1,11 @@
 "use server";
+
 import { db } from "@/lib/db";
 import { LoginCredentials } from "@/types/login.types";
 import { sendEmailVerificationToken } from "../sendEmailVerificationToken";
 import { generateRandomString } from "@/lib/utils";
 
-export async function registerNewUser(data: LoginCredentials) {
+ async function registerNewUser(data: LoginCredentials) {
   try {
     const bcrypt = require("bcryptjs");
     const { email, password } = data;
@@ -32,7 +33,8 @@ export async function registerNewUser(data: LoginCredentials) {
       data: {
         email,
         hashedPassword,
-        image: "https://res.cloudinary.com/dqe71igxe/image/upload/v1694603551/default-user_avatar.svg",
+        image:
+          "https://res.cloudinary.com/dqe71igxe/image/upload/v1694603551/default-user_avatar.svg",
       },
     });
 

@@ -20,7 +20,7 @@ const Header: FC<HeaderProps> = async ({ chatPartner }) => {
         return `Last seen: ${lastSeen.getHours()} hours ago`;
       }
       return `Last seen: ${new Date(
-        Date.now() - chatPartner.updatedAt.getTime()
+        Date.now() - chatPartner.updatedAt.getTime(),
       ).getMinutes()} minutes ago`;
     }
   };

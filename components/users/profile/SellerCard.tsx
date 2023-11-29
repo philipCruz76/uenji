@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FC, useCallback } from "react";
@@ -11,13 +11,18 @@ interface SellerCardProps {
   image: string | null;
   country: string | null;
   createdAt: Date | null;
-  isOnline : boolean| null;
+  isOnline: boolean | null;
 }
 
-const SellerCard: FC<SellerCardProps> =  ({
-  publicMode, username, image, country, createdAt, isOnline,userId
+const SellerCard: FC<SellerCardProps> = ({
+  publicMode,
+  username,
+  image,
+  country,
+  createdAt,
+  isOnline,
+  userId,
 }) => {
-
   const memberSince = new Date(createdAt!).toLocaleDateString("en-US", {
     month: "long",
     year: "numeric",
@@ -25,16 +30,18 @@ const SellerCard: FC<SellerCardProps> =  ({
 
   const router = useRouter();
   const handleClick = useCallback(() => {
-    fetch('/api/conversations', {
-      method: 'POST',
-      body: JSON.stringify({userId})})
+    fetch("/api/conversations", {
+      method: "POST",
+      body: JSON.stringify({ userId }),
+    })
       .then((data) => {
         data.json().then((data) => {
-        router.push(`/inbox/${username}?chatId=${data.id}`)})
-      }).catch((error) => {
-        toast.error(error.message)
+          router.push(`/inbox/${username}?chatId=${data.id}`);
+        });
       })
-    
+      .catch((error) => {
+        toast.error(error.message);
+      });
   }, [username]);
 
   return (

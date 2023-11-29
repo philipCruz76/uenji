@@ -20,10 +20,10 @@ const inactiveNavBar =
 const MobileNav = lazy(() => import("@/components/navigation/MobileNav"));
 const JoinButton = lazy(() => import("@/components/auth/signIn/JoinButton"));
 const InboxDropDownMenu = lazy(
-  () => import("@/components/navigation/InboxDropDownMenu")
+  () => import("@/components/navigation/InboxDropDownMenu"),
 );
 const UserContextMenu = lazy(
-  () => import("@/components/users/UserContextMenu")
+  () => import("@/components/users/UserContextMenu"),
 );
 
 type ExtendedNavBarProps = {
@@ -199,6 +199,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                   user={{
                     username: session.user.username || null,
                     image: session.user.image || null,
+                    isSeller: session.user.isSeller || null,
                   }}
                 />
               </div>

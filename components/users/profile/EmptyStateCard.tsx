@@ -71,7 +71,8 @@ const EmptyStateCard = () => {
       <span className="flex text-zinc-600 text-lg font-semibold">
         Ready to start selling?
       </span>
-      <Link href='/freelancer_onboarding/overview'
+      <Link
+        href="/freelancer_onboarding/overview"
         className={cn(
           buttonVariants({ variant: "outline" }),
           " hover:bg-zinc-600 hover:border-zinc-600 hover:text-white   transform transition-shadow ease-in-out duration-300 w-[200px]",

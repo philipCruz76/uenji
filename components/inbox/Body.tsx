@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { FullMessageType } from "@/types/common.types";
 import { FC, lazy, useEffect, useState } from "react";
 import { find } from "lodash";
@@ -13,7 +13,7 @@ type BodyProps = {
 
 const Body: FC<BodyProps> = ({ initialMessages }) => {
   const [messages, setMessages] = useState<FullMessageType[]>(initialMessages);
-  const pusher = usePusherStore((state)=> state.pusherClient)
+  const pusher = usePusherStore((state) => state.pusherClient);
   const { chatId } = useConversation();
 
   useEffect(() => {
@@ -22,22 +22,20 @@ const Body: FC<BodyProps> = ({ initialMessages }) => {
     if (div) div.scrollTop = div.scrollHeight;
 
     const messageHandler = (message: FullMessageType) => {
-          if (div) div.scrollTop = div.scrollHeight;
-          setMessages((current) => {
-            if (find(current, { id: message.id })) {
-              return current;
-            }
-            return [...current, message];
-          });
+      if (div) div.scrollTop = div.scrollHeight;
+      setMessages((current) => {
+        if (find(current, { id: message.id })) {
+          return current;
+        }
+        return [...current, message];
+      });
     };
 
     channel.bind("messages:new", messageHandler);
-
     return () => {
-      channel.unsubscribe();
       channel.unbind("messages:new", messageHandler);
     };
-  }, [chatId]);
+  }, [messages]);
 
   return (
     <div id="MessageBox" className="flex-1 overflow-y-auto">

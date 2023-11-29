@@ -1,8 +1,8 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
-const {withUt} = require('uploadthing/tw')
+const { withUt } = require("uploadthing/tw");
 
 /** @type {import('tailwindcss').Config} */
-module.exports = withUt( {
+module.exports = withUt({
   darkMode: ["class"],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",

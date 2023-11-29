@@ -11,8 +11,8 @@ type ProvidersContextProps = {
 const ProvidersContext: FC<ProvidersContextProps> = ({ children }) => {
   return (
     <SessionProvider>
-        <ToasterContext />
-        {children}
+      <ToasterContext />
+      {children}
     </SessionProvider>
   );
 };

@@ -9,6 +9,7 @@ import {
 } from "@/lib/stores/modal-store";
 import { cn } from "@/lib/utils";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 
@@ -19,9 +20,10 @@ const DesktopAuthOTP = ({}) => {
   const { newUser } = useNewUserStore();
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
   const [validatedUser, setValidatedUser] = useState<boolean>(false);
-  const [isValidating, setIsValidating] = useState<boolean>(false);
   const [failedValidation, setFailedValidation] = useState<boolean>(false);
   const [activeInput, setActiveInput] = useState<number>(0);
+
+  const router = useRouter();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -80,6 +82,7 @@ const DesktopAuthOTP = ({}) => {
             setShowOTP(false);
             setShowEmailCredentials(false);
             setIsOpen(false);
+            router.refresh();
           }
         }),
       )

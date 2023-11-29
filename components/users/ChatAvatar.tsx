@@ -7,9 +7,8 @@ type ChatAvatarProps = {
 };
 
 const ChatAvatar: FC<ChatAvatarProps> = ({ user }) => {
+  const { image, isOnline } = user;
 
-  const {image, isOnline} = user;
- 
   return (
     <div className="relative">
       <div
@@ -24,11 +23,7 @@ const ChatAvatar: FC<ChatAvatarProps> = ({ user }) => {
         md:w-11
       "
       >
-        <Image
-          fill
-          src={ image!}
-          alt="Avatar"
-        />
+        <Image fill src={image!} alt="Avatar" />
       </div>
       {isOnline ? (
         <span
@@ -47,7 +42,7 @@ const ChatAvatar: FC<ChatAvatarProps> = ({ user }) => {
             md:w-3
           "
         />
-      ) :(
+      ) : (
         <span
           className="
             absolute 

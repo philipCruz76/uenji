@@ -1,48 +1,62 @@
 import { FullCategoryType } from "./common.types";
+import { z } from "zod";
 
-export type SellerPersonalInfo = {
-    fullName : string;
-    displayName : string;
-    profilePicture : string;
-    description: string;
-    languages: {
-        language: ""|"Inglês" | "Português" | "Françês" | "Espanhol" | "Alemão" |  "Mandarim",
-        level: ""|"Básico" | "Conversacional" | "Fluente" | "Nativo/Bilingue";
-    }
-}
+export const PersonalInfoValidator = z.object({
+  fullName: z
+    .string()
+    .regex(/^[a-zA-Z]+\s[a-zA-Z]+$/, "Please enter your full name."),
+  displayName: z
+    .string()
+    .regex(/^[a-zA-Z]+\s[a-zA-Z]+$/, "Please enter a valid display name.")
+    .min(3, "Display name must be at least 3 characters long."),
+  profilePicture: z.string(),
+  description: z
+    .string()
+    .min(50, "Description must be at least 50 characters long."),
+  languages: z.array(
+    z.object({
+      name: z.string(),
+      level: z.string(),
+    }),
+  ),
+});
+
+export type SellerPersonalInfo = z.infer<typeof PersonalInfoValidator>;
 
 export type SellerProfessionalInfo = {
-    ocupation: {
-        category: FullCategoryType;
-        startYear: number;
-        endYear?: number;
-        bestSkills?: string[];
-    },
-    skills:{
-        skill: string;
-        level: "Principiante" | "Intermédio" | "Expert";
-    },
-    education?: {
-        educationLevel: "Ensino Secundário" | "Bacharelato" | "Mestrado" | "Doutoramento";
-        institution: string;
-        year: number;
-        major: string;
-    },
-    certifications?: {
-        name: string;
-        institution: string;
-        year: number;
-    },
-    personalWebsite?: string;
-}
+  occupation: {
+    category: FullCategoryType;
+    startYear: number;
+    endYear?: number;
+    bestSkills?: string[];
+  };
+  skills: {
+    name: string;
+    level: string;
+  }[];
+  education?: {
+    educationLevel: string;
+    institution: string;
+    year: number;
+    degree: string;
+  }[];
+  certifications?: {
+    name: string;
+    institution: string;
+    year: number;
+  }[];
+  personalWebsite?: string;
+};
+
+export type SellerInfo = SellerPersonalInfo | SellerProfessionalInfo;
 
 export type SellerAccountSecurity = {
-    emailVerified?: boolean;
-    phoneVerified?: boolean;
-}
+  emailVerified?: boolean;
+  phoneVerified?: boolean;
+};
 
 export type FullSellerProfile = {
-    personalInfo: SellerPersonalInfo;
-    professionalInfo: SellerProfessionalInfo;
-    accountSecurity: SellerAccountSecurity;
-}
+  personalInfo: SellerPersonalInfo;
+  professionalInfo: SellerProfessionalInfo;
+  accountSecurity: SellerAccountSecurity;
+};

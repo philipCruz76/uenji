@@ -32,3 +32,10 @@ export type FullCategoryType =
   | "Branding"
   | "Design";
 
+export type LanguageProficiency = {
+  languageName: string;
+  languageLevel: string;
+};
+
+export type language = ["Português" | "Inglês" | "Francês"];
+export type level = ["Nativo/Bilingue" | "Avançado" | "Intermédio" | "Básico"];

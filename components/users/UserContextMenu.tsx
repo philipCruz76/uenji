@@ -13,7 +13,7 @@ import {
 } from "../ui/DropdownMenu";
 
 type UserContextMenuProps = React.HTMLAttributes<HTMLDivElement> & {
-  user: Pick<User, "image" | "username">;
+  user: Pick<User, "image" | "username" | "isSeller">;
 };
 
 export default function UserContextMenu({ user }: UserContextMenuProps) {
@@ -21,10 +21,7 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <UserAvatar
-          user={{
-            username: user.username || null,
-            image: user.image || null,
-          }}
+          avatarPhoto={user.image!}
           className="h-8 w-8 rounded-full cursor-pointer"
         />
       </DropdownMenuTrigger>
@@ -41,9 +38,6 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
             <Link href={`/${user.username}`}>Profile</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href="/">Post a Request</Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
             <Image
               src="/icons/friends.svg"
               alt="Settings"
@@ -58,9 +52,13 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <Link href="/">Become a Seller</Link>
-          </DropdownMenuItem>
+          {!user.isSeller ? (
+            <DropdownMenuItem>
+              <Link href="/freelancer_onboarding/overview">
+                Become a Seller
+              </Link>
+            </DropdownMenuItem>
+          ) : null}
           <DropdownMenuItem>
             <Image
               src="/icons/settings.svg"

@@ -3,16 +3,19 @@ import Link from "next/link";
 
 type ColumnProps = {
   title: string;
-  links: string[];
+  links: {
+    name: string;
+    href: string;
+  }[];
 };
 
-const FooterColumn = ({ title, links }: ColumnProps) => (
+const DesktopFooterColumn = ({ title, links }: ColumnProps) => (
   <div className="flex-1 flex flex-col gap-3 text-sm min-w-max">
     <h4 className="font-semibold">{title}</h4>
     <ul className="flex flex-col gap-2 font-normal">
       {links.map((link) => (
-        <Link href="/" key={link} className="hover:underline">
-          {link}
+        <Link href={link.href} key={link.name} className="hover:underline">
+          {link.name}
         </Link>
       ))}
     </ul>
@@ -30,21 +33,21 @@ const Footer = () => {
             <h1 className="items-start">Uenji</h1>
 
             <div className="flex flex-wrap items-start justify-between text-start gap-[50px] w-full">
-              <FooterColumn
+              <DesktopFooterColumn
                 title={footerLinks[0].title}
                 links={footerLinks[0].links}
               />
 
-              <FooterColumn
+              <DesktopFooterColumn
                 title={footerLinks[1].title}
                 links={footerLinks[1].links}
               />
 
-              <FooterColumn
+              <DesktopFooterColumn
                 title={footerLinks[2].title}
                 links={footerLinks[2].links}
               />
-              <FooterColumn
+              <DesktopFooterColumn
                 title={footerLinks[3].title}
                 links={footerLinks[3].links}
               />

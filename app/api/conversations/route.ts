@@ -60,7 +60,7 @@ export async function POST(request: Request) {
         await pusherServer.trigger(
           user.email,
           "conversation:new",
-          newConversation
+          newConversation,
         );
       }
     });

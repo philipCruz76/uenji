@@ -22,8 +22,8 @@ export default async function Home() {
         <Hero />
       )}
       <div className="flex flex-1 tablet:hidden min-w-full">
-            <MobileFooter />
-          </div>
+        <MobileFooter />
+      </div>
     </>
   );
 }

@@ -6,10 +6,13 @@ import Link from "next/link";
 
 type BuyerDashboardProps = {
   user: User;
-}
+};
 
-const BuyerDashboard= ({ user } : BuyerDashboardProps) => {
-  const popularCategories = CategoryDesciptions.filter((category) => ( category.category === "fotografia" || category.category === "design"))
+const BuyerDashboard = ({ user }: BuyerDashboardProps) => {
+  const popularCategories = CategoryDesciptions.filter(
+    (category) =>
+      category.category === "fotografia" || category.category === "design",
+  );
 
   return (
     <section className="flex container w-screen h-screen py-8">
@@ -18,7 +21,7 @@ const BuyerDashboard= ({ user } : BuyerDashboardProps) => {
           Olá, {user.name ? user.name : user.username}
         </h1>
 
-        <div className="flex flex-col gap-6 w-full  desktop:hidden">
+        <div className="flex flex-col gap-6 w-full">
           <div className="flex flex-row w-full justify-between h-fit ">
             <h2 className=" font-bold text-xl"> Categorias Populares</h2>
             <Link
@@ -38,16 +41,20 @@ const BuyerDashboard= ({ user } : BuyerDashboardProps) => {
               </svg>
             </Link>
           </div>
-          <ul key="categories-list" className="flex flex-col gap-2 w-full  h-full">
+          <ul
+            key="categories-list"
+            className="flex flex-col gap-2 w-full  h-full"
+          >
             {popularCategories.map((category) => {
               const subcategories = subCategories
                 .find((sub) => sub.category === category.category)
                 ?.subcategory.map((sub) => sub.name);
               return (
-                <li >
+                <li key={category.categoryTitle}>
                   <Link
                     href={`/categorias/${category.category}`}
-                    className="flex flex-row  items-center justify-start gap-4 w-full border-2 rounded-md px-2 py-2" key={category.category}
+                    className="flex flex-row  items-center justify-start gap-4 w-full border-2 rounded-md px-2 py-2"
+                    key={category.category}
                   >
                     <Image
                       src={category.thumbnailIcon}
@@ -62,7 +69,10 @@ const BuyerDashboard= ({ user } : BuyerDashboardProps) => {
                       </h5>
                       <div className="flex flex-wrap w-full flex-row gap-1">
                         {subcategories?.map((sub) => (
-                          <span className="text-gray-500 font-light text-sm w-full">
+                          <span
+                            key={sub}
+                            className="text-gray-500 font-light text-sm w-full"
+                          >
                             {sub}
                           </span>
                         ))}

@@ -7,4 +7,3 @@ export const pusherServer = new PusherServer({
   cluster: process.env.NEXT_PUBLIC_PUSHER_SERVER_CLUSTER!,
   useTLS: true,
 });
-

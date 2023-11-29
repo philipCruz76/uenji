@@ -1,5 +1,5 @@
 "use client";
-import { FC, lazy, useEffect, useMemo, useState } from "react";
+import { FC, lazy, useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,8 +11,6 @@ import {
 } from "../ui/DropdownMenu";
 import { FullConversationType } from "@/types/common.types";
 import { useSession } from "next-auth/react";
-import { find } from "lodash";
-import { usePusherStore } from "@/lib/stores/pusher-store";
 
 interface InboxDropDownMenuProps {}
 
@@ -20,68 +18,24 @@ const UserChatList = lazy(() => import("@/components/inbox/UserChatList"));
 
 const InboxDropDownMenu: FC<InboxDropDownMenuProps> = ({}) => {
   const [conversations, setConversations] = useState<FullConversationType[]>(
-    []
+    [],
   );
-  const pusher = usePusherStore((state)=> state.pusherClient);
   const session = useSession();
 
-  const pusherKey = useMemo(() => {
-    return session.data?.user?.email;
-  }, [session.data?.user?.email]);
-
-  useEffect(() => {
-    fetch("/api/conversations", {
-      method: "GET",
-    }).then((data) => {
-      data.json().then((data) => {
-        setConversations(data);
-      });
-    });
-
-    if (!pusherKey) return;
-
-    const channel = pusher.subscribe(pusherKey);
-
-    const updateHandler = (conversation: FullConversationType) => {
-      setConversations((current) =>
-        current.map((currentConversation) => {
-          if (currentConversation.id === conversation.id) {
-            return { ...currentConversation, messages: conversation.messages };
-          }
-          return currentConversation;
-        })
-      );
-    };
-
-    const newHandler = (conversation: FullConversationType) => {
-      setConversations((current) => {
-        if (find(current, { id: conversation.id })) {
-          return current;
-        }
-        return [...current, conversation];
-      });
-    };
-
-    const removeHandler = (conversation: FullConversationType) => {
-      setConversations((current) => {
-        return [...current.filter((convo) => convo.id !== conversation.id)];
-      });
-    };
-
-    channel.bind("conversation:update", updateHandler);
-    channel.bind("conversation:new", newHandler);
-    channel.bind("conversation:remove", removeHandler);
-
-    return () => {
-      channel.unsubscribe();
-      channel.unbind("conversation:update", updateHandler);
-      channel.unbind("conversation:new", newHandler);
-      channel.unbind("conversation:remove", removeHandler);
-    };
-  }, [pusherKey]);
-
   return (
-    <DropdownMenu>
+    <DropdownMenu
+      onOpenChange={(open) => {
+        if (open) {
+          fetch("/api/conversations", {
+            method: "GET",
+          }).then((data) => {
+            data.json().then((data) => {
+              setConversations(data);
+            });
+          });
+        }
+      }}
+    >
       <DropdownMenuTrigger asChild className="focus:outline-none">
         <button aria-label="Inbox">
           <svg

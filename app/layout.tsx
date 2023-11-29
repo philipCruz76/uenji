@@ -8,7 +8,9 @@ import getSession from "@/lib/actions/getSession";
 const inter = Inter({ subsets: ["latin"] });
 const Footer = lazy(() => import("@/components/navigation/Footer"));
 const ProvidersContext = lazy(() => import("@/lib/context/ProvidersContext"));
-const ExtendedNavBar = lazy(() => import("@/components/navigation/ExtendedNavBar"));
+const ExtendedNavBar = lazy(
+  () => import("@/components/navigation/ExtendedNavBar"),
+);
 
 export const metadata = {
   title: "Uenji",

@@ -1,6 +1,5 @@
 "use client";
 import { UploadFileRouter } from "@/app/api/uploadthing/core";
-import { MessageAttachment, useMessageAttachmentStore } from "@/lib/stores/messageAttachement-store";
 import { User } from "@prisma/client";
 import { generateComponents } from "@uploadthing/react";
 import { FC, useRef, useState } from "react";
@@ -17,9 +16,18 @@ const { UploadButton } = generateComponents<UploadFileRouter>();
 const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [input, setInput] = useState<string>("");
-  const sendMessage = (fileURL?: string, filename?:string, fileSize?:number) => {
-    if(fileURL) {
-      const message =fileURL.concat(";fileName=", filename!, ";fileSize=", fileSize!.toString());
+  const sendMessage = (
+    fileURL?: string,
+    filename?: string,
+    fileSize?: number,
+  ) => {
+    if (fileURL) {
+      const message = fileURL.concat(
+        ";fileName=",
+        filename!,
+        ";fileSize=",
+        fileSize!.toString(),
+      );
       fetch("/api/messages", {
         method: "POST",
         body: JSON.stringify({ text: message, chatId }),

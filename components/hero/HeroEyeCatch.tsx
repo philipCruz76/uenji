@@ -73,7 +73,10 @@ const HeroEyeCatch = () => {
       {/* Demo Video*/}
       <div className="flex min-w-full box-border">
         <video controls muted className="flex min-w-full box-content">
-          <source src="./WorkingBg.mp4" type="video/mp4" />
+          <source
+            src="https://res.cloudinary.com/dqe71igxe/video/upload/f_auto:video,q_auto/v1/videos/WorkingStockVideo"
+            type="video/mp4"
+          />
         </video>
       </div>
     </section>

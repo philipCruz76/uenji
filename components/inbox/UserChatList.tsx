@@ -34,7 +34,7 @@ const UserChatList: FC<UserChatListProps> = ({ data, chatPartner }) => {
                 {data?.messages?.length > 0 &&
                 data?.messages[data?.messages.length - 1]?.createdAt
                   ? new Date(
-                      data?.messages[data?.messages.length - 1]?.createdAt
+                      data?.messages[data?.messages.length - 1]?.createdAt,
                     ).toLocaleString("en-US", {
                       month: "short",
                       day: "numeric",
@@ -44,7 +44,9 @@ const UserChatList: FC<UserChatListProps> = ({ data, chatPartner }) => {
             </div>
             <span className="flex relative text-sm text-slate-600">
               {lastMessage?.sender?.username === chatPartner.username
-                ? `${!chatPartner.name ? chatPartner.username : chatPartner.name}: `
+                ? `${
+                    !chatPartner.name ? chatPartner.username : chatPartner.name
+                  }: `
                 : "Me: "}
 
               {lastMessage?.body?.match(/^https:\/\/utfs\.io\/f\/.*/)

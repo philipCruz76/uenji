@@ -1,7 +1,5 @@
 "use client";
 
-import { FC } from "react";
-import Link from "next/link";
 import { footerLinks } from "@/constants";
 import {
   Accordion,
@@ -9,20 +7,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/Accordion";
+import FooterColumn from "./FooterColumn";
 
-interface MobileFooterProps {}
-
-const FooterColumn = ({ links }: { links: string[] }) => (
-  <ul className="flex flex-col items-start">
-    {links.map((link) => (
-      <Link href="/" key={link}>
-        {link}
-      </Link>
-    ))}
-  </ul>
-);
-
-const MobileFooter: FC<MobileFooterProps> = ({}) => {
+const MobileFooter = ({}) => {
   return (
     <>
       <footer className="flex flex-col px-6 py-6 bg-slate-50 w-full">
