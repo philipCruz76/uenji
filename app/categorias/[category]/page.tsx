@@ -72,7 +72,7 @@ const page = ({ params }: pageProps) => {
         </span>
         <div className="desktop:flex flex-row gap-4 hidden w-full py-4">
           {subcategory?.map((sub) => (
-            <div className="flex flex-col w-full gap-">
+            <div key={sub.name} className="flex flex-col w-full gap-">
               <Image
                 src={sub.thumbnail}
                 width={300}
