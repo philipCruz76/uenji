@@ -29,7 +29,7 @@ export default async function RootLayout({
         <ProvidersContext>
           <ExtendedNavBar session={session} />
           <main>{children}</main>
-          <div className="flex flex-1 bottom-0 w-full h-px bg-gray-200" />
+          <div className="hidden tablet:flex flex-1 bottom-0 w-full h-px bg-gray-200" />
           <div className="tablet:flex hidden flex-1 min-w-full">
             <Footer />
           </div>
