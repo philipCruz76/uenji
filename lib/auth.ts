@@ -122,6 +122,7 @@ export const authOptions: NextAuthOptions = {
         session.user.image = token.picture;
         session.user.isOnline = token.isOnline;
         session.user.username = token.username;
+        session.user.isActive = token.isActive;
       }
       return session;
     },
@@ -162,6 +163,7 @@ export const authOptions: NextAuthOptions = {
         picture: dbUser.image,
         username: dbUser.username,
         isOnline: dbUser.isOnline,
+        isActive: dbUser.active,
       };
     },
   },

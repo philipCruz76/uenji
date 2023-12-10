@@ -1,8 +1,10 @@
 "use client";
 import { Input } from "@/components/ui/Input";
 import DataTable from "@/components/users/seller_profile/DataTable";
+import { useSellerOnboardingStore } from "@/lib/stores/selleOboarding-store";
 import { cn } from "@/lib/utils";
 import {
+  ProfessionalInfoValidator,
   SellerInfo,
   SellerProfessionalInfo,
 } from "@/types/sellerProfile.types";
@@ -14,6 +16,7 @@ import {
   UseFormRegister,
   useForm,
 } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const OccupationFields = [
   "Fotografía",
@@ -35,11 +38,12 @@ const page = ({}) => {
     register,
     handleSubmit,
     setError,
-    setValue,
+    trigger,
     control,
     formState: { errors, isValid },
   } = useForm<SellerProfessionalInfo>({
     mode: "onChange",
+    resolver:zodResolver(ProfessionalInfoValidator),
   });
 
   const [showYearsOfExperience, setShowYearsOfExperience] = useState(false);
@@ -54,19 +58,25 @@ const page = ({}) => {
   });
   const currentYear = new Date(Date.now()).getFullYear();
   const router = useRouter();
+  const { sellerOnboardingStep, setSellerOnboardingStep } =
+    useSellerOnboardingStore();
+
+  useEffect(() => {
+    sellerOnboardingStep !== 2 && setSellerOnboardingStep(2);
+  }, [sellerOnboardingStep]);
 
   useEffect(() => {
     const startYear = 1970;
     const yearsArray = Array.from(
       { length: currentYear - startYear + 1 },
-      (_, i) => startYear + i,
+      (_, i) => startYear + i
     );
     yearsArray.reverse();
     setYears(yearsArray);
   }, []);
 
   const professionalInfoHandler: SubmitHandler<SellerProfessionalInfo> = async (
-    data,
+    data
   ) => {
     console.log(data);
     router.push("/freelancer_onboarding/account_security");
@@ -140,7 +150,7 @@ const page = ({}) => {
                 <div className="flex flex-col gap-3">
                   <small>
                     {" "}
-                    Escolha entre<b>duas a cinco</b> das suas melhores
+                    Escolha entre <b>duas a cinco</b> das suas melhores
                     competências neste ramo
                   </small>
                   <div className="grid grid-cols-1 tablet:grid-cols-3 ">
@@ -158,7 +168,7 @@ const page = ({}) => {
                             Skill {skill}
                           </span>
                         </div>
-                      ),
+                      )
                     )}
                   </div>
                   <div className="h-[1px] bg-slate-200" />
@@ -197,7 +207,7 @@ const page = ({}) => {
                   value={currentSelectedSkill.fieldName}
                   onChange={(e) => {
                     e.preventDefault();
-
+                    
                     setCurrentSelectedSkill({
                       ...currentSelectedSkill,
                       fieldName: e.target.value,
@@ -230,15 +240,15 @@ const page = ({}) => {
                     className={cn(
                       "w-[150px]  h-[40px] ",
                       `${isValid === false ? "bg-gray-400" : "bg-sky-600"}`,
-                      "text-white font-semibold hover:opacity-50 rounded-sm",
+                      "text-white font-semibold hover:opacity-50 rounded-sm"
                     )}
                     onClick={() => {
                       if (skills.size < 10) {
                         setSkills(
                           skills.set(
                             currentSelectedSkill.fieldName,
-                            currentSelectedSkill.fieldLevel,
-                          ),
+                            currentSelectedSkill.fieldLevel
+                          )
                         );
                         setShowAddSkillInput(false);
                       } else {
@@ -362,7 +372,7 @@ const page = ({}) => {
                     className={cn(
                       "w-[150px]  h-[40px] ",
                       `${isValid === false ? "bg-gray-400" : "bg-sky-600"}`,
-                      "text-white font-semibold rounded-sm hover:opacity-50",
+                      "text-white font-semibold rounded-sm hover:opacity-50"
                     )}
                     onClick={() => {}}
                   >
@@ -409,7 +419,7 @@ const page = ({}) => {
           className={cn(
             `w-[200px] h-[40px] ${
               isValid && skills.size > 0 ? " bg-sky-600" : "bg-gray-400"
-            } text-white rounded-sm`,
+            } text-white rounded-sm`
           )}
           onClick={handleSubmit(professionalInfoHandler)}
         >

@@ -23,6 +23,43 @@ export const PersonalInfoValidator = z.object({
 
 export type SellerPersonalInfo = z.infer<typeof PersonalInfoValidator>;
 
+
+export const ProfessionalInfoValidator = z.object({
+  occupation: z.object({
+    category: z.object({
+      name: z.string(),
+      subCategory: z.string(),
+    }),
+    startYear: z.number(),
+    endYear: z.optional(z.number()),
+    bestSkills: z.array(z.string()).optional(),
+  }),
+  skills: z.array(
+    z.object({
+      name: z.string().min(1, "Skill name must be at least 1 character long."),
+      level: z.string(),
+    }),
+  ),
+  education: z.array(
+    z.object({
+      educationLevel: z.string(),
+      institution: z.string(),
+      year: z.number(),
+      degree: z.string(),
+    }),
+  ).optional(),
+  certifications: z.optional( z.array(
+    z.object({
+      name: z.string(),
+      institution: z.string(),
+      year: z.number(),
+    })),
+  ),
+  personalWebsite: z.optional(z.string()),
+});
+
+export type SellerProfessionalData = z.infer<typeof ProfessionalInfoValidator>;
+
 export type SellerProfessionalInfo = {
   occupation: {
     category: FullCategoryType;

@@ -9,8 +9,8 @@ interface pageProps {}
 
 const page: FC<pageProps> = ({}) => {
   return (
-    <section className="flex container max-w-screen max-h-screen min-h-screen">
-      <div className="flex flex-col-reverse desktop:flex-row-reverse w-full h-full items-center justify-between py-8 tablet:pl-[25px] ">
+    <section className="flex container py-8 max-w-screen max-h-screen min-h-screen">
+      <div className="flex flex-col-reverse desktop:flex-row-reverse w-full h-full items-center justify-between  tablet:pl-[25px] ">
         <div className="flex container flex-col max-w-[900px] h-full tablet:px-[60px] items-start justify-center">
           <h1 className="flex text-[#303030] font-bold box-border tablet:max-w-[590px] tablet:pr-[80px] text-2xl">
             {" "}
@@ -50,8 +50,8 @@ const page: FC<pageProps> = ({}) => {
             </Link>
           </div>
         </div>
-        <div className="hidden lg:block  h-fit max-h-screen overflow-hidden  border rounded-md ">
-          <video autoPlay muted className="flex max-h-screen box-content">
+        <div className="hidden desktop:flex  h-fit max-h-screen overflow-hidden  border rounded-md ">
+          <video autoPlay muted className="hidden desktop:flex max-h-screen box-content">
             <source
               src="https://res.cloudinary.com/dqe71igxe/video/upload/f_auto:video,q_auto/v1/videos/SellerDont"
               type="video/mp4"

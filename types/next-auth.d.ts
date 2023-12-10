@@ -10,6 +10,7 @@ declare module "next-auth/jwt" {
     isSeller?: boolean | null;
     image?: string | null;
     isOnline?: boolean | null;
+    isActive?: boolean | null;
   }
 }
 
@@ -21,6 +22,7 @@ declare module "next-auth" {
       isSeller?: boolean | null;
       image?: string | null;
       isOnline?: boolean | null;
+      isActive?: boolean | null;
     };
   }
 }

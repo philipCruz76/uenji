@@ -1,13 +1,15 @@
 "use client";
 import { Input } from "@/components/ui/Input";
 import DataTable from "@/components/users/seller_profile/DataTable";
+import { useSellerOnboardingStore } from "@/lib/stores/selleOboarding-store";
 import { useSellerProfileStore } from "@/lib/stores/sellerProfile-store";
 import { cn } from "@/lib/utils";
-import { SellerInfo, SellerPersonalInfo } from "@/types/sellerProfile.types";
+import { PersonalInfoValidator, SellerInfo, SellerPersonalInfo } from "@/types/sellerProfile.types";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Control,
   SubmitHandler,
@@ -35,6 +37,12 @@ const page = ({}) => {
     fieldName: "Português",
     fieldLevel: "Nativo/Bilingue",
   });
+  const {sellerOnboardingStep, setSellerOnboardingStep} = useSellerOnboardingStore();
+ 
+  useEffect(() => { 
+    sellerOnboardingStep !== 1 && setSellerOnboardingStep(1);
+  }
+  , [sellerOnboardingStep]);
 
   const user = useSession().data?.user?.name;
   const router = useRouter();
@@ -49,6 +57,7 @@ const page = ({}) => {
     formState: { errors, isValid },
   } = useForm<SellerPersonalInfo>({
     mode: "onChange",
+    resolver: zodResolver(PersonalInfoValidator)
   });
 
   const personalInfoHandler: SubmitHandler<SellerPersonalInfo> = (data) => {

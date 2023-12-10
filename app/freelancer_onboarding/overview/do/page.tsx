@@ -50,8 +50,8 @@ const page: FC<pageProps> = ({}) => {
             </Link>
           </div>
         </div>
-        <div className="hidden lg:block  h-fit max-h-screen overflow-hidden  border rounded-md ">
-          <video autoPlay muted className="flex max-h-screen box-content">
+        <div className="hidden desktop:block  h-fit max-h-screen overflow-hidden  border rounded-md ">
+          <video autoPlay muted className="hidden desktop:block max-h-screen box-content">
             <source
               src="https://res.cloudinary.com/dqe71igxe/video/upload/f_auto:video,q_auto/v1/videos/SellerOverview"
               type="video/mp4"

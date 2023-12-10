@@ -1,11 +1,22 @@
-import getCurrentUser from "@/lib/actions/getCurrentUser";
+"use client";
+
+import { useSellerOnboardingStore } from "@/lib/stores/selleOboarding-store";
 import { cn } from "@/lib/utils";
-import { FC } from "react";
+import { useSession } from "next-auth/react";
+import {  useEffect } from "react";
 
-interface pageProps {}
 
-const page: FC<pageProps> = async ({}) => {
-  const user = await getCurrentUser();
+
+const page= ({}) => {
+
+  const user = useSession().data?.user;
+
+  const {sellerOnboardingStep, setSellerOnboardingStep} = useSellerOnboardingStore();
+ 
+  useEffect(() => { 
+    sellerOnboardingStep !== 3 && setSellerOnboardingStep(3);
+  }
+  , [sellerOnboardingStep]);
 
   return (
     <>
@@ -37,7 +48,7 @@ const page: FC<pageProps> = async ({}) => {
           </aside>
 
           <div>
-            {user?.active !== null ? (
+            {user?.isActive === true ? (
               <div className="flex items-center tablet:w-[150px] w-full justify-center px-4 py-2 border  rounded-md shadow-sm text-sm font-medium text-gray-500 bg-sky-200  border-slate-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
                 Verified
               </div>
