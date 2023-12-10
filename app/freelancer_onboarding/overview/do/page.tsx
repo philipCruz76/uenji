@@ -9,7 +9,7 @@ interface pageProps {}
 
 const page: FC<pageProps> = ({}) => {
   return (
-    <section className="flex container py-8 max-w-screen max-h-screen min-h-screen">
+    <section className="flex container py-8 max-w-screen min-h-screen overflow-y-scroll">
       <div className="flex flex-col-reverse desktop:flex-row-reverse w-full h-full items-center justify-between  tablet:pl-[25px] ">
         <div className="flex container gap-2 flex-col max-w-[900px] h-full tablet:px-[60px] items-start justify-center">
           <h1 className="flex text-[#303030] font-bold box-border tablet:max-w-[590px] tablet:pr-[80px] text-2xl">
