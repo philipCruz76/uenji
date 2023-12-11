@@ -31,7 +31,7 @@ const page: FC<pageProps> = ({}) => {
               </li>
             ))}
           </ul>
-          <div className="flex tablet:flex-row flex-col gap-2  tablet:justify-start items-center w-full justify-center">
+          <div className="grid grid-cols-1 tablet:grid-cols-2 grid-rows-1 gap-4 tablet:justify-start items-center w-full justify-center">
             <Link
               href="/freelancer_onboarding/overview/dont"
               className={cn(
@@ -43,7 +43,7 @@ const page: FC<pageProps> = ({}) => {
             </Link>
             <Link
               href="/freelancer_onboarding/overview"
-              className="underline text-blue-700"
+              className="underline text-blue-700 text-center tablet:text-start"
             >
               {" "}
               Voltar
@@ -51,7 +51,11 @@ const page: FC<pageProps> = ({}) => {
           </div>
         </div>
         <div className="hidden desktop:block  h-fit max-h-screen overflow-hidden  border rounded-md ">
-          <video autoPlay muted className="hidden desktop:block max-h-screen box-content">
+          <video
+            autoPlay
+            muted
+            className="hidden desktop:block max-h-screen box-content"
+          >
             <source
               src="https://res.cloudinary.com/dqe71igxe/video/upload/f_auto:video,q_auto/v1/videos/SellerOverview"
               type="video/mp4"

@@ -5,7 +5,7 @@ import { LoginCredentials } from "@/types/login.types";
 import { sendEmailVerificationToken } from "../sendEmailVerificationToken";
 import { generateRandomString } from "@/lib/utils";
 
- async function registerNewUser(data: LoginCredentials) {
+async function registerNewUser(data: LoginCredentials) {
   try {
     const bcrypt = require("bcryptjs");
     const { email, password } = data;

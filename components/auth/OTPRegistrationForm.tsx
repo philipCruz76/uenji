@@ -11,7 +11,7 @@ import {
 } from "@/lib/stores/modal-store";
 import { Fragment, useEffect, useRef, useState } from "react";
 import verifyOTP from "@/lib/actions/auth/verifyOTP";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const OTPRegistrationForm = () => {
   const { setIsOpen } = useOpenModalStore();
@@ -68,7 +68,7 @@ const OTPRegistrationForm = () => {
     }
     const { email, password } = newUser;
     const otpString = otp.join("");
-    
+
     activateUser(email, otpString)
       .then(() =>
         signIn("credentials", {

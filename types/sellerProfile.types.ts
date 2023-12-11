@@ -23,7 +23,6 @@ export const PersonalInfoValidator = z.object({
 
 export type SellerPersonalInfo = z.infer<typeof PersonalInfoValidator>;
 
-
 export const ProfessionalInfoValidator = z.object({
   occupation: z.object({
     category: z.object({
@@ -40,20 +39,24 @@ export const ProfessionalInfoValidator = z.object({
       level: z.string(),
     }),
   ),
-  education: z.array(
-    z.object({
-      educationLevel: z.string(),
-      institution: z.string(),
-      year: z.number(),
-      degree: z.string(),
-    }),
-  ).optional(),
-  certifications: z.optional( z.array(
-    z.object({
-      name: z.string(),
-      institution: z.string(),
-      year: z.number(),
-    })),
+  education: z
+    .array(
+      z.object({
+        educationLevel: z.string(),
+        institution: z.string(),
+        year: z.number(),
+        degree: z.string(),
+      }),
+    )
+    .optional(),
+  certifications: z.optional(
+    z.array(
+      z.object({
+        name: z.string(),
+        institution: z.string(),
+        year: z.number(),
+      }),
+    ),
   ),
   personalWebsite: z.optional(z.string()),
 });

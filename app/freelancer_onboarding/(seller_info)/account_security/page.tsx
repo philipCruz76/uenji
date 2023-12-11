@@ -3,20 +3,17 @@
 import { useSellerOnboardingStore } from "@/lib/stores/selleOboarding-store";
 import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
-import {  useEffect } from "react";
+import { useEffect } from "react";
 
-
-
-const page= ({}) => {
-
+const page = ({}) => {
   const user = useSession().data?.user;
 
-  const {sellerOnboardingStep, setSellerOnboardingStep} = useSellerOnboardingStore();
- 
-  useEffect(() => { 
+  const { sellerOnboardingStep, setSellerOnboardingStep } =
+    useSellerOnboardingStore();
+
+  useEffect(() => {
     sellerOnboardingStep !== 3 && setSellerOnboardingStep(3);
-  }
-  , [sellerOnboardingStep]);
+  }, [sellerOnboardingStep]);
 
   return (
     <>

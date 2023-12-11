@@ -31,19 +31,19 @@ const page: FC<pageProps> = ({}) => {
               </li>
             ))}
           </ul>
-          <div className="flex tablet:flex-row flex-col gap-2  tablet:justify-start items-center w-full justify-center">
+          <div className="grid grid-cols-1 tablet:grid-cols-2 grid-rows-1 gap-4 tablet:justify-start items-center w-full justify-center">
             <Link
               href="/freelancer_onboarding/personal_info"
               className={cn(
                 buttonVariants({ variant: "default" }),
-                "flex bg-sky-500 tablet:w-[160px] w-full text-white",
+                "text-center bg-sky-500 tablet:w-[160px] w-full text-white",
               )}
             >
               Continuar
             </Link>
             <Link
               href="/freelancer_onboarding/overview/do"
-              className="underline text-blue-700"
+              className="underline text-blue-700 text-center tablet:text-start"
             >
               {" "}
               Voltar
@@ -51,7 +51,11 @@ const page: FC<pageProps> = ({}) => {
           </div>
         </div>
         <div className="hidden desktop:flex  h-fit max-h-screen overflow-hidden  border rounded-md ">
-          <video autoPlay muted className="hidden desktop:flex max-h-screen box-content">
+          <video
+            autoPlay
+            muted
+            className="hidden desktop:flex max-h-screen box-content"
+          >
             <source
               src="https://res.cloudinary.com/dqe71igxe/video/upload/f_auto:video,q_auto/v1/videos/SellerDont"
               type="video/mp4"

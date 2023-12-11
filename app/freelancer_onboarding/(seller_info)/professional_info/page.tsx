@@ -43,7 +43,7 @@ const page = ({}) => {
     formState: { errors, isValid },
   } = useForm<SellerProfessionalInfo>({
     mode: "onChange",
-    resolver:zodResolver(ProfessionalInfoValidator),
+    resolver: zodResolver(ProfessionalInfoValidator),
   });
 
   const [showYearsOfExperience, setShowYearsOfExperience] = useState(false);
@@ -69,14 +69,14 @@ const page = ({}) => {
     const startYear = 1970;
     const yearsArray = Array.from(
       { length: currentYear - startYear + 1 },
-      (_, i) => startYear + i
+      (_, i) => startYear + i,
     );
     yearsArray.reverse();
     setYears(yearsArray);
   }, []);
 
   const professionalInfoHandler: SubmitHandler<SellerProfessionalInfo> = async (
-    data
+    data,
   ) => {
     console.log(data);
     router.push("/freelancer_onboarding/account_security");
@@ -168,7 +168,7 @@ const page = ({}) => {
                             Skill {skill}
                           </span>
                         </div>
-                      )
+                      ),
                     )}
                   </div>
                   <div className="h-[1px] bg-slate-200" />
@@ -207,7 +207,7 @@ const page = ({}) => {
                   value={currentSelectedSkill.fieldName}
                   onChange={(e) => {
                     e.preventDefault();
-                    
+
                     setCurrentSelectedSkill({
                       ...currentSelectedSkill,
                       fieldName: e.target.value,
@@ -240,15 +240,15 @@ const page = ({}) => {
                     className={cn(
                       "w-[150px]  h-[40px] ",
                       `${isValid === false ? "bg-gray-400" : "bg-sky-600"}`,
-                      "text-white font-semibold hover:opacity-50 rounded-sm"
+                      "text-white font-semibold hover:opacity-50 rounded-sm",
                     )}
                     onClick={() => {
                       if (skills.size < 10) {
                         setSkills(
                           skills.set(
                             currentSelectedSkill.fieldName,
-                            currentSelectedSkill.fieldLevel
-                          )
+                            currentSelectedSkill.fieldLevel,
+                          ),
                         );
                         setShowAddSkillInput(false);
                       } else {
@@ -372,7 +372,7 @@ const page = ({}) => {
                     className={cn(
                       "w-[150px]  h-[40px] ",
                       `${isValid === false ? "bg-gray-400" : "bg-sky-600"}`,
-                      "text-white font-semibold rounded-sm hover:opacity-50"
+                      "text-white font-semibold rounded-sm hover:opacity-50",
                     )}
                     onClick={() => {}}
                   >
@@ -419,7 +419,7 @@ const page = ({}) => {
           className={cn(
             `w-[200px] h-[40px] ${
               isValid && skills.size > 0 ? " bg-sky-600" : "bg-gray-400"
-            } text-white rounded-sm`
+            } text-white rounded-sm`,
           )}
           onClick={handleSubmit(professionalInfoHandler)}
         >
