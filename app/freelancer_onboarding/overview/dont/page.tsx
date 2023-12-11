@@ -20,14 +20,22 @@ const page: FC<pageProps> = ({}) => {
             O seu sucesso no Uenji é importante para nós. Evite o seguinte para
             se manter em conformidade com as normas da nossa comunidade:
           </h3>
-          <ul className="grid desktop:grid-cols-3 tablet:grid-cols-2 grid-cols-1 min-h-[310px] box-border flex-wrap w-full h-full pt-[42px]  justify-between">
+          <ul className="grid desktop:grid-cols-3 tablet:grid-cols-2 grid-cols-1 min-h-[310px] box-border  max-w-full  pt-[42px]  justify-between">
             {sellerOnBoardingDonts.map((item) => (
               <li
                 key={item.key}
-                className="flex tablet:flex-col gap-2 flex-row box-border text-gray-600 text-sm max-w-[270px] pb-[40px]"
+                className="tablet:px-2 justify-center max-w-[270px] pb-[40px]"
               >
-                <Image alt={item.key} src={item.icon} width={43} height={43} />
-                <p>{item.text}</p>
+                <Image
+                  alt={item.key}
+                  src={item.icon}
+                  width={43}
+                  height={43}
+                  className="items-center justify-center"
+                />
+                <p className="text-gray-600 text-sm text-justify">
+                  {item.text}
+                </p>
               </li>
             ))}
           </ul>
@@ -36,7 +44,7 @@ const page: FC<pageProps> = ({}) => {
               href="/freelancer_onboarding/personal_info"
               className={cn(
                 buttonVariants({ variant: "default" }),
-                "text-center bg-sky-500 tablet:w-[160px] w-full text-white",
+                "text-center bg-sky-500 tablet:w-[160px] w-full text-white"
               )}
             >
               Continuar

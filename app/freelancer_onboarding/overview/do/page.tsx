@@ -20,14 +20,16 @@ const page: FC<pageProps> = ({}) => {
             A sua primeira impressão é fundamental! Crie um perfil que se
             destaque da multidão no Uenji.
           </h3>
-          <ul className="grid desktop:grid-cols-3 tablet:grid-cols-2 grid-cols-1 min-h-[310px] box-border  max-w-full max-h-full pt-[42px]  justify-between">
+          <ul className="grid desktop:grid-cols-3 tablet:grid-cols-2 grid-cols-1 min-h-[310px] box-border  max-w-full  pt-[42px]  justify-between">
             {sellerOnBoardingDos.map((item) => (
               <li
                 key={item.key}
-                className="flex tablet:flex-col gap-2 flex-row box-border text-gray-600 text-sm max-w-[270px] pb-[40px]"
+                className="tablet:px-2 justify-center max-w-[270px] pb-[40px]"
               >
                 <Image alt={item.key} src={item.icon} width={43} height={43} />
-                <p>{item.text}</p>
+                <p className="text-gray-600 text-sm text-justify">
+                  {item.text}
+                </p>
               </li>
             ))}
           </ul>
@@ -36,7 +38,7 @@ const page: FC<pageProps> = ({}) => {
               href="/freelancer_onboarding/overview/dont"
               className={cn(
                 buttonVariants({ variant: "default" }),
-                "text-center bg-sky-500 tablet:w-[160px] w-full text-white",
+                "text-center bg-sky-500 tablet:w-[160px] w-full text-white"
               )}
             >
               Continuar
