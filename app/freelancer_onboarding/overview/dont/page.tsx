@@ -44,7 +44,7 @@ const page: FC<pageProps> = ({}) => {
               href="/freelancer_onboarding/personal_info"
               className={cn(
                 buttonVariants({ variant: "default" }),
-                "text-center bg-sky-500 tablet:w-[160px] w-full text-white"
+                "text-center bg-sky-500 tablet:w-[160px] w-full text-white",
               )}
             >
               Continuar
