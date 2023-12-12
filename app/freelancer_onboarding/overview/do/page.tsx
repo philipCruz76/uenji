@@ -9,7 +9,7 @@ interface pageProps {}
 
 const page: FC<pageProps> = ({}) => {
   return (
-    <section className="flex container py-8 max-w-screen min-h-screen overflow-y-scroll">
+    <section className="flex container py-8 max-w-[100dvw] min-h-[100dvh] overflow-y-scroll">
       <div className="flex flex-col-reverse desktop:flex-row-reverse w-full h-full items-center justify-between  tablet:pl-[25px] ">
         <div className="flex container flex-col max-w-[900px] h-full tablet:px-[60px] items-start justify-center">
           <h1 className="flex text-[#303030] font-bold box-border tablet:max-w-[590px] tablet:pr-[80px] text-2xl pb-[20px]">
@@ -52,11 +52,11 @@ const page: FC<pageProps> = ({}) => {
             </Link>
           </div>
         </div>
-        <div className="hidden desktop:block  h-fit max-h-screen overflow-hidden  border rounded-md ">
+        <div className="hidden desktop:block  h-fit max-h-[100dvh] overflow-hidden  border rounded-md ">
           <video
             autoPlay
             muted
-            className="hidden desktop:block max-h-screen box-content"
+            className="hidden desktop:block max-h-[100dvh] box-content"
           >
             <source
               src="https://res.cloudinary.com/dqe71igxe/video/upload/f_auto:video,q_auto/v1/videos/SellerOverview"

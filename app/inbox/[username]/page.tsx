@@ -32,7 +32,7 @@ const page: FC<PageProps> = async ({ params, searchParams }: PageProps) => {
   )[0];
   const messages = await getMessages(chatId);
   return (
-    <div className=" max-w-screen w-[800px] h-[90dvh]  tablet:h-[80dvh] flex flex-col border rounded-3xl">
+    <div className=" max-w-[100dvw] w-[800px] h-[90dvh]  tablet:h-[80dvh] flex flex-col border rounded-3xl">
       <Header chatPartner={chatPartner} />
       <Body initialMessages={messages} />
       <ChatInput chatPartner={chatPartner} chatId={chatId} />

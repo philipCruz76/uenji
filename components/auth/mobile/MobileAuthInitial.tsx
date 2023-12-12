@@ -11,9 +11,9 @@ const MobileAuthInitial = () => {
     <section className="flex flex-col space-y-3 ">
       {/* Auth buttons */}
       <div className="flex flex-col py-[40%] space-y-2 items-center justify-center font-semibold text-[16px] ">
-        <div className="flex flex-row space-x-2  w-screen h-[40px] px-6 ">
+        <div className="flex flex-row space-x-2  w-[100dvw] h-[40px] px-6 ">
           <button
-            className="flex flex-row border w-screen h-[40px] items-center justify-between rounded-sm"
+            className="flex flex-row border w-[100dvw] h-[40px] items-center justify-between rounded-sm"
             onClick={() => setShowEmailCredentials(true)}
           >
             <div className="pl-1 ">
@@ -47,9 +47,9 @@ const MobileAuthInitial = () => {
         </div>
 
         {/* Google Button */}
-        <div className="flex flex-row space-x-2  w-screen h-[40px] px-6 ">
+        <div className="flex flex-row space-x-2  w-[100dvw] h-[40px] px-6 ">
           <button
-            className="flex border w-screen h-[40px] items-center justify-center rounded-sm"
+            className="flex border w-[100dvw] h-[40px] items-center justify-center rounded-sm"
             onClick={() => socialAction("google")}
           >
             <svg
@@ -94,7 +94,7 @@ const MobileAuthInitial = () => {
           <p>OR</p>
         </div>
 
-        <div className="flex flex-row  space-x-2  w-screen h-[40px] items-center justify-between px-6 ">
+        <div className="flex flex-row  space-x-2  w-[100dvw] h-[40px] items-center justify-between px-6 ">
           <button
             className="flex flex-row w-full space-x-2 border  h-[40px] items-center justify-center text-center rounded-sm"
             onClick={() => socialAction("facebook")}

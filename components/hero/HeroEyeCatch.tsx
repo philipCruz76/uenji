@@ -11,7 +11,7 @@ const HeroEyeCatch = () => {
           </h2>
 
           {/* Selling Proposition*/}
-          <ul className="flex flex-row flex-wrap pr-6 max-w-screen py-6 items-start justify-start text-start gap-4">
+          <ul className="flex flex-row flex-wrap pr-6 max-w-[100dvw] py-6 items-start justify-start text-start gap-4">
             <li>
               <h6 className="flex flex-row tablet:text-lg  text-base font-semibold gap-2">
                 <span className="w-[24px] h-[24px]" aria-hidden="true">

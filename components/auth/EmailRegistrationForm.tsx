@@ -69,7 +69,7 @@ const EmailRegistrationForm = () => {
   };
 
   return (
-    <section className="flex container flex-col min-w-screen">
+    <section className="flex container flex-col min-w-[100dvw]">
       {/* Back button */}
       <div
         className="flex flex-row items-center justify-center absolute top-6 left-8 cursor-pointer"

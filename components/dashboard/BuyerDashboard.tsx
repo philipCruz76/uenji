@@ -15,7 +15,7 @@ const BuyerDashboard = ({ user }: BuyerDashboardProps) => {
   );
 
   return (
-    <section className="flex container w-screen h-screen py-8">
+    <section className="flex container w-[100dvw] h-[100dvh] py-8">
       <div className="flex w-full flex-col space-y-6">
         <h1 className="flex text-3xl left-0 justify-start items-center font-bold">
           Olá, {user.name ? user.name : user.username}

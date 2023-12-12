@@ -25,7 +25,7 @@ const UserProfileMobilePage: FC<UserProfilePageMobileProps> = async ({
 
   const publicMode = currentUser?.username !== user.username;
   return (
-    <div className="flex flex-col w-screen h-screen">
+    <div className="flex flex-col w-[100dvw] h-[100dvh]">
       <SellerCard
         userId={user.id}
         username={username}

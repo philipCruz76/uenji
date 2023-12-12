@@ -35,10 +35,10 @@ const ProfilePage: FC<ProfilePageProps> = async ({
 
   return (
     <>
-      <section className="tablet:flex hidden container bg-neutral-100 w-screen min-h-screen">
+      <section className="tablet:flex hidden container bg-neutral-100 w-[100dvw] min-h-[100dvh]">
         <UserProfilePage user={user} />
       </section>
-      <section className="tablet:hidden flex  bg-neutral-100 w-screen h-screen">
+      <section className="tablet:hidden flex  bg-neutral-100 w-[100dvw] h-[100dvh]">
         <UserProfileMobilePage user={user} />
       </section>
     </>

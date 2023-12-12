@@ -35,7 +35,7 @@ const page = ({ params }: pageProps) => {
   const faq = categoryFAQs.find((c) => c.category === category)?.faq;
 
   return (
-    <section className="flex flex-col gap-6 py-8 tablet:container min-h-[100dvh] max-w-screen ">
+    <section className="flex flex-col gap-6 py-8 tablet:container min-h-[100dvh] max-w-[100dvw] ">
       <div className="flex  w-full min-h-[240px] items-center  text-center justify-center border rounded-md  text-white">
         <Image
           src={

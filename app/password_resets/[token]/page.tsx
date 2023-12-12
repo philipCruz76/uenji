@@ -24,7 +24,7 @@ const PasswordResetPage: FC<PasswordResetPageProps> = async ({
   const isValid = await getPasswordResetToken(token, email);
 
   return (
-    <section className="flex flex-col container w-screen h-screen overflow-x-hidden bg-neutral-100">
+    <section className="flex flex-col container w-[100dvw] h-[100dvh] overflow-x-hidden bg-neutral-100">
       {(await isValid) ? (
         <PasswordResetForm userEmail={email} />
       ) : (

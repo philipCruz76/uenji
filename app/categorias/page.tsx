@@ -6,7 +6,7 @@ import React from "react";
 
 const CategoriesPage = () => {
   return (
-    <section className="flex flex-col gap-6 py-8 container w-screen h-screen">
+    <section className="flex flex-col gap-6 py-8 container w-[100dvw] h-[100dvh]">
       <h1 className="text-3xl font-bold text-start items-center justify-start">
         Categorias
       </h1>

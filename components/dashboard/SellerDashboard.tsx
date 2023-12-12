@@ -7,7 +7,7 @@ interface SellerDashboardProps {
 
 const SellerDashboard: FC<SellerDashboardProps> = ({ user }) => {
   return (
-    <section className="flex container w-screen h-screen">
+    <section className="flex container w-[100dvw] h-[100dvh]">
       <div className="flex w-full flex-col items-center justify-center text-center">
         <h1>Welcome, {user.username}</h1>
         <p>Here is your seller dashboard</p>

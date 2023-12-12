@@ -16,7 +16,7 @@ const UserProfilePage: FC<UserProfilePageProps> = async ({ user }) => {
   const publicMode = currentUser?.username !== user.username;
 
   return (
-    <div className="flex flex-row flex-wrap  desktop:min-h-[2000px] justify-between w-screen ">
+    <div className="flex flex-row flex-wrap  desktop:min-h-[2000px] justify-between w-[100dvw] ">
       <div className="block w-[400px] my-20 desktop:max-h-[2000px] ">
         <SellerCard
           publicMode={publicMode}

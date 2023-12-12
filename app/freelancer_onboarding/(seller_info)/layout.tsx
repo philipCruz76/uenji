@@ -12,7 +12,7 @@ export default function SellerInfoLayout({
 }) {
   const { sellerOnboardingStep } = useSellerOnboardingStore();
   return (
-    <section className="flex flex-col px-[24px] desktop:px-0 max-w-[100dvw] min-h-screen">
+    <section className="flex flex-col px-[24px] desktop:px-0 max-w-[100dvw] min-h-[100dvh]">
       <div className="flex w-full h-[70px] justify-between border-b pt-6">
         <ul className="tablet:flex hidden flex-row gap-2 px-4 cursor-pointer">
           <li

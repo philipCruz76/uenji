@@ -64,7 +64,7 @@ const ActivateLinkPage: FC<ActivateLinkPageProps> = async ({
     });
 
   return (
-    <section className="flex flex-col items-center justify-center w-screen h-screen">
+    <section className="flex flex-col items-center justify-center w-[100dvw] h-[100dvh]">
       {(await isValid) ? redirect("/") : null}
     </section>
   );
