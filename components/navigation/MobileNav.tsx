@@ -47,7 +47,7 @@ const MobileNav: FC<MobileNavProps> = ({ session }) => {
             className="lg:hidden fixed z-50 translate-x-0 inset-0 bg-black bg-opacity-50 "
             onClickCapture={() => (isClickInsideRef.current = true)}
           />
-          <Drawer.Content className="bg-white  mt-24 z-50 bottom-0 left-0 right-0 lg:hidden flex flex-col fixed  max-h-screen  min-h-screen  w-[240px] px-4 py-6  border-r border-gray-200   gap-4 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500">
+          <Drawer.Content className="bg-white  mt-24 z-50 bottom-0 left-0 right-0 lg:hidden flex flex-col fixed  max-h-[100dvh]  min-h-[100dvh]  w-[240px] px-4 py-6  border-r border-gray-200   gap-4 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500">
             {session ? (
               <LoggedInMobileNavContent />
             ) : (
