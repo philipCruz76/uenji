@@ -55,15 +55,15 @@ const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
 
   return (
     <div className="flex relative bg-white  tablet:w-[400px] min-h-[450px] h-fit">
-      <div className="flex flex-col gap-2 px-[30px] py-[30px]  border border-zinc-200 w-full h-fit items-center justify-center space-y-3">
+      <div className="flex flex-col gap-2 tablet:px-[30px] tablet:py-[30px] px-[20px] py-[20px]  border border-zinc-200 w-full h-fit items-center justify-center space-y-3">
         {!publicMode ? (
           <>
             {/* Seller Description */}
             <div className="flex w-full flex-col gap-2">
               <div className="flex flex-row justify-between w-full pb-2">
-                <h3 className="text-base font-semibold">Description</h3>
+                <h3 className="text-base font-semibold">Descrição</h3>
                 <a className="text-xs hover:underline text-cyan-600 cursor-pointer">
-                  Edit Description
+                  Editar Descrição
                 </a>
               </div>
               <span className="text-sm w-full text-justify">{description}</span>
@@ -73,9 +73,9 @@ const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
             {/* Seller Languages */}
             <div className="flex w-full flex-col gap-2">
               <div className="flex flex-row justify-between w-full pb-2">
-                <h3 className="text-base font-semibold">Languages</h3>
+                <h3 className="text-base font-semibold">Línguas</h3>
                 <a className="text-xs hover:underline text-cyan-600 cursor-pointer">
-                  Edit Languages
+                  Editar Línguas
                 </a>
               </div>
               {parsedLanguages.map((language) => (
@@ -92,9 +92,9 @@ const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
             {/* Seller Occupation */}
             <div className="flex w-full flex-col gap-2">
               <div className="flex flex-row justify-between w-full pb-2">
-                <h3 className="text-base font-semibold">Occupation</h3>
+                <h3 className="text-base font-semibold">Profissão</h3>
                 <a className="text-xs hover:underline text-cyan-600 cursor-pointer">
-                  Edit Occupation
+                  Editar Profissão
                 </a>
               </div>
               <span className="text-sm text-slate-600">
@@ -109,20 +109,18 @@ const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
             {/* Seller Skills */}
             <div className="flex w-full flex-col gap-2">
               <div className="flex flex-row justify-between w-full pb-2">
-                <h3 className="text-base font-semibold">Skills</h3>
+                <h3 className="text-base font-semibold">Competências</h3>
                 <a className="text-xs hover:underline text-cyan-600 cursor-pointer">
-                  Edit Skills
+                  Editar Competências
                 </a>
               </div>
-              <ul>
+              <ul className="flex flex-row gap-2">
                 {parsedSkills.map((skill) => (
                   <li
                     key={skill.name}
                     className=" border w-[90px] text-sm text-center py-[4px] px-[4px] hover:bg-gray-200 rounded-2xl"
                   >
-                    
                     {skill.name}
-                    
                   </li>
                 ))}
               </ul>
@@ -132,9 +130,9 @@ const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
             {/* Seller Education */}
             <div className="flex w-full flex-col gap-2">
               <div className="flex flex-row justify-between w-full pb-2">
-                <h3 className="text-base font-semibold">Education</h3>
+                <h3 className="text-base font-semibold">Educação</h3>
                 <a className="text-xs hover:underline text-cyan-600 cursor-pointer">
-                  Edit Education
+                  Editar Educação
                 </a>
               </div>
               {parsedEducation.map((education) => (
@@ -151,9 +149,9 @@ const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
             {/* Seller Certification */}
             <div className="flex w-full flex-col gap-2">
               <div className="flex flex-row justify-between w-full pb-2">
-                <h3 className="text-base font-semibold">Certification</h3>
+                <h3 className="text-base font-semibold">Certificações</h3>
                 <a className="text-xs hover:underline text-cyan-600 cursor-pointer">
-                  Edit Certification
+                  Editar Certificações
                 </a>
               </div>
               {parsedCertification.map((certification) => (
