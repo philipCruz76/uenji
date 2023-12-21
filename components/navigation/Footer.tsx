@@ -27,7 +27,7 @@ const Footer = () => {
     <>
       <div className="flex w-full h-px bg-gray-200 " />
 
-      <footer className="container flex min-w-full bg-slate-50">
+      <footer className="container flex min-w-full h-fit bg-slate-50">
         <div className="container justify-between flex flex-col lg:px-20 py-6 px-5 gap-6">
           <div className="flex flex-col gap-12 w-full">
             <h1 className="items-start">Uenji</h1>

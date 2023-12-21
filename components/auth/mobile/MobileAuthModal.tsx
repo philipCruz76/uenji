@@ -8,6 +8,7 @@ import {
 import MobileAuthInitial from "./MobileAuthInitial";
 import EmailRegistrationForm from "../EmailRegistrationForm";
 import OTPRegistrationForm from "../OTPRegistrationForm";
+import Image from "next/image";
 
 const SmallScreenSignInSheet = () => {
   let { isOpen, setIsOpen } = useOpenModalStore();
@@ -36,7 +37,12 @@ const SmallScreenSignInSheet = () => {
         }}
       >
         <div className="flex relative items-start mx-auto px-4 py-4  font-bold text-3xl">
-          Uenji
+          <Image
+            src={"/uenji-logo.png"}
+            alt="Uenji Logo"
+            width={200}
+            height={200}
+          />
         </div>
         {/* Close Button*/}
         <div className="absolute top-6 right-6">

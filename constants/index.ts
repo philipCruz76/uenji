@@ -215,3 +215,6 @@ export const CategoryDesciptions = [
     categoryTagline: "Traduz o teu conteúdo",
   },
 ];
+
+const ISO3166a2 = require("iso-3166-1-alpha-2");
+export const ISOCountries = ISO3166a2.getCountries();

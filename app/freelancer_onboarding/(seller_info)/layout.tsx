@@ -4,12 +4,20 @@ import { Progress } from "@/components/ui/Progress";
 import Link from "next/link";
 import { useSellerOnboardingStore } from "@/lib/stores/selleOboarding-store";
 import { cn } from "@/lib/utils";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export default function SellerInfoLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const user = useSession().data?.user;
+
+  if (user?.isSeller) {
+    redirect("/");
+  }
+
   const { sellerOnboardingStep } = useSellerOnboardingStore();
   return (
     <section className="flex flex-col px-[24px] desktop:px-0 max-w-[100dvw] min-h-[100dvh]">

@@ -9,6 +9,7 @@ import TabletAuthInitial from "./TabletAuthInitial";
 import { cn } from "@/lib/utils";
 import EmailRegistrationForm from "../EmailRegistrationForm";
 import OTPRegistrationForm from "../OTPRegistrationForm";
+import Image from "next/image";
 
 const MobileAuthModal = () => {
   let { isOpen, setIsOpen } = useOpenModalStore();
@@ -48,7 +49,7 @@ const MobileAuthModal = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="flex flex-col max-w-[400px] transform overflow-y-scroll rounded-2xl bg-white shadow-xl transition-all h-[560px] px-2">
+              <Dialog.Panel className="flex flex-col max-w-[400px] transform overflow-y-scroll rounded-2xl bg-white shadow-xl items-center transition-all h-[560px] px-2">
                 <Dialog.Title
                   as="div"
                   className={cn(
@@ -60,10 +61,15 @@ const MobileAuthModal = () => {
                   <span
                     className={cn(
                       isEmail &&
-                        "flex w-full relative items-center  justify-center text-center",
+                        "flex w-full relative items-center  justify-center",
                     )}
                   >
-                    Uenji
+                    <Image
+                      src={"/uenji-logo.png"}
+                      alt="Uenji Logo"
+                      width={200}
+                      height={200}
+                    />
                   </span>
                 </Dialog.Title>
 

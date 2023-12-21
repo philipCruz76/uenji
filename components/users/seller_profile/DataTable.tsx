@@ -7,8 +7,14 @@ type DataTableProps = {
   initialInput: Map<string, string>;
   setTableData: Dispatch<SetStateAction<Map<string, string>>>;
   showRowEditor: Dispatch<SetStateAction<boolean>>;
-  selectetField: Dispatch<
-    SetStateAction<{ fieldName: string; fieldLevel: string }>
+  selectedField: Dispatch<
+    SetStateAction<{
+      fieldName: string;
+      institutionName?: string;
+      educationCountry?: string;
+      educationLevel?: string;
+      fieldLevel: string;
+    }>
   >;
   fieldRegister: UseFormRegister<SellerInfo>;
   formControl: Control<SellerInfo>;
@@ -19,29 +25,49 @@ function DataTable({
   initialInput,
   setTableData,
   showRowEditor,
-  selectetField,
+  selectedField,
   fieldRegister,
   formControl,
   fieldName,
 }: DataTableProps) {
-  let fieldToRegister: "languages" | "skills";
-  let tableTitle: string;
+  let fieldToRegister: "languages" | "skills" | "education" | "certifications";
+  let column1Name = "";
+  let column2Name = "";
 
   switch (fieldName) {
     case "languages":
       fieldToRegister = "languages";
-      tableTitle = "Language";
+      column1Name = "Language";
+      column2Name = "Level";
       break;
     case "skills":
       fieldToRegister = "skills";
-      tableTitle = "Skill";
+      column1Name = "Skill";
+      column2Name = "Level";
+      break;
+    case "education":
+      fieldToRegister = "education";
+      column1Name = "Education";
+      column2Name = "Year";
+      break;
+    case "certifications":
+      fieldToRegister = "certifications";
+      column1Name = "Certification";
+      column2Name = "Year";
       break;
     default:
       break;
   }
 
   const { remove } = useFieldArray({
-    name: fieldName === "languages" ? "languages" : "skills",
+    name:
+      fieldName === "languages"
+        ? "languages"
+        : fieldName === "skills"
+        ? "skills"
+        : fieldName === "education"
+        ? "education"
+        : "certifications",
     control: formControl,
   });
 
@@ -49,10 +75,8 @@ function DataTable({
     <table className="flex flex-col border w-full mt-4">
       <thead className="bg-gray-100 p-2 border-b">
         <tr className="flex flex-row gap-4 ">
-          <th className="w-full font-normal text-left">
-            {fieldName === "languages" ? "Language" : "Skill"}
-          </th>
-          <th className="w-full font-normal text-left">Level</th>
+          <th className="w-full font-normal text-left">{column1Name}</th>
+          <th className="w-full font-normal text-left">{column2Name}</th>
           <th className="w-full text-left"></th>
         </tr>
       </thead>
@@ -60,33 +84,116 @@ function DataTable({
         {initialInput.size > 0
           ? Array.from(initialInput.keys()).map((input, index) => (
               <tr className="flex text-gray-600 p-2 border-b" key={input}>
-                <td
-                  {...fieldRegister(`${fieldToRegister}.${index}.name`, {
-                    required: true,
-                    value: input,
-                  })}
-                  className="flex w-full"
-                >
-                  {input}
-                </td>
-                <td
-                  {...fieldRegister(`${fieldToRegister}.${index}.level`, {
-                    required: true,
-                    value: initialInput.get(input),
-                  })}
-                  className="flex w-full"
-                >
-                  {initialInput.get(input)}
-                </td>
+                {fieldToRegister === "education" ? (
+                  <td
+                    {...fieldRegister(`${fieldToRegister}.${index}.degree`, {
+                      required: true,
+                      value: input,
+                    })}
+                    className="flex w-full"
+                  >
+                    {input}
+                  </td>
+                ) : (
+                  <td
+                    {...fieldRegister(`${fieldToRegister}.${index}.name`, {
+                      required: true,
+                      value: input,
+                    })}
+                    className="flex w-full"
+                  >
+                    {input}
+                  </td>
+                )}
+
+                {fieldToRegister === "certifications" ? (
+                  <td
+                    {...fieldRegister(
+                      `${fieldToRegister}.${index}.institution`,
+                      {
+                        required: true,
+                        value: initialInput.get(input)?.split(";")[1],
+                      }
+                    )}
+                    {...fieldRegister(`${fieldToRegister}.${index}.year`, {
+                      required: true,
+                      value: initialInput.get(input)?.split(";")[0],
+                    })}
+                    className="flex w-full"
+                  >
+                    {initialInput.get(input)?.split(";")[0]}
+                  </td>
+                ) : fieldToRegister === "education" ? (
+                  <td
+                    {...fieldRegister(
+                      `${fieldToRegister}.${index}.educationLevel`,
+                      {
+                        required: true,
+                        value: initialInput.get(input)?.split(";")[3],
+                      }
+                    )}
+                    {...fieldRegister(
+                      `${fieldToRegister}.${index}.institution`,
+                      {
+                        required: true,
+                        value: initialInput.get(input)?.split(";")[1],
+                      }
+                    )}
+                    {...fieldRegister(`${fieldToRegister}.${index}.country`, {
+                      required: true,
+                      value: initialInput.get(input)?.split(";")[2],
+                    })}
+                    {...fieldRegister(`${fieldToRegister}.${index}.year`, {
+                      required: true,
+                      value: initialInput.get(input)?.split(";")[0],
+                    })}
+                    className="flex w-full"
+                  >
+                    {initialInput.get(input)?.split(";")[0]}
+                  </td>
+                ) : (
+                  <td
+                    {...fieldRegister(`${fieldToRegister}.${index}.level`, {
+                      required: true,
+                      value: initialInput.get(input),
+                    })}
+                    className="flex w-full"
+                  >
+                    {initialInput.get(input)}
+                  </td>
+                )}
+
                 <td className="flex flex-row w-full gap-1 px-4">
                   <span>
                     <button
                       type="button"
                       onClick={() => {
-                        selectetField({
-                          fieldName: input,
-                          fieldLevel: initialInput.get(input)!,
-                        });
+                        if (fieldToRegister === "certifications") {
+                          const [certificationYear, institutionName] =
+                            initialInput.get(input)!.split(";");
+
+                          selectedField({
+                            fieldName: input,
+                            institutionName: institutionName,
+                            fieldLevel: certificationYear,
+                          });
+                        }  else  if (fieldToRegister === "education"){
+                          const [educationYear, institutionName, educationCountry, educationLevel] = initialInput.get(input)!.split(";");
+                          selectedField({
+                            fieldName: input,
+                            institutionName: institutionName,
+                            educationCountry: educationCountry,
+                            educationLevel: educationLevel,
+                            fieldLevel: educationYear,
+                          });
+                        }
+                        else {
+                          selectedField({
+                            fieldName: input,
+                            fieldLevel: initialInput.get(input)!,
+                          });
+                        }
+
                         showRowEditor(true);
                       }}
                     >

@@ -84,7 +84,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
         {/*NavBar items*/}
         <div className="flex w-full items-center justify-between xl:gap-8 ">
           {/* Hambuger Menu and Logo Container */}
-          <div className="flex tablet:px-2  tablet:w-auto w-full justify-between items-center">
+          <div className="flex   tablet:w-auto w-full justify-between items-center">
             {/*Mobile Nav Button*/}
             <div className=" flex lg:hidden focus:outline-none px-2">
               <button
@@ -112,9 +112,16 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
             {/*Logo*/}
             <Link
               href="/"
-              className="tablet:w-full w-[40px] justify-center text-center font-sans font-bold text-[34px] "
+              className="w-[150px] h-[70px] justify-center items-center flex"
             >
-              Uenji
+              <Image
+                src={
+                  !isActiveNavBar ? "/uenji-logo.png" : "/uenji-logo-black.png"
+                }
+                alt="Uenji Logo"
+                width={200}
+                height={200}
+              />
             </Link>
           </div>
 

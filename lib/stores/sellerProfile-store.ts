@@ -15,6 +15,7 @@ type SellerProfileStore = {
   getSellerPersonalInfo: () => SellerPersonalInfo;
   getSellerProfessionalInfo: () => SellerProfessionalInfo;
   getSellerAccountSecurity: () => SellerAccountSecurity;
+  getSellerProfile: () => FullSellerProfile;
 };
 
 export const useSellerProfileStore = create<SellerProfileStore>()(
@@ -35,7 +36,8 @@ export const useSellerProfileStore = create<SellerProfileStore>()(
       professionalInfo: {
         occupation: {
           category: "Fotografia",
-          startYear: 2023,
+          bestSkills: [""],
+          startYear: "2023",
         },
         skills: [
           {
@@ -53,19 +55,19 @@ export const useSellerProfileStore = create<SellerProfileStore>()(
       set(
         produce((state) => {
           state.sellerProfile.personalInfo = personalInfo;
-        }),
+        })
       ),
     setSellerProfessionalInfo: (professionalInfo) =>
       set(
         produce((state) => {
           state.sellerProfile.professionalInfo = professionalInfo;
-        }),
+        })
       ),
     setSellerAccountSecurity: (accountSecurity) =>
       set(
         produce((state) => {
           state.sellerProfile.accountSecurity = accountSecurity;
-        }),
+        })
       ),
     getSellerPersonalInfo: () => {
       return get().sellerProfile.personalInfo;
@@ -76,5 +78,8 @@ export const useSellerProfileStore = create<SellerProfileStore>()(
     getSellerAccountSecurity: () => {
       return get().sellerProfile.accountSecurity;
     },
-  }),
+    getSellerProfile: () => {
+      return get().sellerProfile;
+    },
+  })
 );

@@ -11,6 +11,7 @@ import {
 } from "@/types/sellerProfile.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
+import { revalidatePath, revalidateTag } from "next/cache";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -48,7 +49,6 @@ const page = ({}) => {
     sellerOnboardingStep !== 1 && setSellerOnboardingStep(1);
   }, [sellerOnboardingStep]);
 
-  const user = useSession().data?.user?.name;
   const router = useRouter();
   const { setSellerPersonalInfo, getSellerPersonalInfo } =
     useSellerProfileStore();
@@ -71,25 +71,19 @@ const page = ({}) => {
   };
 
   const handleProfilePicture = (file: File) => {
-    const formData = new FormData();
-
-    formData.append("file", file);
-    formData.append("api_key", "364241324318833");
-    formData.append("upload_preset", "khnf4kne");
-    formData.append("folder", "profile_pictures");
-    formData.append("resource_type", "image");
-    formData.append("public_id", user + "_profile_picture");
-
-    fetch("https://api.cloudinary.com/v1_1/dqe71igxe/image/upload", {
+    fetch("/api/cloudinary/upload", {
       method: "POST",
-      body: formData,
+      body: file,
+      next: {
+        revalidate: 1,
+      }
     })
       .then(async (response) => {
         toast.success("Profile picture updated successfully");
-        await response.json().then(async (data) => {
-          setProfilePictureSrc(data.secure_url);
-          setValue("profilePicture", data.secure_url);
-        });
+        const { url } = await response.json();
+        setProfilePictureSrc(url);
+        setValue("profilePicture", url);
+        
       })
       .catch((error) => {
         toast.error(error.message);
@@ -249,6 +243,7 @@ const page = ({}) => {
                   const target = e.target as HTMLInputElement & {
                     files: FileList;
                   };
+
                   handleProfilePicture(target.files[0]);
                 }}
                 style={{ display: "none" }}
@@ -264,7 +259,7 @@ const page = ({}) => {
                   profilePictureSrc === ""
                     ? "group-hover/uploadButton:flex"
                     : null,
-                  ` relative z-1 object-cover items-center justify-center w-full`,
+                  ` relative z-1 object-cover items-center justify-center w-full`
                 )}
               >
                 <path d="M208,56H180.28L166.65,35.56A8,8,0,0,0,160,32H96a8,8,0,0,0-6.65,3.56L75.71,56H48A24,24,0,0,0,24,80V192a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V80A24,24,0,0,0,208,56Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H80a8,8,0,0,0,6.66-3.56L100.28,48h55.43l13.63,20.44A8,8,0,0,0,176,72h32a8,8,0,0,1,8,8ZM128,88a44,44,0,1,0,44,44A44.05,44.05,0,0,0,128,88Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,128,160Z"></path>
@@ -384,8 +379,8 @@ const page = ({}) => {
                       setLanguages(
                         languages.set(
                           currentSelectedLanguage.fieldName,
-                          currentSelectedLanguage.fieldLevel,
-                        ),
+                          currentSelectedLanguage.fieldLevel
+                        )
                       );
                       setShowLanguageSelector(false);
                     }}
@@ -419,7 +414,7 @@ const page = ({}) => {
               initialInput={languages}
               setTableData={setLanguages}
               showRowEditor={setShowLanguageSelector}
-              selectetField={setCurrentSelectedLanguage}
+              selectedField={setCurrentSelectedLanguage}
               fieldRegister={register as UseFormRegister<SellerInfo>}
               formControl={control as Control<SellerInfo>}
               fieldName="languages"
@@ -442,7 +437,7 @@ const page = ({}) => {
           className={cn(
             `w-[200px] h-[40px] ${
               isValid && languages.size > 0 ? " bg-sky-600" : "bg-gray-400"
-            } text-white rounded-sm`,
+            } text-white rounded-sm`
           )}
           onClick={handleSubmit(personalInfoHandler)}
         >

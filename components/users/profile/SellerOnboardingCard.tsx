@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
 
-const EmptyStateCard = () => {
+const SellerOnboardingCard = () => {
   return (
     <div className="flex flex-col space-y-4 items-center justify-center text-center relative border bg-white  desktop:w-[730px] tablet:w-[500px]  h-[450px]">
       <svg
@@ -84,4 +84,4 @@ const EmptyStateCard = () => {
   );
 };
 
-export default EmptyStateCard;
+export default SellerOnboardingCard;

@@ -58,11 +58,11 @@ model User {
   phoneNumber         String?   @map("phone_number") @db.String
   description         String?
   displayName         String?   @map("display_name") @db.String
-  languages           Json?     @db.Json
-  occupation          Json?     @db.Json
-  skills              Json?     @db.Json
-  education           Json?     @db.Json
-  certification       Json?     @db.Json
+  languages           String?   @db.String
+  occupation          String?   @db.String
+  skills              String?   @db.String
+  education           String?   @db.String
+  certification       String?   @db.String
   personalWebsite     String?   @map(name: "personal_website")
   phoneNumberVerified DateTime? @map(name: "phone_number_verified")
   isSeller            Boolean?  @default(false) @map(name: "is_seller")

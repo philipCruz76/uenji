@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { FC, useCallback } from "react";
 import { toast } from "react-hot-toast";
 
-interface SellerCardProps {
+type SellerCardProps= {
   publicMode?: boolean;
   userId: string | null;
   username: string | null;
@@ -14,7 +14,7 @@ interface SellerCardProps {
   isOnline: boolean | null;
 }
 
-const SellerCard: FC<SellerCardProps> = ({
+const ProfileInfoCard: FC<SellerCardProps> = ({
   publicMode,
   username,
   image,
@@ -65,12 +65,12 @@ const SellerCard: FC<SellerCardProps> = ({
         </div>
         <div className="flex w-full items-center justify-center text-center">
           <Image
-            width={150}
-            height={150}
+            width={200}
+            height={200}
             src={image! || "./icons/default-user.svg"}
             alt="profile picture"
             referrerPolicy="no-referrer"
-            className="rounded-full hover:opacity-80 transition duration-150 ease-in-out cursor-pointer"
+            className="w-[200px] h-[200px] rounded-full hover:opacity-80 transition duration-150 ease-in-out cursor-pointer"
           />
         </div>
         <div className="flex flex-col space-x-2 items-center justify-center text-center">
@@ -133,4 +133,4 @@ const SellerCard: FC<SellerCardProps> = ({
   );
 };
 
-export default SellerCard;
+export default ProfileInfoCard;

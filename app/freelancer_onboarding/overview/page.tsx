@@ -11,7 +11,7 @@ const page = async ({}) => {
   if (isSeller?.valueOf() === true) redirect("/");
 
   return (
-    <section className="flex container max-w-[100dvw] max-h-[100dvh] min-h-[100dvh] ">
+    <section className="flex container max-w-[100dvw]  min-h-[100dvh] ">
       <div className="flex flex-col-reverse desktop:flex-row  w-full h-full items-center justify-between py-8 tablet:pl-[25px] ">
         <div className="flex px-[2rem] flex-col w-full h-full">
           <h1 className="flex text-[#303030] w-full font-bold box-border tablet:max-w-[590px] tablet:pr-[80px] pb-[25px] tablet:text-2xl text-xl">

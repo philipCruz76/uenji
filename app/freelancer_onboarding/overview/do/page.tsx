@@ -1,13 +1,15 @@
 import { sellerOnBoardingDos } from "@/constants/sellerOnBoarding";
 import { buttonVariants } from "@/constants/ui/button";
+import getCurrentUser from "@/lib/actions/getCurrentUser";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { FC } from "react";
+import { redirect } from "next/navigation";
 
-interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
+const page= async () => {
+  const isSeller = await getCurrentUser().then((user) => user?.isSeller);
+  if (isSeller?.valueOf() === true) redirect("/");
   return (
     <section className="flex container py-8 max-w-[100dvw] min-h-[100dvh] overflow-y-scroll">
       <div className="flex flex-col-reverse desktop:flex-row-reverse w-full h-full items-center justify-between  tablet:pl-[25px] ">

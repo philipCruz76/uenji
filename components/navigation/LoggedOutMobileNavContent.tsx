@@ -88,13 +88,13 @@ const LoggedOutMobileNavContent = () => {
               </AccordionTrigger>
 
               <AccordionContent>
-                {languageFilters.map((filter) => (
-                  <ul className="flex relative flex-col items-start">
+                <ul className="flex relative flex-col items-start">
+                  {languageFilters.map((filter) => (
                     <Link href="/" key={filter} className="hover:underline">
                       {filter}
                     </Link>
-                  </ul>
-                ))}
+                  ))}
+                </ul>
               </AccordionContent>
             </AccordionItem>
           </Accordion>

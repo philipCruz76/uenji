@@ -5,8 +5,8 @@ import getCurrentUser from "@/lib/actions/getCurrentUser";
 interface UserProfilePageMobileProps {
   user: User;
 }
-const EmptyStateCard = lazy(() => import("./EmptyStateCard"));
-const SellerCard = lazy(() => import("./SellerCard"));
+const EmptyStateCard = lazy(() => import("./SellerOnboardingCard"));
+const SellerCard = lazy(() => import("./ProfileInfoCard"));
 
 const UserProfileMobilePage: FC<UserProfilePageMobileProps> = async ({
   user,

@@ -1,15 +1,60 @@
 "use client";
 
 import { useSellerOnboardingStore } from "@/lib/stores/selleOboarding-store";
+import { useSellerProfileStore } from "@/lib/stores/sellerProfile-store";
 import { cn } from "@/lib/utils";
+import {
+  SellerAccountSecurity,
+  SellerAccountSecurityValidator,
+  SellerProfileValidator,
+} from "@/types/sellerProfile.types";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import { useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const page = ({}) => {
   const user = useSession().data?.user;
 
   const { sellerOnboardingStep, setSellerOnboardingStep } =
     useSellerOnboardingStore();
+  const { setSellerAccountSecurity, getSellerProfile } =
+    useSellerProfileStore();
+
+  const accountSecurityHandler: SubmitHandler<SellerAccountSecurity> = (
+    data: SellerAccountSecurity
+  ) => {
+    setSellerAccountSecurity(data);
+    if (SellerProfileValidator.safeParse(getSellerProfile()).success) {
+      console.log(getSellerProfile());
+      fetch("/api/activate/seller/", {
+        method: "POST",
+        body: JSON.stringify(getSellerProfile()),
+      })
+        .then((res) => {
+          if (res.ok) {
+            toast.success("Seller profile created successfully.");
+            redirect("/");
+          }
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
+    } else {
+      toast.error("Please return and fill in previous steps.");
+    }
+  };
+
+  const {
+    formState: { isValid },
+    handleSubmit,
+    register,
+  } = useForm<SellerAccountSecurity>({
+    mode: "onChange",
+    resolver: zodResolver(SellerAccountSecurityValidator),
+  });
 
   useEffect(() => {
     sellerOnboardingStep !== 3 && setSellerOnboardingStep(3);
@@ -24,7 +69,10 @@ const page = ({}) => {
           email and phone number so that we can keep your account secured.
         </h3>
       </div>
-      <form className="flex flex-col gap-4 w-full h-fit py-4 border-b">
+      <form
+        className="flex flex-col gap-4 w-full h-fit py-4 border-b"
+        onSubmit={handleSubmit(accountSecurityHandler)}
+      >
         <div className="flex tablet:flex-row flex-col justify-start w-full h-fit group tablet:pt-[35px] ">
           <aside className="flex flex-row gap-2  items-center justify-start flex-wrap h-fit w-full min-w-[210px]">
             <svg
@@ -45,18 +93,15 @@ const page = ({}) => {
           </aside>
 
           <div>
-            {user?.isActive === true ? (
-              <div className="flex items-center tablet:w-[150px] w-full justify-center px-4 py-2 border  rounded-md shadow-sm text-sm font-medium text-gray-500 bg-sky-200  border-slate-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">
-                Verified
-              </div>
-            ) : (
-              <button
-                type="button"
-                className="flex items-center w-[150px] justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
-              >
-                Verify
-              </button>
-            )}
+            <a
+              {...register("emailVerified", {
+                required: true,
+                value: user?.isActive!,
+              })}
+              className="flex items-center tablet:w-[150px] w-full justify-center px-4 py-2 border  rounded-md shadow-sm text-sm font-medium text-gray-500 bg-sky-200  border-slate-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+            >
+              Verified
+            </a>
           </div>
         </div>
 
@@ -78,18 +123,32 @@ const page = ({}) => {
               </small>
             </h3>
           </aside>
+          <div>
+            <a
+              {...register("phoneVerified", {
+                required: true,
+                value: false,
+              })}
+              className="flex items-center tablet:w-[150px] w-full justify-center px-4 py-2 border  rounded-md shadow-sm text-sm font-medium text-gray-500 bg-sky-200  border-slate-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+            >
+              Unverified
+            </a>
+          </div>
+        </div>
+        <div className="flex items-center justify-end py-4">
+          <button
+            disabled={!isValid}
+            type="submit"
+            className={cn(
+              `tablet:w-[100px] w-full h-[40px]  ${
+                isValid ? "bg-sky-600" : "bg-gray-400"
+              }  text-white rounded-sm`
+            )}
+          >
+            Concluir
+          </button>
         </div>
       </form>
-      <div className="flex items-center justify-end py-4">
-        <button
-          type="submit"
-          className={cn(
-            " tablet:w-[100px] w-full h-[40px]  bg-sky-600 text-white rounded-sm",
-          )}
-        >
-          Concluir
-        </button>
-      </div>
     </>
   );
 };
