@@ -7,7 +7,7 @@ import {
   SellerInfo,
   SellerProfessionalInfo,
 } from "@/types/sellerProfile.types";
-import {  lazy, useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Control,
@@ -47,7 +47,7 @@ type SellerEducationInfo = {
 };
 
 const DataTable = lazy(
-  () => import("@/components/users/seller_profile/DataTable")
+  () => import("@/components/users/seller_profile/DataTable"),
 );
 const SkillLevels = ["Beginner", "Intermediate", "Expert"];
 
@@ -66,7 +66,7 @@ const page = ({}) => {
   const [skills, setSkills] = useState<Map<string, string>>(new Map());
   const [education, setEducation] = useState<Map<string, string>>(new Map());
   const [certifications, setCertifications] = useState<Map<string, string>>(
-    new Map()
+    new Map(),
   );
   const [currentSelectedSkill, setCurrentSelectedSkill] = useState({
     fieldName: "",
@@ -117,7 +117,7 @@ const page = ({}) => {
     const initialYear = 1970;
     const yearsArray = Array.from(
       { length: currentYear - initialYear + 1 },
-      (_, i) => initialYear + i
+      (_, i) => initialYear + i,
     );
     yearsArray.reverse();
     setYears(yearsArray);
@@ -126,14 +126,14 @@ const page = ({}) => {
   useEffect(() => {
     const occupationYearArray = Array.from(
       { length: currentYear - startYear + 1 },
-      (_, i) => startYear + i
+      (_, i) => startYear + i,
     );
     occupationYearArray.reverse();
     setOccupationYears(occupationYearArray);
   }, [startYear]);
 
   const professionalInfoHandler: SubmitHandler<SellerProfessionalInfo> = (
-    data: SellerProfessionalInfo
+    data: SellerProfessionalInfo,
   ) => {
     setSellerProfessionalInfo(data);
     console.log(getSellerProfessionalInfo());
@@ -217,7 +217,9 @@ const page = ({}) => {
                     }}
                   >
                     {occupationYears.map((year) => (
-                      <option value={year}key={year} >{year}</option>
+                      <option value={year} key={year}>
+                        {year}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -248,7 +250,7 @@ const page = ({}) => {
                             Skill {skill}
                           </span>
                         </div>
-                      )
+                      ),
                     )}
                   </div>
                   <div className="h-[1px] bg-slate-200" />
@@ -346,15 +348,15 @@ const page = ({}) => {
                           ? "bg-gray-400"
                           : "bg-sky-600"
                       }`,
-                      "text-white font-semibold hover:opacity-50 rounded-sm"
+                      "text-white font-semibold hover:opacity-50 rounded-sm",
                     )}
                     onClick={() => {
                       if (skills.size < 10) {
                         setSkills(
                           skills.set(
                             currentSelectedSkill.fieldName,
-                            currentSelectedSkill.fieldLevel
-                          )
+                            currentSelectedSkill.fieldLevel,
+                          ),
                         );
                         setShowAddSkillInput(false);
                         setCurrentSelectedSkill({
@@ -532,7 +534,7 @@ const page = ({}) => {
                             ? "bg-gray-400"
                             : "bg-sky-600"
                         }`,
-                        "text-white font-semibold rounded-sm hover:opacity-50"
+                        "text-white font-semibold rounded-sm hover:opacity-50",
                       )}
                       onClick={() => {
                         setEducation(
@@ -544,8 +546,8 @@ const page = ({}) => {
                               ";" +
                               currentSelectedEducationInfo.educationCountry +
                               ";" +
-                              currentSelectedEducationInfo.educationLevel
-                          )
+                              currentSelectedEducationInfo.educationLevel,
+                          ),
                         );
                         setShowAddEducationInput(false);
                         setCurrentSelectedEducationInfo({
@@ -711,7 +713,7 @@ const page = ({}) => {
                           ? "bg-gray-400"
                           : "bg-sky-600"
                       }`,
-                      "text-white font-semibold rounded-sm hover:opacity-50"
+                      "text-white font-semibold rounded-sm hover:opacity-50",
                     )}
                     onClick={() => {
                       setCertifications(
@@ -719,8 +721,8 @@ const page = ({}) => {
                           currentSelectedCertification.fieldName,
                           currentSelectedCertification.fieldLevel +
                             ";" +
-                            currentSelectedCertification.institutionName
-                        )
+                            currentSelectedCertification.institutionName,
+                        ),
                       );
                       setShowAddCertificationInput(false);
                       setCurrentSelectedCertification({
@@ -805,7 +807,7 @@ const page = ({}) => {
           className={cn(
             `w-[200px] h-[40px] ${
               isValid ? " bg-sky-600" : "bg-gray-400"
-            } text-white rounded-sm`
+            } text-white rounded-sm`,
           )}
         >
           Continuar

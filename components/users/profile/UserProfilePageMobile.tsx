@@ -26,12 +26,13 @@ const UserProfileMobilePage: FC<UserProfilePageMobileProps> = async ({
         createdAt={createdAt}
         isOnline={isOnline}
       />
-      {isSeller ? (<div className="gap-2 w-[100dvw] h-[100dvh]">
-        <SellerInfoCard publicMode={publicMode} user={user}/>
-        <div className="w-full text-center py-10 h-fit">
-          {" "}
-          To be implemented Gig showcase
-        </div>
+      {isSeller ? (
+        <div className="gap-2 w-[100dvw] h-[100dvh]">
+          <SellerInfoCard publicMode={publicMode} user={user} />
+          <div className="w-full text-center py-10 h-fit">
+            {" "}
+            To be implemented Gig showcase
+          </div>
         </div>
       ) : publicMode ? null : (
         <SellerOnboardingCard />

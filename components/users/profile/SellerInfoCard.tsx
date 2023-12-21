@@ -50,7 +50,7 @@ const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
   const parsedSkills = JSON.parse(skills!) as SellerSkills;
   const parsedEducation = JSON.parse(education!) as SellerEducation;
   const parsedCertification = JSON.parse(
-    certification!
+    certification!,
   ) as SellerCertifications;
 
   return (

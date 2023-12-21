@@ -44,9 +44,9 @@ export async function POST(request: Request) {
                 secure: true,
                 fetch_format: "auto",
                 sign_url: true,
-              })
+              }),
             });
-          }
+          },
         )
         .end(buffer);
     });

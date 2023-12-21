@@ -28,11 +28,12 @@ const UserProfilePage: FC<UserProfilePageProps> = async ({ user }) => {
           createdAt={createdAt}
           isOnline={isOnline}
         />
-        {isSeller ? (<SellerInfoCard publicMode={publicMode} user={user}/>): null}
-        
+        {isSeller ? (
+          <SellerInfoCard publicMode={publicMode} user={user} />
+        ) : null}
       </div>
       <div className="block my-20">
-        {isSeller  ? (
+        {isSeller ? (
           <div className="flex flex-1  desktop:w-[730px] tablet:w-[500px]  h-[450px] border bg-white items-center text-center justify-center">
             To be implemented Gig showcase
           </div>

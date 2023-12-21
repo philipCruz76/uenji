@@ -52,17 +52,16 @@ export const ProfessionalInfoValidator = z.object({
           message: "Please enter a valid degree name.",
         }),
       }),
-    ).max(3, "Please insert at most 3 education parameters.")
+    )
+    .max(3, "Please insert at most 3 education parameters.")
     .optional(),
   certifications: z
     .array(
       z.object({
         name: z.string(),
-        institution: z
-          .string()
-          .regex(/^[a-zA-Z\s]+$/, {
-            message: "Please enter a valid institution name.",
-          }),
+        institution: z.string().regex(/^[a-zA-Z\s]+$/, {
+          message: "Please enter a valid institution name.",
+        }),
         year: z.string(),
       }),
     )
@@ -74,7 +73,6 @@ export type SellerProfessionalInfo = z.infer<typeof ProfessionalInfoValidator>;
 
 export type SellerInfo = SellerPersonalInfo | SellerProfessionalInfo;
 
-
 export const SellerAccountSecurityValidator = z.object({
   emailVerified: z.boolean().optional(),
   phoneVerified: z.boolean().optional(),
@@ -85,7 +83,9 @@ export const SellerProfileValidator = z.object({
   professionalInfo: ProfessionalInfoValidator,
   accountSecurity: SellerAccountSecurityValidator,
 });
-export type SellerAccountSecurity = z.infer<typeof SellerAccountSecurityValidator>;
+export type SellerAccountSecurity = z.infer<
+  typeof SellerAccountSecurityValidator
+>;
 
 export type FullSellerProfile = {
   personalInfo: SellerPersonalInfo;

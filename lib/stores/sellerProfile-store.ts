@@ -55,19 +55,19 @@ export const useSellerProfileStore = create<SellerProfileStore>()(
       set(
         produce((state) => {
           state.sellerProfile.personalInfo = personalInfo;
-        })
+        }),
       ),
     setSellerProfessionalInfo: (professionalInfo) =>
       set(
         produce((state) => {
           state.sellerProfile.professionalInfo = professionalInfo;
-        })
+        }),
       ),
     setSellerAccountSecurity: (accountSecurity) =>
       set(
         produce((state) => {
           state.sellerProfile.accountSecurity = accountSecurity;
-        })
+        }),
       ),
     getSellerPersonalInfo: () => {
       return get().sellerProfile.personalInfo;
@@ -81,5 +81,5 @@ export const useSellerProfileStore = create<SellerProfileStore>()(
     getSellerProfile: () => {
       return get().sellerProfile;
     },
-  })
+  }),
 );

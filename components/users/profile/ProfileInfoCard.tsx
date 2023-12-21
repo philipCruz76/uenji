@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { FC, useCallback } from "react";
 import { toast } from "react-hot-toast";
 
-type SellerCardProps= {
+type SellerCardProps = {
   publicMode?: boolean;
   userId: string | null;
   username: string | null;
@@ -12,7 +12,7 @@ type SellerCardProps= {
   country: string | null;
   createdAt: Date | null;
   isOnline: boolean | null;
-}
+};
 
 const ProfileInfoCard: FC<SellerCardProps> = ({
   publicMode,

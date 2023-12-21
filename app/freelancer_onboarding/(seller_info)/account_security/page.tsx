@@ -11,6 +11,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -24,7 +25,7 @@ const page = ({}) => {
     useSellerProfileStore();
 
   const accountSecurityHandler: SubmitHandler<SellerAccountSecurity> = (
-    data: SellerAccountSecurity
+    data: SellerAccountSecurity,
   ) => {
     setSellerAccountSecurity(data);
     if (SellerProfileValidator.safeParse(getSellerProfile()).success) {
@@ -33,8 +34,9 @@ const page = ({}) => {
         method: "POST",
         body: JSON.stringify(getSellerProfile()),
       })
-        .then((res) => {
-          if (res.ok) {
+        .then(async (res) => {
+          const { ok } = await res.json();
+          if (ok === true) {
             toast.success("Seller profile created successfully.");
             redirect("/");
           }
@@ -142,7 +144,7 @@ const page = ({}) => {
             className={cn(
               `tablet:w-[100px] w-full h-[40px]  ${
                 isValid ? "bg-sky-600" : "bg-gray-400"
-              }  text-white rounded-sm`
+              }  text-white rounded-sm`,
             )}
           >
             Concluir

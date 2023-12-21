@@ -113,7 +113,7 @@ function DataTable({
                       {
                         required: true,
                         value: initialInput.get(input)?.split(";")[1],
-                      }
+                      },
                     )}
                     {...fieldRegister(`${fieldToRegister}.${index}.year`, {
                       required: true,
@@ -130,14 +130,14 @@ function DataTable({
                       {
                         required: true,
                         value: initialInput.get(input)?.split(";")[3],
-                      }
+                      },
                     )}
                     {...fieldRegister(
                       `${fieldToRegister}.${index}.institution`,
                       {
                         required: true,
                         value: initialInput.get(input)?.split(";")[1],
-                      }
+                      },
                     )}
                     {...fieldRegister(`${fieldToRegister}.${index}.country`, {
                       required: true,
@@ -177,8 +177,13 @@ function DataTable({
                             institutionName: institutionName,
                             fieldLevel: certificationYear,
                           });
-                        }  else  if (fieldToRegister === "education"){
-                          const [educationYear, institutionName, educationCountry, educationLevel] = initialInput.get(input)!.split(";");
+                        } else if (fieldToRegister === "education") {
+                          const [
+                            educationYear,
+                            institutionName,
+                            educationCountry,
+                            educationLevel,
+                          ] = initialInput.get(input)!.split(";");
                           selectedField({
                             fieldName: input,
                             institutionName: institutionName,
@@ -186,8 +191,7 @@ function DataTable({
                             educationLevel: educationLevel,
                             fieldLevel: educationYear,
                           });
-                        }
-                        else {
+                        } else {
                           selectedField({
                             fieldName: input,
                             fieldLevel: initialInput.get(input)!,

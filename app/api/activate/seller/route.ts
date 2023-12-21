@@ -1,6 +1,5 @@
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 import { db } from "@/lib/db";
-import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -14,7 +13,7 @@ export async function POST(request: Request) {
 
     console.log("Activating seller with profile: ", user.username);
 
-    console.log(body)
+    console.log(body);
 
     await db.user.update({
       where: {
@@ -24,23 +23,19 @@ export async function POST(request: Request) {
         name: body.personalInfo.name,
         image: body.personalInfo.profilePicture,
         description: body.personalInfo.description,
-        languages:  JSON.stringify(body.personalInfo.languages), 
-        occupation:  JSON.stringify(body.professionalInfo.occupation),
-        skills:  JSON.stringify(body.professionalInfo.skills),
-        education:  JSON.stringify(body.professionalInfo.education),
-        certification:  JSON.stringify(body.professionalInfo.certifications),
+        languages: JSON.stringify(body.personalInfo.languages),
+        occupation: JSON.stringify(body.professionalInfo.occupation),
+        skills: JSON.stringify(body.professionalInfo.skills),
+        education: JSON.stringify(body.professionalInfo.education),
+        certification: JSON.stringify(body.professionalInfo.certifications),
         personalWebsite: body.professionalInfo.personalWebsite,
         active: true,
         isSeller: true,
       },
     });
-    return NextResponse.json({
-        ok: true,
-    })
+    return NextResponse.json({ ok: true });
   } catch (error) {
     console.log("Seller activation error: ", error);
-    return {
-      ok: false,
-    };
+    return NextResponse.error();
   }
 }

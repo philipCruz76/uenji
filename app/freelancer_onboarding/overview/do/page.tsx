@@ -6,8 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-
-const page= async () => {
+const page = async () => {
   const isSeller = await getCurrentUser().then((user) => user?.isSeller);
   if (isSeller?.valueOf() === true) redirect("/");
   return (
