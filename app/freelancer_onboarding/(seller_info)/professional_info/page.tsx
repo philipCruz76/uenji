@@ -1,6 +1,6 @@
 "use client";
 import { Input } from "@/components/ui/Input";
-import { useSellerOnboardingStore } from "@/lib/stores/selleOboarding-store";
+import { useSellerOnboardingStore } from "@/lib/stores/sellerOboarding-store";
 import { cn } from "@/lib/utils";
 import {
   ProfessionalInfoValidator,

@@ -1,7 +1,7 @@
 "use client";
 import { Input } from "@/components/ui/Input";
 import DataTable from "@/components/users/seller_profile/DataTable";
-import { useSellerOnboardingStore } from "@/lib/stores/selleOboarding-store";
+import { useSellerOnboardingStore } from "@/lib/stores/sellerOboarding-store";
 import { useSellerProfileStore } from "@/lib/stores/sellerProfile-store";
 import { cn } from "@/lib/utils";
 import {

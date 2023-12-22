@@ -24,7 +24,7 @@ export default async function layout({
   });
   return (
     <section className="flex tablet:container max-w-[100dvw] max-h-[100dvh] flex-row   text-center py-6 px-6">
-      <div className="flex w-full tablet:pr-4 rounded-md max-h-full justify-start tablet:max-w-[350px]">
+      <div className="hidden tablet:flex w-full tablet:pr-4 rounded-md max-h-full justify-start tablet:max-w-[350px]">
         <ConversationsSidebar
           initialConversations={conversations}
           currentUserEmail={currentUser.email}

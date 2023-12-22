@@ -2,7 +2,7 @@
 
 import { Progress } from "@/components/ui/Progress";
 import Link from "next/link";
-import { useSellerOnboardingStore } from "@/lib/stores/selleOboarding-store";
+import { useSellerOnboardingStore } from "@/lib/stores/sellerOboarding-store";
 import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
