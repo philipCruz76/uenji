@@ -16,21 +16,9 @@ import {
   useForm,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ISOCountries } from "@/constants";
+import { ISOCountries, categoryFilters } from "@/constants";
 import { useSellerProfileStore } from "@/lib/stores/sellerProfile-store";
 
-const OccupationFields = [
-  "Fotografía",
-  "Formação",
-  "Escrita",
-  "Música",
-  "Design",
-  "Análises",
-  "Programação",
-  "Vídeo",
-  "Negócios",
-  "Branding",
-];
 
 type SellerCeritifcation = {
   fieldName: string;
@@ -183,9 +171,9 @@ const page = ({}) => {
                 <option value="" disabled>
                   Selecionar Ramo
                 </option>
-                {OccupationFields.map((occupation) => (
+                {categoryFilters.map((occupation) => (
                   <option value={occupation} key={occupation}>
-                    {occupation}
+                    {occupation.toUpperCase()}
                   </option>
                 ))}
               </select>

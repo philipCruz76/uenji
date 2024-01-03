@@ -21,15 +21,15 @@ const page = async () => {
   });
   return (
     <>
-    <div className="tablet:hidden flex w-full rounded-md max-h-full justify-start ">
+      <div className="tablet:hidden flex w-full rounded-md max-h-full justify-start ">
         <ConversationsSidebar
           initialConversations={conversations}
           currentUserEmail={currentUser.email}
         />
       </div>
-    <div className="hidden tablet:flex">
-      <EmptyState user={currentUser} />
-    </div>
+      <div className="hidden tablet:flex">
+        <EmptyState user={currentUser} />
+      </div>
     </>
   );
 };

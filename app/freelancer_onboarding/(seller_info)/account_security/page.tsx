@@ -11,7 +11,6 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
