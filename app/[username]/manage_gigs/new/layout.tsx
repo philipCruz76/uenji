@@ -25,21 +25,15 @@ const gigSteps = [
     current: false,
   },
   {
-    name: "Requirements",
-    href: "/%5Busername%5D/manage_gigs/new/requirements",
-    step: 4,
-    current: false,
-  },
-  {
     name: "Gallery",
     href: "/%5Busername%5D/manage_gigs/new/gallery",
-    step: 5,
+    step: 4,
     current: false,
   },
   {
     name: "Publish",
     href: "/%5Busername%5D/manage_gigs/new/publish",
-    step: 6,
+    step: 5,
     current: false,
   },
 ];

@@ -36,7 +36,7 @@ const GigWizardStep = ({ currentStep }: GigWizardStepProps) => {
       >
         {currentStep.name}
       </a>
-      {currentStep.step === 6 ? null : (
+      {currentStep.step === 5 ? null : (
         <Image
           src="/icons/arrow-circle-right.svg"
           alt="chevron right"
