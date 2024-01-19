@@ -42,12 +42,12 @@ const Header: FC<HeaderProps> = async ({ chatPartner }) => {
           <div className="flex flex-row  min-w-fit items-center gap-2">
             <div className="rounded-full bg-gray-300 h-[14px] w-[14px]" />
             <h1 className="flex w-full">
-              <a
+              <Link
                 href={`/${chatPartner.username}?source=inbox`}
                 className="min-w-fit text-base tablet:text-lg font-bold underline hover:text-gray-500"
               >
                 {chatPartner.name ? chatPartner.name : chatPartner.username}
-              </a>
+              </Link>
               <span className="px-2 text-sm tablet:text-base text-gray-500">
                 @{chatPartner.username}
               </span>

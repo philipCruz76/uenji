@@ -1,5 +1,6 @@
 import { CategoryDesciptions } from "@/constants";
 import Image from "next/image";
+import Link from "next/link";
 
 const HeroCategoryExpo = () => {
   return (
@@ -14,7 +15,7 @@ const HeroCategoryExpo = () => {
           <ul className="grid desktop:grid-cols-5 tablet:grid-cols-3 grid-cols-2 min-w-full items-center justify-between flex-wrap">
             {CategoryDesciptions.map((category) => (
               <li key={category.category}>
-                <a
+                <Link
                   href={`/categorias/${category.category}`}
                   className="flex flex-col group gap-[10px] w-[150px] h-[150px] cursor-pointer items-center justify-center text-center"
                 >
@@ -30,7 +31,7 @@ const HeroCategoryExpo = () => {
                     {category.categoryTitle}
                   </p>
                   <div className="flex transition ease-in-out duration-300 h-[3px] w-12 bg-slate-500 group-hover:bg-sky-600  group-hover:scale-x-150 " />
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

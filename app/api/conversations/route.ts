@@ -7,30 +7,28 @@ export async function POST(request: Request) {
   try {
     const currentUser = await getCurrentUser();
     const body = await request.json();
-    const { userId } = body;
+    const { id } = body;
 
     if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse("Unauthorized", { status: 400 });
     }
 
-    const existingConversations = await db.conversation.findMany({
+    const singleConversation = await db.conversation.findFirst({
       where: {
         OR: [
           {
             userIds: {
-              equals: [currentUser.id, userId],
+              equals: [currentUser.id, id],
             },
           },
           {
             userIds: {
-              equals: [userId, currentUser.id],
+              equals: [id, currentUser.id],
             },
           },
         ],
       },
     });
-
-    const singleConversation = existingConversations[0];
 
     if (singleConversation) {
       return NextResponse.json(singleConversation);
@@ -44,7 +42,7 @@ export async function POST(request: Request) {
               id: currentUser.id,
             },
             {
-              id: userId,
+              id: id,
             },
           ],
         },
@@ -60,7 +58,7 @@ export async function POST(request: Request) {
         await pusherServer.trigger(
           user.email,
           "conversation:new",
-          newConversation,
+          newConversation
         );
       }
     });
@@ -96,6 +94,7 @@ export async function GET() {
         },
       },
     });
+
 
     return NextResponse.json(existingConversations);
   } catch (error) {

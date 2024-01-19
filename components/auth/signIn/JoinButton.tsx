@@ -31,7 +31,7 @@ const JoinButton: FC<JoinButtonProps> = ({ isButton }) => {
           }}
           className={cn(
             buttonVariants({ variant: "outline" }),
-            "flex hover:bg-sky-600 hover:border-sky-600 max-w-[80px] cursor-pointer",
+            "flex hover:bg-amber-600 hover:border-amber-600 max-w-[80px] cursor-pointer",
           )}
         >
           {" "}

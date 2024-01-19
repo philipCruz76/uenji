@@ -11,6 +11,7 @@ import {
 } from "../ui/DropdownMenu";
 import { FullConversationType } from "@/types/common.types";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 interface InboxDropDownMenuProps {}
 
@@ -83,9 +84,9 @@ const InboxDropDownMenu: FC<InboxDropDownMenuProps> = ({}) => {
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuGroup className="flex flex-row w-full justify-end">
-            <a href="/inbox" className="text-xs hover:underline text-blue-700">
+            <Link href="/inbox" className="text-xs hover:underline text-blue-700">
               See All in Inbox
-            </a>
+            </Link>
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenuPortal>

@@ -121,17 +121,17 @@ model PasswordResetToken {
 
 model Gig {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  title          String
-  description    String
+  title          String   @db.String
+  description    String?  @db.String
   totalRatings   Int?     @default(0) @map(name: "total_ratings")
   ratingNumber   Int?     @default(0) @map(name: "rating_number")
   category       String
-  price          Float
+  price          Float?
   coverImage     String?  @map(name: "cover_image")
-  images         String[]
-  shortTitle     String   @map(name: "short_title")
-  deliveryTime   Int      @map(name: "delivery_time")
-  revisionNumber Int      @default(0) @map(name: "revision_number")
+  images         String[] 
+  shortTitle     String?   @map(name: "short_title")
+  deliveryTime   Int?      @map(name: "delivery_time")
+  revisionNumber Int?     @default(0) @map(name: "revision_number")
   features       String[]
   sales          Int?     @default(0)
   userId         String   @map(name: "user_id") @db.ObjectId

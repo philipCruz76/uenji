@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FC, useCallback } from "react";
 import { toast } from "react-hot-toast";
 
 type SellerCardProps = {
-  publicMode?: boolean;
   userId: string | null;
   username: string | null;
   image: string | null;
@@ -15,7 +15,6 @@ type SellerCardProps = {
 };
 
 const ProfileInfoCard: FC<SellerCardProps> = ({
-  publicMode,
   username,
   image,
   country,
@@ -27,22 +26,6 @@ const ProfileInfoCard: FC<SellerCardProps> = ({
     month: "long",
     year: "numeric",
   });
-
-  const router = useRouter();
-  const handleClick = useCallback(() => {
-    fetch("/api/conversations", {
-      method: "POST",
-      body: JSON.stringify({ userId }),
-    })
-      .then((data) => {
-        data.json().then((data) => {
-          router.push(`/inbox/${username}?chatId=${data.id}`);
-        });
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
-  }, [username]);
 
   return (
     <div className="flex relative bg-white  tablet:w-[400px] h-[450px]">
@@ -77,19 +60,10 @@ const ProfileInfoCard: FC<SellerCardProps> = ({
           <h1 className="text-2xl font-bold text-gray-800">{username}</h1>
           <p className="text-sm text-zinc-600">@{username}</p>
         </div>
-        <div className="tablet:flex hidden h-auto">
-          {publicMode ? (
-            <a
-              onClick={handleClick}
-              className="border border-cyan-500 text-cyan-500 px-4 py-2 rounded-sm  cursor-pointer hover:bg-cyan-500 hover:text-white transform transition-colors ease-in-out duration-300 w-full h-fit  font-semibold  text-sm text-center"
-            >
-              Contact {username}
-            </a>
-          ) : (
-            <a className="border border-zinc-600 text-zinc-600 px-4 py-2 rounded-sm  cursor-pointer hover:bg-zinc-600 hover:text-white transform transition-colors ease-in-out duration-300 w-full h-fit  font-semibold  text-sm text-center">
-              Preview Uenji Profile
-            </a>
-          )}
+        <div className="flex  h-auto">
+          <Link href={`/${username}?publicMode=true`} className="border border-zinc-600 text-zinc-600 px-4 py-2 rounded-sm  cursor-pointer hover:bg-zinc-600 hover:text-white transform transition-colors ease-in-out duration-300 w-full h-fit  font-semibold  text-sm text-center">
+            Preview Uenji Profile
+          </Link>
         </div>
 
         {/* user stats */}

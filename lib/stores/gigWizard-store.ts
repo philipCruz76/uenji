@@ -6,6 +6,7 @@ import {
   GigGallery,
   GigOverview,
   GigPricing,
+  GigWizardStep,
 } from "@/types/gigWizard.types";
 
 type GigWizardStore = {
@@ -25,7 +26,7 @@ export const useGigWizardStore = create<GigWizardStore>()((set, get) => ({
   fullGig: {
     overview: {
       gigTitle: "",
-      gigCateogry: "",
+      gigCategory: "",
       gigSearchTags: [""],
     },
     pricing: {
@@ -84,5 +85,30 @@ export const useGigWizardStore = create<GigWizardStore>()((set, get) => ({
   },
   getFullGig: () => {
     return get().fullGig;
+  },
+}));
+
+
+type GigWizardStepStore = {
+  gigWizardStep: GigWizardStep;
+  setGigWizardStep: (step: GigWizardStep) => void;
+  getGigWizardStep: () => GigWizardStep;
+};
+
+export const useGigWizardStepStore = create<GigWizardStepStore>()((set, get) => ({
+  gigWizardStep: {
+    name: "Overview",
+    href: "/gig-wizard/overview",
+    step: 1,
+    current: true,
+  },
+  setGigWizardStep: (step) =>
+    set(
+      produce((state) => {
+        state.gigWizardStep = step;
+      })
+    ),
+  getGigWizardStep: () => {
+    return get().gigWizardStep;
   },
 }));

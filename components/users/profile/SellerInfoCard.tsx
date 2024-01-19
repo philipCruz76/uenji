@@ -1,7 +1,6 @@
 import { User } from "@prisma/client";
 
 type SellerInfoCardProps = {
-  publicMode?: boolean;
   user: User;
 };
 
@@ -36,7 +35,7 @@ type SellerEducation = {
   degree: string;
 }[];
 
-const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
+const SellerInfoCard = ({ user }: SellerInfoCardProps) => {
   const {
     description,
     languages,
@@ -50,18 +49,19 @@ const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
   const parsedSkills = JSON.parse(skills!) as SellerSkills;
   const parsedEducation = JSON.parse(education!) as SellerEducation;
   const parsedCertification = JSON.parse(
-    certification!,
+    certification!
   ) as SellerCertifications;
 
   return (
     <div className="flex relative bg-white  tablet:w-[400px] min-h-[450px] h-fit">
       <div className="flex flex-col gap-2 tablet:px-[30px] tablet:py-[30px] px-[20px] py-[20px]  border border-zinc-200 w-full h-fit items-center justify-center space-y-3">
-        {!publicMode ? (
+        {true ? (
           <>
             {/* Seller Description */}
             <div className="flex w-full flex-col gap-2">
               <div className="flex flex-row justify-between w-full pb-2">
                 <h3 className="text-base font-semibold">Descrição</h3>
+
                 <a className="text-xs hover:underline text-cyan-600 cursor-pointer">
                   Editar Descrição
                 </a>
@@ -74,6 +74,7 @@ const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
             <div className="flex w-full flex-col gap-2">
               <div className="flex flex-row justify-between w-full pb-2">
                 <h3 className="text-base font-semibold">Línguas</h3>
+
                 <a className="text-xs hover:underline text-cyan-600 cursor-pointer">
                   Editar Línguas
                 </a>
@@ -93,6 +94,7 @@ const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
             <div className="flex w-full flex-col gap-2">
               <div className="flex flex-row justify-between w-full pb-2">
                 <h3 className="text-base font-semibold">Profissão</h3>
+
                 <a className="text-xs hover:underline text-cyan-600 cursor-pointer">
                   Editar Profissão
                 </a>
@@ -110,6 +112,7 @@ const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
             <div className="flex w-full flex-col gap-2">
               <div className="flex flex-row justify-between w-full pb-2">
                 <h3 className="text-base font-semibold">Competências</h3>
+
                 <a className="text-xs hover:underline text-cyan-600 cursor-pointer">
                   Editar Competências
                 </a>
@@ -131,6 +134,7 @@ const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
             <div className="flex w-full flex-col gap-2">
               <div className="flex flex-row justify-between w-full pb-2">
                 <h3 className="text-base font-semibold">Educação</h3>
+
                 <a className="text-xs hover:underline text-cyan-600 cursor-pointer">
                   Editar Educação
                 </a>
@@ -150,6 +154,7 @@ const SellerInfoCard = ({ publicMode, user }: SellerInfoCardProps) => {
             <div className="flex w-full flex-col gap-2">
               <div className="flex flex-row justify-between w-full pb-2">
                 <h3 className="text-base font-semibold">Certificações</h3>
+
                 <a className="text-xs hover:underline text-cyan-600 cursor-pointer">
                   Editar Certificações
                 </a>

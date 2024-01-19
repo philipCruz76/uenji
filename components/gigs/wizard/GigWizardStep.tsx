@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 
 type gigSteps = {
@@ -25,7 +26,7 @@ const GigWizardStep = ({ currentStep }: GigWizardStepProps) => {
       >
         {currentStep.step}
       </div>
-      <a
+      <Link
         href={currentStep.href}
         className={cn(
           `${
@@ -35,7 +36,7 @@ const GigWizardStep = ({ currentStep }: GigWizardStepProps) => {
         aria-current={currentStep.current ? "page" : undefined}
       >
         {currentStep.name}
-      </a>
+      </Link>
       {currentStep.step === 5 ? null : (
         <Image
           src="/icons/arrow-circle-right.svg"

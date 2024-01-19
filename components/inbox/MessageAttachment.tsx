@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { FC } from "react";
 
 interface MessageAttachmentProps {
@@ -43,7 +44,7 @@ const MessageAttachment: FC<MessageAttachmentProps> = ({ fileUrl }) => {
         width="160"
         className="object-cover hover:scale-110 transition translate rounded-md"
       />
-      <a
+      <Link
         href={fileLink}
         className="text-xs hover:underline flex flex-row gap-1 cursor-pointer"
       >
@@ -57,11 +58,11 @@ const MessageAttachment: FC<MessageAttachmentProps> = ({ fileUrl }) => {
           <path d="M50.34,117.66a8,8,0,0,1,11.32-11.32L120,164.69V32a8,8,0,0,1,16,0V164.69l58.34-58.35a8,8,0,0,1,11.32,11.32l-72,72a8,8,0,0,1-11.32,0ZM216,208H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
         </svg>
         Download ({fileName}, {fileSize})
-      </a>
+      </Link>
     </div>
   ) : (
     <div className="flex flex-col gap-2 h-[60px] border items-center justify-center rounded-md">
-      <a
+      <Link
         href={fileLink}
         className="text-xs hover:underline flex flex-row gap-1 cursor-pointer"
       >
@@ -75,7 +76,7 @@ const MessageAttachment: FC<MessageAttachmentProps> = ({ fileUrl }) => {
           <path d="M50.34,117.66a8,8,0,0,1,11.32-11.32L120,164.69V32a8,8,0,0,1,16,0V164.69l58.34-58.35a8,8,0,0,1,11.32,11.32l-72,72a8,8,0,0,1-11.32,0ZM216,208H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
         </svg>
         Download ({fileName}, {fileSize})
-      </a>
+      </Link>
     </div>
   );
 };

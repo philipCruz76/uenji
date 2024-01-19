@@ -2,20 +2,23 @@ import { User } from "@prisma/client";
 import { FC, lazy } from "react";
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 
-interface UserProfilePageMobileProps {
+type UserProfilePageMobileProps = {
   user: User;
-}
+  publicMode?: boolean;
+};
+
 const SellerOnboardingCard = lazy(() => import("./SellerOnboardingCard"));
 const ProfileInfoCard = lazy(() => import("./ProfileInfoCard"));
 const SellerInfoCard = lazy(() => import("./SellerInfoCard"));
 
-const UserProfileMobilePage: FC<UserProfilePageMobileProps> = async ({
+const UserProfileMobilePage = async ({
   user,
-}) => {
+  publicMode,
+}: UserProfilePageMobileProps) => {
   const currentUser = await getCurrentUser();
   const { username, country, image, isSeller, createdAt, isOnline } = user;
 
-  const publicMode = currentUser?.username !== user.username;
+  publicMode !== undefined ? publicMode = publicMode : publicMode = currentUser?.username !== username;
   return (
     <div className="flex flex-col w-[100dvw] h-[100dvh]">
       <ProfileInfoCard
@@ -28,7 +31,7 @@ const UserProfileMobilePage: FC<UserProfilePageMobileProps> = async ({
       />
       {isSeller ? (
         <div className="gap-2 w-[100dvw] h-[100dvh]">
-          <SellerInfoCard publicMode={publicMode} user={user} />
+          <SellerInfoCard user={user} />
           <div className="w-full text-center py-10 h-fit">
             {" "}
             To be implemented Gig showcase

@@ -175,7 +175,8 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                     {" "}
                     Become a Seller
                   </Link>
-                ) : null}
+                ) : <Link href={`/${session.user.username}/gigs`} 
+                className="flex hover:underline text-zinc-600"> Gigs </Link>}
               </ul>
             ) : (
               <ul className="desktop:flex hidden  text-base font-semibold px-2 gap-[20px]">

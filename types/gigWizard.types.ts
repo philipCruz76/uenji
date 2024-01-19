@@ -2,11 +2,11 @@ import { z } from "zod";
 
 export const GigOverviewValidator = z.object({
   gigTitle: z.string().min(15,"15 characters at least").refine((str) => (str.match(/\b\w+\b/g) || []).length >= 4, "Your title should have at least 4 words"),
-  gigCateogry: z.string(),
+  gigCategory: z.string().min(1, "Please select a category"),
   gigSearchTags: z
     .array(
       z.string().regex(/^[a-zA-Z0-9]+$/, "Only letters and numbers are allowed")
-    )
+    ).min(1, "At least 1 tag required")
     .max(5, "5 tags maximum"),
 });
 
@@ -65,4 +65,11 @@ export type Gig = {
     pricing: GigPricing;
     description: GigDescription;
     gallery: GigGallery;
+}
+
+export type GigWizardStep = {
+  name: string;
+  href: string;
+  step: number;
+  current: boolean;
 }

@@ -1,48 +1,26 @@
 import { User } from "@prisma/client";
-import { FC, lazy } from "react";
+import { lazy } from "react";
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 
-interface UserProfilePageProps {
+type UserProfilePageProps = {
   user: User;
+  publicMode?: boolean;
 }
 
-const SellerOnboardingCard = lazy(() => import("./SellerOnboardingCard"));
-const ProfileInfoCard = lazy(() => import("./ProfileInfoCard"));
-const SellerInfoCard = lazy(() => import("./SellerInfoCard"));
+const PrivateProfileView = lazy(() => import("./PrivateProfileView"));
+const PublicProfileView = lazy(() => import("./PublicProfileView"));
 
-const UserProfilePage: FC<UserProfilePageProps> = async ({ user }) => {
+const UserProfilePage= async ({ user, publicMode }: UserProfilePageProps) => {
   const currentUser = await getCurrentUser();
-  const { username, image, country, createdAt, isOnline, id, isSeller } = user;
+  const { username } = user;
 
-  const publicMode = currentUser?.username !== user.username;
+  publicMode !== undefined ? publicMode = publicMode : publicMode = currentUser?.username !== username;
 
-  return (
-    <div className="flex flex-row flex-wrap  desktop:min-h-[2000px] justify-between w-[100dvw] ">
-      <div className="flex flex-col w-[400px] my-20 desktop:max-h-[2000px] gap-4">
-        <ProfileInfoCard
-          publicMode={publicMode}
-          userId={id}
-          username={username}
-          image={image}
-          country={country}
-          createdAt={createdAt}
-          isOnline={isOnline}
-        />
-        {isSeller ? (
-          <SellerInfoCard publicMode={publicMode} user={user} />
-        ) : null}
-      </div>
-      <div className="block my-20">
-        {isSeller ? (
-          <div className="flex flex-1  desktop:w-[730px] tablet:w-[500px]  h-[450px] border bg-white items-center text-center justify-center">
-            To be implemented Gig showcase
-          </div>
-        ) : publicMode ? null : (
-          <SellerOnboardingCard />
-        )}
-      </div>
-    </div>
-  );
+  if (!publicMode) {
+    return (<PrivateProfileView user={user} /> )
+  } else{
+    return (<PublicProfileView user={user}/> )
+  }
 };
 
 export default UserProfilePage;

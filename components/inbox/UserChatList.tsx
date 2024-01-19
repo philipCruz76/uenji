@@ -1,6 +1,7 @@
 "use client";
 import { FC, lazy, useMemo } from "react";
 import { FullConversationType, User } from "@/types/common.types";
+import Link from "next/link";
 
 type UserChatListProps = {
   data: FullConversationType;
@@ -20,7 +21,7 @@ const UserChatList: FC<UserChatListProps> = ({ data, chatPartner }) => {
   return (
     <div className="flex flex-1 flex-col">
       <div className="w-full h-[80px] hover:bg-zinc-100 rounded-md pr-4">
-        <a
+        <Link
           href={`/inbox/${chatPartner.username}?chatId=${data?.id}`}
           className="flex flex-1 mx-2 w-full h-full items-center justify-start flex-row gap-2 "
         >
@@ -56,7 +57,7 @@ const UserChatList: FC<UserChatListProps> = ({ data, chatPartner }) => {
                     : lastMessage?.body) || "No messages yet"}
             </span>
           </div>
-        </a>
+        </Link>
       </div>
     </div>
   );

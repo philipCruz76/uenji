@@ -23,12 +23,12 @@ const LoggedInMobileNavContent = () => {
         <div className="flex flex-row gap-4">
           <UserAvatar avatarPhoto={session.data?.user.image!} />
 
-          <a
+          <Link
             href={`/${session.data?.user.username}`}
             className="text-black font-bold py-2"
           >
             {session.data?.user.username}
-          </a>
+          </Link>
         </div>
 
         {/*Nav Links*/}
