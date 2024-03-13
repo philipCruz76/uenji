@@ -11,22 +11,22 @@ const page = async ({}) => {
   if (isSeller?.valueOf() === true) redirect("/");
 
   return (
-    <section className="flex container max-w-[100dvw]  min-h-[100dvh] ">
-      <div className="flex flex-col-reverse desktop:flex-row  w-full h-full items-center justify-between py-8 tablet:pl-[25px] ">
-        <div className="flex px-[2rem] flex-col w-full h-full">
-          <h1 className="flex text-[#303030] w-full font-bold box-border tablet:max-w-[590px] tablet:pr-[80px] pb-[25px] tablet:text-2xl text-xl">
+    <section className="container flex min-h-[100dvh]  max-w-[100dvw] ">
+      <div className="flex h-full w-full  flex-col-reverse items-center justify-between py-8 tablet:pl-[25px] desktop:flex-row ">
+        <div className="flex h-full w-full flex-col px-[2rem]">
+          <h1 className="box-border flex w-full pb-[25px] text-xl font-bold text-[#303030] tablet:max-w-[590px] tablet:pr-[80px] tablet:text-2xl">
             {" "}
             Pronto para começar a vender no Uenji? Aqui está o resumo:
           </h1>
 
-          <ul className="flex flex-col border-t gap-8 w-full h-full py-4">
+          <ul className="flex h-full w-full flex-col gap-8 border-t py-4">
             {sellerOnboarding.map((item) => (
               <li
                 key={item.key}
-                className="text-gray-600 tablet:text-sm text-xs flex-row"
+                className="flex-row text-xs text-gray-600 tablet:text-sm"
               >
                 <Image alt={item.key} src={item.icon} height={43} width={43} />
-                <h3 className="font-bold tablet:text-base text-sm text-black">
+                <h3 className="text-sm font-bold text-black tablet:text-base">
                   {item.title}
                 </h3>
                 {item.subtext}
@@ -37,14 +37,14 @@ const page = async ({}) => {
             href="/freelancer_onboarding/overview/do"
             className={cn(
               buttonVariants({ variant: "default" }),
-              "flex bg-sky-500 tablet:w-[160px] w-full text-white",
+              "flex w-full bg-sky-500 text-white tablet:w-[160px]",
             )}
           >
             Continuar
           </Link>
         </div>
-        <div className="flex flex-col w-full  py-[20px] items-center text-center  ">
-          <video controls muted className="flex min-w-full box-content">
+        <div className="flex w-full flex-col  items-center py-[20px] text-center  ">
+          <video controls muted className="box-content flex min-w-full">
             <source
               src="https://res.cloudinary.com/dqe71igxe/video/upload/f_auto:video,q_auto/v1/videos/WorkingStockVideo"
               type="video/mp4"

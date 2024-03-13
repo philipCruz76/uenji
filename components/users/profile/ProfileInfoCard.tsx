@@ -1,9 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { FC, useCallback } from "react";
-import { toast } from "react-hot-toast";
+import { FC } from "react";
 
 type SellerCardProps = {
   userId: string | null;
@@ -20,7 +18,6 @@ const ProfileInfoCard: FC<SellerCardProps> = ({
   country,
   createdAt,
   isOnline,
-  userId,
 }) => {
   const memberSince = new Date(createdAt!).toLocaleDateString("en-US", {
     month: "long",
@@ -28,20 +25,20 @@ const ProfileInfoCard: FC<SellerCardProps> = ({
   });
 
   return (
-    <div className="flex relative bg-white  tablet:w-[400px] h-[450px]">
-      <div className=" flex-col px-[30px] py-[30px]  border border-zinc-200 w-full max-h-full items-center justify-center space-y-3">
+    <div className="relative flex h-[450px]  bg-white tablet:w-[400px]">
+      <div className=" max-h-full w-full flex-col  items-center justify-center space-y-3 border border-[#dee2e6] px-[30px] py-[30px]">
         {/* user profile info */}
 
-        <div className="flex container flex-row absolute right-0">
+        <div className="container absolute right-0 flex flex-row">
           {isOnline ? (
-            <div className=" flex w-[68px] max-h-[20px] flex-row absolute right-[30px] z-1 border border-green-400 text-green-400 rounded-xl justify-center items-center">
-              <p className="absolute left-1 top-1/2 transform -translate-y-[70%]">
+            <div className=" z-1 absolute right-[30px] flex max-h-[20px] w-[68px] flex-row items-center justify-center rounded-xl border border-green-400 text-green-400">
+              <p className="absolute left-1 top-1/2 -translate-y-[70%] transform">
                 .
               </p>
               <span>Online</span>
             </div>
           ) : (
-            <div className=" flex w-[68px] max-h-[20px] flex-row absolute right-[30px] z-1 border border-zinc-400 text-zinc-400 rounded-xl justify-center items-center">
+            <div className=" z-1 absolute right-[30px] flex max-h-[20px] w-[68px] flex-row items-center justify-center rounded-xl border border-zinc-400 text-zinc-400">
               <span>Offline</span>
             </div>
           )}
@@ -53,23 +50,26 @@ const ProfileInfoCard: FC<SellerCardProps> = ({
             src={image! || "./icons/default-user.svg"}
             alt="profile picture"
             referrerPolicy="no-referrer"
-            className="w-[200px] h-[200px] rounded-full hover:opacity-80 transition duration-150 ease-in-out cursor-pointer"
+            className="h-[200px] w-[200px] cursor-pointer rounded-full transition duration-150 ease-in-out hover:opacity-80"
           />
         </div>
-        <div className="flex flex-col space-x-2 items-center justify-center text-center">
+        <div className="flex flex-col items-center justify-center space-x-2 text-center">
           <h1 className="text-2xl font-bold text-gray-800">{username}</h1>
           <p className="text-sm text-zinc-600">@{username}</p>
         </div>
         <div className="flex  h-auto">
-          <Link href={`/${username}?publicMode=true`} className="border border-zinc-600 text-zinc-600 px-4 py-2 rounded-sm  cursor-pointer hover:bg-zinc-600 hover:text-white transform transition-colors ease-in-out duration-300 w-full h-fit  font-semibold  text-sm text-center">
+          <Link
+            href={`/${username}?publicMode=true`}
+            className="h-fit w-full transform cursor-pointer rounded-sm border  border-zinc-600 px-4 py-2 text-center text-sm font-semibold text-zinc-600 transition-colors duration-300  ease-in-out  hover:bg-zinc-600 hover:text-white"
+          >
             Preview Uenji Profile
           </Link>
         </div>
 
         {/* user stats */}
-        <div className="flex flex-col border-t-2 space-y-2 text-sm font-normal py-4">
-          <div className="flex justify-between w-full">
-            <p className="flex-row flex">
+        <div className="flex flex-col space-y-2 border-t-2 py-4 text-sm font-normal">
+          <div className="flex w-full justify-between">
+            <p className="flex flex-row">
               {" "}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ const ProfileInfoCard: FC<SellerCardProps> = ({
             </p>
             <p className="font-bold">{country ? ` ${country}` : " Unknown"}</p>
           </div>
-          <div className="flex justify-between w-full">
+          <div className="flex w-full justify-between">
             <p className="flex flex-row">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

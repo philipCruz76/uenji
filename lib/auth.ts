@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+import db from "@/lib/db";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextAuthOptions, getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -11,7 +11,6 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
-  debug: process.env.NODE_ENV === "development",
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -83,11 +82,11 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   events: {
-    async signIn(message) {
+    async signIn(session) {
       try {
         await db.user.update({
           where: {
-            id: message.user.id,
+            id: session.user.id,
           },
           data: {
             isOnline: true,
@@ -97,16 +96,28 @@ export const authOptions: NextAuthOptions = {
         console.error(error);
       }
     },
-    async signOut(message) {
+    async signOut(session) {
       try {
-        await db.user.update({
-          where: {
-            id: message.token.id,
-          },
-          data: {
-            isOnline: false,
-          },
-        });
+        if (session.token.isSeller) {
+          await db.user.update({
+            where: {
+              id: session.token.id,
+            },
+            data: {
+              isOnline: false,
+              sellerView: true,
+            },
+          });
+        } else {
+          await db.user.update({
+            where: {
+              id: session.token.id,
+            },
+            data: {
+              isOnline: false,
+            },
+          });
+        }
       } catch (error: any) {
         console.error(error);
       }
@@ -123,6 +134,9 @@ export const authOptions: NextAuthOptions = {
         session.user.isOnline = token.isOnline;
         session.user.username = token.username;
         session.user.isActive = token.isActive;
+        session.user.sellerView = token.sellerView;
+        session.user.gigIds = token.gigIds;
+        session.user.conversationIds = token.conversationIds;
       }
       return session;
     },
@@ -131,6 +145,10 @@ export const authOptions: NextAuthOptions = {
       const dbUser = await db.user.findFirst({
         where: {
           email: token.email,
+        },
+        include: {
+          conversations: true,
+          Gig: true,
         },
       });
 
@@ -155,6 +173,11 @@ export const authOptions: NextAuthOptions = {
         }
       }
 
+      const gigIds = dbUser.Gig.map((gig) => gig.id);
+      const conversationIds = dbUser.conversations.map(
+        (conversation) => conversation.id,
+      );
+
       return {
         id: dbUser.id,
         name: dbUser.name,
@@ -164,6 +187,9 @@ export const authOptions: NextAuthOptions = {
         username: dbUser.username,
         isOnline: dbUser.isOnline,
         isActive: dbUser.active,
+        sellerView: dbUser.sellerView,
+        gigIds: gigIds,
+        conversationIds: conversationIds,
       };
     },
   },

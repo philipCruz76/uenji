@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 import { pusherServer } from "@/lib/pusher";
-import { db } from "@/lib/db";
+import db from "@/lib/db";
 import getConversationById from "@/lib/actions/conversations/getConversationById";
 import { FullMessageType } from "@/types/common.types";
 

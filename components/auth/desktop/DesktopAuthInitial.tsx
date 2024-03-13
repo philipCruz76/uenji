@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useLogInVariantStore } from "@/lib/stores/auth-store";
-import { useEmailCredentialsStore } from "@/lib/stores/modal-store";
+import { useEmailCredentialsStore } from "@/lib/stores/modals/modal-store";
 import { signInText, signUpText } from "@/constants/auth/signInConstants";
 import { socialAction } from "@/lib/actions/auth/socialAction";
 
@@ -17,13 +17,16 @@ const DesktopAuthInitial = () => {
   }, [isLogin]);
 
   return (
-    <div className="container flex flex-col space-y-3 text-left mt-12">
+    <div className="container mt-12 flex flex-col space-y-3 text-left">
       <p className="text-2xl font-semibold">
         {isLogin === "login" ? signInText.title : signUpText.title}
       </p>
-      <div className="flex text-base font-extralight text-slate-500 space-x-1">
+      <div className="flex space-x-1 text-base font-extralight text-slate-500">
         <p>{isLogin === "login" ? signInText.subtext : signUpText.subtext}</p>
-        <a className="underline cursor-pointer" onClick={toggleVariant}>
+        <a
+          className="cursor-pointer font-medium text-[#71a9d2] underline transition duration-200 ease-in-out hover:scale-105"
+          onClick={toggleVariant}
+        >
           {isLogin === "login"
             ? signInText.hyperlinkText
             : signUpText.hyperlinkText}
@@ -31,43 +34,40 @@ const DesktopAuthInitial = () => {
       </div>
 
       {/* Auth buttons */}
-      <div className="flex flex-col py-10 space-y-2 items-start font-semibold text-sm">
+      <div className="flex flex-col items-start space-y-2 py-10 text-sm font-semibold">
         <button
-          className="flex flex-row mx-auto border w-[360px] h-[50px] items-center space-x-4"
+          className="flex h-[50px] w-full items-center justify-center border pl-2 text-center transition duration-200 ease-in-out hover:scale-105"
           onClick={() => setShowEmailCredentials(true)}
         >
-          <div className="pl-2">
-            <svg
-              width="24px"
-              height="24px"
-              viewBox="0 0 60 60"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              stroke="#000000"
-            >
-              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-              <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></g>
-              <g id="SVGRepo_iconCarrier">
-                <rect x="8" y="12" width="48" height="40"></rect>
-                <polyline points="56 20 32 36 8 20"></polyline>
-              </g>
-            </svg>
-          </div>
-
-          <p className={isLogin === "login" ? "pl-10" : "pl-16"}>
+          <svg
+            width="24px"
+            height="24px"
+            viewBox="0 0 60 60"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            stroke="#000000"
+          >
+            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <rect x="8" y="12" width="48" height="40"></rect>
+              <polyline points="56 20 32 36 8 20"></polyline>
+            </g>
+          </svg>
+          <span className="w-full">
             {isLogin === "login"
               ? signInText.credentialsText
               : signUpText.credentialsText}
-          </p>
+          </span>
         </button>
 
         {/* Google Auth */}
         <button
-          className="flex flex-row mx-auto border w-[360px] h-[50px] space-x-4 text-center items-center justify-center"
+          className="flex h-[50px] w-full items-center justify-center border pl-2 text-center transition duration-200 ease-in-out hover:scale-105"
           onClick={() => socialAction("google")}
         >
           <svg
@@ -76,7 +76,6 @@ const DesktopAuthInitial = () => {
             viewBox="0 0 36 36"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="mr-14"
           >
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g
@@ -104,16 +103,16 @@ const DesktopAuthInitial = () => {
               ></path>{" "}
             </g>
           </svg>
-          <p className="pr-24">Continue with Google</p>
+          <span className="w-full">Entrar com Google</span>
         </button>
 
-        <div className="flex w-full py-4 items-center justify-center text-center font-extralight text-slate-400">
-          <p>OR</p>
+        <div className="flex w-full items-center justify-center py-4 text-center font-extralight text-black">
+          <p>OU</p>
         </div>
 
-        <div className="flex flex-row space-x-2 justify-center items-center mx-2">
+        <div className="flex w-full flex-row items-center justify-center space-x-2">
           <button
-            className="flex flex-row space-x-2 border w-[175px] h-[50px] items-center justify-center text-center "
+            className="flex h-[50px] w-[175px] flex-row items-center justify-center space-x-2 border text-center transition duration-200 ease-in-out hover:scale-105 "
             onClick={() => socialAction("facebook")}
           >
             <svg
@@ -140,7 +139,7 @@ const DesktopAuthInitial = () => {
             <p className="pr-10">Facebook</p>
           </button>
 
-          <button className="flex flex-row space-x-2 border w-[175px] h-[50px] items-center justify-center text-center">
+          <button className="flex h-[50px] w-[175px] flex-row items-center justify-center space-x-2 border text-center transition duration-200 ease-in-out hover:scale-105">
             <svg
               fill="#000000"
               width="24px"

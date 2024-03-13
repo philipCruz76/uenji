@@ -1,7 +1,6 @@
 import { lazy } from "react";
 import { User } from "@prisma/client";
-import Link from "next/link";
-import Image from "next/image";
+import GigShowCaseSection from "./GigShowCaseSection";
 
 type PrivateProfileViewProps = {
   user: User;
@@ -15,10 +14,9 @@ const PrivateProfileView = ({ user }: PrivateProfileViewProps) => {
   const { username, image, country, createdAt, isOnline, id, isSeller } = user;
 
   return (
-    <div className="flex flex-row flex-wrap  desktop:min-h-[2000px] justify-between w-[100dvw] ">
-      <div className="flex flex-col w-[400px] my-20 desktop:max-h-[2000px] gap-4">
+    <div className="flex max-w-[100dvw] flex-row  flex-wrap justify-between desktop:min-h-[2000px] ">
+      <div className="my-20  w-[400px]  gap-4 desktop:max-h-[2000px]">
         <ProfileInfoCard
-         
           userId={id}
           username={username}
           image={image}
@@ -26,27 +24,11 @@ const PrivateProfileView = ({ user }: PrivateProfileViewProps) => {
           createdAt={createdAt}
           isOnline={isOnline}
         />
-        {isSeller ? (
-          <SellerInfoCard user={user} />
-        ) : null}
+        {isSeller ? <SellerInfoCard user={user} /> : null}
       </div>
-      <div className="block my-20">
+      <div className="my-20 max-h-[500px] rounded-md border border-[#dee2e6] tablet:max-w-[600px] desktop:max-w-[60%]">
         {isSeller ? (
-          <div className="flex flex-1 flex-col gap-6 desktop:w-[730px] tablet:w-[500px]  h-[450px] border bg-white items-center text-center justify-center">
-            <span>To be implemented Gig showcase</span>
-            <Link
-              href={`/${username}/manage_gigs/new?step=1`}
-              className="flex items-center justify-center rounded-xl border-black border w-[60px] h-[60px]"
-            >
-              <Image
-                alt="Create new Gig"
-                src="/icons/plus-sign.svg"
-                width={50}
-                height={50}
-              />
-            </Link>
-            <span className="text-sm">Create new Gig</span>
-          </div>
+          <GigShowCaseSection profileUser={user} publicMode={false} />
         ) : (
           <SellerOnboardingCard />
         )}

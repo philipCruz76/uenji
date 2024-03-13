@@ -2,19 +2,19 @@ import Image from "next/image";
 
 const HeroEyeCatch = () => {
   return (
-    <section className=" grid desktop:grid-cols-2 grip-rows-2 container desktop:py-24 tablet:py-14 py-8 h-full  max-w-full bg-slate-200 ">
-      <div className=" flex flex-wrap items-center ">
+    <section className=" grip-rows-2  grid h-full max-w-full rounded-md border bg-[#f8f9fa] px-[20px] py-8 tablet:py-14  desktop:grid-cols-2 desktop:py-24">
+      <div className=" flex flex-wrap items-center text-[#000000]">
         <div className="flex flex-col">
           {/*Title*/}
-          <h2 className="flex font-bold  tablet:text-3xl text-2xl">
+          <h2 className="flex text-2xl  font-bold tablet:text-3xl">
             A melhor parte? <br /> Você pode começar agora mesmo!
           </h2>
 
           {/* Selling Proposition*/}
-          <ul className="flex flex-row flex-wrap pr-6 max-w-[100dvw] py-6 items-start justify-start text-start gap-4">
+          <ul className="flex max-w-[100dvw] flex-row flex-wrap items-start justify-start gap-4 py-6 pr-6 text-start">
             <li>
-              <h6 className="flex flex-row tablet:text-lg  text-base font-semibold gap-2">
-                <span className="w-[24px] h-[24px]" aria-hidden="true">
+              <h6 className="flex flex-row gap-2  text-base font-semibold tablet:text-lg">
+                <span className="h-[24px] w-[24px]" aria-hidden="true">
                   <Image
                     alt="check-icon"
                     src="/icons/check-circle-thin.svg"
@@ -24,15 +24,15 @@ const HeroEyeCatch = () => {
                 </span>
                 Cumpra com o seu orçamento
               </h6>
-              <span className="text-slate-500 tablet:text-lg text-base">
+              <span className="text-base text-[#0b4141] tablet:text-lg">
                 Encontre o serviço certo para cada gama de preço. Sem tarifas
                 horárias, apenas preços baseados em cada projecto.
               </span>
             </li>
 
             <li>
-              <h6 className="flex flex-row tablet:text-lg  text-base font-semibold gap-2">
-                <span className="w-[24px] h-[24px]" aria-hidden="true">
+              <h6 className="flex flex-row gap-2  text-base font-semibold tablet:text-lg">
+                <span className="h-[24px] w-[24px]" aria-hidden="true">
                   <Image
                     alt="check-icon"
                     src="/icons/check-circle-thin.svg"
@@ -42,15 +42,15 @@ const HeroEyeCatch = () => {
                 </span>
                 Receba trabalho de qualidade rapidamente
               </h6>
-              <span className="text-slate-500 tablet:text-lg text-base">
+              <span className="text-base text-[#0b4141] tablet:text-lg">
                 Entregue o seu projeto a um freelancer em minutos e obtenha
                 resultados que irão durar para sempre.
               </span>
             </li>
 
             <li>
-              <h6 className="flex flex-row tablet:text-lg  text-base font-semibold gap-2">
-                <span className="w-[24px] h-[24px]" aria-hidden="true">
+              <h6 className="flex flex-row gap-2  text-base font-semibold tablet:text-lg">
+                <span className="h-[24px] w-[24px]" aria-hidden="true">
                   <Image
                     alt="check-icon"
                     src="/icons/check-circle-thin.svg"
@@ -60,7 +60,7 @@ const HeroEyeCatch = () => {
                 </span>
                 Pague quando estiver satisfeito
               </h6>
-              <span className="text-slate-500 tablet:text-lg text-base">
+              <span className="text-base text-[#0b4141] tablet:text-lg">
                 Orçamento antecipado significa que não há surpresas. Os
                 pagamentos só são liberados quando estiver satisfeito com o
                 serviço.
@@ -71,8 +71,8 @@ const HeroEyeCatch = () => {
       </div>
 
       {/* Demo Video*/}
-      <div className="flex min-w-full box-border">
-        <video controls muted className="flex min-w-full box-content">
+      <div className="box-border flex min-w-full">
+        <video controls muted className="box-content flex min-w-full">
           <source
             src="https://res.cloudinary.com/dqe71igxe/video/upload/f_auto:video,q_auto/v1/videos/WorkingStockVideo"
             type="video/mp4"

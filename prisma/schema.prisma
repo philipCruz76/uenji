@@ -66,6 +66,7 @@ model User {
   personalWebsite     String?   @map(name: "personal_website")
   phoneNumberVerified DateTime? @map(name: "phone_number_verified")
   isSeller            Boolean?  @default(false) @map(name: "is_seller")
+  sellerView          Boolean?  @default(false) @map(name: "seller_view")
   createdAt           DateTime  @default(now()) @map(name: "created_at")
   updatedAt           DateTime  @updatedAt @map(name: "updated_at")
   accounts            Account[]
@@ -125,12 +126,15 @@ model Gig {
   description    String?  @db.String
   totalRatings   Int?     @default(0) @map(name: "total_ratings")
   ratingNumber   Int?     @default(0) @map(name: "rating_number")
+  packages       String?  @db.String
+  faq            String?  @db.String
+  published      Boolean @db.Bool @default(false)
   category       String
-  price          Float?
   coverImage     String?  @map(name: "cover_image")
-  images         String[] 
-  shortTitle     String?   @map(name: "short_title")
-  deliveryTime   Int?      @map(name: "delivery_time")
+  images         String[]
+  documents      String[]
+  shortTitle     String?  @map(name: "short_title")
+  deliveryTime   Int?     @map(name: "delivery_time")
   revisionNumber Int?     @default(0) @map(name: "revision_number")
   features       String[]
   sales          Int?     @default(0)

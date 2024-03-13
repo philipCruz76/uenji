@@ -1,4 +1,4 @@
-export const subCategories = [
+export const SubCategoriesList = [
   {
     category: "fotografia",
     subcategory: [

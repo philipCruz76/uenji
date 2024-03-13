@@ -1,7 +1,6 @@
 import getCurrentUser from "@/lib/actions/getCurrentUser";
-import { db } from "@/lib/db";
+import db from "@/lib/db";
 import { pusherServer } from "@/lib/pusher";
-import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
@@ -10,7 +9,7 @@ export async function POST(request: Request) {
     const { id } = body;
 
     if (!currentUser?.id || !currentUser?.email) {
-      return new NextResponse("Unauthorized", { status: 400 });
+      return new Response("Unauthorized", { status: 400 });
     }
 
     const singleConversation = await db.conversation.findFirst({
@@ -31,7 +30,7 @@ export async function POST(request: Request) {
     });
 
     if (singleConversation) {
-      return NextResponse.json(singleConversation);
+      return Response.json(singleConversation);
     }
 
     const newConversation = await db.conversation.create({
@@ -58,15 +57,15 @@ export async function POST(request: Request) {
         await pusherServer.trigger(
           user.email,
           "conversation:new",
-          newConversation
+          newConversation,
         );
       }
     });
 
-    return NextResponse.json(newConversation);
+    return Response.json(newConversation);
   } catch (error) {
     console.error(error);
-    return new NextResponse("Internal Error", { status: 500 });
+    return new Response("Internal Error", { status: 500 });
   }
 }
 
@@ -75,7 +74,7 @@ export async function GET() {
     const currentUser = await getCurrentUser();
 
     if (!currentUser?.id || !currentUser?.email) {
-      return new NextResponse("Unauthorized", { status: 400 });
+      return new Response("Unauthorized", { status: 400 });
     }
 
     const existingConversations = await db.conversation.findMany({
@@ -95,10 +94,9 @@ export async function GET() {
       },
     });
 
-
-    return NextResponse.json(existingConversations);
+    return Response.json(existingConversations);
   } catch (error) {
     console.error(error);
-    return new NextResponse("Internal Error", { status: 500 });
+    return new Response("Internal Error", { status: 500 });
   }
 }

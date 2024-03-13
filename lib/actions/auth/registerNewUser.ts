@@ -1,6 +1,6 @@
 "use server";
 
-import { db } from "@/lib/db";
+import db from "@/lib/db";
 import { LoginCredentials } from "@/types/login.types";
 import { sendEmailVerificationToken } from "../sendEmailVerificationToken";
 import { generateRandomString } from "@/lib/utils";
@@ -29,10 +29,14 @@ async function registerNewUser(data: LoginCredentials) {
       activateLinkToken,
     );
 
+    const emailParts = email?.split("@");
+    const derivedUsername = emailParts[0].replace(/[^a-zA-Z0-9]/g, "");
+
     const user = await db.user.create({
       data: {
         email,
         hashedPassword,
+        username: derivedUsername,
         image:
           "https://res.cloudinary.com/dqe71igxe/image/upload/v1694603551/default-user_avatar.svg",
       },

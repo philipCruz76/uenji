@@ -1,11 +1,20 @@
+import GigCard from "@/components/gigs/GigCard";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/Accordion";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/Carousel";
 import { CATEGORIES, CategoryDesciptions } from "@/constants";
-import { categoryFAQs, subCategories } from "@/constants/categoryConstants";
+import { categoryFAQs, SubCategoriesList } from "@/constants/categoryConstants";
+import getPopularGigs from "@/lib/actions/gigs/getPopularGigs";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -19,7 +28,7 @@ type pageProps = {
 
 const categorySchema = z.enum(CATEGORIES);
 
-const page = ({ params }: pageProps) => {
+const page = async ({ params }: pageProps) => {
   const { category } = params;
   const valid = categorySchema.safeParse(category);
 
@@ -30,65 +39,87 @@ const page = ({ params }: pageProps) => {
   );
 
   const { categoryTagline, categoryTitle, titlecardImage } = categoryObject!;
-  const subcategory = subCategories.find((c) => c.category === category)
-    ?.subcategory;
+  const categoryGigs = await getPopularGigs(categoryTitle);
+  const subcategory = SubCategoriesList.find(
+    (c) => c.category === category,
+  )?.subcategory;
   const faq = categoryFAQs.find((c) => c.category === category)?.faq;
 
   return (
-    <section className="flex flex-col gap-6 py-8 tablet:container min-h-[100dvh] max-w-[100dvw] ">
-      <div className="flex  w-full min-h-[240px] items-center  text-center justify-center border rounded-md  text-white">
+    <section className="flex min-h-[100dvh] max-w-[100dvw] flex-col gap-6 bg-white px-[24px] py-8 ">
+      <div className="flex  min-h-[240px] w-full flex-col items-center  justify-center text-center text-white">
         <Image
           src={
             !titlecardImage
               ? "https://res.cloudinary.com/dqe71igxe/image/upload/v1695893990/category%20bg.jpg"
               : titlecardImage
           }
-          width={1200}
-          height={800}
+          width={300}
+          height={200}
           alt={categoryTitle}
-          className=" object-fill w-full h-[240px] rounded-md"
+          className=" h-[200px]  w-[300px] rounded-md object-fill"
         />
-        <h1 className="absolute  text-3xl top-[200px] text-black font-sans font-bold ">
-          {categoryTitle}
-        </h1>
-        <h3 className="absolute  top-[240px] items-center text-xl text-black font-semibold font-sans justify-center">
+        <h1 className="  text-3xl font-bold text-black ">{categoryTitle}</h1>
+        <h3 className=" items-center justify-center text-xl font-semibold text-black">
           {categoryTagline}
         </h3>
       </div>
 
-      <div className="flex flex-col w-full ">
-        <span className="w-full font-sans font-bold px-6 desktop:px-0 py-4 text-xl opacity-90">
+      <div className="flex w-full flex-col ">
+        <span className="w-full px-6 py-4 text-xl font-bold opacity-90 desktop:px-0">
           Serviços mais populares de {categoryTitle}
         </span>
-        <div className="w-full h-[100px] border items-center justify-center text-center">
-          {" "}
-          TO be implemented gigs carroussel <br />
-          <b>!on mobile it is not a slider!</b>{" "}
+        <div className="h-full w-full items-center justify-center px-12 text-center">
+          {/* Popular Gigs Carousel */}
+
+          <Carousel
+            className="w-full"
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+          >
+            <CarouselContent>
+              {categoryGigs
+                ? categoryGigs.map((gig, index) => (
+                    <CarouselItem
+                      key={`popular-gig-${index}`}
+                      className="ml-2  py-6 tablet:basis-1/2 desktop:basis-1/4 "
+                    >
+                      <GigCard gigToShow={gig} index={index} />
+                    </CarouselItem>
+                  ))
+                : null}
+            </CarouselContent>
+
+            <CarouselPrevious className="ml-2" />
+            <CarouselNext />
+          </Carousel>
         </div>
       </div>
-      <div className="flex flex-col min-w-full">
-        <span className="w-full font-sans font-bold px-6 desktop:px-0 py-4 text-xl opacity-90">
+      <div className="flex min-w-full flex-col">
+        <span className="w-full px-6 py-4  text-xl font-bold opacity-90 desktop:px-0">
           Explora {categoryTitle}
         </span>
-        <div className="desktop:flex flex-row gap-4 hidden w-full py-4">
+        <div className="hidden w-full flex-row gap-4 py-4 desktop:flex">
           {subcategory?.map((sub) => (
-            <div key={sub.name} className="flex flex-col w-full gap-">
+            <div key={sub.name} className="gap- flex w-full flex-col">
               <Image
                 src={sub.thumbnail}
                 width={300}
                 height={200}
                 alt={sub.name}
-                className="flex max-w-[300px] max-h-[200px] rounded-lg"
+                className="flex max-h-[200px] max-w-[300px] rounded-lg"
               />
-              <h2 className="flex w-full font-sans font-bold  py-4 text-xl opacity-90">
+              <h2 className="flex w-full py-4   text-xl font-bold opacity-90">
                 {sub.name}
               </h2>
-              <ul className="flex flex-col w-[70%]  items-center justify-start  gap-3">
+              <ul className="flex w-[70%] flex-col  items-center justify-start  gap-3">
                 {sub.listings.map((listing) => (
                   <Link
                     href={`/category/${category}`}
                     key={listing}
-                    className="flex flex-row justify-between group items-center w-full py-1 text-lg text-gray-600 rounded-md hover:bg-gray-200"
+                    className="group flex w-full flex-row items-center justify-between rounded-md py-1 text-lg text-gray-600 hover:bg-gray-200"
                   >
                     {listing}
                     <svg
@@ -111,20 +142,20 @@ const page = ({ params }: pageProps) => {
           {subcategory?.map((sub) => (
             <Accordion type="multiple" key={sub.name}>
               <AccordionItem value="Subcategory">
-                <AccordionTrigger className="px-6 border-b hover:no-underline">
-                  <div className="flex flex-row gap-3 w-full ">
+                <AccordionTrigger className="border-b px-6 hover:no-underline">
+                  <div className="flex w-full flex-row gap-3 ">
                     <Image
                       src={sub.thumbnail}
                       width={80}
                       height={50}
                       alt={sub.name}
-                      className=" max-w-[80px] max-h-[50px] rounded-lg"
+                      className=" max-h-[50px] max-w-[80px] rounded-lg"
                     />
-                    <span className=" flex w-full h-full text-center font-bold text-lg  opacity-90">{`${sub.name}`}</span>
+                    <span className=" flex h-full w-full text-center text-lg font-bold  opacity-90">{`${sub.name}`}</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <ul className="flex py-[20px] flex-col items-start  text-lg gap-3 text-gray-600 bg-gray-50">
+                  <ul className="flex flex-col items-start gap-3  bg-gray-50 py-[20px] text-lg text-gray-600">
                     {sub.listings.map((listing) => (
                       <Link
                         href={`/category/${category}`}
@@ -141,26 +172,24 @@ const page = ({ params }: pageProps) => {
           ))}
         </div>
       </div>
-      <div className="flex flex-col min-w-full px-6">
-        <h2 className="desktop:text-center w-full font-sans font-bold  py-4 desktop:text-2xl text-xl opacity-90">
+      <div className="flex min-w-full flex-col px-6">
+        <h2 className="w-full py-4  text-xl  font-bold opacity-90 desktop:text-center desktop:text-2xl">
           {categoryTitle} FAQ
         </h2>
-        <div className="">
-          {faq?.map((f) => (
-            <Accordion type="multiple" key={f.question} className=" border-b">
-              <AccordionItem value="FAQ">
-                <AccordionTrigger className="hover:no-underline">
-                  <span className="flex w-full h-full text-start text-lg text-gray-600 opacity-90 text-[16px]">{`${f.question}`}</span>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <span className="flex w-[80%]  flex-wrap text-left text-gray-600 opacity-90 text-[16px]">
-                    {f.answer}
-                  </span>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          ))}
-        </div>
+        {faq?.map((f) => (
+          <Accordion type="multiple" key={f.question} className=" border-b">
+            <AccordionItem value="FAQ">
+              <AccordionTrigger className="hover:no-underline">
+                <span className="flex h-full w-full text-start text-[16px] text-lg text-gray-600 opacity-90">{`${f.question}`}</span>
+              </AccordionTrigger>
+              <AccordionContent>
+                <span className="flex w-[80%]  flex-wrap text-left text-[16px] text-gray-600 opacity-90">
+                  {f.answer}
+                </span>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        ))}
       </div>
     </section>
   );

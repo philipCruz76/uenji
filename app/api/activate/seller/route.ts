@@ -1,6 +1,5 @@
 import getCurrentUser from "@/lib/actions/getCurrentUser";
-import { db } from "@/lib/db";
-import { NextResponse } from "next/server";
+import db from "@/lib/db";
 
 export async function POST(request: Request) {
   try {
@@ -11,16 +10,13 @@ export async function POST(request: Request) {
       throw new Error("You must be logged in to activate your seller profile.");
     }
 
-    console.log("Activating seller with profile: ", user.username);
-
-    console.log(body);
-
     await db.user.update({
       where: {
         email: user.email!,
       },
       data: {
-        name: body.personalInfo.name,
+        name: body.personalInfo.fullName,
+        displayName: body.personalInfo.displayName,
         image: body.personalInfo.profilePicture,
         description: body.personalInfo.description,
         languages: JSON.stringify(body.personalInfo.languages),
@@ -31,11 +27,12 @@ export async function POST(request: Request) {
         personalWebsite: body.professionalInfo.personalWebsite,
         active: true,
         isSeller: true,
+        sellerView: true,
       },
     });
-    return NextResponse.json({ ok: true });
+    return Response.json({ ok: true });
   } catch (error) {
     console.log("Seller activation error: ", error);
-    return NextResponse.error();
+    return Response.error();
   }
 }

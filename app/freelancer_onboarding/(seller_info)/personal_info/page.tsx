@@ -88,9 +88,9 @@ const page = ({}) => {
   };
   return (
     <>
-      <div className="flex flex-col gap-4 w-full h-fit py-4 border-b">
-        <h1 className="font-bold text-4xl"> Personal Info</h1>
-        <h3 className="tablet:flex hidden flex-wrap max-w-[500px]">
+      <div className="flex h-fit w-full flex-col gap-4 border-b py-4">
+        <h1 className="text-4xl font-bold"> Personal Info</h1>
+        <h3 className="hidden max-w-[500px] flex-wrap tablet:flex">
           Tell us a bit about yourself. This information will appear on your
           public profile, so that potential buyers can get to know you better.
         </h3>
@@ -101,11 +101,11 @@ const page = ({}) => {
       </div>
       <form
         onSubmit={handleSubmit(personalInfoHandler)}
-        className="flex flex-col gap-[60px] w-full h-full box-content py-6"
+        className="box-content flex h-full w-full flex-col gap-[60px] py-6"
       >
         {/* Full Name */}
-        <div className="flex tablet:flex-row flex-col justify-start w-full min-h-[60px] group tablet:pt-[35px] tablet:pb-[95px]">
-          <aside className="block flex-col flex-wrap h-fit  min-w-[210px] w-full ">
+        <div className="group flex min-h-[60px] w-full flex-col justify-start tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
+          <aside className="block h-fit w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
               <span>
                 Full Name <span className="text-red-500">*</span>
@@ -114,12 +114,12 @@ const page = ({}) => {
                 <i>Private</i>
               </small>
             </h3>
-            <div className="tablet:hidden tablet:group-hover:flex flex text-xs text-gray-400 py-2">
+            <div className="flex py-2 text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
               Ex. José António
             </div>
           </aside>
-          <div className="flex flex-col w-full">
-            <div className="flex tablet:flex-row flex-col gap-4 w-full">
+          <div className="flex w-full flex-col">
+            <div className="flex w-full flex-col gap-4 tablet:flex-row">
               <Input
                 type="text"
                 id="firstName"
@@ -133,7 +133,7 @@ const page = ({}) => {
                     });
                   }
                 }}
-                className="w-full h-[40px] border border-gray-300 rounded-sm"
+                className="h-[40px] w-full rounded-sm border border-gray-300"
               />
 
               <Input
@@ -155,7 +155,7 @@ const page = ({}) => {
                   },
                   required: true,
                 })}
-                className="w-full h-[40px] border border-gray-300 rounded-sm"
+                className="h-[40px] w-full rounded-sm border border-gray-300"
               />
             </div>
             {errors.fullName ? (
@@ -165,14 +165,14 @@ const page = ({}) => {
         </div>
 
         {/* Display Name */}
-        <div className="flex tablet:flex-row flex-col w-full min-h-[60px] group tablet:pt-[35px] tablet:pb-[95px]">
-          <aside className="block flex-col flex-wrap  min-w-[210px] w-full ">
+        <div className="group flex min-h-[60px] w-full flex-col tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
+          <aside className="block w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
               <span>
                 Display Name<span className="text-red-500">*</span>
               </span>
             </h3>
-            <div className="flex tablet:hidden tablet:group-hover:flex text-xs text-gray-400 py-2">
+            <div className="flex py-2 text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
               <span className="flex flex-wrap">
                 To help build credible and authentic connections with customers,
                 they{"’"}ll now see your display name.
@@ -182,7 +182,7 @@ const page = ({}) => {
               </span>
             </div>
           </aside>
-          <div className="flex flex-col gap-4 w-full">
+          <div className="flex w-full flex-col gap-4">
             <Input
               type="text"
               {...register("displayName", {
@@ -201,7 +201,7 @@ const page = ({}) => {
               })}
               name="displayName"
               id="displayName"
-              className="tablet:w-[300px] w-full h-[40px] border border-gray-300 rounded-sm"
+              className="h-[40px] w-full rounded-sm border border-gray-300 tablet:w-[300px]"
             />
             {errors.displayName ? (
               <span className="text-red-500">{errors.displayName.message}</span>
@@ -210,22 +210,22 @@ const page = ({}) => {
         </div>
 
         {/* Profile Picture */}
-        <div className="flex tablet:flex-row flex-col w-full tablet:pt-[35px] tablet:pb-[95px] group">
-          <aside className="block flex-col flex-wrap  min-w-[210px] w-full ">
+        <div className="group flex w-full flex-col tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
+          <aside className="block w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
               <span>
                 Profile Picture<span className="text-red-500">*</span>
               </span>
             </h3>
-            <div className="flex tablet:hidden tablet:group-hover:flex text-xs text-gray-400">
+            <div className="flex text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
               Add a profile picture of yourself so customers will know exactly
               who {"they’ll"} be working with.
             </div>
           </aside>
-          <div className="flex items-start justify-start w-full ">
+          <div className="flex w-full items-start justify-start ">
             <button
               type="button"
-              className=" w-[150px] h-[150px] border text-white border-gray-300 rounded-full group/uploadButton hover:bg-gray-700 hover:bg-opacity-50 overflow-hidden"
+              className=" group/uploadButton h-[150px] w-[150px] overflow-hidden rounded-full border border-gray-300 text-white hover:bg-gray-700 hover:bg-opacity-50"
               onClick={() => {
                 document.getElementById("profilePicture")?.click();
               }}
@@ -256,7 +256,7 @@ const page = ({}) => {
                   profilePictureSrc === ""
                     ? "group-hover/uploadButton:flex"
                     : null,
-                  ` relative z-1 object-cover items-center justify-center w-full`,
+                  ` z-1 relative w-full items-center justify-center object-cover`,
                 )}
               >
                 <path d="M208,56H180.28L166.65,35.56A8,8,0,0,0,160,32H96a8,8,0,0,0-6.65,3.56L75.71,56H48A24,24,0,0,0,24,80V192a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V80A24,24,0,0,0,208,56Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V80a8,8,0,0,1,8-8H80a8,8,0,0,0,6.66-3.56L100.28,48h55.43l13.63,20.44A8,8,0,0,0,176,72h32a8,8,0,0,1,8,8ZM128,88a44,44,0,1,0,44,44A44.05,44.05,0,0,0,128,88Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,128,160Z"></path>
@@ -268,7 +268,7 @@ const page = ({}) => {
                   src={profilePictureSrc}
                   width={200}
                   height={200}
-                  className=" w-full h-full object-cover"
+                  className=" h-full w-full object-cover"
                 />
               ) : null}
             </button>
@@ -276,17 +276,22 @@ const page = ({}) => {
         </div>
 
         {/* Description */}
-        <div className="flex tablet:flex-row flex-col w-full tablet:pt-[35px] tablet:pb-[95px] group">
-          <aside className="block flex-col flex-wrap  min-w-[210px] w-full ">
+        <div className="group flex w-full flex-col tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
+          <aside className="block w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
               <span>
                 Description<span className="text-red-500">*</span>
               </span>
             </h3>
+            <div className="flex text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
+              Tell us about yourself. This information will appear on your
+              public profile, so that potential buyers can get to know you
+              better.
+            </div>
           </aside>
-          <div className="flex flex-col items-start justify-start w-full ">
+          <div className="flex w-full flex-col items-start justify-start ">
             <textarea
-              className="w-full h-[150px] border border-gray-300 rounded-sm"
+              className="h-[150px] w-full rounded-sm border border-gray-300"
               {...register("description", {
                 onChange: (e: React.FormEvent<HTMLTextAreaElement>) => {
                   e.preventDefault();
@@ -304,7 +309,7 @@ const page = ({}) => {
               id="description"
               maxLength={600}
             />
-            <small className="text-gray-400 text-end">{charNumber}/600</small>
+            <small className="text-end text-gray-400">{charNumber}/600</small>
 
             {errors.description ? (
               <span className="text-red-500">{errors.description.message}</span>
@@ -313,23 +318,23 @@ const page = ({}) => {
         </div>
 
         {/* Languages */}
-        <div className="flex tablet:flex-row flex-col max-w-full tablet:pt-[35px] tablet:pb-[95px] group">
-          <aside className="block flex-col flex-wrap  min-w-[210px] w-full py-4 ">
+        <div className="group flex max-w-full flex-col tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
+          <aside className="block w-full min-w-[210px]  flex-col flex-wrap py-4 ">
             <h3 className="py-2">
               <span>
                 Languages<span className="text-red-500">*</span>
               </span>
             </h3>
-            <div className="flex tablet:hidden tablet:group-hover:flex text-xs text-gray-400">
+            <div className="flex text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
               Select which languages you can communicate in and your proficiency
               level.
             </div>
           </aside>
-          <div className=" flex-col items-start justify-start w-full max-w-[855px]">
+          <div className=" w-full max-w-[855px] flex-col items-start justify-start">
             {showLanguageSelector && (
-              <div className="flex tablet:flex-row flex-col border tablet:p-2 p-[12px]">
+              <div className="flex flex-col border p-[12px] tablet:flex-row tablet:p-2">
                 <select
-                  className="tablet:w-[300px] w-full h-[40px] border border-gray-300 bg-white rounded-sm text-gray-600 px-2"
+                  className="h-[40px] w-full rounded-sm border border-gray-300 bg-white px-2 text-gray-600 tablet:w-[300px]"
                   name="language"
                   id="language"
                   value={currentSelectedLanguage.fieldName}
@@ -350,7 +355,7 @@ const page = ({}) => {
                   })}
                 </select>
                 <select
-                  className="tablet:w-[300px] w-full h-[40px] border border-gray-300 bg-white  rounded-sm text-gray-600 px-2"
+                  className="h-[40px] w-full rounded-sm border border-gray-300 bg-white  px-2 text-gray-600 tablet:w-[300px]"
                   name="proficiency"
                   id="proficiency"
                   value={currentSelectedLanguage.fieldLevel}
@@ -371,7 +376,7 @@ const page = ({}) => {
                 <div className="flex flex-row justify-between gap-1 px-2 ">
                   <button
                     type="button"
-                    className="w-[150px]  h-[40px] bg-sky-600 text-white font-semibold hover:opacity-50 rounded-sm"
+                    className="h-[40px]  w-[150px] rounded-sm bg-sky-600 font-semibold text-white hover:opacity-50"
                     onClick={() => {
                       setLanguages(
                         languages.set(
@@ -386,7 +391,7 @@ const page = ({}) => {
                   </button>
                   <button
                     type="button"
-                    className="w-[150px] h-[40px] bg-gray-200 text-gray-400 hover:opacity-50 font-semibold rounded-sm"
+                    className="h-[40px] w-[150px] rounded-sm bg-gray-200 font-semibold text-gray-400 hover:opacity-50"
                     onClick={() => {
                       setCurrentSelectedLanguage({
                         fieldName: "",
@@ -402,7 +407,7 @@ const page = ({}) => {
             )}
 
             {errors.languages ? (
-              <span className="text-red-500 text-xs">
+              <span className="text-xs text-red-500">
                 {errors.languages.message}
               </span>
             ) : null}
@@ -418,7 +423,7 @@ const page = ({}) => {
             />
             <button
               type="button"
-              className="flex min-w-[200px] hover:opacity-50 text-sky-500"
+              className="flex min-w-[200px] text-sky-500 hover:opacity-50"
               onClick={() => {
                 setShowLanguageSelector(true);
               }}
@@ -432,9 +437,9 @@ const page = ({}) => {
           type="submit"
           disabled={!isValid || languages.size === 0}
           className={cn(
-            `w-[200px] h-[40px] ${
+            `h-[40px] w-[200px] ${
               isValid && languages.size > 0 ? " bg-sky-600" : "bg-gray-400"
-            } text-white rounded-sm`,
+            } rounded-sm text-white`,
           )}
           onClick={handleSubmit(personalInfoHandler)}
         >

@@ -5,7 +5,7 @@ const FacebookButton = () => {
     <>
       {/* Facebook Button */}
       <button
-        className="flex flex-row space-x-2 border w-[170px] h-[50px] items-center justify-center text-center "
+        className="flex h-[50px] w-[170px] flex-row items-center justify-center space-x-2 border text-center "
         onClick={() => socialAction("facebook")}
       >
         <svg

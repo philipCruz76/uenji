@@ -5,7 +5,7 @@ const GoogleButton = () => {
     <>
       {/* Google Button */}
       <button
-        className="flex flex-row mx-auto border w-[350px] h-[60px] space-x-4 text-center items-center justify-center"
+        className="flex h-[50px] w-full items-center justify-center border pl-2 text-center"
         onClick={() => socialAction("google")}
       >
         <svg
@@ -14,7 +14,6 @@ const GoogleButton = () => {
           viewBox="0 0 36 36"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="mr-14"
         >
           <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
           <g
@@ -42,7 +41,7 @@ const GoogleButton = () => {
             ></path>{" "}
           </g>
         </svg>
-        <p className="pr-24">Continue with Google</p>
+        <span className="w-full">Entrar com Google</span>
       </button>
     </>
   );

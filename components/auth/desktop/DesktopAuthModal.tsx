@@ -4,10 +4,11 @@ import {
   useEmailCredentialsStore,
   useOTPStore,
   useOpenModalStore,
-} from "@/lib/stores/modal-store";
-import DesktopAuthInitial from "./DesktopAuthInitial";
-import DesktopAuthEmail from "./DesktopAuthEmail";
-import DesktopAuthOTP from "./DesktopAuthOTP";
+} from "@/lib/stores/modals/modal-store";
+import DesktopAuthInitial from "@/components/auth/desktop/DesktopAuthInitial";
+import DesktopAuthEmail from "@/components/auth/desktop/DesktopAuthEmail";
+import DesktopAuthOTP from "@/components/auth/desktop/DesktopAuthOTP";
+import Image from "next/image";
 
 const DesktopAuthModal = () => {
   const { isOpen, setIsOpen } = useOpenModalStore();
@@ -18,7 +19,7 @@ const DesktopAuthModal = () => {
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed flex inset-0 z-10 overflow-y-auto"
+        className="fixed inset-0 z-10 flex overflow-y-auto"
         onClose={() => {
           setIsOpen(false);
           setShowEmailCredentials(false);
@@ -48,15 +49,20 @@ const DesktopAuthModal = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="flex flex-row max-w-[840px] transform overflow-hidden rounded-2xl bg-white  shadow-xl transition-all">
-                <Dialog.Title as="div" className="flex h-[560px] ">
-                  <img src="./deskWork.jpg" alt="" />
+              <Dialog.Panel className="flex max-w-[840px] transform flex-row overflow-hidden rounded-2xl bg-white  shadow-xl transition-all">
+                <Dialog.Title as="div" className="flex min-w-[370px] h-[560px] ">
+                  <Image
+                    src="/images/deskWork.jpg"
+                    alt="Sign-in Modal image"
+                    width={700}
+                    height={560}
+                  />
                 </Dialog.Title>
                 <div className="w-full p-6">
                   {/* Close Button */}
-                  <div className="absolute top-6 right-6">
+                  <div className="absolute right-6 top-6">
                     <button
-                      className="h-6 p-0 w-6 rounded-md"
+                      className="h-6 w-6 rounded-md p-0"
                       onClick={() => {
                         setIsOpen(false);
                         setShowEmailCredentials(false);
@@ -69,7 +75,7 @@ const DesktopAuthModal = () => {
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
                         stroke="currentColor"
-                        className="w-6 h-6"
+                        className="h-6 w-6"
                       >
                         <path
                           strokeLinecap="round"

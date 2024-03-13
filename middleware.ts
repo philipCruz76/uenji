@@ -1,14 +1,7 @@
-import { withAuth } from "next-auth/middleware";
-import { NextResponse } from "next/server";
+import { NextRequestWithAuth, withAuth } from "next-auth/middleware";
 
 export default withAuth(
-  function middleware(req) {
-    if (
-      req.nextUrl.pathname.startsWith("/gig") &&
-      req.nextauth.token?.isSeller !== false
-    )
-      return NextResponse.redirect(new URL("/", req.nextUrl));
-  },
+  async function middleware(req: NextRequestWithAuth) {},
   {
     callbacks: {
       authorized: ({ token }) => !!token,
@@ -19,7 +12,17 @@ export default withAuth(
   },
 );
 
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/gig/:path*", "/user/:path*", "/categories/:path*"],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - assets (build assets)
+     *
+     */
+    "/((?!api|_next/static|_next/image|images|icons|category-banners|categorias|[username]|favicon.ico).*)",
+  ],
 };

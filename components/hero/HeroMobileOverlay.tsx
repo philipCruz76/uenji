@@ -1,27 +1,40 @@
 const HeroMobileOverlay = () => {
   return (
-    <div className="bg-zinc-900 w-full h-[620px] px-4 flex flex-col items-center justify-center">
+    <div className="flex h-[620px] w-full flex-col items-center justify-center bg-[#f8f9fa] px-4">
       {/*Slogan*/}
-      <div className="py-6 max-w-[440px] w-full">
-        <div className="flex desktop:gap-4 tablet:gap-2 gap-[4px]">
-          <span className=" text-3xl font-bold text-white ">
-            {""}Encontre o{" "}
-            <i className="font-serif font-medium">serviço de freelance</i> certo
-            para si
+      <div className="w-full max-w-[440px] py-6">
+        <div className="flex gap-[4px] tablet:gap-2 desktop:gap-4">
+          <span className=" text-3xl font-bold text-black ">
+            {""}Encontre o especialista de{" "}
+            <div className="h-[38px] overflow-hidden  font-serif text-[32px] font-medium  leading-[38px]">
+              <span className="relative animate-rotating-text-mobile text-black">
+                <i>
+                  Programação
+                  <br />
+                  Fotografia
+                  <br />
+                  Negócios
+                  <br />
+                  Marketing
+                  <br />
+                </i>
+              </span>
+            </div>
+            adequado para si
           </span>
         </div>
       </div>
 
       {/*Search Bar*/}
-      <form className="flex w-full max-w-[440px] mb-4 h-[50px]">
+      <form className="mb-4 flex h-[50px] w-full max-w-[440px] ">
         <input
           type="text"
           placeholder="Pesquise qualquer serviço..."
-          className="flex-1 p-2 rounded-md border-none"
+          className="flex-1 rounded-md border border-black bg-white p-2 text-[16px] focus:outline-none "
         />
       </form>
 
-      <button className="bg-sky-500 w-full h-[50px] text-white px-4 py-2 rounded-md border-none max-w-[440px]">
+      <button className="h-[50px] w-full max-w-[440px] rounded-md border-none bg-black px-4 py-2 text-[#E2DEDB]">
         <div className="flex items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +42,7 @@ const HeroMobileOverlay = () => {
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="white"
-            className="flex w-5 h-5 "
+            className="flex h-5 w-5 "
           >
             <path
               strokeLinecap="round"

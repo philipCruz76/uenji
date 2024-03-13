@@ -1,5 +1,5 @@
 "use server";
-import { db } from "@/lib/db";
+import db from "@/lib/db";
 import getSession from "./getSession";
 import { redirect } from "next/navigation";
 

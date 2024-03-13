@@ -19,19 +19,19 @@ const UserChatList: FC<UserChatListProps> = ({ data, chatPartner }) => {
   if (!chatPartner) return null;
 
   return (
-    <div className="flex flex-1 flex-col">
-      <div className="w-full h-[80px] hover:bg-zinc-100 rounded-md pr-4">
+    <div className="flex flex-1 flex-col items-center justify-center">
+      <div className="h-[80px] w-[95%] rounded-md pr-4  transition duration-200 ease-in-out hover:scale-105 hover:bg-zinc-100">
         <Link
           href={`/inbox/${chatPartner.username}?chatId=${data?.id}`}
-          className="flex flex-1 mx-2 w-full h-full items-center justify-start flex-row gap-2 "
+          className="mx-2 flex h-full w-full flex-1 flex-row items-center justify-start gap-2 "
         >
           <ChatAvatar user={chatPartner} />
-          <div className="flex flex-col w-full gap-2">
-            <div className="flex flex-row justify-between w-full">
+          <div className="flex w-full flex-col gap-2">
+            <div className="flex w-full flex-row justify-between">
               <span className="flex w-full text-sm font-semibold">
                 {chatPartner.name ? chatPartner.name : chatPartner.username}
               </span>
-              <span className="flex w-full text-xs text-gray-400">
+              <span className="flex w-full text-xs text-black">
                 {data?.messages?.length > 0 &&
                 data?.messages[data?.messages.length - 1]?.createdAt
                   ? new Date(
@@ -43,7 +43,7 @@ const UserChatList: FC<UserChatListProps> = ({ data, chatPartner }) => {
                   : ""}
               </span>
             </div>
-            <span className="flex relative text-sm text-slate-600">
+            <span className="relative flex text-sm text-gray-600">
               {lastMessage?.sender?.username === chatPartner.username
                 ? `${
                     !chatPartner.name ? chatPartner.username : chatPartner.name

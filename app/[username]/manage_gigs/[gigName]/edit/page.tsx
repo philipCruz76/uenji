@@ -1,36 +1,79 @@
 "use client";
+import { useGigWizardStepStore } from "@/lib/stores/gigWizard-store";
+import { useRouter } from "next/navigation";
+import { lazy, useEffect, useMemo } from "react";
 
-import GigWizardOverview from "@/components/gigs/wizard/GigWizardOverview";
-import { useGigWizardStore } from "@/lib/stores/gigWizard-store";
-import { GigPricing, GigPricingValidator } from "@/types/gigWizard.types";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-
-type gigPricingProps = {
-  params: {
-    username: string;
-  };
-  searchParams: {
-    step: number;
-  };
+type pageProps = {
+  params: { username: string; gigName: string };
+  searchParams: { step: string };
 };
-const page = ({ params, searchParams }: gigPricingProps) => {
-  const { username } = params;
-  const { step } = searchParams;
 
+const GigWizardOverview = lazy(
+  () => import("@/components/gigs/wizard/GigWizardOverview"),
+);
+const GigWizardPricing = lazy(
+  () => import("@/components/gigs/wizard/GigWizardPricing"),
+);
+const GigWizardDescription = lazy(
+  () => import("@/components/gigs/wizard/GigWizardDescription"),
+);
+const GigWizardGallery = lazy(
+  () => import("@/components/gigs/wizard/GigWizardGallery"),
+);
+const GigWizardPublish = lazy(
+  () => import("@/components/gigs/wizard/GigWizardPublish"),
+);
+
+const page = ({ params, searchParams }: pageProps) => {
+  const { username, gigName } = params;
+  const router = useRouter();
+  const { setGigWizardStepHrefs, getCurrentGigWizardStep } =
+    useGigWizardStepStore();
+  let { step } = searchParams;
+
+  if (step === null) {
+    step = "1";
+  }
+
+  useMemo(() => {
+    setGigWizardStepHrefs([
+      `/${username}/manage_gigs/${gigName}/edit?step=1`,
+      `/${username}/manage_gigs/${gigName}/edit?step=2`,
+      `/${username}/manage_gigs/${gigName}/edit?step=3`,
+      `/${username}/manage_gigs/${gigName}/edit?step=4`,
+      `/${username}/manage_gigs/${gigName}/edit?step=5`,
+    ]);
+  }, [gigName]);
+
+  if (step !== "1" && getCurrentGigWizardStep(0).hasBeenCompleted === false) {
+    router.push(`/${username}/manage_gigs/${gigName}/edit?step=1`);
+  }
   switch (step) {
-    case 1:
-      return <GigWizardOverview username={username} />;
-    case 2:
-        return // TODO <GigWizardPricing username={username} />;
-    case 3:
-        return // TODO <GigWizardDescription username={username} />;
-    case 4:
-        return // TODO <GigWizardGallery username={username} />;
-    case 5:
-        return // TODO <GigWizardPublish username={username} />;
+    case "1":
+      return (
+        <GigWizardOverview username={username.toString()} gigName={gigName} />
+      );
+    case "2":
+      return (
+        <GigWizardPricing username={username.toString()} gigName={gigName} />
+      );
+    case "3":
+      return (
+        <GigWizardDescription
+          username={username.toString()}
+          gigName={gigName}
+        />
+      );
+    case "4":
+      return (
+        <GigWizardGallery username={username.toString()} gigName={gigName} />
+      );
+    case "5":
+      return (
+        <GigWizardPublish username={username.toString()} gigName={gigName} />
+      );
     default:
-        return null;
+      return router.push("/");
   }
 };
 

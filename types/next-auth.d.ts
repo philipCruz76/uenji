@@ -1,3 +1,4 @@
+import { Conversation, Gig } from "@prisma/client";
 import { User } from "next-auth";
 import "next-auth/jwt";
 
@@ -11,6 +12,9 @@ declare module "next-auth/jwt" {
     image?: string | null;
     isOnline?: boolean | null;
     isActive?: boolean | null;
+    sellerView?: boolean | null;
+    gigIds: string[] | null;
+    conversationIds: string[] | null;
   }
 }
 
@@ -23,6 +27,9 @@ declare module "next-auth" {
       image?: string | null;
       isOnline?: boolean | null;
       isActive?: boolean | null;
+      sellerView?: boolean | null;
+      gigIds: string[] | null;
+      conversationIds: string[] | null;
     };
   }
 }

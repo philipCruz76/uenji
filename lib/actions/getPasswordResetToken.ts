@@ -1,6 +1,6 @@
 "use server";
 import { PasswordResetLinkValidator } from "@/types/passwordReset.types";
-import { db } from "../db";
+import db from "@/lib/db";
 
 export default async function getPasswordResetToken(
   token: string,

@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  webpack5: true,
   webpack(config) {
     config.resolve.fallback = {
       // if you miss it, all the other options in fallback, specified
@@ -24,11 +23,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "uploadthing.com",
-      },
-      {
-        protocol: "https",
-        hostname: "utfs.io",
+        hostname: "uenji-file-uploads.s3.eu-north-1.amazonaws.com",
       },
     ],
   },

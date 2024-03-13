@@ -4,7 +4,7 @@ const AppleButton = () => {
   return (
     <>
       {/* Apple Button */}
-      <button className="flex flex-row space-x-2 border w-[170px] h-[50px] items-center justify-center text-center">
+      <button className="flex h-[50px] w-[170px] flex-row items-center justify-center space-x-2 border text-center">
         <svg
           fill="#000000"
           width="24px"

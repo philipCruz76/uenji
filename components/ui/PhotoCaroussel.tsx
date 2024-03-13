@@ -1,13 +1,13 @@
 "use client";
 
-import CategoryCard from "../categories/CategoryCard";
 import { catCards } from "@/constants";
 import { Swiper, SwiperSlide } from "swiper/react";
-import PrevButton from "./PrevButton";
-import NextButton from "./NextButton";
-
+import PrevButton from "@/components/ui/PrevButton";
+import NextButton from "@/components/ui/NextButton";
+import { Autoplay } from "swiper/modules";
+import CategoryCard from "@/components/categories/CategoryCard";
+import MobileCategoryCard from "@/components/categories/MobileCategoryCard";
 import "swiper/css/bundle";
-import MobileCategoryCard from "../categories/MobileCategoryCard";
 
 type PhotoCarousselProps = {
   slidesTOShow: number;
@@ -16,8 +16,13 @@ type PhotoCarousselProps = {
 const PhotoCaroussel = ({ slidesTOShow }: PhotoCarousselProps) => {
   return (
     <Swiper
-      slidesPerView={1.5}
+      slidesPerView={1.8}
       spaceBetween={10}
+      autoplay={{
+        delay: 2500,
+        disableOnInteraction: false,
+      }}
+      modules={[Autoplay]}
       loop={true}
       breakpoints={{
         600: {
@@ -37,25 +42,27 @@ const PhotoCaroussel = ({ slidesTOShow }: PhotoCarousselProps) => {
           spaceBetween: 200,
         },
       }}
-      className="flex max-w-[1200px] relative w-full mx-auto my-8 items-center justify-center"
+      className="relative mx-auto my-8 flex w-full max-w-[1200px] items-center justify-center"
     >
       {catCards.map((card) => (
         <SwiperSlide key={card.alt} className="w-full">
-          <div className="tablet:flex w-fit hidden">
+          <div className="hidden w-fit tablet:flex">
             <CategoryCard
               key={card.title}
               title={card.title}
               description={card.description}
               image={card.image}
+              href={card.href}
               alt={card.alt}
             />
           </div>
-          <div className="tablet:hidden w-fit flex">
+          <div className="flex w-fit tablet:hidden">
             <MobileCategoryCard
               key={card.title}
               title={card.title}
               description={card.description}
               image={card.image}
+              href={card.href}
               alt={card.alt}
             />
           </div>
@@ -63,7 +70,7 @@ const PhotoCaroussel = ({ slidesTOShow }: PhotoCarousselProps) => {
       ))}
 
       {/* Swiper Buttons */}
-      <div className="tablet:flex hidden flex-row">
+      <div className="hidden flex-row tablet:flex">
         <PrevButton />
         <NextButton />
       </div>

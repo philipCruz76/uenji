@@ -1,71 +1,54 @@
-
-import GigWizardStep from "@/components/gigs/wizard/GigWizardStep";
-import getCurrentUser from "@/lib/actions/getCurrentUser";
+import GigWizardSteps from "@/components/gigs/wizard/GigWizardSteps";
+import getCurrentUserWithExtraInfo from "@/lib/actions/getCurrentUserWithExtraInfo";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 
 type newGigLayoutProps = {
-  params:{
+  params: {
     username: string;
-  }
+  };
   children: React.ReactNode;
 };
 
-const gigSteps = [
-  {
-    name: "Overview",
-    href: `/%5Busername%5D/manage_gigs/new?step=1`,
-    step: 1,
-    current: true,
-  },
-  {
-    name: "Pricing",
-    href: "/%5Busername%5D/manage_gigs/new/new?step=2",
-    step: 2,
-    current: false,
-  },
-  {
-    name: "Description & FAQ",
-    href: "/%5Busername%5D/manage_gigs/new/new?step=3",
-    step: 3,
-    current: false,
-  },
-  {
-    name: "Gallery",
-    href: "/%5Busername%5D/manage_gigs/new?step=4",
-    step: 4,
-    current: false,
-  },
-  {
-    name: "Publish",
-    href: "/%5Busername%5D/manage_gigs/newnew?step=5",
-    step: 5,
-    current: false,
-  },
-];
-
-async function newGigLayout({ children ,params }: newGigLayoutProps) {
-  const user = await getCurrentUser();
+async function newGigLayout({ params, children }: newGigLayoutProps) {
+  const currentUser = await getCurrentUserWithExtraInfo();
   const { username } = params;
-  if (!user ||user?.isSeller === false || user.username !== username ) {
+  if (
+    !currentUser ||
+    currentUser?.isSeller === false ||
+    currentUser?.username !== username
+  ) {
     redirect("/");
-  } 
-  
-  
+  }
+  if (currentUser.Gig.length >= 4) redirect("/");
+
   return (
-    <section className="flex min-h-[100dvh] min-w-[100dvw]">
-      <div className="w-full h-full">
-        <nav className="h-[60px] w-full border-b">
-          <ul className="flex flex-row w-full  h-full  justify-center  gap-2">
-            {gigSteps.map((step) => (
-              <GigWizardStep key={step.name} currentStep={step} />
-            ))}
-          </ul>
-          <div className="bg-white  w-full border-b border-gray-200" />
-        </nav>
-        {children}
-      </div>
-      
-    </section>
+    <>
+      <section className="hidden min-h-[100dvh] min-w-[100dvw] bg-zinc-50 desktop:flex">
+        <div className="h-full w-full">
+          <nav className="h-[60px] w-full border-b">
+            <GigWizardSteps />;
+            <div className="w-full  border-b border-gray-200 bg-white" />
+          </nav>
+          {children}
+        </div>
+      </section>
+      <section className="flex min-h-[100dvh] min-w-[100dvw] items-center  justify-center bg-zinc-50 desktop:hidden">
+        <div className="flex max-h-[40dvh] min-h-[40dvh] min-w-[70dvw] max-w-[70dvw] flex-col items-center justify-center rounded-lg border bg-white px-4">
+          <Image
+            src={"/icons/computer.svg"}
+            width={100}
+            height={100}
+            alt="computer icon"
+            className="h-[100px] w-[100px]"
+          />
+          <span className="text-ellipsis text-lg font-semibold">
+            Por fazor visitar site através de um portátil para poder criar ou
+            editar um serviço
+          </span>
+        </div>
+      </section>
+    </>
   );
 }
 

@@ -1,4 +1,5 @@
 import { footerLinks } from "@/constants";
+import Image from "next/image";
 import Link from "next/link";
 
 type ColumnProps = {
@@ -10,11 +11,15 @@ type ColumnProps = {
 };
 
 const DesktopFooterColumn = ({ title, links }: ColumnProps) => (
-  <div className="flex-1 flex flex-col gap-3 text-sm min-w-max">
-    <h4 className="font-semibold">{title}</h4>
+  <div className="flex min-w-max flex-1 flex-col gap-3 text-sm">
+    <h4 className="text-lg font-semibold">{title}</h4>
     <ul className="flex flex-col gap-2 font-normal">
       {links.map((link) => (
-        <Link href={link.href} key={link.name} className="hover:underline">
+        <Link
+          href={link.href}
+          key={link.name}
+          className="transition duration-200 ease-in-out hover:scale-105 hover:underline"
+        >
           {link.name}
         </Link>
       ))}
@@ -25,14 +30,20 @@ const DesktopFooterColumn = ({ title, links }: ColumnProps) => (
 const Footer = () => {
   return (
     <>
-      <div className="flex w-full h-px bg-gray-200 " />
+      <div className="flex h-px w-full bg-gray-200 " />
 
-      <footer className="container flex min-w-full h-fit bg-slate-50">
-        <div className="container justify-between flex flex-col lg:px-20 py-6 px-5 gap-6">
-          <div className="flex flex-col gap-12 w-full">
-            <h1 className="items-start">Uenji</h1>
+      <footer className=" flex h-fit min-w-full bg-[#f8f9fa] text-black">
+        <div className=" flex flex-col justify-between gap-6 px-5 py-6 desktop:px-20">
+          <div className="w-full gap-12">
+            <Image
+              src={"/images/uenji-logo-black.png"}
+              alt="Uenji Logo"
+              className="h-auto  w-auto items-start"
+              width={150}
+              height={150}
+            />
 
-            <div className="flex flex-wrap items-start justify-between text-start gap-[50px] w-full">
+            <div className="flex w-full flex-wrap items-start justify-between gap-[50px] text-start">
               <DesktopFooterColumn
                 title={footerLinks[0].title}
                 links={footerLinks[0].links}
@@ -47,16 +58,12 @@ const Footer = () => {
                 title={footerLinks[2].title}
                 links={footerLinks[2].links}
               />
-              <DesktopFooterColumn
-                title={footerLinks[3].title}
-                links={footerLinks[3].links}
-              />
             </div>
           </div>
 
-          <div className="w-full h-px bg-gray-200 my-0.5" />
-          <div className="flex justify-between items-center max-sm:flex-col w-full text-sm font-normal">
-            <span className="text-gray-500">
+          <div className="my-0.5 h-px w-full bg-gray-200" />
+          <div className="max-sm:flex-col flex w-full items-center justify-between text-sm font-normal">
+            <span className="text-white-500 font-semibold">
               © 2023 Uenji. All rights reserved
             </span>
           </div>

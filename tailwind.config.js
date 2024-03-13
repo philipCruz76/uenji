@@ -1,8 +1,7 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
-const { withUt } = require("uploadthing/tw");
 
 /** @type {import('tailwindcss').Config} */
-module.exports = withUt({
+module.exports = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -18,7 +17,6 @@ module.exports = withUt({
       },
     },
     screens: {
-      lg: "1160px",
       desktop: "900px",
       tablet: "600px",
       mobile: "400px",
@@ -59,15 +57,36 @@ module.exports = withUt({
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      borderRadius: {
-        lg: `var(--radius)`,
-        md: `calc(var(--radius) - 2px)`,
-        sm: "calc(var(--radius) - 4px)",
-      },
+
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: ["var(--font-geist-sans)"],
+        mono: ["var(--font-geist-mono)"],
       },
       keyframes: {
+        "rotating-text-desktop": {
+          "0%,100%": { top: "0%" },
+          "20%": { top: "0%" },
+          "25%": { top: "-50px" },
+          "45%": { top: "-50px" },
+          "50%": { top: "-100px" },
+          "70%": { top: "-100px" },
+          "75%": { top: "-150px" },
+          "95%": { top: "-150px" },
+        },
+        "rotating-text-mobile": {
+          "0%,100%": { top: "0%" },
+          "20%": { top: "0%" },
+          "25%": { top: "-40px" },
+          "45%": { top: "-40px" },
+          "50%": { top: "-80px" },
+          "70%": { top: "-80px" },
+          "75%": { top: "-120px" },
+          "95%": { top: "-120px" },
+        },
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" },
+        },
         "accordion-down": {
           from: { height: 0 },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -80,8 +99,11 @@ module.exports = withUt({
       animation: {
         "accordion-down": "accordion-down 0.3s ease-out ",
         "accordion-up": "accordion-up 0.1s ease-in",
+        "rotating-text-desktop": "rotating-text-desktop 10s ease infinite",
+        "rotating-text-mobile": "rotating-text-mobile 10s ease infinite",
+        wiggle: "wiggle 0.6s ease-in-out infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate"),require("postcss-import")],
-});
+  plugins: [require("tailwindcss-animate"), require("postcss-import")],
+};

@@ -25,9 +25,9 @@ const Header: FC<HeaderProps> = async ({ chatPartner }) => {
     }
   };
   return (
-    <header className="container flex w-full h-[80px] border-b py-4  items-center">
+    <header className="container flex h-[80px] w-full items-center border-b  py-4">
       <div className="flex w-full justify-between">
-        <Link href="/inbox" className="flex tablet:hidden cursor-pointer">
+        <Link href="/inbox" className="flex cursor-pointer tablet:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="28"
@@ -39,21 +39,21 @@ const Header: FC<HeaderProps> = async ({ chatPartner }) => {
           </svg>
         </Link>
         <div className="flex flex-col">
-          <div className="flex flex-row  min-w-fit items-center gap-2">
-            <div className="rounded-full bg-gray-300 h-[14px] w-[14px]" />
+          <div className="flex min-w-fit  flex-row items-center gap-2">
+            <div className="h-[14px] w-[14px] rounded-full bg-gray-300" />
             <h1 className="flex w-full">
               <Link
                 href={`/${chatPartner.username}?source=inbox`}
-                className="min-w-fit text-base tablet:text-lg font-bold underline hover:text-gray-500"
+                className="min-w-fit text-base font-bold underline hover:text-gray-500 tablet:text-lg"
               >
                 {chatPartner.name ? chatPartner.name : chatPartner.username}
               </Link>
-              <span className="px-2 text-sm tablet:text-base text-gray-500">
+              <span className="px-2 text-sm text-gray-500 tablet:text-base">
                 @{chatPartner.username}
               </span>
             </h1>
           </div>
-          <small className="flex flex-row text-gray-500 text-xs">
+          <small className="flex flex-row text-xs text-gray-500">
             <span>{timeLastSeen()}</span>
           </small>
         </div>

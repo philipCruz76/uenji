@@ -8,7 +8,7 @@ import {
   useEmailCredentialsStore,
   useOTPStore,
   useOpenModalStore,
-} from "@/lib/stores/modal-store";
+} from "@/lib/stores/modals/modal-store";
 import { Fragment, useEffect, useRef, useState } from "react";
 import verifyOTP from "@/lib/actions/auth/verifyOTP";
 import { useRouter } from "next/navigation";
@@ -117,13 +117,13 @@ const OTPRegistrationForm = () => {
     <>
       {/* Back Button */}
       <div
-        className="flex flex-row items-center justify-center absolute top-6 left-8 cursor-pointer"
+        className="absolute left-8 top-6 flex cursor-pointer flex-row items-center justify-center"
         onClick={() => {
           setShowOTP(false);
           setShowEmailCredentials(true);
         }}
       >
-        <button className="h-6 p-0 w-6 ">
+        <button className="h-6 w-6 p-0 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -137,15 +137,15 @@ const OTPRegistrationForm = () => {
       </div>
 
       {/* OTP form */}
-      <div className="container h-full w-fit flex flex-col space-y-3 py-20">
-        <span className="flex justify-start font-bold text-2xl">
+      <div className="container flex h-full w-fit flex-col space-y-3 py-20">
+        <span className="flex justify-start text-2xl font-bold">
           Confirm your email
         </span>
         <div className="flex flex-col justify-start pb-14">
           <span>Enter the verification code we emailed to: </span>
           <span className=" text-sm font-light">{newUser.email}</span>
         </div>
-        <form className="flex flex-row justify-between items-center space-x-2">
+        <form className="flex flex-row items-center justify-between space-x-2">
           {otp.map((_, index) => {
             return (
               <Fragment key={index}>
@@ -153,7 +153,7 @@ const OTPRegistrationForm = () => {
                   ref={index === activeInput ? inputRef : null}
                   type="number"
                   className={cn(
-                    "w-12 h-12 text-center text-xl text-gray-400 border border-zinc-300 rounded-sm focus:outline-none focus:border-zinc-700 focus:text-gray-700 transition-colors duration-150 ease-in-out",
+                    "h-12 w-12 rounded-sm border border-zinc-300 text-center text-xl text-gray-400 transition-colors duration-150 ease-in-out focus:border-zinc-700 focus:text-gray-700 focus:outline-none",
                     failedValidation && "border-red-500 focus:border-red-500",
                   )}
                   onChange={(e) => handleOtpChange(e, index)}
@@ -166,24 +166,24 @@ const OTPRegistrationForm = () => {
           })}
         </form>
         {failedValidation && !isValidating && (
-          <span className="text-red-500 text-sm">
+          <span className="text-sm text-red-500">
             You've entered the wrong code. Try again
           </span>
         )}
         {isValidating && (
-          <div className="flex flex-row space-x-4 relative">
+          <div className="relative flex flex-row space-x-4">
             <div
               className="flex  h-[16px] w-[16px] animate-spin rounded-full border-2 border-solid border-zinc-400 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
               role="status"
             ></div>
-            <span className="flex font-semibold text-sm ">Checking code</span>
+            <span className="flex text-sm font-semibold ">Checking code</span>
           </div>
         )}
-        <span className="font-semibold underline text-sm cursor-pointer">
+        <span className="cursor-pointer text-sm font-semibold underline">
           Resend code
         </span>
         <button
-          className="rounded-md bg-zinc-700 text-white font-semibold text-lg py-2"
+          className="rounded-md bg-zinc-700 py-2 text-lg font-semibold text-white"
           onClick={handleSubmit}
         >
           Submit

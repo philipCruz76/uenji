@@ -1,5 +1,6 @@
 "use client";
 
+import useCurrentUser from "@/lib/hooks/useCurrentUser";
 import { useSellerOnboardingStore } from "@/lib/stores/sellerOboarding-store";
 import { useSellerProfileStore } from "@/lib/stores/sellerProfile-store";
 import { cn } from "@/lib/utils";
@@ -9,15 +10,14 @@ import {
   SellerProfileValidator,
 } from "@/types/sellerProfile.types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 const page = ({}) => {
-  const user = useSession().data?.user;
-
+  const user = useCurrentUser();
+  const router = useRouter();
   const { sellerOnboardingStep, setSellerOnboardingStep } =
     useSellerOnboardingStore();
   const { setSellerAccountSecurity, getSellerProfile } =
@@ -33,11 +33,11 @@ const page = ({}) => {
         method: "POST",
         body: JSON.stringify(getSellerProfile()),
       })
-        .then(async (res) => {
-          const { ok } = await res.json();
-          if (ok === true) {
+        .then((res) => {
+          if (res.ok) {
+            router.push("/");
+            router.refresh();
             toast.success("Seller profile created successfully.");
-            redirect("/");
           }
         })
         .catch((error) => {
@@ -63,19 +63,19 @@ const page = ({}) => {
 
   return (
     <>
-      <div className="flex flex-col gap-4 w-full h-fit py-4 border-b">
-        <h1 className="font-bold text-4xl">Account Security</h1>
-        <h3 className="tablet:flex hidden flex-wrap max-w-[500px]">
+      <div className="flex h-fit w-full flex-col gap-4 border-b py-4">
+        <h1 className="text-4xl font-bold">Account Security</h1>
+        <h3 className="hidden max-w-[500px] flex-wrap tablet:flex">
           Trust and safety is a big deal in our community. Please verify your
           email and phone number so that we can keep your account secured.
         </h3>
       </div>
       <form
-        className="flex flex-col gap-4 w-full h-fit py-4 border-b"
+        className="flex h-fit w-full flex-col gap-4 border-b py-4"
         onSubmit={handleSubmit(accountSecurityHandler)}
       >
-        <div className="flex tablet:flex-row flex-col justify-start w-full h-fit group tablet:pt-[35px] ">
-          <aside className="flex flex-row gap-2  items-center justify-start flex-wrap h-fit w-full min-w-[210px]">
+        <div className="group flex h-fit w-full flex-col justify-start tablet:flex-row tablet:pt-[35px] ">
+          <aside className="flex h-fit w-full  min-w-[210px] flex-row flex-wrap items-center justify-start gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -87,7 +87,7 @@ const page = ({}) => {
             </svg>
             <h3 className="py-2">
               <span>Email</span>
-              <small className="text-gray-400 px-3">
+              <small className="px-3 text-gray-400">
                 <i>Private</i>
               </small>
             </h3>
@@ -99,15 +99,15 @@ const page = ({}) => {
                 required: true,
                 value: user?.isActive!,
               })}
-              className="flex items-center tablet:w-[150px] w-full justify-center px-4 py-2 border  rounded-md shadow-sm text-sm font-medium text-gray-500 bg-sky-200  border-slate-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+              className="flex w-full items-center justify-center rounded-md border border-slate-400 bg-sky-200  px-4 py-2 text-sm font-medium text-gray-500 shadow-sm  focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 tablet:w-[150px]"
             >
               Verified
             </a>
           </div>
         </div>
 
-        <div className="flex tablet:flex-row flex-col justify-start w-full h-fit group tablet:pt-[35px] ">
-          <aside className="flex flex-row gap-2  items-center justify-start flex-wrap h-fit w-full min-w-[210px]">
+        <div className="group flex h-fit w-full flex-col justify-start tablet:flex-row tablet:pt-[35px] ">
+          <aside className="flex h-fit w-full  min-w-[210px] flex-row flex-wrap items-center justify-start gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -119,7 +119,7 @@ const page = ({}) => {
             </svg>
             <h3 className="py-2">
               <span>Phone Number</span>
-              <small className="text-gray-400 px-3">
+              <small className="px-3 text-gray-400">
                 <i>Private</i>
               </small>
             </h3>
@@ -130,7 +130,7 @@ const page = ({}) => {
                 required: true,
                 value: false,
               })}
-              className="flex items-center tablet:w-[150px] w-full justify-center px-4 py-2 border  rounded-md shadow-sm text-sm font-medium text-gray-500 bg-sky-200  border-slate-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+              className="flex w-full items-center justify-center rounded-md border border-slate-400 bg-sky-200  px-4 py-2 text-sm font-medium text-gray-500 shadow-sm  focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 tablet:w-[150px]"
             >
               Unverified
             </a>
@@ -141,9 +141,9 @@ const page = ({}) => {
             disabled={!isValid}
             type="submit"
             className={cn(
-              `tablet:w-[100px] w-full h-[40px]  ${
+              `h-[40px] w-full tablet:w-[100px]  ${
                 isValid ? "bg-sky-600" : "bg-gray-400"
-              }  text-white rounded-sm`,
+              }  rounded-sm text-white`,
             )}
           >
             Concluir

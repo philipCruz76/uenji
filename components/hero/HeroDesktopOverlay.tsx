@@ -3,37 +3,50 @@ import Image from "next/image";
 const HeroDesktopOverlay = () => {
   return (
     <>
-      <div className="bg-amber-800 w-full"></div>
+      <div className="max-h-[100dvh] max-w-[100dvw] "></div>
       {/*Background Image*/}
       <Image
         alt="backgroung image"
-        src="/bg-transparent.png"
-        className="flex bg-amber-800 items-end justify-end object-right h-[700px]"
-        width={500}
-        height={700}
+        src="/images/african-american-man-copy-space.jpg"
+        className=" min-h-[100dvh] min-w-[100dvw] items-end justify-end bg-[#495057] object-fill "
+        width={3000}
+        height={2000}
       />
 
       {/*Overlay*/}
-      <div className="container flex absolute z-1 inset-0 mt-56 px-6 flex-col items-start justify-start ">
+      <div className="z-1 container absolute inset-0 mt-56 flex flex-col items-start justify-start px-6 ">
         {/*Slogan*/}
-        <div className="flex lg:w-[640px]  h-[100px] tablet:w-[440px] desktop:gap-4 tablet:gap-2 gap-[4px]">
-          <span className="lg:text-5xl tablet:text-4xl text-3xl font-bold text-white ">
-            {""}Encontre o{" "}
-            <i className="font-serif font-medium">serviço de freelance</i> certo
-            para si
+        <div className=" min-h-[100px] gap-[4px] tablet:w-[440px] tablet:gap-2 desktop:w-[640px] desktop:gap-4">
+          <span className="text-3xl font-bold text-black tablet:text-4xl desktop:text-5xl ">
+            {""}Encontre o especialista de{" "}
+            <div className="h-[48px] overflow-hidden  font-serif text-[42px] font-medium uppercase  leading-[48px]">
+              <span className="relative animate-rotating-text-desktop text-[#425664]">
+                <i>
+                  Programação
+                  <br />
+                  Fotografia
+                  <br />
+                  Negócios
+                  <br />
+                  Marketing
+                  <br />
+                </i>
+              </span>
+            </div>
+            adequado para si
           </span>
         </div>
 
         {/*Search Bar*/}
-        <div className="flex lg:w-[600px] tablet:w-[500px] lg:py-6 py-2">
+        <div className="flex py-2 tablet:w-[500px] desktop:w-[600px] desktop:py-6">
           <input
             type="text"
             placeholder="Pesquise qualquer serviço..."
-            className="border-2 border-slate-300 bg-white h-12 px-5 desktop:w-[600px] rounded-l-md text-sm text-black focus:outline-none focus:border-slate-500"
+            className="h-12 rounded-l-md border-2 border-slate-600 bg-white px-5 text-sm text-black focus:border-slate-500 focus:outline-none desktop:w-[600px]"
           />
           <button
             type="submit"
-            className="flex  border-black bg-black rounded-r-md w-[50px] items-center justify-between text-center"
+            className="flex  w-[50px] items-center justify-between rounded-r-md border-black bg-black text-center"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +54,7 @@ const HeroDesktopOverlay = () => {
               viewBox="-16 0 50 24"
               strokeWidth="1.5"
               stroke="white"
-              className="flex items-center justify-between w-10 h-12"
+              className="flex h-12 w-10 items-center justify-between"
             >
               <path
                 strokeLinecap="round"
@@ -50,38 +63,6 @@ const HeroDesktopOverlay = () => {
               />
             </svg>
           </button>
-        </div>
-
-        {/*Featured Services*/}
-        <div className="flex flex-row gap-2 items-center justify-center py-2">
-          <span className="text-white font-medium text-base  text-start items-center justify-center">
-            Popular :
-          </span>
-          <ul className="flex flex-row gap-2 text-white text-sm ">
-            <li>
-              <a className="flex border font-medium w-[100px] items-center justify-center rounded-full cursor-pointer hover:bg-white hover:text-black">
-                Fotografia
-              </a>
-            </li>
-
-            <li>
-              <a className="flex border font-medium w-[100px] items-center justify-center rounded-full cursor-pointer hover:bg-white hover:text-black">
-                Design
-              </a>
-            </li>
-
-            <li>
-              <a className="flex border font-medium w-[120px] items-center justify-center rounded-full cursor-pointer hover:bg-white hover:text-black">
-                Programação
-              </a>
-            </li>
-
-            <li>
-              <a className="flex border font-medium w-[120px] items-center justify-center rounded-full cursor-pointer hover:bg-white hover:text-black">
-                Escrita
-              </a>
-            </li>
-          </ul>
         </div>
       </div>
     </>

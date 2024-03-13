@@ -33,7 +33,9 @@ const MessageBox: FC<MessageBoxProps> = ({ data }) => {
           </div>
         </div>
         <div className={message}>
-          {data.body?.match(/^https:\/\/utfs\.io\/f\/.*/) ? (
+          {data.body?.match(
+            /^https:\/\/uenji-file-uploads\.s3\.eu-north-1\.amazonaws\.com\/uploads\/.*/,
+          ) ? (
             <MessageAttachment fileUrl={data.body} />
           ) : (
             <div>{data.body}</div>

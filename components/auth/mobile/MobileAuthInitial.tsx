@@ -1,4 +1,4 @@
-import { useEmailCredentialsStore } from "@/lib/stores/modal-store";
+import { useEmailCredentialsStore } from "@/lib/stores/modals/modal-store";
 import { useLogInVariantStore } from "@/lib/stores/auth-store";
 import { socialAction } from "@/lib/actions/auth/socialAction";
 import { signInText, signUpText } from "@/constants/auth/signInConstants";
@@ -10,10 +10,10 @@ const MobileAuthInitial = () => {
   return (
     <section className="flex flex-col space-y-3 ">
       {/* Auth buttons */}
-      <div className="flex flex-col py-[40%] space-y-2 items-center justify-center font-semibold text-[16px] ">
-        <div className="flex flex-row space-x-2  w-[100dvw] h-[40px] px-6 ">
+      <div className="flex flex-col items-center justify-center space-y-2 py-[40%] text-[16px] font-semibold ">
+        <div className="flex h-[40px] w-[100dvw]  flex-row space-x-2 px-6 ">
           <button
-            className="flex flex-row border w-[100dvw] h-[40px] items-center justify-between rounded-sm"
+            className="flex h-[40px] w-[100dvw] flex-row items-center justify-between rounded-sm border"
             onClick={() => setShowEmailCredentials(true)}
           >
             <div className="pl-1 ">
@@ -47,9 +47,9 @@ const MobileAuthInitial = () => {
         </div>
 
         {/* Google Button */}
-        <div className="flex flex-row space-x-2  w-[100dvw] h-[40px] px-6 ">
+        <div className="flex h-[40px] w-[100dvw]  flex-row space-x-2 px-6 ">
           <button
-            className="flex border w-[100dvw] h-[40px] items-center justify-center rounded-sm"
+            className="flex h-[40px] w-[100dvw] items-center justify-center rounded-sm border"
             onClick={() => socialAction("google")}
           >
             <svg
@@ -90,13 +90,13 @@ const MobileAuthInitial = () => {
           </button>
         </div>
 
-        <div className="flex max-w-full py-2 items-center justify-center text-center font-extralight text-slate-400">
+        <div className="flex max-w-full items-center justify-center py-2 text-center font-extralight text-slate-400">
           <p>OR</p>
         </div>
 
-        <div className="flex flex-row  space-x-2  w-[100dvw] h-[40px] items-center justify-between px-6 ">
+        <div className="flex h-[40px]  w-[100dvw]  flex-row items-center justify-between space-x-2 px-6 ">
           <button
-            className="flex flex-row w-full space-x-2 border  h-[40px] items-center justify-center text-center rounded-sm"
+            className="flex h-[40px] w-full flex-row items-center  justify-center space-x-2 rounded-sm border text-center"
             onClick={() => socialAction("facebook")}
           >
             <svg
@@ -122,7 +122,7 @@ const MobileAuthInitial = () => {
             <p>Facebook</p>
           </button>
 
-          <button className="flex flex-row w-full space-x-2 border h-[40px] items-center justify-center text-center rounded-sm">
+          <button className="flex h-[40px] w-full flex-row items-center justify-center space-x-2 rounded-sm border text-center">
             <svg
               fill="#000000"
               width="24px"

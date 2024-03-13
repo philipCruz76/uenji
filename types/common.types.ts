@@ -29,8 +29,16 @@ export type FullCategoryType =
   | "Programação"
   | "Negócios"
   | "Vídeo"
-  | "Branding"
+  | "Marketing"
   | "Design";
+
+export type Category = {
+  category: string;
+  categoryTitle: string;
+  titlecardImage: string;
+  thumbnailIcon: string;
+  categoryTagline: string;
+};
 
 export type LanguageProficiency = {
   languageName: string;

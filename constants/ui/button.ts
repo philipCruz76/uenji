@@ -1,14 +1,13 @@
 import { cva } from "class-variance-authority";
 
 export const buttonVariants = cva(
-  "active:scale-95 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:opacity-50 dark:focus:ring-slate-400 disabled:pointer-events-none dark:focus:ring-offset-slate-900",
+  "active:scale-95 inline-flex items-center justify-center  text-sm font-medium transition-colors focus:outline-none  disabled:opacity-50 dark:focus:ring-slate-400 disabled:pointer-events-none dark:focus:ring-offset-slate-900",
   {
     variants: {
       variant: {
         default: "bg-zinc-900 text-zinc-100 hover:bg-zinc-800",
         destructive: "text-white hover:bg-red-600 dark:hover:bg-red-600",
-        outline:
-          "border border-input bg-transparent hover:bg-sky-600 hover:border-sky-600",
+        outline: "border border-input bg-transparent shadow-md ",
         subtle: "hover:bg-zinc-200 bg-zinc-100 text-zinc-900",
         ghost:
           "bg-transparent hover:bg-zinc-100 text-zinc-800 data-[state=open]:bg-transparent data-[state=open]:bg-transparent",

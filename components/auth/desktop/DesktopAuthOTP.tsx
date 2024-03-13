@@ -6,7 +6,7 @@ import {
   useEmailCredentialsStore,
   useOTPStore,
   useOpenModalStore,
-} from "@/lib/stores/modal-store";
+} from "@/lib/stores/modals/modal-store";
 import { cn } from "@/lib/utils";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -117,13 +117,13 @@ const DesktopAuthOTP = ({}) => {
     <>
       {/* Back Button */}
       <div
-        className="flex flex-row items-center justify-center absolute top-6 left-[400px] cursor-pointer"
+        className="absolute left-[400px] top-6 flex cursor-pointer flex-row items-center justify-center"
         onClick={() => {
           setShowOTP(false);
           setShowEmailCredentials(true);
         }}
       >
-        <button className="h-6 p-0 w-6 ">
+        <button className="h-6 w-6 p-0 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -134,12 +134,12 @@ const DesktopAuthOTP = ({}) => {
             <path d="M220,128a4,4,0,0,1-4,4H49.66l65.17,65.17a4,4,0,0,1-5.66,5.66l-72-72a4,4,0,0,1,0-5.66l72-72a4,4,0,0,1,5.66,5.66L49.66,124H216A4,4,0,0,1,220,128Z"></path>
           </svg>
         </button>
-        <span className="px-[2px] font-semibold text-sm">Back</span>
+        <span className="px-[2px] text-sm font-semibold">Back</span>
       </div>
 
       {/* OTP form */}
-      <div className="container h-full w-[438px] flex flex-col space-y-3 py-20">
-        <span className="flex justify-start font-bold text-2xl">
+      <div className="container flex h-full w-[438px] flex-col space-y-3 py-20">
+        <span className="flex justify-start text-2xl font-bold">
           Confirm your email
         </span>
         <div className="flex flex-col justify-start pb-14">
@@ -147,7 +147,7 @@ const DesktopAuthOTP = ({}) => {
           <span className=" text-sm font-light">{newUser.email}</span>
         </div>
 
-        <form className="flex flex-row justify-between items-center space-x-2">
+        <form className="flex flex-row items-center justify-between space-x-2">
           {otp.map((_, index) => {
             return (
               <Fragment key={index}>
@@ -155,7 +155,7 @@ const DesktopAuthOTP = ({}) => {
                   ref={index === activeInput ? inputRef : null}
                   type="number"
                   className={cn(
-                    "w-12 h-12 text-center text-xl text-gray-400 border border-zinc-300 rounded-sm focus:outline-none focus:border-zinc-700 focus:text-gray-700 transition-colors duration-150 ease-in-out",
+                    "h-12 w-12 rounded-sm border border-zinc-300 text-center text-xl text-gray-400 transition-colors duration-150 ease-in-out focus:border-zinc-700 focus:text-gray-700 focus:outline-none",
                     failedValidation && "border-red-500 focus:border-red-500",
                   )}
                   onInput={handleInput}
@@ -168,15 +168,15 @@ const DesktopAuthOTP = ({}) => {
           })}
         </form>
         {failedValidation && (
-          <span className="text-red-500 text-sm">
+          <span className="text-sm text-red-500">
             You've entered the wrong code. Try again
           </span>
         )}
-        <span className="font-semibold underline text-sm cursor-pointer">
+        <span className="cursor-pointer text-sm font-semibold underline">
           Resend code
         </span>
         <button
-          className="rounded-md bg-zinc-700 text-white font-semibold text-lg py-2"
+          className="rounded-md bg-zinc-700 py-2 text-lg font-semibold text-white"
           onClick={handleSubmit}
         >
           Submit

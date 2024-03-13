@@ -2,10 +2,22 @@
 import { passwordResetEmail } from "@/constants/email/passwordResetEmail";
 import { createTransport } from "nodemailer";
 import { generateRandomString } from "../utils";
-import { db } from "../db";
+import db from "@/lib/db";
 
 export async function sendPasswordResetEmail(email: string) {
   try {
+    const user = await db.user.findUnique({
+      where: {
+        email: email,
+      },
+    });
+
+    if (!user) {
+      throw new Error(
+        "O email não está cadastrado no sistema. Por favor, tente novamente.",
+      );
+    }
+
     const passwordResetToken = generateRandomString(20);
     const emailVerification = await createTransport({
       host: "smtp.hostinger.com",
@@ -34,8 +46,11 @@ export async function sendPasswordResetEmail(email: string) {
         userEmail: email,
       },
     });
+    return { ok: true };
   } catch (error) {
     console.log(error);
-    return error;
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
   }
 }

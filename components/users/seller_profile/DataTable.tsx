@@ -64,26 +64,26 @@ function DataTable({
       fieldName === "languages"
         ? "languages"
         : fieldName === "skills"
-        ? "skills"
-        : fieldName === "education"
-        ? "education"
-        : "certifications",
+          ? "skills"
+          : fieldName === "education"
+            ? "education"
+            : "certifications",
     control: formControl,
   });
 
   return (
-    <table className="flex flex-col border w-full mt-4">
-      <thead className="bg-gray-100 p-2 border-b">
+    <table className="mt-4 flex w-full flex-col border">
+      <thead className="border-b bg-gray-100 p-2">
         <tr className="flex flex-row gap-4 ">
-          <th className="w-full font-normal text-left">{column1Name}</th>
-          <th className="w-full font-normal text-left">{column2Name}</th>
+          <th className="w-full text-left font-normal">{column1Name}</th>
+          <th className="w-full text-left font-normal">{column2Name}</th>
           <th className="w-full text-left"></th>
         </tr>
       </thead>
       <tbody>
         {initialInput.size > 0
           ? Array.from(initialInput.keys()).map((input, index) => (
-              <tr className="flex text-gray-600 p-2 border-b" key={input}>
+              <tr className="flex border-b p-2 text-gray-600" key={input}>
                 {fieldToRegister === "education" ? (
                   <td
                     {...fieldRegister(`${fieldToRegister}.${index}.degree`, {
@@ -163,7 +163,7 @@ function DataTable({
                   </td>
                 )}
 
-                <td className="flex flex-row w-full gap-1 px-4">
+                <td className="flex w-full flex-row gap-1 px-4">
                   <span>
                     <button
                       type="button"

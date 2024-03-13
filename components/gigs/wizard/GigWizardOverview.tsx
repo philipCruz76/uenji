@@ -1,29 +1,48 @@
-import { FC } from 'react';
+"use client";
 
 import { cn } from "@/lib/utils";
 import { categoryFilters } from "@/constants";
-import { GigOverview, GigOverviewValidator } from "@/types/gigWizard.types";
+import {
+  GigDescription,
+  GigOverview,
+  GigOverviewValidator,
+  GigPricing,
+} from "@/types/gigWizard.types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { useGigWizardStore } from "@/lib/stores/gigWizard-store";
+import {
+  useGigWizardStepStore,
+  useGigWizardStore,
+} from "@/lib/stores/gigWizard-store";
+import toast from "react-hot-toast";
+import useCurrentUser from "@/lib/hooks/useCurrentUser";
+import { Gig } from "@prisma/client";
 
-interface GigWizardOverviewProps {
-    username  : string;
-}
+type GigWizardOverviewProps = {
+  username: string;
+  gigName?: string;
+};
 
-const GigWizardOverview: FC<GigWizardOverviewProps> = ({ username }) => {
-    const router = useRouter();
-  const [gigTitle, setGigTitle] = useState<string>("");
-  const [gigCategory, setGigCategory] = useState<string>("");
-  const [gigTags, setGigTags] = useState<string[]>([]);
-  const { setGigOverview, getGigOverview } = useGigWizardStore();
+const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
+  const router = useRouter();
+  const user = useCurrentUser();
+
+  const {
+    getFullGig,
+    setGigOverview,
+    getGigOverview,
+    setFullGig,
+    setGigPricing,
+    setGigGallery,
+    setGigDescription,
+  } = useGigWizardStore();
+  const { setGigWizardStepCurrent, setGigWizardStepCompleted } =
+    useGigWizardStepStore();
   const {
     register,
-    watch,
     setValue,
-    trigger,
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<GigOverview>({
@@ -31,206 +50,375 @@ const GigWizardOverview: FC<GigWizardOverviewProps> = ({ username }) => {
     resolver: zodResolver(GigOverviewValidator),
   });
 
-  const watchForm = watch();
+  const gigOverview = getGigOverview();
+
+  useEffect(() => {
+    setGigWizardStepCurrent(0);
+    if (gigName && user) {
+      fetch(`/api/gig/retrieve?gigName=${gigName}`, {
+        method: "GET",
+      })
+        .then(async (res) => {
+          const desiredGig = (await res.json()) as Gig;
+          let parsedPackages = {} as GigPricing["packages"];
+          let parsedFaqs = {} as GigDescription["faqs"];
+          if (desiredGig) {
+            if (desiredGig.packages !== null) {
+              parsedPackages = JSON.parse(
+                desiredGig.packages,
+              ) as GigPricing["packages"];
+              setGigPricing({
+                ...getFullGig().pricing,
+                packages: parsedPackages,
+              });
+            }
+
+            if (desiredGig.coverImage !== "") {
+              setGigGallery({
+                ...getFullGig().gallery,
+                gigImages: desiredGig.images,
+              });
+              if (desiredGig.documents[0] !== "") {
+                setGigGallery({
+                  ...getFullGig().gallery,
+                  gigDocuments: desiredGig.documents,
+                });
+              }
+            }
+            if (desiredGig.description !== "") {
+              setGigDescription({
+                ...getFullGig().description,
+                description: desiredGig.description
+                  ? desiredGig.description
+                  : "",
+              });
+              if (desiredGig.faq !== null) {
+                parsedFaqs = JSON.parse(
+                  desiredGig.faq || "",
+                ) as GigDescription["faqs"];
+                setGigDescription({
+                  ...getFullGig().description,
+                  faqs: parsedFaqs,
+                });
+              }
+            }
+            setFullGig({
+              ...getFullGig(),
+              overview: {
+                ...getFullGig().overview,
+                gigTitle: desiredGig.title,
+                gigCategory: desiredGig.category,
+                gigSearchTags: [...desiredGig.features],
+              },
+            });
+            console.log(getFullGig());
+            setGigWizardStepCompleted(0);
+            setValue("gigTitle", desiredGig.title, { shouldValidate: true });
+            setValue("gigCategory", desiredGig.category, {
+              shouldValidate: true,
+            });
+            setValue("gigSearchTags", [...desiredGig.features], {
+              shouldValidate: true,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [user]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     if (event.key === "Enter" && event.currentTarget.value) {
-      setGigTags([...gigTags, value.toUpperCase()]);
-      setValue("gigSearchTags", [...gigTags, value.toUpperCase()]);
-      trigger("gigSearchTags");
+      setGigOverview({
+        ...gigOverview,
+        gigSearchTags: [...gigOverview.gigSearchTags, value.toUpperCase()],
+      });
+      setValue(
+        "gigSearchTags",
+        [...gigOverview.gigSearchTags, value.toUpperCase()],
+        {
+          shouldValidate: true,
+        },
+      );
+
       event.currentTarget.value = "";
     }
     if (event.key === "Backspace" && !event.currentTarget.value) {
-      setGigTags(gigTags.slice(0, gigTags.length - 1));
-      setValue("gigSearchTags", gigTags.slice(0, gigTags.length - 1));
+      setGigOverview({
+        ...gigOverview,
+        gigSearchTags: gigOverview.gigSearchTags.slice(
+          0,
+          gigOverview.gigSearchTags.length - 1,
+        ),
+      });
+
+      setValue(
+        "gigSearchTags",
+        gigOverview.gigSearchTags.slice(
+          0,
+          gigOverview.gigSearchTags.length - 1,
+        ),
+        {
+          shouldValidate: true,
+        },
+      );
       event.currentTarget.value = "";
     }
     return;
   };
 
+  const handleDelete = () => {
+    fetch(`/api/gig/delete?gigName=${gigName}`, {
+      method: "POST",
+    })
+      .then((res) => {
+        if (res.ok) {
+          toast.success("Gig deleted successfully");
+          router.push(`/`);
+          router.refresh();
+        }
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+
   const onSubmit: SubmitHandler<GigOverview> = (data) => {
     setGigOverview(data);
-    console.log(getGigOverview());
-    router.push(
-      `/${username}/manage_gigs/${getGigOverview().gigTitle.replace(
-        /\s+/g,
-        "-"
-      )}/edit?step=2`
-    );
+    if (gigName) {
+      fetch(`/api/gig/update?gigName=${gigName}&updateType=overview`, {
+        method: "POST",
+        body: JSON.stringify(getGigOverview()),
+      })
+        .then((res) => {
+          if (res.ok) {
+            setGigWizardStepCompleted(0);
+            router.push(
+              `/${username}/manage_gigs/${getGigOverview()
+                .gigTitle.replace(/\s+/g, "-")
+                .toLowerCase()}/edit?step=2`,
+            );
+          }
+        })
+        .catch((error) => {
+          toast.error(error.message);
+        });
+    } else {
+      fetch("/api/gig/create", {
+        method: "POST",
+        body: JSON.stringify(getGigOverview()),
+      }).then((res) => {
+        if (res.ok) {
+          setGigWizardStepCompleted(0);
+          router.push(
+            `/${username}/manage_gigs/${getGigOverview()
+              .gigTitle.replace(/\s+/g, "-")
+              .toLowerCase()}/edit?step=2`,
+          );
+        }
+      });
+    }
   };
 
   return (
-    <section className="flex py-[40px] justify-center min-w-full min-h-full bg-gray-100">
-    <form
-      className="flex flex-col gap-4 w-[70%] h-[70%] border bg-white rounded-md relative p-[28px] pb-[40px]"
-      onSubmit={(e) => {
-        e.preventDefault();
-      }}
-    >
-      {/* Title */}
-      <div className="flex flex-row  justify-between w-full">
-        <div className="flex flex-col gap-2 min-w-[245px] max-w-[245px] pr-[32px]">
-          <span className="text-lg font-semibold">Gig Title</span>
-          <span className="text-sm text-gray-500">
-            As your Gig storefront,{" "}
-            <b>your title is the most important place</b> to include keywords
-            that buyers would likely use to search for a service like yours.
-          </span>
-        </div>
-        <div className="flex flex-col gap-2 w-full">
-          <textarea
-            role="textbox"
-            value={gigTitle}
-            required
-            className="text-lg font-bold border-[2px] focus:outline-none rounded-md p-2 min-h-[80px] justify-items-start"
-            maxLength={80}
-            {...register("gigTitle", {
-              required: "Gig title is required",
-              onChange: (e) => {
-                e.preventDefault();
-                setGigTitle(e.target.value);
-              },
-            })}
-          />
-          <div className="flex flex-row-reverse w-full justify-between">
-            <span className=" text-xs text-gray-500">
-              {gigTitle.length}/80 max
+    <section className="flex min-h-full min-w-full justify-center bg-gray-100 py-[40px]">
+      <form
+        className="relative flex h-[70%] w-[70%] flex-col gap-4 rounded-md border bg-white p-[28px] pb-[40px]"
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        {/* Title */}
+        <div className="flex w-full  flex-row justify-between">
+          <div className="flex min-w-[245px] max-w-[245px] flex-col gap-2 pr-[32px]">
+            <span className="text-lg font-semibold">Título do servicço</span>
+            <span className="text-sm text-gray-500">
+              O Título funciona como uma montra para do seu serviço, e como tal{" "}
+              <b>é o lugar mais importante</b> para meter palavras-chave que
+              serão do interesse para clientes que estejam à procura de serviços
+              como o seu.
             </span>
-            {errors.gigTitle && (
+          </div>
+          <div className="flex w-full flex-col gap-2">
+            <textarea
+              role="textbox"
+              value={gigOverview.gigTitle}
+              required
+              className="min-h-[80px] justify-items-start rounded-md border-[2px] p-2 text-lg font-bold focus:outline-none"
+              maxLength={80}
+              {...register("gigTitle", {
+                required: "Gig title is required",
+                onChange: (e) => {
+                  e.preventDefault();
+                  setGigOverview({ ...gigOverview, gigTitle: e.target.value });
+                },
+              })}
+            />
+            <div className="flex w-full flex-row-reverse justify-between">
+              <span className=" text-xs text-gray-500">
+                {gigOverview.gigTitle.length}/80 max
+              </span>
+              {errors.gigTitle && (
+                <span className="text-xs text-red-500">
+                  {errors.gigTitle.message}
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+        {/* Category */}
+        <div className="flex w-full  flex-row justify-between">
+          <div className="flex min-w-[245px] max-w-[245px] flex-col gap-2 pr-[32px]">
+            <span className="text-lg font-semibold">Categoria</span>
+            <span className="text-sm text-gray-500">
+              Escolha a <b>categoria</b> mais adequada para o seu serviço
+            </span>
+          </div>
+          <div className="flex w-full flex-col gap-2">
+            <select
+              value={gigOverview.gigCategory}
+              className="h-[40px] w-[300px] rounded-sm border border-gray-300 bg-white px-2 text-gray-600"
+              {...register("gigCategory", {
+                required: "Category is required",
+                onChange: (e) => {
+                  e.preventDefault();
+                  setGigOverview({
+                    ...gigOverview,
+                    gigCategory: e.target.value,
+                  });
+                },
+              })}
+            >
+              <option value="" disabled>
+                Selecionar Categoria
+              </option>
+              {categoryFilters.map((occupation) => (
+                <option value={occupation} key={occupation}>
+                  {occupation.toUpperCase()}
+                </option>
+              ))}
+            </select>
+          </div>
+          {errors.gigCategory && (
+            <span className="text-xs text-red-500">
+              {errors.gigCategory.message}
+            </span>
+          )}
+        </div>
+        {/* Search Tags */}
+        <div className="flex max-w-full  flex-row justify-between">
+          <div className="flex min-w-[245px] max-w-[245px] flex-col gap-2 pr-[32px]">
+            <span className="text-lg font-semibold">Palavras-chave</span>
+            <span className="text-sm text-gray-500">
+              Marque o seu serviço com palavras-chave que sejam relevantes para
+              os serviços que oferece. Utilize até 5 palavras chave para melhor
+              se destacar.
+            </span>
+          </div>
+          <div className="flex w-full max-w-full  flex-col gap-2">
+            <span className="text-lg font-semibold">Positive Keywords</span>
+            <span className="text-sm text-gray-500">
+              {" "}
+              Introduza os termos que acredita que os seus compradores irão
+              utilizar quando estiverem a pesquisar pelo o seu serviço.
+            </span>
+
+            <div
+              className={cn(
+                "flex h-[50px] max-w-[593px] flex-row gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+              )}
+            >
+              {gigOverview.gigSearchTags.map((tag, index) => (
+                <button
+                  type="button"
+                  className=" flex max-h-full max-w-full items-center justify-center justify-items-center gap-1 rounded-md bg-slate-100 px-[8px] py-[8px] text-center "
+                  key={index}
+                >
+                  <span className="h-full w-full  font-semibold text-gray-500 hover:cursor-default">
+                    {tag.toUpperCase()}
+                  </span>
+
+                  <svg
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setGigOverview({
+                        ...gigOverview,
+                        gigSearchTags: gigOverview.gigSearchTags.filter(
+                          (_, i) => i !== index,
+                        ),
+                      });
+
+                      setValue(
+                        "gigSearchTags",
+                        gigOverview.gigSearchTags.filter((_, i) => i !== index),
+                        { shouldValidate: true },
+                      );
+                    }}
+                    className=" h-full w-full hover:cursor-pointer"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    fill="#000000"
+                    viewBox="0 0 256 256"
+                  >
+                    <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"></path>
+                  </svg>
+                </button>
+              ))}
+              <input
+                type="text"
+                id="gigTagsInput"
+                className="bg-white outline-none"
+                placeholder="Type something..."
+                onKeyDown={handleKeyDown}
+              />
+            </div>
+
+            {errors.gigSearchTags && (
               <span className="text-xs text-red-500">
-                {errors.gigTitle.message}
+                {errors.gigSearchTags.message}
               </span>
             )}
           </div>
         </div>
-      </div>
-      {/* Category */}
-      <div className="flex flex-row  justify-between w-full">
-        <div className="flex flex-col gap-2 min-w-[245px] max-w-[245px] pr-[32px]">
-          <span className="text-lg font-semibold">Category</span>
-          <span className="text-sm text-gray-500">
-            Choose the <b>category</b> most suitable for your Gig.
-          </span>
-        </div>
-        <div className="flex flex-col gap-2 w-full">
-          <select
-            value={gigCategory}
-            className="w-[300px] h-[40px] border border-gray-300 bg-white rounded-sm text-gray-600 px-2"
-            {...register("gigCategory", {
-              required: "Category is required",
-              onChange: (e) => {
-                e.preventDefault();
-                setGigCategory(e.target.value);
-              },
-            })}
-          >
-            <option value="" disabled>
-              Selecionar Ramo
-            </option>
-            {categoryFilters.map((occupation) => (
-              <option value={occupation} key={occupation}>
-                {occupation.toUpperCase()}
-              </option>
-            ))}
-          </select>
-        </div>
-        {errors.gigCategory && (
-          <span className="text-xs text-red-500">
-            {errors.gigCategory.message}
-          </span>
-        )}
-      </div>
-      {/* Search Tags */}
-      <div className="flex flex-row  justify-between max-w-full">
-        <div className="flex flex-col gap-2 min-w-[245px] max-w-[245px] pr-[32px]">
-          <span className="text-lg font-semibold">Search tags</span>
-          <span className="text-sm text-gray-500">
-            Tag your Gig with buzz words that are relevant to the services you
-            offer. Use all 5 tags to get found.
-          </span>
-        </div>
-        <div className="flex flex-col gap-2  max-w-full w-full">
-          <span className="text-lg font-semibold">Positive Keywords</span>
-          <span className="text-sm text-gray-500">
-            {" "}
-            Enter search terms you feel your buyers will use when looking for
-            your service.
-          </span>
 
-          <div
-            className={cn(
-              "flex flex-row max-w-[593px] overflow-x-scroll gap-2 h-[50px] rounded-md border border-input overflow-scroll bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-            )}
-            {...register("gigSearchTags", {
-              required: "Search tags are required",
-              value: gigTags,
-            })}
-          >
-            {gigTags.map((tag, index) => (
-              <button
-                type="button"
-                className="bg-slate-100 flex items-center justify-center  gap-1 px-[8px] py-[8px] rounded-md "
-                key={index}
-              >
-                <span className="text-center font-semibold text-gray-500 items-center justify-center">
-                  {tag.toUpperCase()}
-                </span>
-                <span
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setGigTags(gigTags.filter((_, i) => i !== index));
-                    setValue(
-                      "gigSearchTags",
-                      gigTags.filter((_, i) => i !== index)
-                    );
-                  }}
-                  className="h-[20px] w-[20px] text-gray-400 font-bold inline-flex max-w-full justify-center items-center text-lg overflow-x-scroll"
-                >
-                  &times;
-                </span>
-              </button>
-            ))}
-            <input
-              type="text"
-              className=" outline-none  bg-transparent"
-              placeholder="Type something..."
-              onKeyDown={handleKeyDown}
-            />
-          </div>
-
-          {errors.gigSearchTags && (
-            <span className="text-xs text-red-500">
-              {errors.gigSearchTags.message}
-            </span>
-          )}
-
-          <span className="text-xl font-bold text-gray-500">
-            {watchForm.gigTitle}
-            <br />
-            {watchForm.gigCategory}
-            <br />
-            {watchForm.gigSearchTags}
-          </span>
-        </div>
-      </div>
-      <div className="flex items-end justify-end ">
-        <button
-          type="button"
-          disabled={!isValid}
-          onClick={handleSubmit(onSubmit)}
+        <div
           className={cn(
-            `justify-center w-[180px] ${
-              isValid ? " bg-sky-500 text-white" : "bg-gray-400 text-white"
-            } rounded-md px-4 py-2`
+            !gigName
+              ? "flex w-full justify-end"
+              : "flex w-full justify-between",
           )}
         >
-          Save & Continue{" "}
-        </button>
-      </div>
-    </form>
-  </section>
-   );
-}
+          {!gigName ? null : (
+            <button
+              type="button"
+              className={cn(
+                isValid ? "bg-red-600 hover:bg-red-500" : "bg-gray-400",
+                "rounded-md px-4 py-2 text-white ",
+              )}
+              onClick={handleDelete}
+            >
+              Delete Gig
+            </button>
+          )}
+          <button
+            type="button"
+            disabled={!isValid}
+            onClick={handleSubmit(onSubmit)}
+            className={cn(
+              `w-[180px] justify-center ${
+                isValid ? "bg-sky-500 text-white" : "bg-gray-400 text-white"
+              } rounded-md px-4 py-2 hover:bg-sky-400`,
+            )}
+          >
+            Gravar e continuar{" "}
+          </button>
+        </div>
+      </form>
+    </section>
+  );
+};
 
 export default GigWizardOverview;

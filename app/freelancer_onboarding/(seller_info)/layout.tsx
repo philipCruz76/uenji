@@ -4,15 +4,15 @@ import { Progress } from "@/components/ui/Progress";
 import Link from "next/link";
 import { useSellerOnboardingStore } from "@/lib/stores/sellerOboarding-store";
 import { cn } from "@/lib/utils";
-import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import useCurrentUser from "@/lib/hooks/useCurrentUser";
 
 export default function SellerInfoLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const user = useSession().data?.user;
+  const user = useCurrentUser();
 
   if (user?.isSeller) {
     redirect("/");
@@ -20,16 +20,16 @@ export default function SellerInfoLayout({
 
   const { sellerOnboardingStep } = useSellerOnboardingStore();
   return (
-    <section className="flex flex-col px-[24px] desktop:px-0 max-w-[100dvw] min-h-[100dvh]">
-      <div className="flex w-full h-[70px] justify-between border-b pt-6">
-        <ul className="tablet:flex hidden flex-row gap-2 px-4 cursor-pointer">
+    <section className="flex min-h-[100dvh] max-w-[100dvw] flex-col px-[24px] desktop:px-0">
+      <div className="flex h-[70px] w-full justify-between border-b pt-6">
+        <ul className="hidden cursor-pointer flex-row gap-2 px-4 tablet:flex">
           <li
             key="personalInfo"
-            className="flex flex-row gap-4 items-center justify-center text-center"
+            className="flex flex-row items-center justify-center gap-4 text-center"
           >
             <i
               className={cn(
-                "flex items-center justify-center w-[40px] h-[40px] border rounded-full text-white",
+                "flex h-[40px] w-[40px] items-center justify-center rounded-full border text-white",
                 sellerOnboardingStep === 1 ? "bg-sky-600" : "bg-gray-400",
               )}
             >
@@ -57,11 +57,11 @@ export default function SellerInfoLayout({
           </li>
           <li
             key="professionalInfo"
-            className="flex flex-row gap-4 items-center justify-center text-center"
+            className="flex flex-row items-center justify-center gap-4 text-center"
           >
             <i
               className={cn(
-                "flex items-center justify-center w-[40px] h-[40px] border rounded-full text-white",
+                "flex h-[40px] w-[40px] items-center justify-center rounded-full border text-white",
                 sellerOnboardingStep === 2 ? "bg-sky-600" : "bg-gray-400",
               )}
             >
@@ -89,11 +89,11 @@ export default function SellerInfoLayout({
           </li>
           <li
             key="accountSecurity"
-            className="flex flex-row gap-4 items-center justify-center text-center"
+            className="flex flex-row items-center justify-center gap-4 text-center"
           >
             <i
               className={cn(
-                "flex items-center justify-center w-[40px] h-[40px] border rounded-full text-white",
+                "flex h-[40px] w-[40px] items-center justify-center rounded-full border text-white",
                 sellerOnboardingStep === 3 ? "bg-sky-600" : "bg-gray-400",
               )}
             >
@@ -111,14 +111,14 @@ export default function SellerInfoLayout({
             </Link>
           </li>
         </ul>
-        <div className="flex flex-col gap-2 w-full h-full px-4">
+        <div className="flex h-full w-full flex-col gap-2 px-4">
           <span className="text-sm">
             Completion Rate:{" "}
             {sellerOnboardingStep === 3 ? 100 : sellerOnboardingStep * 33}%{" "}
           </span>
           <Progress
             value={sellerOnboardingStep === 3 ? 100 : sellerOnboardingStep * 33}
-            className="w-full h-[8px]"
+            className="h-[8px] w-full"
           />
         </div>
       </div>

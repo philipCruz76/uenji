@@ -1,6 +1,6 @@
 "use client";
 import { FC, FormEvent, useState } from "react";
-import { Input } from "../ui/Input";
+import { Input } from "@/components/ui/Input";
 import { resetPassword } from "@/lib/actions/resetUserPassword";
 import { PasswordResetSchema } from "@/types/passwordReset.types";
 
@@ -35,14 +35,14 @@ const PasswordResetForm: FC<PasswordResetFormProps> = ({ userEmail }) => {
     }
   };
   return (
-    <div className="flex flex-row items-center justify-center text-center w-full h-full ">
+    <div className="flex h-full w-full flex-row items-center justify-center text-center ">
       <form
-        className="flex flex-col space-y-4 max-w-[500px] w-full h-[305px]"
+        className="flex h-[305px] w-full max-w-[500px] flex-col space-y-4"
         action={(data) => resetPassword(data, userEmail, validPassword)}
       >
-        <label className="font-semibold text-2xl py-2">Reset Password</label>
+        <label className="py-2 text-2xl font-semibold">Reset Password</label>
         <Input
-          className="w-full border-zinc-300 rounded-sm"
+          className="w-full rounded-sm border-zinc-300"
           required
           placeholder="New Password"
           type="password"
@@ -54,18 +54,18 @@ const PasswordResetForm: FC<PasswordResetFormProps> = ({ userEmail }) => {
           type="password"
           id="confirmPassword"
           required
-          className="w-full border-zinc-300 rounded-sm"
+          className="w-full rounded-sm border-zinc-300"
           placeholder="Confirm Password"
           onChange={async (data) => validateConfirmPassword(data)}
         />
 
-        <span className="flex text-start text-red-500 text-sm">
+        <span className="flex text-start text-sm text-red-500">
           {passWordErrorMessage}
         </span>
         <button
           disabled={passWordErrorMessage != ""}
           type="submit"
-          className="flex items-center justify-center w-full h-10 text-sm font-semibold text-white bg-zinc-600 rounded-md"
+          className="flex h-10 w-full items-center justify-center rounded-md bg-zinc-600 text-sm font-semibold text-white"
         >
           {" "}
           Change{" "}

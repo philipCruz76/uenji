@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+import db from "@/lib/db";
 import { FC } from "react";
 import { redirect } from "next/navigation";
 import { ActivateLinkParamsValidator } from "@/types/activateLink.types";
@@ -64,7 +64,7 @@ const ActivateLinkPage: FC<ActivateLinkPageProps> = async ({
     });
 
   return (
-    <section className="flex flex-col items-center justify-center w-[100dvw] h-[100dvh]">
+    <section className="flex h-[100dvh] w-[100dvw] flex-col items-center justify-center">
       {(await isValid) ? redirect("/") : null}
     </section>
   );

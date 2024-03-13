@@ -18,13 +18,16 @@ const TabletAuthInitial = () => {
   }, [isLogin]);
 
   return (
-    <div className="flex flex-col space-y-3 text-left mt-12 px-3">
+    <div className="mt-12 flex flex-col space-y-3 px-3 text-left">
       <p className="text-2xl font-semibold">
         {isLogin === "login" ? signInText.title : signUpText.title}
       </p>
-      <div className="flex text-base font-extralight text-slate-500 space-x-1">
+      <div className="flex space-x-1 text-base font-extralight text-slate-500">
         <p>{isLogin === "login" ? signInText.subtext : signUpText.subtext}</p>
-        <a className="underline cursor-pointer" onClick={toggleVariant}>
+        <a
+          className="cursor-pointer rounded-md border border-[#495057] bg-[#495057] px-2 font-medium text-white shadow-md"
+          onClick={toggleVariant}
+        >
           {isLogin === "login"
             ? signInText.hyperlinkText
             : signUpText.hyperlinkText}
@@ -32,16 +35,16 @@ const TabletAuthInitial = () => {
       </div>
 
       {/* Auth buttons */}
-      <div className="flex flex-col py-10 space-y-2 items-start font-semibold text-sm">
+      <div className="flex w-full flex-col items-start space-y-2 py-10 text-sm font-semibold">
         <EmailCredentialsButton />
 
         <GoogleButton />
 
-        <div className="flex w-full py-4 items-center justify-center text-center font-extralight text-slate-400">
-          <p>OR</p>
+        <div className="flex w-full items-center justify-center py-4 text-center font-extralight text-black">
+          <p>OU</p>
         </div>
 
-        <div className="flex flex-row space-x-2 justify-center items-center mx-2 ">
+        <div className="mx-2 flex flex-row items-center justify-center space-x-2 ">
           <FacebookButton />
 
           <AppleButton />

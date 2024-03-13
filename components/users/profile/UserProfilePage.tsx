@@ -1,25 +1,34 @@
 import { User } from "@prisma/client";
 import { lazy } from "react";
 import getCurrentUser from "@/lib/actions/getCurrentUser";
+import getSession from "@/lib/actions/getSession";
 
 type UserProfilePageProps = {
   user: User;
   publicMode?: boolean;
-}
+};
 
 const PrivateProfileView = lazy(() => import("./PrivateProfileView"));
 const PublicProfileView = lazy(() => import("./PublicProfileView"));
 
-const UserProfilePage= async ({ user, publicMode }: UserProfilePageProps) => {
-  const currentUser = await getCurrentUser();
+const UserProfilePage = async ({ user, publicMode }: UserProfilePageProps) => {
+  const session = await getSession();
+  let currentUsername = "";
+  if (session !== null) {
+    const currentUser = await getCurrentUser();
+    currentUsername = currentUser?.username || "";
+  }
+
   const { username } = user;
 
-  publicMode !== undefined ? publicMode = publicMode : publicMode = currentUser?.username !== username;
+  publicMode !== undefined
+    ? (publicMode = publicMode)
+    : (publicMode = currentUsername !== username || !session);
 
   if (!publicMode) {
-    return (<PrivateProfileView user={user} /> )
-  } else{
-    return (<PublicProfileView user={user}/> )
+    return <PrivateProfileView user={user} />;
+  } else {
+    return <PublicProfileView user={user} />;
   }
 };
 

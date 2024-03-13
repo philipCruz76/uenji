@@ -1,29 +1,26 @@
-import BuyerDashboard from "@/components/dashboard/BuyerDashboard";
-import SellerDashboard from "@/components/dashboard/SellerDashboard";
-import getSession from "@/lib/actions/getSession";
+import getCurrentUser from "@/lib/actions/getCurrentUser";
 import { lazy } from "react";
 
 const Hero = lazy(() => import("@/components/hero/Hero"));
-const MobileFooter = lazy(() => import("@/components/navigation/MobileFooter"));
+const BuyerDashboard = lazy(
+  () => import("@/components/dashboard/buyer/BuyerDashboard"),
+);
+const SellerDashboard = lazy(
+  () => import("@/components/dashboard/seller/SellerDashboard"),
+);
 
 export default async function Home() {
-  const session = await getSession();
+  const user = await getCurrentUser();
 
-  const isSeller = session?.user.isSeller;
+  if (!user) return <Hero />;
+
   return (
     <>
-      {session ? (
-        isSeller ? (
-          <SellerDashboard user={session.user} />
-        ) : (
-          <BuyerDashboard user={session.user} />
-        )
+      {user.isSeller === true && user.sellerView === true ? (
+        <SellerDashboard user={user} />
       ) : (
-        <Hero />
+        <BuyerDashboard user={user} />
       )}
-      <div className="flex flex-1 tablet:hidden min-w-full">
-        <MobileFooter />
-      </div>
     </>
   );
 }

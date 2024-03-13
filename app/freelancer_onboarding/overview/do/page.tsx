@@ -10,10 +10,10 @@ const page = async () => {
   const isSeller = await getCurrentUser().then((user) => user?.isSeller);
   if (isSeller?.valueOf() === true) redirect("/");
   return (
-    <section className="flex container py-8 max-w-[100dvw] min-h-[100dvh] overflow-y-scroll">
-      <div className="flex flex-col-reverse desktop:flex-row-reverse w-full h-full items-center justify-between  tablet:pl-[25px] ">
-        <div className="flex container flex-col max-w-[900px] h-full tablet:px-[60px] items-start justify-center">
-          <h1 className="flex text-[#303030] font-bold box-border tablet:max-w-[590px] tablet:pr-[80px] text-2xl pb-[20px]">
+    <section className="container flex min-h-[100dvh] max-w-[100dvw] overflow-y-scroll py-8">
+      <div className="flex h-full w-full flex-col-reverse items-center justify-between tablet:pl-[25px]  desktop:flex-row-reverse ">
+        <div className="container flex h-full max-w-[900px] flex-col items-start justify-center tablet:px-[60px]">
+          <h1 className="box-border flex pb-[20px] text-2xl font-bold text-[#303030] tablet:max-w-[590px] tablet:pr-[80px]">
             {" "}
             O que caracteriza um perfil Uenji bem-sucedido?
           </h1>
@@ -21,43 +21,43 @@ const page = async () => {
             A sua primeira impressão é fundamental! Crie um perfil que se
             destaque da multidão no Uenji.
           </h3>
-          <ul className="grid desktop:grid-cols-3 tablet:grid-cols-2 grid-cols-1 min-h-[310px] box-border  max-w-full  pt-[42px]  justify-between">
+          <ul className="box-border grid min-h-[310px] max-w-full grid-cols-1 justify-between  pt-[42px]  tablet:grid-cols-2  desktop:grid-cols-3">
             {sellerOnBoardingDos.map((item) => (
               <li
                 key={item.key}
-                className="tablet:px-2 justify-center max-w-[270px] pb-[40px]"
+                className="max-w-[270px] justify-center pb-[40px] tablet:px-2"
               >
                 <Image alt={item.key} src={item.icon} width={43} height={43} />
-                <p className="text-gray-600 text-sm text-justify">
+                <p className="text-justify text-sm text-gray-600">
                   {item.text}
                 </p>
               </li>
             ))}
           </ul>
-          <div className="grid grid-cols-1 tablet:grid-cols-2 grid-rows-1 gap-4 tablet:justify-start items-center w-full justify-center">
+          <div className="grid w-full grid-cols-1 grid-rows-1 items-center justify-center gap-4 tablet:grid-cols-2 tablet:justify-start">
             <Link
               href="/freelancer_onboarding/overview/dont"
               className={cn(
                 buttonVariants({ variant: "default" }),
-                "text-center bg-sky-500 tablet:w-[160px] w-full text-white",
+                "w-full bg-sky-500 text-center text-white tablet:w-[160px]",
               )}
             >
               Continuar
             </Link>
             <Link
               href="/freelancer_onboarding/overview"
-              className="underline text-blue-700 text-center tablet:text-start"
+              className="text-center text-blue-700 underline tablet:text-start"
             >
               {" "}
               Voltar
             </Link>
           </div>
         </div>
-        <div className="hidden desktop:block  h-fit max-h-[100dvh] overflow-hidden  border rounded-md ">
+        <div className="hidden h-fit  max-h-[100dvh] overflow-hidden rounded-md  border desktop:block ">
           <video
             autoPlay
             muted
-            className="hidden desktop:block max-h-[100dvh] box-content"
+            className="box-content hidden max-h-[100dvh] desktop:block"
           >
             <source
               src="https://res.cloudinary.com/dqe71igxe/video/upload/f_auto:video,q_auto/v1/videos/SellerOverview"

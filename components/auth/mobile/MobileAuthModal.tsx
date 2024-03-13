@@ -4,10 +4,10 @@ import {
   useEmailCredentialsStore,
   useOTPStore,
   useOpenModalStore,
-} from "@/lib/stores/modal-store";
-import MobileAuthInitial from "./MobileAuthInitial";
-import EmailRegistrationForm from "../EmailRegistrationForm";
-import OTPRegistrationForm from "../OTPRegistrationForm";
+} from "@/lib/stores/modals/modal-store";
+import MobileAuthInitial from "@/components/auth/mobile/MobileAuthInitial";
+import EmailRegistrationForm from "@/components/auth/EmailRegistrationForm";
+import OTPRegistrationForm from "@/components/auth/OTPRegistrationForm";
 import Image from "next/image";
 
 const SmallScreenSignInSheet = () => {
@@ -29,25 +29,25 @@ const SmallScreenSignInSheet = () => {
     >
       <Dialog
         as="div"
-        className="container flex flex-col  overflow-hidden fixed top-0 left-0 right-0 bottom-0 z-20 border text-black border-white bg-white rounded-2xl overflow-y-scroll"
+        className="container fixed bottom-0  left-0 right-0 top-0 z-20 flex flex-col overflow-hidden overflow-y-scroll rounded-2xl border border-white bg-white text-black"
         onClose={() => {
           setIsOpen(false);
           setShowEmailCredentials(false);
           setShowOTP(false);
         }}
       >
-        <div className="flex relative items-start mx-auto px-4 py-4  font-bold text-3xl">
+        <div className="relative mx-auto flex items-start px-4 py-4  text-3xl font-bold">
           <Image
-            src={"/uenji-logo.png"}
+            src={"/images/uenji-logo-black.png"}
             alt="Uenji Logo"
             width={200}
             height={200}
           />
         </div>
         {/* Close Button*/}
-        <div className="absolute top-6 right-6">
+        <div className="absolute right-6 top-6">
           <button
-            className="h-6 p-0 w-6 rounded-md"
+            className="h-6 w-6 rounded-md p-0"
             onClick={() => {
               setIsOpen(false);
               setShowEmailCredentials(false);
@@ -60,7 +60,7 @@ const SmallScreenSignInSheet = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="w-6 h-6"
+              className="h-6 w-6"
             >
               <path
                 strokeLinecap="round"

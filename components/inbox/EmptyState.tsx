@@ -7,7 +7,7 @@ type EmptyStateProps = {
 
 const EmptyState: FC<EmptyStateProps> = ({ user }) => {
   return (
-    <div className="flex flex-col w-[800px] border rounded-3xl h-[80dvh] items-center justify-center">
+    <div className="flex h-[80dvh] w-[800px] flex-col items-center justify-center rounded-3xl border">
       <h1 className="text-xl font-semibold">
         {user?.name ? user.name : user?.username?.toLocaleUpperCase()} pick up
         where you left off

@@ -1,13 +1,13 @@
 export const signInText = {
-  title: "Sign into your account",
-  subtext: "Dont have an account?",
-  hyperlinkText: "Join here",
-  credentialsText: "Continue with email/username",
+  title: "Entrar na sua conta",
+  subtext: "Ainda não tem conta?",
+  hyperlinkText: "Adira já",
+  credentialsText: "Continuar com email",
 };
 
 export const signUpText = {
-  title: "Create a new account",
-  subtext: "Already have an account?",
-  hyperlinkText: "Sign in",
-  credentialsText: "Continue with email",
+  title: "Crie uma conta nova",
+  subtext: "Já tem conta?",
+  hyperlinkText: "Entrar",
+  credentialsText: "Continuar com email",
 };

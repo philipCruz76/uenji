@@ -35,7 +35,7 @@ const ConversationsSidebar: FC<ConversationsSidebarProps> = ({
             return { ...currentConversation, messages: conversation.messages };
           }
           return currentConversation;
-        })
+        }),
       );
     };
 
@@ -66,8 +66,8 @@ const ConversationsSidebar: FC<ConversationsSidebarProps> = ({
   }, [pusherKey]);
 
   return (
-    <section className="flex  flex-col  w-full  h-full space-y-6">
-      <div className=" flex flex-row w-full items-center justify-between pr-4">
+    <section className="flex  h-full  w-full  flex-col space-y-6">
+      <div className=" flex w-full flex-row items-center justify-between pr-4">
         <InboxTypeComboBox />
         <svg
           xmlns="http://www.w3.org/2000/svg"

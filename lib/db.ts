@@ -1,18 +1,18 @@
 import { PrismaClient } from "@prisma/client";
 
+const prismaClientSingleton = () => {
+  return new PrismaClient();
+};
+
 declare global {
   // eslint-disable-next-line  no-var, no-unused-vars
-  var chachedPrisma: PrismaClient;
+  var chachedPrisma: undefined | ReturnType<typeof prismaClientSingleton>;
 }
 
-let prisma: PrismaClient;
-if (process.env.NODE_ENV === "production") {
-  prisma = new PrismaClient();
-} else {
-  if (!global.chachedPrisma) {
-    global.chachedPrisma = new PrismaClient();
-  }
-  prisma = global.chachedPrisma;
-}
+const db = globalThis.chachedPrisma ?? prismaClientSingleton();
 
-export const db = prisma;
+export default db;
+
+if (process.env.NODE_ENV === "development") {
+  globalThis.chachedPrisma = db;
+}

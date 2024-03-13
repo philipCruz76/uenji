@@ -8,7 +8,7 @@ import {
   useEmailCredentialsStore,
   useOTPStore,
   useOpenModalStore,
-} from "@/lib/stores/modal-store";
+} from "@/lib/stores/modals/modal-store";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/Input";
 import { useLogInVariantStore, useNewUserStore } from "@/lib/stores/auth-store";
@@ -76,10 +76,10 @@ const DesktopAuthEmail = ({}) => {
     <>
       {/* Back Button */}
       <div
-        className="flex flex-row items-center justify-center absolute top-6 left-[400px] cursor-pointer"
+        className="absolute left-[400px] top-6 flex cursor-pointer flex-row items-center justify-center"
         onClick={() => setShowEmailCredentials(false)}
       >
-        <button className="h-6 p-0 w-6 ">
+        <button className="h-6 w-6 p-0 ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -90,12 +90,14 @@ const DesktopAuthEmail = ({}) => {
             <path d="M220,128a4,4,0,0,1-4,4H49.66l65.17,65.17a4,4,0,0,1-5.66,5.66l-72-72a4,4,0,0,1,0-5.66l72-72a4,4,0,0,1,5.66,5.66L49.66,124H216A4,4,0,0,1,220,128Z"></path>
           </svg>
         </button>
-        <span className="px-[2px] font-semibold text-sm">Back</span>
+        <span className="px-[2px] text-sm font-semibold">Voltar</span>
       </div>
 
       {/* Auth form */}
-      <div className="container w-[438px] flex flex-col space-y-3 text-left mt-12">
-        <p className="flex text-2xl font-semibold mb-8 ">Continue with Email</p>
+      <div className="container mt-12 flex w-[438px] flex-col space-y-3 text-left">
+        <p className="mb-8 flex text-2xl font-semibold ">
+          Continuar com o e-mail
+        </p>
 
         {/* User input form */}
         <form
@@ -103,7 +105,7 @@ const DesktopAuthEmail = ({}) => {
           onSubmit={handleSubmit(loginHandler)}
         >
           <label className="font-semibold">Email</label>
-          <div className="flex relative">
+          <div className="relative flex">
             <Input
               disabled={isSubmitting}
               {...register("email", {
@@ -119,11 +121,11 @@ const DesktopAuthEmail = ({}) => {
                   }),
                 pattern: {
                   value: /^\S+@\S+\.[a-zA-Z]{2,}$/,
-                  message: "Please enter a valid email address.",
+                  message: "Por favor introduza um endereço de e-mail válido.",
                 },
               })}
               className={cn(
-                "border border-zinc-400 rounded-sm h-[40px] px-2 focus:outline-none",
+                "h-[40px] rounded-sm border border-zinc-400 px-2 focus:outline-none",
                 errors.email && "border-red-500",
               )}
               required
@@ -134,13 +136,13 @@ const DesktopAuthEmail = ({}) => {
             />
             {isValidating && (
               <div
-                className="flex absolute right-10 top-[12px] h-[16px] w-[16px] animate-spin rounded-full border-2 border-solid border-zinc-400 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                className="absolute right-10 top-[12px] flex h-[16px] w-[16px] animate-spin rounded-full border-2 border-solid border-zinc-400 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
                 role="status"
               ></div>
             )}
             {errors.email && !isValidating ? (
               <Image
-                className="flex absolute right-10 top-[12px]"
+                className="absolute right-10 top-[12px] flex"
                 src="/icons/error-warning.svg"
                 alt="error"
                 height={16}
@@ -149,26 +151,26 @@ const DesktopAuthEmail = ({}) => {
             ) : null}
           </div>
           {errors.email && (
-            <span className="text-red-500 text-sm">{errors.email.message}</span>
+            <span className="text-sm text-red-500">{errors.email.message}</span>
           )}
           <label className="font-semibold">Password</label>
           <Input
             disabled={isSubmitting}
             {...register("password", {
               required: true,
-              minLength: { value: 8, message: "At least 8 characters long." },
+              minLength: { value: 8, message: "Mínimo 8 caracteres" },
               maxLength: {
                 value: 20,
-                message: "Password must be at most 20 characters long.",
+                message: "A password só pode ter até 20 caracteres.",
               },
               pattern: {
                 value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/,
                 message:
-                  "Password must contain at least one uppercase letter, one lowercase letter and one number",
+                  "A palavra-passe deve conter pelo menos uma letra maiúscula, uma letra minúscula e um número",
               },
             })}
             className={cn(
-              "border border-zinc-400 rounded-sm h-[40px] px-2 focus:outline-none",
+              "h-[40px] rounded-sm border border-zinc-400 px-2 focus:outline-none",
             )}
             required
             type="password"
@@ -176,31 +178,36 @@ const DesktopAuthEmail = ({}) => {
           />
           {isLogin === "register" && errors.password && (
             <>
-              <span className="text-red-500 text-sm">
+              <span className="text-sm text-red-500">
                 {errors.password.message}
               </span>
             </>
           )}
           {isLogin === "login" ? (
             <a
-              className="flex cursor-pointer text-sm underline text-end justify-end items-center"
+              className="flex cursor-pointer items-center justify-end text-end text-sm underline"
               onClick={async () => {
-                await sendPasswordResetEmail(getValues("email"));
-                setIsOpen(false);
-                setShowEmailCredentials(false);
-                toast.success("Password reset email sent");
+                await sendPasswordResetEmail(getValues("email"))
+                  .then(() => {
+                    setIsOpen(false);
+                    setShowEmailCredentials(false);
+                    toast.success("Password reset email sent");
+                  })
+                  .catch((e) => {
+                    toast.error(e.message);
+                  });
               }}
             >
-              Forgot password?
+              Esqueceu-se da palavra-passe?
             </a>
           ) : null}
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="h-[40px] border text-white bg-black border-black rounded-sm hover:bg-opacity-60"
+            className="h-[40px] rounded-sm border border-black bg-black text-white hover:bg-opacity-60"
           >
-            {isLogin === "register" ? "Continue" : "Sign In"}
+            {isLogin === "register" ? "Continuar" : "Entrar"}
           </button>
         </form>
       </div>

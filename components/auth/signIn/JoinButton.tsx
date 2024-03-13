@@ -1,13 +1,19 @@
 import React, { FC, lazy } from "react";
 import { useLogInVariantStore } from "@/lib/stores/auth-store";
-import { useOpenModalStore } from "@/lib/stores/modal-store";
+import { useOpenModalStore } from "@/lib/stores/modals/modal-store";
 import { useMediaQuery } from "react-responsive";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/constants/ui/button";
 
-const DesktopAuthModal = lazy(() => import("../desktop/DesktopAuthModal"));
-const TabletAuthModal = lazy(() => import("../tablet/TabletAuthModal"));
-const MobileAuthModal = lazy(() => import("../mobile/MobileAuthModal"));
+const DesktopAuthModal = lazy(
+  () => import("@/components/auth/desktop/DesktopAuthModal"),
+);
+const TabletAuthModal = lazy(
+  () => import("@/components/auth/tablet/TabletAuthModal"),
+);
+const MobileAuthModal = lazy(
+  () => import("@/components/auth/mobile/MobileAuthModal"),
+);
 
 type JoinButtonProps = {
   isButton?: boolean;
@@ -31,11 +37,11 @@ const JoinButton: FC<JoinButtonProps> = ({ isButton }) => {
           }}
           className={cn(
             buttonVariants({ variant: "outline" }),
-            "flex hover:bg-amber-600 hover:border-amber-600 max-w-[80px] cursor-pointer",
+            "flex max-w-[100px] cursor-pointer rounded-lg  border-[#495057] bg-[#495057] text-[#f8f9fa] transition-all duration-150 ease-in hover:scale-110 hover:border-[#495057] hover:bg-[#495057] hover:text-[#f8f9fa]",
           )}
         >
           {" "}
-          Join{" "}
+          Aderir{" "}
         </span>
       ) : (
         <span

@@ -5,7 +5,7 @@ import React from "react";
 
 const SellerOnboardingCard = () => {
   return (
-    <div className="flex flex-col space-y-4 items-center justify-center text-center relative border bg-white  desktop:w-[730px] tablet:w-[500px]  h-[450px]">
+    <div className="relative flex h-[450px] flex-col items-center justify-center space-y-4 border bg-white  text-center tablet:w-[500px]  desktop:w-[730px]">
       <svg
         width="83px"
         height="83px"
@@ -68,14 +68,14 @@ const SellerOnboardingCard = () => {
           ></path>
         </g>
       </svg>
-      <span className="flex text-zinc-600 text-lg font-semibold">
+      <span className="flex text-lg font-semibold text-zinc-600">
         Ready to start selling?
       </span>
       <Link
         href="/freelancer_onboarding/overview"
         className={cn(
           buttonVariants({ variant: "outline" }),
-          " hover:bg-zinc-600 hover:border-zinc-600 hover:text-white   transform transition-shadow ease-in-out duration-300 w-[200px]",
+          " w-[200px] transform transition-shadow   duration-300 ease-in-out hover:border-zinc-600 hover:bg-zinc-600 hover:text-white",
         )}
       >
         Become a Seller

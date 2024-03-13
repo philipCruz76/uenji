@@ -10,8 +10,8 @@ interface MessageAttachmentProps {
 const MessageAttachment: FC<MessageAttachmentProps> = ({ fileUrl }) => {
   let isImage = false;
   const fileLink = fileUrl.match(/^[^;]+/)?.[0];
-  const fileType = fileLink?.split(".").pop();
   const fileName = fileUrl.match(/fileName=([^;]+)/)?.[1];
+  const fileType = fileName?.split(".").pop();
   let fileSize = fileUrl.match(/fileSize=([^;]+)/)?.[1];
 
   if (!fileLink || !fileType || !fileName || !fileSize)
@@ -31,7 +31,8 @@ const MessageAttachment: FC<MessageAttachmentProps> = ({ fileUrl }) => {
     fileType === "png" ||
     fileType === "jpg" ||
     fileType === "jpeg" ||
-    fileType === "gif"
+    fileType === "gif" ||
+    fileType === "webp"
   )
     isImage = true;
 
@@ -42,11 +43,11 @@ const MessageAttachment: FC<MessageAttachmentProps> = ({ fileUrl }) => {
         alt="Uploaded Image Attachment"
         height="160"
         width="160"
-        className="object-cover hover:scale-110 transition translate rounded-md"
+        className="translate rounded-md object-cover transition hover:scale-110"
       />
       <Link
         href={fileLink}
-        className="text-xs hover:underline flex flex-row gap-1 cursor-pointer"
+        className="flex cursor-pointer flex-row gap-1 text-xs hover:underline"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -61,10 +62,10 @@ const MessageAttachment: FC<MessageAttachmentProps> = ({ fileUrl }) => {
       </Link>
     </div>
   ) : (
-    <div className="flex flex-col gap-2 h-[60px] border items-center justify-center rounded-md">
+    <div className="flex h-[60px] flex-col items-center justify-center gap-2 rounded-md border">
       <Link
         href={fileLink}
-        className="text-xs hover:underline flex flex-row gap-1 cursor-pointer"
+        className="flex cursor-pointer flex-row gap-1 text-xs hover:underline"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

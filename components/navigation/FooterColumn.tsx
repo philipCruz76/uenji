@@ -7,7 +7,11 @@ const FooterColumn = ({
 }) => (
   <ul className="flex flex-col items-start">
     {links.map((link) => (
-      <Link href={link.href} key={link.name} className="hover:underline">
+      <Link
+        href={link.href}
+        key={link.name}
+        className="font-mono text-black hover:underline"
+      >
         {link.name}
       </Link>
     ))}

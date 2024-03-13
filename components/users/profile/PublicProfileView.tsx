@@ -1,81 +1,64 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import { User } from "@prisma/client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useCallback } from "react";
-import toast from "react-hot-toast";
+import {
+  SellerPersonalInfo,
+  SellerProfessionalInfo,
+} from "@/types/sellerProfile.types";
+import ProfileContactButton from "./ProfileContactButton";
+import getUserGigs from "@/lib/actions/gigs/getUserGigs";
+import GigCard from "@/components/gigs/GigCard";
 
 type PublicProfileViewProps = {
   user: User;
 };
 
-type SellerSkills = {
-  name: string;
-  level: string;
-}[];
-type SellerLanguages = {
-  name: string;
-  level: string;
-}[];
-
-const PublicProfileView = ({ user }: PublicProfileViewProps) => {
+const PublicProfileView = async ({ user }: PublicProfileViewProps) => {
   const { image, skills, country, username, id, languages } = user;
-  const parsedSkills = JSON.parse(skills!) as SellerSkills;
-  const parsedLanguages = JSON.parse(languages!) as SellerLanguages;
 
+  const userGigs = await getUserGigs(id);
+  const parsedSkills = JSON.parse(skills!) as SellerPersonalInfo["languages"];
+  const parsedLanguages = JSON.parse(
+    languages!,
+  ) as SellerProfessionalInfo["skills"];
   const timeLastSeen = () => {
     if (user.isOnline) {
       return "Online";
     } else {
       const lastSeen = new Date(Date.now() - user.updatedAt.getTime());
 
+      if (lastSeen.getDay() > 1) {
+        return `Last seen: ${lastSeen.getUTCDate()} days ago`;
+      }
       if (lastSeen.getHours() > 1) {
-        return `Last seen: ${lastSeen.getHours()} hours ago`;
+        return `Last seen: ${lastSeen.getUTCHours()} hours ago`;
       }
       return `Last seen: ${new Date(
-        Date.now() - user.updatedAt.getTime()
+        Date.now() - user.updatedAt.getTime(),
       ).getMinutes()} minutes ago`;
     }
   };
-  const router = useRouter();
-  const handleClick = useCallback(() => {
-    fetch("/api/conversations", {
-      method: "POST",
-      body: JSON.stringify({ id }),
-    })
-      .then((data) => {
-        data.json().then((conversation) => {
-          router.push(`/inbox/${username}?chatId=${conversation.id}`);
-        });
-      })
-      .catch((error) => {
-        toast.error(error.message);
-      });
-  }, [username]);
+
   return (
-    <section className="flex flex-col w-[100dvw] min-h-[100dvh] max-w-[100dvw] px-6 py-6  gap-[20px] overflow-hidden">
-      <div className="flex flex-row w-full ">
-        <div className="flex gap-4 w-full ">
+    <section className="flex min-h-[100dvh] w-[100dvw] max-w-[100dvw] flex-col gap-[20px] overflow-hidden  px-6 py-6">
+      <div className="flex w-full flex-row ">
+        <div className="flex w-full gap-4 ">
           <Image
             width={150}
             height={150}
             src={image! || "./icons/default-user.svg"}
             alt="profile picture"
             referrerPolicy="no-referrer"
-            className="w-[150px] h-[150px] rounded-full transition duration-150 ease-in-out"
+            className="h-[150px] w-[150px] rounded-full transition duration-150 ease-in-out"
           />
           <div className="flex flex-col">
             {/* user info */}
-            <div className="flex flex-items-center gap-3 flex-start p-r-16">
+            <div className="flex-items-center flex-start p-r-16 flex gap-3">
               <h3
                 className="text-2xl font-bold text-gray-800"
                 aria-label="Public Name"
               >
-                {user.name !== "" || user.name !== null
-                  ? user.name
-                  : user.username}
+                {user.displayName}
               </h3>
               <span
                 className="flex items-center text-zinc-600"
@@ -96,29 +79,29 @@ const PublicProfileView = ({ user }: PublicProfileViewProps) => {
                 >
                   <path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path>
                 </svg>
-                <span className="text-sm text-gray-800 font-bold">4.9</span>
+                <span className="text-sm font-bold text-gray-800">4.9</span>
                 <span className="text-sm text-gray-800 hover:cursor-pointer ">
                   (<u>22</u>)
                 </span>
-                <span className="text-sm text-gray-800 font-bold">
+                <span className="text-sm font-bold text-gray-800">
                   New Seller
                 </span>
               </div>
             ) : null}
 
             {/* user additional info*/}
-            <span className="flex flex-row justify-start items-center">
+            <span className="flex flex-row items-center justify-start">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
                 height="16"
                 fill="#575b60"
                 viewBox="0 0 256 256"
-                className="mr-2 items-center justify-center w-[16px] h-[16px]"
+                className="mr-2 h-[16px] w-[16px] items-center justify-center"
               >
                 <path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z"></path>
               </svg>
-              <span className="text-center pr-4">
+              <span className="pr-4 text-center">
                 {country ? ` ${country}` : " Unknown"}
               </span>
 
@@ -136,7 +119,7 @@ const PublicProfileView = ({ user }: PublicProfileViewProps) => {
                   </svg>
                   {parsedLanguages.map((language) => {
                     return (
-                      <span key={language.name} className="text-center pr-1">
+                      <span key={language.name} className="pr-1 text-center">
                         {language.name}
                       </span>
                     );
@@ -148,7 +131,7 @@ const PublicProfileView = ({ user }: PublicProfileViewProps) => {
         </div>
         {/* Contact Card */}
 
-        <div className="flex flex-col w-[600px] h-[200px] bg-white rounded-lg border border-gray-200 px-6 py-6 gap-4">
+        <div className="flex h-[200px] w-[600px] flex-col gap-4 rounded-lg border border-gray-200 bg-white px-6 py-6">
           <div className="flex flex-row items-center justify-start gap-2 ">
             <Image
               width={40}
@@ -156,11 +139,11 @@ const PublicProfileView = ({ user }: PublicProfileViewProps) => {
               src={image! || "./icons/default-user.svg"}
               alt="profile picture"
               referrerPolicy="no-referrer"
-              className="w-[40px] h-[40px] rounded-full hover:opacity-80 transition duration-150 ease-in-out cursor-pointer"
+              className="h-[40px] w-[40px] cursor-pointer rounded-full transition duration-150 ease-in-out hover:opacity-80"
             />
             <div className="flex flex-col">
               <span className="text-lg font-bold text-gray-800">
-                {user.name}
+                {user.displayName}
               </span>
               <div className="flex flex-row  items-center justify-start gap-2">
                 <span className=" text-gray-800">
@@ -182,15 +165,10 @@ const PublicProfileView = ({ user }: PublicProfileViewProps) => {
             </div>
           </div>
 
-          <a
-            onClick={handleClick}
-            className="border border-black bg-black text-white px-4 py-2 rounded-sm  cursor-pointer hover:bg-opacity-80 hover:text-white transform transition-colors ease-in-out duration-300 w-full h-fit  font-semibold  text-sm text-center"
-          >
-            Contact Me
-          </a>
+          <ProfileContactButton username={username!} id={id} />
         </div>
       </div>
-      <div className="flex flex-col w-full gap-2">
+      <div className="flex w-full flex-col gap-2">
         {user.description !== "" && user.description !== null ? (
           <>
             <h1 className="text-lg font-bold text-gray-800">About Me</h1>
@@ -199,7 +177,7 @@ const PublicProfileView = ({ user }: PublicProfileViewProps) => {
         ) : null}
       </div>
 
-      <div className="flex flex-col w-full gap-2">
+      <div className="flex w-full flex-col gap-2">
         {parsedSkills !== null && parsedSkills.length > 0 ? (
           <>
             <h1 className="text-lg font-bold text-gray-800">Skills</h1>
@@ -209,7 +187,7 @@ const PublicProfileView = ({ user }: PublicProfileViewProps) => {
                   return (
                     <div
                       key={skill.name}
-                      className="flex flex-row gap-2 items-center justify-center"
+                      className="flex flex-row items-center justify-center gap-2"
                     >
                       <span
                         key={`SKill ${index}`}
@@ -247,13 +225,15 @@ const PublicProfileView = ({ user }: PublicProfileViewProps) => {
         {/* User Gigs Showcase */}
         {user.isSeller === true ? (
           <>
-            <div className="w-[80%] h-[200px] border items-center text-center justify-center bg-white">
-              <span className=" text-lg font-bold text-gray-800 ">
-                Gigs placeholder
-              </span>
+            <div className="flex flex-row gap-4">
+              {userGigs?.map((gig, index) => (
+                <div key={`gig-${index}`} className="hidden gap-4 tablet:block">
+                  <GigCard gigToShow={gig} index={index} />
+                </div>
+              ))}
             </div>
             {/* User Reviews Showcase */}
-            <div className="w-[80%] h-[200px] border items-center text-center justify-center bg-white">
+            <div className="h-[200px] w-[80%] items-center justify-center border bg-white text-center">
               <span className=" text-lg font-bold text-gray-800 ">
                 Reviews placeholder
               </span>

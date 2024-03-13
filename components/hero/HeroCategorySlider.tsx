@@ -1,10 +1,10 @@
-import PhotoCaroussel from "../ui/PhotoCaroussel";
+import PhotoCaroussel from "@/components/ui/PhotoCaroussel";
 
 const HeroCategorySlider = () => {
   return (
-    <section className="flex flex-col container w-full tablet:h-[700px] h-[500px] box-border desktop:py-24 tablet:py-14 py-8">
-      <span className="flex w-[100dvw] px-2 font-bold text-3xl">
-        Serviços em destaque
+    <section className="container box-border flex h-[500px] w-full flex-col py-8 tablet:h-[700px] tablet:py-14 desktop:py-24">
+      <span className="flex w-[100dvw] px-2 text-3xl font-bold">
+        Categorias em destaque
       </span>
 
       <PhotoCaroussel slidesTOShow={5} />

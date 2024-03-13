@@ -16,7 +16,7 @@ export function UserAvatar({ avatarPhoto, ...props }: UserAvatarProps) {
           src={avatarPhoto}
           alt="profile picture"
           referrerPolicy="no-referrer"
-          className="border rounded-full hover:opacity-80 transition duration-150 ease-in-out cursor-pointer"
+          className="cursor-pointer rounded-full border transition duration-150 ease-in-out hover:opacity-80"
         />
       </div>
     </Avatar>

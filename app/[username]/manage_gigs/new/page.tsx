@@ -2,7 +2,9 @@
 
 import { lazy } from "react";
 
-const GigWizardOverview = lazy(() => import("@/components/gigs/wizard/GigWizardOverview"));
+const GigWizardOverview = lazy(
+  () => import("@/components/gigs/wizard/GigWizardOverview"),
+);
 
 type pageProps = {
   params: {
@@ -10,10 +12,8 @@ type pageProps = {
   };
 };
 
-const page = ({params}:pageProps) => {
-  return (
-   <GigWizardOverview username={params.username}/>
-  );
+const page = ({ params }: pageProps) => {
+  return <GigWizardOverview username={params.username} />;
 };
 
 export default page;
