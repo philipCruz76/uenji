@@ -1,4 +1,4 @@
-import { z, ZodType } from "Zod";
+import { z, ZodType } from "zod";
 
 export type LoginVariant = "signIn" | "join";
 
