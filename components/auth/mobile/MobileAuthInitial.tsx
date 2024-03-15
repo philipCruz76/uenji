@@ -8,9 +8,9 @@ const MobileAuthInitial = () => {
   const { setShowEmailCredentials } = useEmailCredentialsStore();
 
   return (
-    <section className="flex flex-col space-y-3 ">
+    <>
       {/* Auth buttons */}
-      <div className="flex flex-col items-center justify-center space-y-2 py-[40%] text-[16px] font-semibold ">
+      <div className="flex flex-col items-center justify-center space-y-2 py-[20dvh] font-semibold ">
         <div className="flex h-[40px] w-[100dvw]  flex-row space-x-2 px-6 ">
           <button
             className="flex h-[40px] w-[100dvw] flex-row items-center justify-between rounded-sm border"
@@ -145,7 +145,7 @@ const MobileAuthInitial = () => {
           </button>
         </div>
       </div>
-    </section>
+    </>
   );
 };
 

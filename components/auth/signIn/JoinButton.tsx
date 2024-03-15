@@ -8,11 +8,8 @@ import { buttonVariants } from "@/constants/ui/button";
 const DesktopAuthModal = lazy(
   () => import("@/components/auth/desktop/DesktopAuthModal"),
 );
-const TabletAuthModal = lazy(
-  () => import("@/components/auth/tablet/TabletAuthModal"),
-);
 const MobileAuthModal = lazy(
-  () => import("@/components/auth/mobile/MobileAuthModal"),
+  () => import("@/components/auth/mobile/NewMobileAuthModal"),
 );
 
 type JoinButtonProps = {
@@ -60,12 +57,9 @@ const JoinButton: FC<JoinButtonProps> = ({ isButton }) => {
 
       {isDesktopOrLaptop && <DesktopAuthModal />}
 
-      {/*Tablet Auth Modal*/}
+      {/*Tablet and Mobile Auth Modal*/}
 
-      {isTablet && <TabletAuthModal />}
-
-      {/*Mobile Auth Modal*/}
-      {isMobile && <MobileAuthModal />}
+      {isTablet || isMobile ? <MobileAuthModal />: null}
     </>
   );
 };
