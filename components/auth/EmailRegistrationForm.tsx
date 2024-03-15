@@ -120,13 +120,13 @@ const EmailRegistrationForm = () => {
                 },
               })}
               className={cn(
-                "h-[40px] rounded-sm border border-zinc-400 px-2 focus:outline-none",
+                "h-[40px] rounded-sm border border-zinc-400 px-2 text-[16px] focus:outline-none",
                 errors.email && "border-red-500",
               )}
               required
               type="email"
               id="email"
-              autoFocus
+              data-lpignore="true"
               placeholder="name@email.com"
             />
             {isValidating && (
@@ -166,9 +166,10 @@ const EmailRegistrationForm = () => {
               },
             })}
             className={cn(
-              "h-[40px] rounded-sm border border-zinc-400 px-2 focus:outline-none",
+              "h-[40px] rounded-sm border border-zinc-400 text-[16px] px-2 focus:outline-none",
             )}
             required
+            data-lpignore="true"
             type="password"
             id="password"
           />
