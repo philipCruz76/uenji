@@ -18,7 +18,7 @@ import getPopularGigs from "@/lib/actions/gigs/getPopularGigs";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { z } from "zod";
+import { z } from "Zod";
 
 type pageProps = {
   params: {

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "Zod";
 
 export const ActivateLinkParamsValidator = z.object({
   token: z.string().min(20).max(20),

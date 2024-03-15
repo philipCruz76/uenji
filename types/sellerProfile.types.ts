@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "Zod";
 
 export const PersonalInfoValidator = z.object({
   fullName: z

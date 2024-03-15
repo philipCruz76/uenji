@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "Zod";
 
 export const GigOverviewValidator = z.object({
   gigTitle: z
