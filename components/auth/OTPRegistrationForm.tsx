@@ -145,7 +145,7 @@ const OTPRegistrationForm = () => {
           <span>Enter the verification code we emailed to: </span>
           <span className=" text-sm font-light">{newUser.email}</span>
         </div>
-        <form className="flex flex-row items-center justify-between space-x-2">
+        <form className="flex flex-row items-center justify-between text-[16px] space-x-2">
           {otp.map((_, index) => {
             return (
               <Fragment key={index}>

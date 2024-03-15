@@ -96,7 +96,7 @@ const EmailRegistrationForm = () => {
 
         {/* User input form */}
         <form
-          className=" mt-8 flex flex-col space-y-3"
+          className=" mt-8 flex flex-col space-y-3 text-[16px]"
           onSubmit={handleSubmit(loginHandler)}
         >
           <label className="font-semibold">Email</label>
