@@ -99,7 +99,7 @@ const SellerDashboard: FC<SellerDashboardProps> = ({ user }) => {
         </Card>
       </div>
       <div className="grid w-full gap-4 tablet:grid-cols-2 desktop:grid-cols-7">
-        <Card className="col-span-4 border-black">
+        <Card className=" border-black">
           <CardHeader>
             <CardTitle>Vendas</CardTitle>
           </CardHeader>
@@ -107,7 +107,7 @@ const SellerDashboard: FC<SellerDashboardProps> = ({ user }) => {
             <SellerSalesChart />
           </CardContent>
         </Card>
-        <Card className="col-span-4  border-black desktop:col-span-3">
+        <Card className="  border-black desktop:col-span-3">
           <CardHeader>
             <CardTitle>Últimas Vendas</CardTitle>
             <CardDescription>Voçê vendeu 14 serviços este mês</CardDescription>
