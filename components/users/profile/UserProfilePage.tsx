@@ -25,9 +25,9 @@ const UserProfilePage = async ({ user, publicMode }: UserProfilePageProps) => {
     ? (publicMode = publicMode)
     : (publicMode = currentUsername !== username || !session);
 
-  if (!publicMode) {
+  if (publicMode === false) {
     return <PrivateProfileView user={user} />;
-  } else {
+  } else if (publicMode === true || publicMode === undefined){
     return <PublicProfileView user={user} />;
   }
 };
