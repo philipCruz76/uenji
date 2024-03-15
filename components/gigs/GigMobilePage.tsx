@@ -86,7 +86,7 @@ const GigMobilePage = async ({ pageGig }: GigMobilePageProps) => {
       />
 
       {/* Gig Pricing */}
-      <div className="max-h-[450px] w-full items-center justify-center border text-center py-[20px]">
+      <div className="max-h-[450px] w-full items-center justify-center border py-[20px] text-center">
         <GigPricingMobile gig={pageGig} />
       </div>
     </section>

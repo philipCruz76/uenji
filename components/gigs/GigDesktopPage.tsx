@@ -91,7 +91,6 @@ const GigDesktopPage = async ({ pageGig }: GigDesktopPageProps) => {
           <GigSellerInfo user={gigUser} gigTitle={pageGig.title} />
           <GigBasicInfo gig={pageGig} />
         </div>
-        
       </section>
     </>
   );

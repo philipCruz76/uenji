@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { GigPricing } from "@/types/gigWizard.types";
-import {  useState } from "react";
+import { useState } from "react";
 import GigPackageCheckoutButton from "./GigPackageCheckoutButton";
 import getGigByTitle from "@/lib/actions/gigs/getGigByTitle";
 
@@ -11,7 +11,7 @@ type GigPricingMobileProps = {
 type PackageType = "basic" | "standard" | "premium";
 
 const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
-  if(!gig) return null;
+  if (!gig) return null;
   const parsedPackages = JSON.parse(gig.packages!) as GigPricing["packages"];
   const [selectedPackage, setSelectedPackage] = useState<PackageType>("basic");
 
@@ -26,7 +26,7 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
             }}
             className={cn(
               selectedPackage === "basic"
-                ? "border-spacing-2 border-b-2 borde-br-[#495057]  bg-white text-[#495057] shadow-md"
+                ? "borde-br-[#495057] border-spacing-2 border-b-2  bg-white text-[#495057] shadow-md"
                 : null,
               "flex flex-row items-center justify-center gap-2",
             )}
@@ -43,7 +43,6 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
             {parsedPackages[0].price}.00 AKZ
           </label>
         </div>
-        
       ) : (
         <div className="grid h-[50px] w-full grid-cols-3  grid-rows-1 border-b bg-slate-50 text-lg font-medium">
           <label
@@ -236,9 +235,8 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
             </span>
           </div>
         )}
-         <GigPackageCheckoutButton gigUser={gig.user.username!}/>
+        <GigPackageCheckoutButton gigUser={gig.user.username!} />
       </div>
-     
     </div>
   );
 };

@@ -28,7 +28,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
   let { setIsOpen } = useOpenModalStore();
   let { setLogin } = useLogInVariantStore();
   const pathName = usePathname();
-   
+
   const {
     isActiveNavBar,
     activeBarStyling,
@@ -38,14 +38,13 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
   } = useActiveNavBarStore();
 
   useEffect(() => {
-   if(!session?.user && pathName === "/") {
+    if (!session?.user && pathName === "/") {
       setActiveNavBar(false);
       setActiveBarStyling(activeBarStyling + " fixed");
     } else {
       setActiveNavBar(true);
       setActiveBarStyling(activeBarStyling.replace(/\bfixed\b/, ""));
     }
-
   }, [pathName]);
 
   return (

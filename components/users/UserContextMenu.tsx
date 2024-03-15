@@ -60,9 +60,7 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
               )}
               href="/freelancer_onboarding/overview"
             >
-              <span >
-                Converter-se em vendedor
-              </span>
+              <span>Converter-se em vendedor</span>
             </Link>
           </DropdownMenuItem>
         ) : (
@@ -74,7 +72,7 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
                 "flex cursor-pointer border-[#495057] bg-[#dee2e6] transition duration-200 ease-in-out hover:border-[#495057] hover:bg-[#dee2e6] group-hover:scale-105 group-hover:bg-opacity-75",
               )}
             >
-              <span > Mudar para Modo {currentViewTitle} </span>
+              <span> Mudar para Modo {currentViewTitle} </span>
             </button>
           </DropdownMenuItem>
         )}

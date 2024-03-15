@@ -22,9 +22,9 @@ const page = async ({ params }: pageProps) => {
   return (
     <section className="flex max-h-[100dvh] min-h-[100vh] min-w-[100vw] max-w-[100dvw] flex-col gap-2 overflow-hidden p-6">
       <h1 className="text-3xl font-bold">Gigs</h1>
-      <div className=" flex overflow-x-scroll overflow-y-hidden py-[10px] flex-row  min-w-full  items-center justify-start h-full max-w-full pt-[50px]">
+      <div className=" flex h-full min-w-full max-w-full flex-row  items-center  justify-start overflow-y-hidden overflow-x-scroll py-[10px] pt-[50px]">
         {userGigs.map((gig, index) => (
-          <div key={`gig-${index}`} className="px-2" >
+          <div key={`gig-${index}`} className="px-2">
             <GigCard gigToShow={gig} index={index} />
           </div>
         ))}

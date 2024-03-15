@@ -21,7 +21,7 @@ const Hero = () => {
   const { setActiveNavBar, setActiveBarStyling, activeBarStyling } =
     useActiveNavBarStore();
   const { data: userLogged } = useSession();
-  
+
   useEffect(() => {
     setActiveNavBar(false);
     setActiveBarStyling(activeBarStyling + " fixed");

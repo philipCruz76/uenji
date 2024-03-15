@@ -32,7 +32,6 @@ const CategoriesPage = () => {
                   <h5 className="text-lg font-semibold text-slate-800">
                     {category.categoryTitle}
                   </h5>
-                  
                 </aside>
               </Link>
             </li>

@@ -14,30 +14,38 @@ type GigCheckoutModalProps = {
 type DrawerOrientation = "left" | "right" | "top" | "bottom";
 
 const GigCheckoutModal = ({ selectedPackage }: GigCheckoutModalProps) => {
-  const { openCheckout, setOpenCheckout,mobileCheckout, setOpenMobileCheckout } = useCheckoutModalStore();
-  const [drawerStyling, setDrawerStyling] = useState<string>("h-[100dvh] w-[35dvw]");
-  const [drawerOrientation, setDrawerOrientation] = useState<DrawerOrientation>("left");
+  const {
+    openCheckout,
+    setOpenCheckout,
+    mobileCheckout,
+    setOpenMobileCheckout,
+  } = useCheckoutModalStore();
+  const [drawerStyling, setDrawerStyling] = useState<string>(
+    "h-[100dvh] w-[35dvw]",
+  );
+  const [drawerOrientation, setDrawerOrientation] =
+    useState<DrawerOrientation>("left");
 
   const handleCheckout = () => {
     setOpenCheckout(false);
     setOpenMobileCheckout(false);
   };
 
-  const isTablet = useMediaQuery({minWidth:601, maxWidth: 899 });
+  const isTablet = useMediaQuery({ minWidth: 601, maxWidth: 899 });
   const isMobile = useMediaQuery({ maxWidth: 600 });
 
-  useEffect(()=> {
-    if(isMobile) {
+  useEffect(() => {
+    if (isMobile) {
       setDrawerStyling("h-[100dvh] w-[100dvw]");
       setDrawerOrientation("left");
-    } else if(isTablet){
+    } else if (isTablet) {
       setDrawerStyling("h-[80dvh] w-[100dvw]");
       setDrawerOrientation("bottom");
     } else {
       setDrawerStyling("h-[100dvh] w-[35dvw]");
       setDrawerOrientation("left");
     }
-  },[isMobile, isTablet])
+  }, [isMobile, isTablet]);
   return (
     <>
       {/* Desktop Checkout Modal */}
@@ -83,8 +91,6 @@ const GigCheckoutModal = ({ selectedPackage }: GigCheckoutModalProps) => {
           </DrawerPortal>
         </Drawer>
       </div>
-
-      
     </>
   );
 };

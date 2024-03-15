@@ -8,9 +8,8 @@ type CheckoutModalState = {
 };
 
 export const useCheckoutModalStore = create<CheckoutModalState>()((set) => ({
-    openCheckout: false,
-    mobileCheckout: false,
-    setOpenMobileCheckout: (mobileCheckout: boolean) => set({ mobileCheckout }),
-    setOpenCheckout: (openCheckout: boolean) => set({ openCheckout }),
+  openCheckout: false,
+  mobileCheckout: false,
+  setOpenMobileCheckout: (mobileCheckout: boolean) => set({ mobileCheckout }),
+  setOpenCheckout: (openCheckout: boolean) => set({ openCheckout }),
 }));
-

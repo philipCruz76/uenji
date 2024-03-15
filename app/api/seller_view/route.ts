@@ -1,6 +1,5 @@
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 import db from "@/lib/db";
-import { revalidatePath } from "next/cache";
 
 export async function GET() {
   try {
@@ -19,7 +18,6 @@ export async function GET() {
       },
     });
 
-    revalidatePath("/", "layout");
     return Response.json({ ok: true });
   } catch (err: any) {
     console.error(err);
