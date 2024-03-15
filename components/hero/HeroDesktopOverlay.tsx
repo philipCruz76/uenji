@@ -8,7 +8,7 @@ const HeroDesktopOverlay = () => {
       <Image
         alt="backgroung image"
         src="/images/african-american-man-copy-space.jpg"
-        className=" min-h-[100dvh] min-w-[100dvw] items-end justify-end bg-[#495057] object-fill "
+        className=" min-h-[100dvh] min-w-[100dvw] items-end justify-end object-fill "
         width={3000}
         height={2000}
       />
