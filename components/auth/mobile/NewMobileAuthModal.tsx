@@ -24,23 +24,23 @@ const NewMobileAuthModal = ({}: NewMobileAuthModalProps) => {
   const { isEmail, setShowEmailCredentials } = useEmailCredentialsStore();
   const { isOTP, setShowOTP } = useOTPStore();
   const drawerRef = useRef<HTMLDivElement>(null);
-  let visualViewportHeight = window.visualViewport?.height || 0;
 
   useEffect(() => {
     function onVisualViewportChange() {
       if (!drawerRef.current) return;
 
-      
-      const OFFSET = 0;
+      const visualViewportHeight = window.visualViewport?.height || 0;
+      const focusedElement = document.activeElement as HTMLElement;
 
-      // Difference between window height and height excluding the keyboard
-      let diffFromInitial = window.innerHeight - visualViewportHeight;
+      if (focusedElement.tagName === "INPUT") {
+        // Difference between window height and height excluding the keyboard
+        let diffFromInitial = window.innerHeight - visualViewportHeight;
 
-      const drawerHeight =
-        drawerRef.current.getBoundingClientRect().height || 0;
+        const drawerHeight =
+          drawerRef.current.getBoundingClientRect().height || 0;
 
-      drawerRef.current.style.height = `${drawerHeight - Math.max(diffFromInitial, 0)}px`;
-      drawerRef.current.style.bottom = `${Math.max(diffFromInitial, 0)}px`;
+        drawerRef.current.style.height = `${drawerHeight - Math.max(diffFromInitial, 0)}px`;
+      }
     }
 
     window.visualViewport?.addEventListener("resize", onVisualViewportChange);
@@ -50,7 +50,7 @@ const NewMobileAuthModal = ({}: NewMobileAuthModalProps) => {
         "resize",
         onVisualViewportChange,
       );
-  }, [visualViewportHeight]);
+  }, [window.visualViewport?.height]);
   return (
     <Drawer
       open={isOpen}
