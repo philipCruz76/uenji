@@ -54,58 +54,56 @@ const NewMobileAuthModal = ({}: NewMobileAuthModalProps) => {
       onOpenChange={(open) => setIsOpen(open)}
       fixed
     >
-      <DrawerPortal>
-        <DrawerContent
-          ref={drawerRef}
-          className="flex h-[100dvh] w-[100dvw] px-4"
-        >
-          {/* Close Button*/}
-          <div className=" flex items-center justify-end ">
-            <button
-              className="h-6 w-6 rounded-md p-0"
-              onClick={() => {
-                setIsOpen(false);
-                setShowEmailCredentials(false);
-                setShowOTP(false);
-              }}
+      <DrawerContent
+        ref={drawerRef}
+        className="flex h-[100dvh] w-[100dvw] grow px-4"
+      >
+        {/* Close Button*/}
+        <div className=" flex items-center justify-end ">
+          <button
+            className="h-6 w-6 rounded-md p-0"
+            onClick={() => {
+              setIsOpen(false);
+              setShowEmailCredentials(false);
+              setShowOTP(false);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="h-6 w-6"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="h-6 w-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-          {isEmail === true ? null : (
-            <div className="flex items-center justify-center">
-              <Image
-                src={"/images/uenji-logo-black.png"}
-                alt="Uenji Logo"
-                width={200}
-                height={200}
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
               />
-            </div>
-          )}
+            </svg>
+          </button>
+        </div>
+        {isEmail === true ? null : (
+          <div className="flex items-center justify-center">
+            <Image
+              src={"/images/uenji-logo-black.png"}
+              alt="Uenji Logo"
+              width={200}
+              height={200}
+            />
+          </div>
+        )}
 
-          {/* Modal Content */}
-          {!isEmail ? (
-            <MobileAuthInitial />
-          ) : isOTP ? (
-            <OTPRegistrationForm />
-          ) : (
-            <EmailRegistrationForm />
-          )}
-        </DrawerContent>
-      </DrawerPortal>
+        {/* Modal Content */}
+        {!isEmail ? (
+          <MobileAuthInitial />
+        ) : isOTP ? (
+          <OTPRegistrationForm />
+        ) : (
+          <EmailRegistrationForm />
+        )}
+      </DrawerContent>
     </Drawer>
   );
 };

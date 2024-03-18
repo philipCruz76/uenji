@@ -69,10 +69,10 @@ const EmailRegistrationForm = () => {
   };
 
   return (
-    <section className=" flex grow flex-col  ">
+    <>
       {/* Back button */}
       <div
-        className="absolute left-8 top-6 flex cursor-pointer flex-row items-center justify-center"
+        className="absolute left-6 top-6 flex cursor-pointer flex-row items-center justify-center"
         onClick={() => setShowEmailCredentials(false)}
       >
         <button className="h-6 w-6 p-0 ">
@@ -89,57 +89,57 @@ const EmailRegistrationForm = () => {
       </div>
 
       {/* Auth form */}
-      <div className="   fixed mt-8 flex  w-[90dvw] flex-col  text-left">
-        <p className=" text-xl font-semibold ">Continuar com o e-mail</p>
+      <div className=" absolute mt-20  w-[90dvw] flex-col text-left">
+        <p className=" text-xl font-semibold ">Continuar com e-mail</p>
 
         {/* User input form */}
         <form className=" mt-8 flex flex-col gap-2 text-[16px]">
           <label className="font-semibold">Email</label>
-          <div className="relative flex">
-            <Input
-              disabled={isSubmitting}
-              {...register("email", {
-                required: true,
-                validate: async (value) =>
-                  checkIfUserExists(value).then((res) => {
-                    if (res) {
-                      setLogin("login");
-                    } else {
-                      setLogin("register");
-                    }
-                    return true;
-                  }),
-                pattern: {
-                  value: /^\S+@\S+\.[a-zA-Z]{2,}$/,
-                  message: "Por favor introduza um endereço de e-mail válido.",
-                },
-              })}
-              className={cn(
-                "h-[40px] rounded-sm border border-zinc-400 px-2 text-[16px] focus:outline-none",
-                errors.email && "border-red-500",
-              )}
-              required
-              type="email"
-              id="email"
-              data-lpignore="true"
-              placeholder="name@email.com"
-            />
-            {isValidating && (
-              <div
-                className="absolute right-10 top-[12px] flex h-[16px] w-[16px] animate-spin rounded-full border-2 border-solid border-zinc-400 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                role="status"
-              ></div>
+
+          <Input
+            disabled={isSubmitting}
+            {...register("email", {
+              required: true,
+              validate: async (value) =>
+                checkIfUserExists(value).then((res) => {
+                  if (res) {
+                    setLogin("login");
+                  } else {
+                    setLogin("register");
+                  }
+                  return true;
+                }),
+              pattern: {
+                value: /^\S+@\S+\.[a-zA-Z]{2,}$/,
+                message: "Por favor introduza um endereço de e-mail válido.",
+              },
+            })}
+            className={cn(
+              "h-[40px] rounded-sm border border-zinc-400 px-2 text-[16px] focus:outline-none",
+              errors.email && "border-red-500",
             )}
-            {errors.email && !isValidating ? (
-              <Image
-                className="absolute right-10 top-[12px] flex"
-                src="/icons/error-warning.svg"
-                alt="error"
-                height={16}
-                width={16}
-              />
-            ) : null}
-          </div>
+            required
+            type="email"
+            id="email"
+            data-lpignore="true"
+            placeholder="name@email.com"
+          />
+          {isValidating && (
+            <div
+              className="absolute right-10 top-[12px] flex h-[16px] w-[16px] animate-spin rounded-full border-2 border-solid border-zinc-400 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+              role="status"
+            ></div>
+          )}
+          {errors.email && !isValidating ? (
+            <Image
+              className="absolute right-10 top-[12px] flex"
+              src="/icons/error-warning.svg"
+              alt="error"
+              height={16}
+              width={16}
+            />
+          ) : null}
+
           {errors.email && (
             <span className="text-sm text-red-500">{errors.email.message}</span>
           )}
@@ -204,7 +204,7 @@ const EmailRegistrationForm = () => {
           </button>
         </form>
       </div>
-    </section>
+    </>
   );
 };
 
