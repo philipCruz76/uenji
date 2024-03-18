@@ -15,6 +15,7 @@ import Image from "next/image";
 import MobileAuthInitial from "@/components/auth/mobile/MobileAuthInitial";
 import OTPRegistrationForm from "@/components/auth/OTPRegistrationForm";
 import EmailRegistrationForm from "@/components/auth/EmailRegistrationForm";
+import { useEffect, useRef } from "react";
 
 type NewMobileAuthModalProps = {};
 
@@ -22,6 +23,34 @@ const NewMobileAuthModal = ({}: NewMobileAuthModalProps) => {
   let { isOpen, setIsOpen } = useOpenModalStore();
   const { isEmail, setShowEmailCredentials } = useEmailCredentialsStore();
   const { isOTP, setShowOTP } = useOTPStore();
+  const drawerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function onVisualViewportChange() {
+        if (!drawerRef.current) return;
+
+      const visualViewportHeight = window.visualViewport?.height || 0;
+      const OFFSET = 0;
+
+
+
+      // Difference between window height and height excluding the keyboard
+      let diffFromInitial = window.innerHeight - visualViewportHeight;
+
+      const drawerHeight = drawerRef.current.getBoundingClientRect().height || 0;
+
+      drawerRef.current.style.height = `${drawerHeight - Math.max(diffFromInitial, 0)}px`;
+      drawerRef.current.style.bottom = `${Math.max(diffFromInitial, 0)}px`;
+    }
+
+    window.visualViewport?.addEventListener("resize", onVisualViewportChange);
+
+    return () =>
+      window.visualViewport?.removeEventListener(
+        "resize",
+        onVisualViewportChange,
+      );
+  }, []);
   return (
     <Drawer
       open={isOpen}
@@ -30,7 +59,10 @@ const NewMobileAuthModal = ({}: NewMobileAuthModalProps) => {
       fixed
     >
       <DrawerPortal>
-        <DrawerContent className="flex h-[100dvh] w-[100dvw] px-4">
+        <DrawerContent
+          ref={drawerRef}
+          className="flex h-[100dvh] w-[100dvw] px-4"
+        >
           {/* Close Button*/}
           <div className=" flex items-center justify-end ">
             <button
