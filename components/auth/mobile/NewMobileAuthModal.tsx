@@ -24,22 +24,18 @@ const NewMobileAuthModal = ({}: NewMobileAuthModalProps) => {
   const { isEmail, setShowEmailCredentials } = useEmailCredentialsStore();
   const { isOTP, setShowOTP } = useOTPStore();
   const drawerRef = useRef<HTMLDivElement>(null);
+  const focusedElement = document.activeElement as HTMLElement;
 
   useEffect(() => {
     function onVisualViewportChange() {
       if (!drawerRef.current) return;
 
-      const visualViewportHeight = window.visualViewport?.height || 0;
-      const focusedElement = document.activeElement as HTMLElement;
-
+      let visualViewportHeight = window.visualViewport?.height || 0;
       if (focusedElement.tagName === "INPUT") {
         // Difference between window height and height excluding the keyboard
         let diffFromInitial = window.innerHeight - visualViewportHeight;
 
-        const drawerHeight =
-          drawerRef.current.getBoundingClientRect().height || 0;
-
-        drawerRef.current.style.height = `${drawerHeight - Math.max(diffFromInitial, 0)}px`;
+        drawerRef.current.style.bottom = `${Math.max(diffFromInitial, 0)}px`;
       }
     }
 
@@ -50,7 +46,7 @@ const NewMobileAuthModal = ({}: NewMobileAuthModalProps) => {
         "resize",
         onVisualViewportChange,
       );
-  }, [window.visualViewport?.height]);
+  }, [focusedElement]);
   return (
     <Drawer
       open={isOpen}
