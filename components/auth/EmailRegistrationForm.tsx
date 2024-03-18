@@ -28,7 +28,7 @@ const EmailRegistrationForm = () => {
     register,
     handleSubmit,
     getValues,
-    formState: { errors, isSubmitting, isValidating },
+    formState: { errors, isSubmitting, isValid, isValidating },
     reset,
   } = useForm<LoginCredentials>({
     mode: "onChange",
@@ -69,7 +69,7 @@ const EmailRegistrationForm = () => {
   };
 
   return (
-    <section className="container flex flex-col ">
+    <section className=" flex flex-col ">
       {/* Back button */}
       <div
         className="absolute left-8 top-6 flex cursor-pointer flex-row items-center justify-center"
@@ -89,14 +89,12 @@ const EmailRegistrationForm = () => {
       </div>
 
       {/* Auth form */}
-      <div className=" mt-6 flex flex-col space-y-3 text-left">
-        <p className="mb-8 flex text-2xl font-semibold ">
-          Continuar com o e-mail
-        </p>
+      <div className=" mt-6 flex flex-col text-left">
+        <p className=" text-xl font-semibold ">Continuar com o e-mail</p>
 
         {/* User input form */}
         <form
-          className=" mt-8 flex flex-col space-y-3 text-[16px]"
+          className=" mt-8 flex h-full w-full flex-col gap-2 text-[16px]"
           onSubmit={handleSubmit(loginHandler)}
         >
           <label className="font-semibold">Email</label>
@@ -166,7 +164,7 @@ const EmailRegistrationForm = () => {
               },
             })}
             className={cn(
-              "h-[40px] rounded-sm border border-zinc-400 text-[16px] px-2 focus:outline-none",
+              "h-[40px] rounded-sm border border-zinc-400 px-2 text-[16px] focus:outline-none",
             )}
             required
             data-lpignore="true"
@@ -196,8 +194,13 @@ const EmailRegistrationForm = () => {
 
           <button
             type="submit"
-            disabled={isSubmitting}
-            className="h-[40px] rounded-sm border border-black bg-black text-white hover:bg-opacity-60"
+            disabled={isValid}
+            className={cn(
+              isValid
+                ? "border-black bg-black text-white"
+                : "bg-zinc-100 text-gray-400",
+              "h-[40px] rounded-md border  font-semibold hover:bg-opacity-60",
+            )}
           >
             {isLogin === "register" ? "Continuar" : "Entrar"}
           </button>

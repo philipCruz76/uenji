@@ -27,7 +27,7 @@ const UserProfilePage = async ({ user, publicMode }: UserProfilePageProps) => {
 
   if (publicMode === false) {
     return <PrivateProfileView user={user} />;
-  } else if (publicMode === true || publicMode === undefined){
+  } else if (publicMode === true || publicMode === undefined) {
     return <PublicProfileView user={user} />;
   }
 };

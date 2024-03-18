@@ -57,23 +57,25 @@ const NewMobileAuthModal = ({}: NewMobileAuthModalProps) => {
               </svg>
             </button>
           </div>
-          <div className="flex items-center justify-center">
-          <Image
-            src={"/images/uenji-logo-black.png"}
-            alt="Uenji Logo"
-            width={200}
-            height={200}
-          />
-          </div>
-         
-         {/* Modal Content */}
-        {!isEmail ? (
-          <MobileAuthInitial />
-        ) : isOTP ? (
-          <OTPRegistrationForm />
-        ) : (
-          <EmailRegistrationForm />
-        )}
+          {isEmail === true ? null : (
+            <div className="flex items-center justify-center">
+              <Image
+                src={"/images/uenji-logo-black.png"}
+                alt="Uenji Logo"
+                width={200}
+                height={200}
+              />
+            </div>
+          )}
+
+          {/* Modal Content */}
+          {!isEmail ? (
+            <MobileAuthInitial />
+          ) : isOTP ? (
+            <OTPRegistrationForm />
+          ) : (
+            <EmailRegistrationForm />
+          )}
         </DrawerContent>
       </DrawerPortal>
     </Drawer>

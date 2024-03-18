@@ -59,7 +59,7 @@ const JoinButton: FC<JoinButtonProps> = ({ isButton }) => {
 
       {/*Tablet and Mobile Auth Modal*/}
 
-      {isTablet || isMobile ? <MobileAuthModal />: null}
+      {isTablet || isMobile ? <MobileAuthModal /> : null}
     </>
   );
 };

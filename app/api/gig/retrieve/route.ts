@@ -1,6 +1,6 @@
 import getCurrentUserWithExtraInfo from "@/lib/actions/getCurrentUserWithExtraInfo";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function GET(request: Request) {
   try {

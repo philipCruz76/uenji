@@ -1,7 +1,7 @@
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 import db from "@/lib/db";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function GET() {
   try {

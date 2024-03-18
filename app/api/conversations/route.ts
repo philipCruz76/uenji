@@ -2,7 +2,7 @@ import getCurrentUser from "@/lib/actions/getCurrentUser";
 import db from "@/lib/db";
 import { pusherServer } from "@/lib/pusher";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
