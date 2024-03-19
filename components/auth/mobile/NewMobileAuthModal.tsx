@@ -1,11 +1,5 @@
 "use client";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerPortal,
-  DrawerTitle,
-} from "@/components/ui/Drawer";
+import { Drawer, DrawerContent } from "@/components/ui/Drawer";
 import {
   useEmailCredentialsStore,
   useOTPStore,
@@ -15,7 +9,7 @@ import Image from "next/image";
 import MobileAuthInitial from "@/components/auth/mobile/MobileAuthInitial";
 import OTPRegistrationForm from "@/components/auth/OTPRegistrationForm";
 import EmailRegistrationForm from "@/components/auth/EmailRegistrationForm";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type NewMobileAuthModalProps = {};
 
@@ -24,29 +18,12 @@ const NewMobileAuthModal = ({}: NewMobileAuthModalProps) => {
   const { isEmail, setShowEmailCredentials } = useEmailCredentialsStore();
   const { isOTP, setShowOTP } = useOTPStore();
   const drawerRef = useRef<HTMLDivElement>(null);
-  const focusedElement = document.activeElement as HTMLElement;
+  const [visualViewportHeight, setViewportHeight] = useState(
+    window.visualViewport?.height,
+  );
 
-  useEffect(() => {
-    function onVisualViewportChange() {
-      if (!drawerRef.current) return;
+  
 
-      let visualViewportHeight = window.visualViewport?.height || 0;
-      if (focusedElement.tagName === "INPUT") {
-        // Difference between window height and height excluding the keyboard
-        let diffFromInitial = window.innerHeight - visualViewportHeight;
-
-        drawerRef.current.style.bottom = `${Math.max(diffFromInitial, 0)}px`;
-      }
-    }
-
-    window.visualViewport?.addEventListener("resize", onVisualViewportChange);
-
-    return () =>
-      window.visualViewport?.removeEventListener(
-        "resize",
-        onVisualViewportChange,
-      );
-  }, [focusedElement]);
   return (
     <Drawer
       open={isOpen}
@@ -56,7 +33,7 @@ const NewMobileAuthModal = ({}: NewMobileAuthModalProps) => {
     >
       <DrawerContent
         ref={drawerRef}
-        className="flex h-[100dvh] w-[100dvw] grow px-4"
+        className="absolute left-0 top-[-14dvh] focus:outline-none flex min-h-[100dvh] w-[100dvw] grow px-4"
       >
         {/* Close Button*/}
         <div className=" flex items-center justify-end ">

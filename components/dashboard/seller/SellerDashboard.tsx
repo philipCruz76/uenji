@@ -16,7 +16,7 @@ interface SellerDashboardProps {
 
 const SellerDashboard: FC<SellerDashboardProps> = ({ user }) => {
   return (
-    <section className="container  flex min-h-[100dvh] min-w-[100dvw] max-w-[100dvw] flex-col items-center justify-center gap-4 bg-white p-[24px] text-center">
+    <section className="flex min-h-[100dvh] min-w-[100dvw] max-w-[100dvw] flex-col items-center justify-center gap-4 bg-white p-[24px] text-center">
       <h1 className=" text-3xl font-bold">Olá, {user.name}</h1>
       <h3 className="text-xl font-bold">
         Eis o seu painel de controlo de vendedor
@@ -98,8 +98,8 @@ const SellerDashboard: FC<SellerDashboardProps> = ({ user }) => {
           </CardContent>
         </Card>
       </div>
-      <div className="grid w-full gap-4 tablet:grid-cols-2 desktop:grid-cols-7">
-        <Card className=" border-black">
+      <div className="grid w-full gap-4 grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-7">
+        <Card className="desktop:col-span-4 border-black">
           <CardHeader>
             <CardTitle>Vendas</CardTitle>
           </CardHeader>
@@ -107,7 +107,7 @@ const SellerDashboard: FC<SellerDashboardProps> = ({ user }) => {
             <SellerSalesChart />
           </CardContent>
         </Card>
-        <Card className="  border-black desktop:col-span-3">
+        <Card className="desktop:col-span-3 border-black ">
           <CardHeader>
             <CardTitle>Últimas Vendas</CardTitle>
             <CardDescription>Voçê vendeu 14 serviços este mês</CardDescription>

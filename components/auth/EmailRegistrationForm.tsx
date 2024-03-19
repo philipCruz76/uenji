@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { toast } from "react-hot-toast";
@@ -93,7 +95,10 @@ const EmailRegistrationForm = () => {
         <p className=" text-xl font-semibold ">Continuar com e-mail</p>
 
         {/* User input form */}
-        <form className=" mt-8 flex flex-col gap-2 text-[16px]">
+        <form
+          onSubmit={handleSubmit(loginHandler)}
+          className=" mt-8 flex flex-col gap-2 text-[16px]"
+        >
           <label className="font-semibold">Email</label>
 
           <Input
@@ -191,8 +196,7 @@ const EmailRegistrationForm = () => {
 
           <button
             type="submit"
-            disabled={isValid}
-            onClick={handleSubmit(loginHandler)}
+            disabled={isValid === false || isSubmitting === true}
             className={cn(
               isValid
                 ? "border-black bg-black text-white"

@@ -29,7 +29,7 @@ const DesktopAuthEmail = ({}) => {
     register,
     handleSubmit,
     getValues,
-    formState: { errors, isSubmitting, isValidating },
+    formState: { errors, isValid,isSubmitting, isValidating },
     reset,
   } = useForm<LoginCredentials>({
     mode: "onChange",
@@ -204,8 +204,13 @@ const DesktopAuthEmail = ({}) => {
 
           <button
             type="submit"
-            disabled={isSubmitting}
-            className="h-[40px] rounded-sm border border-black bg-black text-white hover:bg-opacity-60"
+            disabled={isValid === false || isSubmitting === true}
+            className={cn(
+              isValid
+                ? "border-black bg-black text-white hover:bg-opacity-60"
+                : "bg-zinc-100 text-gray-400",
+              "h-[40px] rounded-md border font-semibold ",
+            )}
           >
             {isLogin === "register" ? "Continuar" : "Entrar"}
           </button>
