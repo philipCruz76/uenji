@@ -1,3 +1,4 @@
+"use client";
 import { FC, useEffect, useRef } from "react";
 import LoggedInMobileNavContent from "./LoggedInMobileNavContent";
 import LoggedOutMobileNavContent from "./LoggedOutMobileNavContent";
@@ -32,7 +33,7 @@ const MobileNav: FC<MobileNavProps> = ({ session }) => {
           />
           <Drawer.Content className="fixed  bottom-0 left-0 right-0 z-50 mt-24 flex max-h-[100dvh] min-h-[100dvh] w-[240px]  flex-col  gap-4  bg-[#f8f9fa]  px-4 py-6   shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500 desktop:hidden">
             {session ? (
-              <LoggedInMobileNavContent />
+              <LoggedInMobileNavContent currentUser={session.user} />
             ) : (
               <LoggedOutMobileNavContent />
             )}

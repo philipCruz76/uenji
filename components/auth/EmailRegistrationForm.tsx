@@ -93,7 +93,7 @@ const EmailRegistrationForm = () => {
       </div>
 
       {/* Auth form */}
-      <div className=" absolute mt-20  w-[90dvw] flex-col text-left">
+      <div className=" absolute mt-20 flex w-[90dvw] flex-col text-left">
         <p className=" text-xl font-semibold ">Continuar com e-mail</p>
 
         {/* User input form */}

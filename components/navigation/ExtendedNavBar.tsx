@@ -55,7 +55,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
     const activeOrders = async () => {
       try {
         const orders = await getSellerOrders();
-        const activeOrders = orders.filter((order) => order.status === "New");
+        const activeOrders = orders.filter((order) => order.status === "active");
         setOrders(activeOrders.length);
       } catch (error: any) {
         toast.error(error.message);

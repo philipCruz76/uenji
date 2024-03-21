@@ -15,22 +15,44 @@ import FooterColumn from "@/components/navigation/FooterColumn";
 import useCurrentUser from "@/lib/hooks/useCurrentUser";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/constants/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { getSellerOrders } from "@/lib/actions/orders/getUserOrders";
+import { User } from "@/types/common.types";
 
-const LoggedInMobileNavContent = () => {
-  const currentUser = useCurrentUser();
+type LoggedInMobileNavContentProps = {
+  currentUser: User;
+};
+
+const LoggedInMobileNavContent = ({currentUser}: LoggedInMobileNavContentProps) => {
+  
   const { setMobileNav } = useOpenMobileNavStore();
   const router = useRouter();
+  const [currentViewTitle, setCurrentViewTitle] = useState<
+    "Comprador" | "Vendedor"
+  >(currentUser.sellerView ? "Comprador" : "Vendedor");
+  const [orders, setOrders] = useState<number>(0);
+
+  useEffect(() => {
+    if (!currentUser) return;
+    const activeOrders = async () => {
+      try {
+        const orders = await getSellerOrders();
+        const activeOrders = orders.filter((order) => order.status === "active");
+        setOrders(activeOrders.length);
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    };
+    activeOrders();
+  }, []);
+
   if (!currentUser) {
     setMobileNav(false);
     return null;
   }
-
-  const [currentViewTitle, setCurrentViewTitle] = useState<
-    "Comprador" | "Vendedor"
-  >(currentUser.sellerView ? "Comprador" : "Vendedor");
+  
   const switchView = () => {
     fetch("/api/seller_view", {
       method: "GET",
@@ -54,15 +76,15 @@ const LoggedInMobileNavContent = () => {
       {/* Mobile Menu Content */}
       <div className="flex-1 overflow-y-auto">
         <Link
-          href={`/${currentUser?.username}`}
-          className="flex w-full flex-row items-center justify-start  gap-4 py-2 font-sans font-bold text-black"
+          href={`/${currentUser.username}`}
+          className="flex w-full flex-row items-center justify-start  gap-4 py-2  font-mono font-bold text-black"
         >
           <UserAvatar avatarPhoto={currentUser?.image!} />
-          {currentUser?.username}
+          {currentUser.username!.charAt(0).toUpperCase() + currentUser.username!.slice(1)}
         </Link>
 
         {/*Nav Links*/}
-        <ul className="flex flex-col gap-[10px] py-[20px] font-mono text-base font-normal text-[#000000] ">
+        <ul className="flex flex-col gap-[8px] py-[20px] font-mono text-base font-normal text-[#000000] ">
           {currentUser.isSeller ? (
             <div className="flex w-full items-center justify-center pb-4">
               <button
@@ -95,8 +117,13 @@ const LoggedInMobileNavContent = () => {
           </Link>
           {currentUser.isSeller ? (
             <>
-              <Link href="/" className="hover:underline" key="Manage Orders">
-                Gerir Pedidos
+              <Link href="/" className="hover:underline flex flex-row gap-1 items-center justify-start" key="Manage Orders">
+                <span>Pedidos</span>
+                {orders > 0 && (
+                  <span className=" flex h-[18px] w-[18px] items-center justify-center rounded-full border border-red-600 text-red-600 text-center text-xs font-mono ">
+                    {orders}
+                  </span>
+                )}
               </Link>
               <Link
                 href={`/${currentUser.username}/gigs`}
@@ -128,9 +155,9 @@ const LoggedInMobileNavContent = () => {
             Settings
           </Link>
 
-          <Accordion type="multiple" key="Language">
+          <Accordion type="multiple" key="Language" >
             <AccordionItem value="2">
-              <AccordionTrigger className="flex h-fit flex-row gap-2">
+              <AccordionTrigger className=" gap-1">
                 <span className="font-normal">Inglês</span>
                 <Image
                   alt="Language"

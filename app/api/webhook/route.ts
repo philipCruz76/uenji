@@ -92,7 +92,7 @@ export async function POST(request: Request) {
           gigPackageIdx: parseInt(session.metadata.packageIdx),
           gigDeliveryTime: deliveryTime,
           paymentIntent: paymentIntent.id,
-          status: "New",
+          status: "active",
         },
       });
     }

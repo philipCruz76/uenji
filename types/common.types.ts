@@ -7,6 +7,7 @@ export interface User {
   email?: string | null;
   accessToken?: string;
   isSeller?: boolean | null;
+  sellerView?: boolean | null;
   image?: string | null;
   isOnline?: boolean | null;
 }
