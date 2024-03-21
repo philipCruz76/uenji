@@ -11,6 +11,7 @@ const PopularCategoryShowcase = lazy(
 const PopularGigsShowcase = lazy(
   () => import("@/components/dashboard/buyer/PopularGigsShowcase"),
 );
+const PopularGigsShowCaseMobile = lazy( () => import("@/components/dashboard/buyer/PopularGigsShowCaseMobile"));
 
 type BuyerDashboardProps = {
   user: User;
@@ -19,11 +20,11 @@ type BuyerDashboardProps = {
 const BuyerDashboard = ({ user }: BuyerDashboardProps) => {
   const popularCategories = CategoryDesciptions.filter(
     (category) =>
-      category.category === "fotografia" || category.category === "design",
+      category.category === "programacao" || category.category === "marketing" || category.category === "fotografia",
   );
 
   return (
-    <section className="container flex min-h-[100dvh] min-w-[100dvw] px-12 py-8">
+    <section className=" flex min-h-[100dvh] min-w-[100dvw] px-6 py-8">
       <div className="flex w-full flex-col space-y-6">
         <h1 className="left-0 flex items-center justify-start text-3xl font-bold">
           Olá, {user.name ? user.name : user.username}
@@ -35,10 +36,14 @@ const BuyerDashboard = ({ user }: BuyerDashboardProps) => {
           <PopularGigsShowcase />
         </div>
         {/* Mobile View */}
-        <div className="flex desktop:hidden">
+        <div className="flex flex-col gap-8 desktop:hidden">
           <PopularCategoryShowcaseMobile
             popularCategories={popularCategories}
           />
+          <div>
+          <h3 className="w-full text-2xl font-semibold py-6">Serviços em destaque</h3>
+          <PopularGigsShowCaseMobile />
+          </div>
         </div>
       </div>
     </section>

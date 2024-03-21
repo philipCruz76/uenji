@@ -18,6 +18,7 @@ export default async function getPopularGigs(gigCategory?: string) {
             username: true,
             name: true,
             image: true,
+            displayName: true,
           },
         },
       },
