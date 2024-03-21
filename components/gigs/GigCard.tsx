@@ -89,7 +89,7 @@ const GigCard = ({ gigToShow, size }: GigCardProps) => {
             {/* Gig Price */}
             <div>
               <span className="text-ellipsis text-lg font-semibold">
-                Desde {parsedPackages[0].price} AKZ
+                Desde {parsedPackages[0].price} AOA
               </span>
             </div>
           </div>

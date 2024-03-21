@@ -584,7 +584,7 @@ const GigPricingPackages = ({
                 }}
               />
               <span className="pr-[32px] text-sm text-gray-500 hover:cursor-default">
-                AKZ
+                AOA
               </span>
             </div>
           </td>
@@ -624,7 +624,7 @@ const GigPricingPackages = ({
                     }}
                   />
                   <span className="pr-[32px] text-sm text-gray-500 hover:cursor-default">
-                    AKZ
+                    AOA
                   </span>
                 </div>
               </td>
@@ -662,7 +662,7 @@ const GigPricingPackages = ({
                     }}
                   />
                   <span className="pr-[32px] text-sm text-gray-500 hover:cursor-default">
-                    AKZ
+                    AOA
                   </span>
                 </div>
               </td>

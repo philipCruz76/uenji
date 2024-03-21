@@ -34,7 +34,7 @@ export const GigPricingValidator = z.object({
         .string()
         .refine(
           (value) => parseInt(value) >= 1000 && parseInt(value) % 500 === 0,
-          "Preço mínimo não pode ser abaixo dos 1,000.00 AKZ e em incrementos de 500.00 AKZ",
+          "Preço mínimo não pode ser abaixo dos 1,000.00 AOA e em incrementos de 500.00 AOA",
         ),
       deliveryTime: z
         .string()
