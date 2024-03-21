@@ -4,17 +4,24 @@ import { GigPricing } from "@/types/gigWizard.types";
 import { useState } from "react";
 import GigPackageCheckoutButton from "./GigPackageCheckoutButton";
 import GigCheckoutModal from "./GigCheckoutModal";
-import getGigByTitle from "@/lib/actions/gigs/getGigByTitle";
+import { ExtendedGigInfo } from "@/types/common.types";
 
 type GigPricingCardProps = {
-  gig: Awaited<ReturnType<typeof getGigByTitle>>;
+  gig: ExtendedGigInfo;
 };
-type PackageType = "basic" | "standard" | "premium";
+
+type PackageType = {
+  type: "basic" | "standard" | "premium";
+  index: number;
+};
 
 const GigPricingCard = ({ gig }: GigPricingCardProps) => {
   if (!gig) return null;
   const parsedPackages = JSON.parse(gig.packages!) as GigPricing["packages"];
-  const [selectedPackage, setSelectedPackage] = useState<PackageType>("basic");
+  const [selectedPackage, setSelectedPackage] = useState<PackageType>({
+    type: "basic",
+    index: 0,
+  });
   const singlePackage = Object.keys(parsedPackages).length < 2;
 
   return (
@@ -26,10 +33,10 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
               <div className="grid h-[50px] w-full grid-cols-1  grid-rows-1 border-b bg-slate-50">
                 <label
                   onClick={() => {
-                    setSelectedPackage("basic");
+                    setSelectedPackage({ type: "basic", index: 0 });
                   }}
                   className={cn(
-                    selectedPackage === "basic"
+                    selectedPackage.type === "basic"
                       ? "border-spacing-2 border-b-2 border-b-black bg-white shadow-md"
                       : null,
                   )}
@@ -38,7 +45,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                 </label>
               </div>
               <div className="flex min-h-full min-w-full justify-between">
-                {selectedPackage === "basic" && (
+                {selectedPackage.type === "basic" && (
                   <div className="grid min-h-full min-w-full grid-cols-1 grid-rows-4 gap-6 p-4 text-start">
                     <h3 className="text-center text-2xl">
                       {parsedPackages[0].title.charAt(0).toLocaleUpperCase() +
@@ -101,10 +108,10 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
               <div className="grid h-[50px] w-full grid-cols-3  grid-rows-1 border-b bg-slate-50">
                 <label
                   onClick={() => {
-                    setSelectedPackage("basic");
+                    setSelectedPackage({ type: "basic", index: 0 });
                   }}
                   className={cn(
-                    selectedPackage === "basic"
+                    selectedPackage.type === "basic"
                       ? "border-spacing-2 border-b-2 border-b-black bg-white shadow-md"
                       : null,
                   )}
@@ -113,10 +120,10 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                 </label>
                 <label
                   onClick={() => {
-                    setSelectedPackage("standard");
+                    setSelectedPackage({ type: "standard", index: 1 });
                   }}
                   className={cn(
-                    selectedPackage === "standard"
+                    selectedPackage.type === "standard"
                       ? "border-spacing-2 border-b-2 border-b-black bg-white shadow-md"
                       : null,
                     "border-l border-r",
@@ -126,10 +133,10 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                 </label>
                 <label
                   onClick={() => {
-                    setSelectedPackage("premium");
+                    setSelectedPackage({ type: "premium", index: 2 });
                   }}
                   className={cn(
-                    selectedPackage === "premium"
+                    selectedPackage.type === "premium"
                       ? "border-spacing-2 border-b-2 border-b-black bg-white shadow-md"
                       : null,
                   )}
@@ -138,7 +145,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                 </label>
               </div>
               <div className="flex min-h-full min-w-full justify-between">
-                {selectedPackage === "basic" && (
+                {selectedPackage.type === "basic" && (
                   <div className="grid min-h-full min-w-full grid-cols-1 grid-rows-4 gap-6 p-4 text-start">
                     <h3 className="text-center text-2xl">
                       {parsedPackages[0].title.charAt(0).toLocaleUpperCase() +
@@ -191,7 +198,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                     </span>
                   </div>
                 )}
-                {selectedPackage === "standard" && (
+                {selectedPackage.type === "standard" && (
                   <div className="grid min-h-full min-w-full grid-cols-1 grid-rows-4 gap-6 p-4 text-start">
                     <h3 className="text-center text-2xl">
                       {parsedPackages[1].title.charAt(0).toLocaleUpperCase() +
@@ -244,7 +251,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                     </span>
                   </div>
                 )}
-                {selectedPackage === "premium" && (
+                {selectedPackage.type === "premium" && (
                   <div className="flex flex-col gap-4">
                     <div className="grid grid-cols-1 grid-rows-4 gap-6 p-4 text-start">
                       <h3 className="text-center text-2xl">
@@ -305,13 +312,9 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
         )}
       </div>
       <GigCheckoutModal
-        selectedPackage={
-          selectedPackage === "basic"
-            ? parsedPackages[0]
-            : selectedPackage === "standard"
-              ? parsedPackages[1]
-              : parsedPackages[2]
-        }
+        selectedPackage={parsedPackages[selectedPackage.index]}
+        packageIdx={selectedPackage.index}
+        gigId={gig.id}
       />
     </>
   );

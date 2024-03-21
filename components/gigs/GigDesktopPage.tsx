@@ -1,13 +1,13 @@
 import getCurrentUser from "@/lib/actions/getCurrentUser";
-import getGigByTitle from "@/lib/actions/gigs/getGigByTitle";
 import Link from "next/link";
 import { lazy } from "react";
 import GigPricingCard from "./GigPricingCard";
 import getSession from "@/lib/actions/getSession";
 import { redirect } from "next/navigation";
+import { ExtendedGigInfo } from "@/types/common.types";
 
 type GigDesktopPageProps = {
-  pageGig: Awaited<ReturnType<typeof getGigByTitle>>;
+  pageGig: ExtendedGigInfo;
 };
 
 const GigSellerInfo = lazy(() => import("@/components/gigs/GigSellerInfo"));

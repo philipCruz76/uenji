@@ -2,7 +2,7 @@
 
 import { NavLinks } from "@/constants";
 import Link from "next/link";
-import { FC, lazy, useEffect } from "react";
+import { FC, lazy, useEffect, useState } from "react";
 import Image from "next/image";
 import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
 import { useOpenModalStore } from "@/lib/stores/modals/modal-store";
@@ -11,6 +11,8 @@ import { Session } from "next-auth";
 import { useActiveNavBarStore } from "@/lib/stores/navbar-store";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { getSellerOrders } from "@/lib/actions/orders/getUserOrders";
+import toast from "react-hot-toast";
 const MobileNav = lazy(() => import("@/components/navigation/MobileNav"));
 const JoinButton = lazy(() => import("@/components/auth/signIn/JoinButton"));
 const InboxDropDownMenu = lazy(
@@ -27,6 +29,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
   let { mobileNav, setMobileNav } = useOpenMobileNavStore();
   let { setIsOpen } = useOpenModalStore();
   let { setLogin } = useLogInVariantStore();
+  const [orders, setOrders] = useState<number>(0);
   const pathName = usePathname();
 
   const {
@@ -46,6 +49,20 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
       setActiveBarStyling(activeBarStyling.replace(/\bfixed\b/, ""));
     }
   }, [pathName]);
+
+  useEffect(() => {
+    if(!session) return;
+    const activeOrders = async () => {
+      try {
+        const orders = await getSellerOrders();
+        const activeOrders = orders.filter((order) => order.status === "New");
+        setOrders(activeOrders.length);
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    };
+    activeOrders();
+  }, [session?.user]);
 
   return (
     <header>
@@ -140,11 +157,20 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
               <ul className="hidden items-center justify-center gap-[20px] px-2 text-base font-semibold desktop:flex">
                 <InboxDropDownMenu />
                 <Link
-                  href="/"
+                  href="/orders"
                   className="group flex flex-col items-center justify-center"
                 >
-                  <span>Pedidos</span>
-                  <div className="hidden h-[2px] w-[46px] bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current " />
+                  <div className="flex flex-row items-center justify-center gap-1">
+                    {" "}
+                    <span>Pedidos</span>
+                    {orders > 0 && (
+                      <span className=" flex h-[16px] w-[16px] items-center justify-center rounded-full border border-black bg-black text-center font-mono text-white">
+                        {orders}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className={cn(orders > 0 ? "w-[66px]": "w-[46px]","hidden h-[2px]  bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current ")} />
                 </Link>
                 {!session.user.isSeller ? (
                   <Link

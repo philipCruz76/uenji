@@ -30,7 +30,21 @@ async function registerNewUser(data: LoginCredentials) {
     );
 
     const emailParts = email?.split("@");
-    const derivedUsername = emailParts[0].replace(/[^a-zA-Z0-9]/g, "");
+    let derivedUsername = emailParts[0].replace(/[^a-zA-Z0-9]/g, "");
+
+    const userNameExists = await db.user.findUnique({
+      where: {
+        username: derivedUsername,
+      },
+      select: {
+        username: true,
+      },
+    });
+
+    if (userNameExists !== null) {
+      const randomTwoDigitNumber = Math.floor(Math.random() * 90 + 10);
+      derivedUsername = `${derivedUsername}_${randomTwoDigitNumber}`;
+    }
 
     const user = await db.user.create({
       data: {

@@ -1,4 +1,5 @@
-import { Conversation, Message } from "@prisma/client";
+import { Conversation, Gig, Message, Order } from "@prisma/client";
+import { User as PrismaUser } from "@prisma/client";
 
 export interface User {
   name?: string | null;
@@ -45,5 +46,11 @@ export type LanguageProficiency = {
   languageLevel: string;
 };
 
+export type ExtendedGigInfo = Gig & {
+  user: PrismaUser;
+};
+
+export type UserOrders = ({gig: Gig} & {users: PrismaUser[]} & Order)[];
+export type UserGigs = (Gig & { user: Pick<PrismaUser, 'username' |'name'|'image'> })[] | undefined;
 export type language = ["Português" | "Inglês" | "Francês"];
 export type level = ["Nativo/Bilingue" | "Avançado" | "Intermédio" | "Básico"];

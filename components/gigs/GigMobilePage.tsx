@@ -1,5 +1,4 @@
 import getCurrentUser from "@/lib/actions/getCurrentUser";
-import getGigByTitle from "@/lib/actions/gigs/getGigByTitle";
 import { redirect } from "next/navigation";
 
 import { lazy } from "react";
@@ -14,13 +13,14 @@ import {
 import Image from "next/image";
 import GigPricingMobile from "./GigPricingMobile";
 import getSession from "@/lib/actions/getSession";
+import { ExtendedGigInfo } from "@/types/common.types";
 
 const GigSellerInfoMobile = lazy(
   () => import("@/components/gigs/GigSellerInfoMobile"),
 );
 
 type GigMobilePageProps = {
-  pageGig: Awaited<ReturnType<typeof getGigByTitle>>;
+  pageGig: ExtendedGigInfo;
 };
 
 const GigMobilePage = async ({ pageGig }: GigMobilePageProps) => {

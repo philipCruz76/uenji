@@ -1,7 +1,6 @@
 import db from "@/lib/db";
 import { lazy } from "react";
 import { redirect } from "next/navigation";
-import getSession from "@/lib/actions/getSession";
 
 type ProfilePageProps = {
   params: {
@@ -16,10 +15,11 @@ const UserProfilePage = lazy(
   () => import("@/components/users/profile/UserProfilePage"),
 );
 const UserProfileMobilePage = lazy(
-  () => import("@/components/users/profile/UserProfilePageMobile"),
+  () => import("@/components/users/profile/mobile/UserProfilePageMobile"),
 );
 
 const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
+  let publicView = searchParams.publicMode;
   const user = await db.user.findFirst({
     where: {
       username: params.username,
@@ -32,13 +32,14 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
 
   const { publicMode } = searchParams;
 
+  if (publicMode) publicView = true;
   return (
     <>
-      <section className="container hidden min-h-[100dvh] max-w-[100dvw] bg-[#FFFFFF] tablet:flex">
-        <UserProfilePage user={user} publicMode={publicMode} />
+      <section className="container hidden min-h-[100dvh] max-w-[100dvw] bg-[#FFFFFF] desktop:flex">
+        <UserProfilePage user={user} publicMode={publicView} />
       </section>
-      <section className="flex min-h-[100dvh]  max-w-[100dvw] tablet:hidden">
-        <UserProfileMobilePage user={user} publicMode={publicMode} />
+      <section className="flex min-h-[100dvh]  max-w-[100dvw] desktop:hidden">
+        <UserProfileMobilePage user={user} publicMode={publicView} />
       </section>
     </>
   );

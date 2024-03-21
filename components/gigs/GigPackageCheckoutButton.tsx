@@ -4,6 +4,7 @@ import useCurrentUser from "@/lib/hooks/useCurrentUser";
 import { useCheckoutModalStore } from "@/lib/stores/modals/checkout-modal-store";
 import { useOpenModalStore } from "@/lib/stores/modals/modal-store";
 import { cn } from "@/lib/utils";
+import toast from "react-hot-toast";
 
 type GigPackageCheckoutButtonProps = {
   gigUser: string;
@@ -21,6 +22,7 @@ const GigPackageCheckoutButton = ({
       return null;
     }
     if (currentUser?.username === gigUser) {
+      toast.error("You can't purchase your own gig!");
       return null;
     }
     {

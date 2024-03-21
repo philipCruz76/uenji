@@ -17,6 +17,7 @@ import registerNewUser from "@/lib/actions/auth/registerNewUser";
 import { checkIfUserExists } from "@/lib/actions/auth/checkIfUserExists";
 import { sendPasswordResetEmail } from "@/lib/actions/sentPasswordResetEmail";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const EmailRegistrationForm = () => {
   const { setIsOpen } = useOpenModalStore();
@@ -24,6 +25,7 @@ const EmailRegistrationForm = () => {
   const { isLogin, setLogin } = useLogInVariantStore();
   const { setNewUser } = useNewUserStore();
   const { setShowOTP } = useOTPStore();
+  const [emailVerified, setEmailVerified] = useState(false);
   const router = useRouter();
 
   const {
@@ -101,15 +103,17 @@ const EmailRegistrationForm = () => {
         >
           <label className="font-semibold">Email</label>
 
-          <Input
+          <input
             disabled={isSubmitting}
             {...register("email", {
               required: true,
               validate: async (value) =>
                 checkIfUserExists(value).then((res) => {
                   if (res) {
+                    setEmailVerified(true);
                     setLogin("login");
                   } else {
+                    setEmailVerified(false);
                     setLogin("register");
                   }
                   return true;
@@ -120,13 +124,12 @@ const EmailRegistrationForm = () => {
               },
             })}
             className={cn(
-              "h-[40px] rounded-sm border border-zinc-400 px-2 text-[16px] focus:outline-none",
+              "h-[40px] rounded-sm border border-zinc-400 px-2 text-[16px] placeholder-gray-400 focus:outline-none",
               errors.email && "border-red-500",
             )}
             required
             type="email"
             id="email"
-            data-lpignore="true"
             placeholder="name@email.com"
           />
           {isValidating && (
@@ -180,7 +183,7 @@ const EmailRegistrationForm = () => {
               </span>
             </>
           )}
-          {isLogin === "login" ? (
+          {emailVerified ? (
             <a
               className="flex cursor-pointer items-center justify-end text-end text-sm underline"
               onClick={async () => {

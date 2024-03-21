@@ -60,6 +60,7 @@ const ActivateLinkPage: FC<ActivateLinkPageProps> = async ({
       return true;
     })
     .catch((e) => {
+      console.error(e);
       redirect("/");
     });
 

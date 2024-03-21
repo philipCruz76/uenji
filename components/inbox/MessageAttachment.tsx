@@ -30,6 +30,7 @@ const MessageAttachment: FC<MessageAttachmentProps> = ({ fileUrl }) => {
   if (
     fileType === "png" ||
     fileType === "jpg" ||
+    fileType === "JPG" ||
     fileType === "jpeg" ||
     fileType === "gif" ||
     fileType === "webp"

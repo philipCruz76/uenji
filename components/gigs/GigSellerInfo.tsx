@@ -8,6 +8,7 @@ import {
 } from "@/types/sellerProfile.types";
 import { User } from "@prisma/client";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
@@ -20,7 +21,7 @@ const GigSellerInfo = ({ user, gigTitle }: GigSellerInfoProps) => {
   const currentUser = useCurrentUser();
   const router = useRouter();
   const { setIsOpen } = useOpenModalStore();
-  const { displayName, image, country, languages, id, username, skills } = user;
+  const { displayName, image, country, languages, id, username, skills, name } = user;
   const parsedLanguages = JSON.parse(
     languages!,
   ) as SellerPersonalInfo["languages"];
@@ -54,6 +55,7 @@ const GigSellerInfo = ({ user, gigTitle }: GigSellerInfoProps) => {
         {gigTitle.charAt(0).toUpperCase() + gigTitle.slice(1)}
       </h1>
       <div className="flex flex-row items-center justify-start gap-6">
+        <Link href={`/${username}`}>
         <Image
           width={150}
           height={150}
@@ -62,14 +64,17 @@ const GigSellerInfo = ({ user, gigTitle }: GigSellerInfoProps) => {
           referrerPolicy="no-referrer"
           className="h-[100px] w-[100px] rounded-full border transition duration-150 ease-in-out "
         />
+        </Link>
         {/* user info */}
         <div className="flex flex-col items-start justify-start gap-3 ">
+        <Link href={`/${username}`}>
           <h3
             className="text-2xl font-bold text-gray-800"
             aria-label="Public Name"
           >
-            {displayName}
+            { !displayName? name : displayName}
           </h3>
+          </Link>
           {/*User Location*/}
           <span
             className="flex flex-row items-center justify-start gap-2 text-sm text-gray-600"

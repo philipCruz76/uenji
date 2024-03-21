@@ -2,7 +2,6 @@ import { User } from "@prisma/client";
 import { FC, lazy } from "react";
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 import GigCard from "@/components/gigs/GigCard";
-import { redirect } from "next/navigation";
 import getUserGigs from "@/lib/actions/gigs/getUserGigs";
 import {
   Carousel,
@@ -12,15 +11,16 @@ import {
   CarouselPrevious,
 } from "@/components/ui/Carousel";
 import getSession from "@/lib/actions/getSession";
+import PublicProfileViewMobile from "./PublicProfileViewMobile";
 
 type UserProfilePageMobileProps = {
   user: User;
   publicMode?: boolean;
 };
 
-const SellerOnboardingCard = lazy(() => import("./SellerOnboardingCard"));
-const ProfileInfoCard = lazy(() => import("./ProfileInfoCard"));
-const SellerInfoCard = lazy(() => import("./SellerInfoCard"));
+const SellerOnboardingCard = lazy(() => import("../SellerOnboardingCard"));
+const ProfileInfoCard = lazy(() => import("../ProfileInfoCard"));
+const SellerInfoCard = lazy(() => import("../SellerInfoCard"));
 
 const UserProfileMobilePage = async ({
   user,
@@ -37,6 +37,10 @@ const UserProfileMobilePage = async ({
   publicMode !== undefined
     ? (publicMode = publicMode)
     : (publicMode = currentUsername !== username || !session);
+
+  if (publicMode === true || publicMode === undefined) {
+    return <PublicProfileViewMobile user={user} />;
+  }
   return (
     <div className="h-full w-full">
       <ProfileInfoCard

@@ -3,17 +3,23 @@ import { cn } from "@/lib/utils";
 import { GigPricing } from "@/types/gigWizard.types";
 import { useState } from "react";
 import GigPackageCheckoutButton from "./GigPackageCheckoutButton";
-import getGigByTitle from "@/lib/actions/gigs/getGigByTitle";
+import { ExtendedGigInfo } from "@/types/common.types";
 
 type GigPricingMobileProps = {
-  gig: Awaited<ReturnType<typeof getGigByTitle>>;
+  gig: ExtendedGigInfo;
 };
-type PackageType = "basic" | "standard" | "premium";
+type PackageType = {
+  type: "basic" | "standard" | "premium";
+  index: number;
+};
 
 const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
   if (!gig) return null;
   const parsedPackages = JSON.parse(gig.packages!) as GigPricing["packages"];
-  const [selectedPackage, setSelectedPackage] = useState<PackageType>("basic");
+  const [selectedPackage, setSelectedPackage] = useState<PackageType>({
+    type: "basic",
+    index: 0,
+  });
 
   const singlePackage = Object.keys(parsedPackages).length < 2;
   return (
@@ -22,10 +28,10 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
         <div className="grid h-[50px] w-full grid-cols-1  grid-rows-1 border-b bg-slate-50 text-lg font-medium">
           <label
             onClick={() => {
-              setSelectedPackage("basic");
+              setSelectedPackage({ type: "basic", index: 0 });
             }}
             className={cn(
-              selectedPackage === "basic"
+              selectedPackage.type === "basic"
                 ? "borde-br-[#495057] border-spacing-2 border-b-2  bg-white text-[#495057] shadow-md"
                 : null,
               "flex flex-row items-center justify-center gap-2",
@@ -35,7 +41,9 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
               xmlns="http://www.w3.org/2000/svg"
               width="22"
               height="22"
-              fill={cn(selectedPackage === "basic" ? "#495057" : "#000000")}
+              fill={cn(
+                selectedPackage.type === "basic" ? "#495057" : "#000000",
+              )}
               viewBox="0 0 256 256"
             >
               <path d="M152,120H136V56h8a32,32,0,0,1,32,32,8,8,0,0,0,16,0,48.05,48.05,0,0,0-48-48h-8V24a8,8,0,0,0-16,0V40h-8a48,48,0,0,0,0,96h8v64H104a32,32,0,0,1-32-32,8,8,0,0,0-16,0,48.05,48.05,0,0,0,48,48h16v16a8,8,0,0,0,16,0V216h16a48,48,0,0,0,0-96Zm-40,0a32,32,0,0,1,0-64h8v64Zm40,80H136V136h16a32,32,0,0,1,0,64Z"></path>
@@ -47,10 +55,10 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
         <div className="grid h-[50px] w-full grid-cols-3  grid-rows-1 border-b bg-slate-50 text-lg font-medium">
           <label
             onClick={() => {
-              setSelectedPackage("premium");
+              setSelectedPackage({ type: "premium", index: 2 });
             }}
             className={cn(
-              selectedPackage === "premium"
+              selectedPackage.type === "premium"
                 ? "border-spacing-2 border-b-2 border-b-[#495057] bg-white text-[#495057] shadow-md"
                 : null,
               "flex flex-row items-center justify-center gap-2",
@@ -60,7 +68,9 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
               xmlns="http://www.w3.org/2000/svg"
               width="22"
               height="22"
-              fill={cn(selectedPackage === "premium" ? "#495057" : "#000000")}
+              fill={cn(
+                selectedPackage.type === "premium" ? "#495057" : "#000000",
+              )}
               viewBox="0 0 256 256"
             >
               <path d="M152,120H136V56h8a32,32,0,0,1,32,32,8,8,0,0,0,16,0,48.05,48.05,0,0,0-48-48h-8V24a8,8,0,0,0-16,0V40h-8a48,48,0,0,0,0,96h8v64H104a32,32,0,0,1-32-32,8,8,0,0,0-16,0,48.05,48.05,0,0,0,48,48h16v16a8,8,0,0,0,16,0V216h16a48,48,0,0,0,0-96Zm-40,0a32,32,0,0,1,0-64h8v64Zm40,80H136V136h16a32,32,0,0,1,0,64Z"></path>
@@ -69,10 +79,10 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
           </label>
           <label
             onClick={() => {
-              setSelectedPackage("standard");
+              setSelectedPackage({ type: "standard", index: 1 });
             }}
             className={cn(
-              selectedPackage === "standard"
+              selectedPackage.type === "standard"
                 ? "border-spacing-2 border-b-2 border-b-[#495057] bg-white text-[#495057] shadow-md"
                 : null,
               "flex flex-row items-center justify-center gap-2",
@@ -82,7 +92,9 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
               xmlns="http://www.w3.org/2000/svg"
               width="22"
               height="22"
-              fill={cn(selectedPackage === "standard" ? "#495057" : "#000000")}
+              fill={cn(
+                selectedPackage.type === "standard" ? "#495057" : "#000000",
+              )}
               viewBox="0 0 256 256"
             >
               <path d="M152,120H136V56h8a32,32,0,0,1,32,32,8,8,0,0,0,16,0,48.05,48.05,0,0,0-48-48h-8V24a8,8,0,0,0-16,0V40h-8a48,48,0,0,0,0,96h8v64H104a32,32,0,0,1-32-32,8,8,0,0,0-16,0,48.05,48.05,0,0,0,48,48h16v16a8,8,0,0,0,16,0V216h16a48,48,0,0,0,0-96Zm-40,0a32,32,0,0,1,0-64h8v64Zm40,80H136V136h16a32,32,0,0,1,0,64Z"></path>
@@ -91,10 +103,10 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
           </label>
           <label
             onClick={() => {
-              setSelectedPackage("basic");
+              setSelectedPackage({ type: "basic", index: 0 });
             }}
             className={cn(
-              selectedPackage === "basic"
+              selectedPackage.type === "basic"
                 ? "border-spacing-2 border-b-2 border-b-[#495057] bg-white text-[#495057] shadow-md"
                 : null,
               "flex flex-row items-center justify-center gap-2",
@@ -104,7 +116,9 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
               xmlns="http://www.w3.org/2000/svg"
               width="22"
               height="22"
-              fill={cn(selectedPackage === "basic" ? "#495057" : "#000000")}
+              fill={cn(
+                selectedPackage.type === "basic" ? "#495057" : "#000000",
+              )}
               viewBox="0 0 256 256"
             >
               <path d="M152,120H136V56h8a32,32,0,0,1,32,32,8,8,0,0,0,16,0,48.05,48.05,0,0,0-48-48h-8V24a8,8,0,0,0-16,0V40h-8a48,48,0,0,0,0,96h8v64H104a32,32,0,0,1-32-32,8,8,0,0,0-16,0,48.05,48.05,0,0,0,48,48h16v16a8,8,0,0,0,16,0V216h16a48,48,0,0,0,0-96Zm-40,0a32,32,0,0,1,0-64h8v64Zm40,80H136V136h16a32,32,0,0,1,0,64Z"></path>
@@ -115,7 +129,7 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
       )}
 
       <div className="h-full w-full">
-        {selectedPackage === "basic" && (
+        {selectedPackage.type === "basic" && (
           <div className="grid grid-cols-1 grid-rows-4 gap-8 p-4 pt-[24px] text-start">
             <h3 className=" text-xl font-semibold">
               {parsedPackages[0].title.charAt(0).toLocaleUpperCase() +
@@ -155,7 +169,7 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
             </span>
           </div>
         )}
-        {selectedPackage === "standard" && (
+        {selectedPackage.type === "standard" && (
           <div className="grid grid-cols-1 grid-rows-4 gap-8 p-4 pt-[24px] text-start">
             <h3 className=" text-xl font-semibold">
               {parsedPackages[1].title.charAt(0).toLocaleUpperCase() +
@@ -195,7 +209,7 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
             </span>
           </div>
         )}
-        {selectedPackage === "premium" && (
+        {selectedPackage.type === "premium" && (
           <div className="grid grid-cols-1 grid-rows-4 gap-8 p-4 pt-[24px] text-start">
             <h3 className=" text-xl font-semibold">
               {parsedPackages[2].title.charAt(0).toLocaleUpperCase() +

@@ -161,6 +161,19 @@ export const authOptions: NextAuthOptions = {
         const emailParts = dbUser.email?.split("@");
         if (emailParts) {
           let derivedUsername = emailParts[0].replace(/[^a-zA-Z0-9]/g, "");
+          const userNameExists = await db.user.findUnique({
+            where: {
+              username: derivedUsername,
+            },
+            select: {
+              username: true,
+            },
+          });
+
+          if (userNameExists !== null) {
+            const randomTwoDigitNumber = Math.floor(Math.random() * 90 + 10);
+            derivedUsername = `${derivedUsername}_${randomTwoDigitNumber}`;
+          }
 
           await db.user.update({
             where: {

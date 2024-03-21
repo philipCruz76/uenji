@@ -9,6 +9,7 @@ const SellerDashboard = lazy(
   () => import("@/components/dashboard/seller/SellerDashboard"),
 );
 
+export const dynamic = 'force-dynamic';
 export default async function Home() {
   const user = await getCurrentUser();
 

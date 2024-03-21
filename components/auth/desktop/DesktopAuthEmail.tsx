@@ -16,6 +16,7 @@ import { checkIfUserExists } from "@/lib/actions/auth/checkIfUserExists";
 import registerNewUser from "@/lib/actions/auth/registerNewUser";
 import { sendPasswordResetEmail } from "@/lib/actions/sentPasswordResetEmail";
 import { LoginCredentials } from "@/types/login.types";
+import { useState } from "react";
 
 const DesktopAuthEmail = ({}) => {
   const { setIsOpen } = useOpenModalStore();
@@ -23,13 +24,14 @@ const DesktopAuthEmail = ({}) => {
   const { isLogin, setLogin } = useLogInVariantStore();
   const { setNewUser } = useNewUserStore();
   const { setShowOTP } = useOTPStore();
+  const [emailVerified, setEmailVerified] = useState(false);
   const router = useRouter();
 
   const {
     register,
     handleSubmit,
     getValues,
-    formState: { errors, isValid,isSubmitting, isValidating },
+    formState: { errors, isValid, isSubmitting, isValidating },
     reset,
   } = useForm<LoginCredentials>({
     mode: "onChange",
@@ -106,15 +108,17 @@ const DesktopAuthEmail = ({}) => {
         >
           <label className="font-semibold">Email</label>
           <div className="relative flex">
-            <Input
+            <input
               disabled={isSubmitting}
               {...register("email", {
                 required: true,
                 validate: async (value) =>
                   checkIfUserExists(value).then((res) => {
                     if (res) {
+                      setEmailVerified(true);
                       setLogin("login");
                     } else {
+                      setEmailVerified(false);
                       setLogin("register");
                     }
                     return true;
@@ -125,7 +129,7 @@ const DesktopAuthEmail = ({}) => {
                 },
               })}
               className={cn(
-                "h-[40px] rounded-sm border border-zinc-400 px-2 focus:outline-none",
+                "h-[40px] w-full rounded-sm border border-zinc-400 px-2 placeholder-gray-400 focus:outline-none",
                 errors.email && "border-red-500",
               )}
               required
@@ -183,7 +187,7 @@ const DesktopAuthEmail = ({}) => {
               </span>
             </>
           )}
-          {isLogin === "login" ? (
+          {emailVerified ? (
             <a
               className="flex cursor-pointer items-center justify-end text-end text-sm underline"
               onClick={async () => {

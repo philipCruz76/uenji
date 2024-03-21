@@ -9,7 +9,7 @@ import Image from "next/image";
 import MobileAuthInitial from "@/components/auth/mobile/MobileAuthInitial";
 import OTPRegistrationForm from "@/components/auth/OTPRegistrationForm";
 import EmailRegistrationForm from "@/components/auth/EmailRegistrationForm";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 type NewMobileAuthModalProps = {};
 
@@ -18,11 +18,10 @@ const NewMobileAuthModal = ({}: NewMobileAuthModalProps) => {
   const { isEmail, setShowEmailCredentials } = useEmailCredentialsStore();
   const { isOTP, setShowOTP } = useOTPStore();
   const drawerRef = useRef<HTMLDivElement>(null);
-  const [visualViewportHeight, setViewportHeight] = useState(
-    window.visualViewport?.height,
-  );
 
-  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [isOpen]);
 
   return (
     <Drawer
@@ -33,7 +32,7 @@ const NewMobileAuthModal = ({}: NewMobileAuthModalProps) => {
     >
       <DrawerContent
         ref={drawerRef}
-        className="absolute left-0 top-[-14dvh] focus:outline-none flex min-h-[100dvh] w-[100dvw] grow px-4"
+        className="absolute left-0 top-[-14dvh] flex min-h-[100dvh] w-[100dvw] grow px-4 focus:outline-none"
       >
         {/* Close Button*/}
         <div className=" flex items-center justify-end ">

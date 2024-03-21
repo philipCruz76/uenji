@@ -6,20 +6,29 @@ import { GigPricing } from "@/types/gigWizard.types";
 
 import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import CheckoutButton from "../checkout/CheckoutButton";
 
 type GigCheckoutModalProps = {
   selectedPackage: GigPricing["packages"][0];
+  packageIdx: number;
+  gigId: string;
 };
 
 type DrawerOrientation = "left" | "right" | "top" | "bottom";
 
-const GigCheckoutModal = ({ selectedPackage }: GigCheckoutModalProps) => {
+const GigCheckoutModal = ({
+  selectedPackage,
+  gigId,
+  packageIdx,
+}: GigCheckoutModalProps) => {
   const {
     openCheckout,
     setOpenCheckout,
     mobileCheckout,
     setOpenMobileCheckout,
   } = useCheckoutModalStore();
+  const router = useRouter();
   const [drawerStyling, setDrawerStyling] = useState<string>(
     "h-[100dvh] w-[35dvw]",
   );
@@ -29,6 +38,7 @@ const GigCheckoutModal = ({ selectedPackage }: GigCheckoutModalProps) => {
   const handleCheckout = () => {
     setOpenCheckout(false);
     setOpenMobileCheckout(false);
+    router.push(`/checkout?gigId=${gigId}&gigPackage=${packageIdx}`);
   };
 
   const isTablet = useMediaQuery({ minWidth: 601, maxWidth: 899 });
@@ -80,6 +90,17 @@ const GigCheckoutModal = ({ selectedPackage }: GigCheckoutModalProps) => {
                   </div>
                   <span>{selectedPackage?.description}</span>
                 </div>
+
+                {/*
+                 //Stripe Checkout button 
+                <CheckoutButton
+                  gigId={gigId}
+                  packageIdx={packageIdx}
+                  selectedPackage={selectedPackage}
+                />
+                */}
+                
+                {/* Stripe Payment Elements button */}
                 <button
                   className="h-[50px] w-full  rounded-lg border-[#495057] bg-[#7298cd] font-mono text-[#f8f9fa] transition duration-200 ease-in-out hover:scale-105"
                   onClick={handleCheckout}

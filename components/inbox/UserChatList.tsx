@@ -50,7 +50,9 @@ const UserChatList: FC<UserChatListProps> = ({ data, chatPartner }) => {
                   }: `
                 : "Me: "}
 
-              {lastMessage?.body?.match(/^https:\/\/utfs\.io\/f\/.*/)
+              {lastMessage?.body?.match(
+            /^https:\/\/uenji-file-uploads\.s3\.eu-north-1\.amazonaws\.com\/uploads\/.*/,
+          )
                 ? "File attachment"
                 : (lastMessage?.body?.length! > 25
                     ? `${lastMessage?.body?.slice(0, 25)}...`

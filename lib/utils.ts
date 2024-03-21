@@ -30,3 +30,7 @@ export async function computeSHA256(file: File) {
     .join("");
   return hashHex;
 }
+
+export function absoluteUrl(path: string) {
+  return `${process.env.NEXT_PUBLIC_APP_URL!}${path}`;
+}
