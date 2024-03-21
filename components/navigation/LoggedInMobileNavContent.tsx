@@ -12,7 +12,6 @@ import Image from "next/image";
 import { footerLinks, languageFilters } from "@/constants";
 import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
 import FooterColumn from "@/components/navigation/FooterColumn";
-import useCurrentUser from "@/lib/hooks/useCurrentUser";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/constants/ui/button";
 import { useEffect, useState } from "react";
@@ -25,8 +24,9 @@ type LoggedInMobileNavContentProps = {
   currentUser: User;
 };
 
-const LoggedInMobileNavContent = ({currentUser}: LoggedInMobileNavContentProps) => {
-  
+const LoggedInMobileNavContent = ({
+  currentUser,
+}: LoggedInMobileNavContentProps) => {
   const { setMobileNav } = useOpenMobileNavStore();
   const router = useRouter();
   const [currentViewTitle, setCurrentViewTitle] = useState<
@@ -39,20 +39,22 @@ const LoggedInMobileNavContent = ({currentUser}: LoggedInMobileNavContentProps) 
     const activeOrders = async () => {
       try {
         const orders = await getSellerOrders();
-        const activeOrders = orders.filter((order) => order.status === "active");
+        const activeOrders = orders.filter(
+          (order) => order.status === "active",
+        );
         setOrders(activeOrders.length);
       } catch (error: any) {
         toast.error(error.message);
       }
     };
     activeOrders();
-  }, []);
+  }, [currentUser.sellerView]);
 
   if (!currentUser) {
     setMobileNav(false);
     return null;
   }
-  
+
   const switchView = () => {
     fetch("/api/seller_view", {
       method: "GET",
@@ -80,7 +82,8 @@ const LoggedInMobileNavContent = ({currentUser}: LoggedInMobileNavContentProps) 
           className="flex w-full flex-row items-center justify-start  gap-4 py-2  font-mono font-bold text-black"
         >
           <UserAvatar avatarPhoto={currentUser?.image!} />
-          {currentUser.username!.charAt(0).toUpperCase() + currentUser.username!.slice(1)}
+          {currentUser.username!.charAt(0).toUpperCase() +
+            currentUser.username!.slice(1)}
         </Link>
 
         {/*Nav Links*/}
@@ -117,10 +120,14 @@ const LoggedInMobileNavContent = ({currentUser}: LoggedInMobileNavContentProps) 
           </Link>
           {currentUser.isSeller ? (
             <>
-              <Link href="/" className="hover:underline flex flex-row gap-1 items-center justify-start" key="Manage Orders">
+              <Link
+                href="/orders"
+                className="flex flex-row items-center justify-start gap-1 hover:underline"
+                key="Manage Orders"
+              >
                 <span>Pedidos</span>
-                {orders > 0 && (
-                  <span className=" flex h-[18px] w-[18px] items-center justify-center rounded-full border border-red-600 text-red-600 text-center text-xs font-mono ">
+                {orders > 0 && currentUser.sellerView === true && (
+                  <span className=" flex h-[18px] w-[18px] items-center justify-center rounded-full border border-red-600 text-center font-mono text-xs text-red-600 ">
                     {orders}
                   </span>
                 )}
@@ -155,7 +162,7 @@ const LoggedInMobileNavContent = ({currentUser}: LoggedInMobileNavContentProps) 
             Settings
           </Link>
 
-          <Accordion type="multiple" key="Language" >
+          <Accordion type="multiple" key="Language">
             <AccordionItem value="2">
               <AccordionTrigger className=" gap-1">
                 <span className="font-normal">Inglês</span>

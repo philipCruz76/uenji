@@ -62,7 +62,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
       }
     };
     activeOrders();
-  }, [session?.user]);
+  }, [session?.user.sellerView]);
 
   return (
     <header>
@@ -163,7 +163,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                   <div className="flex flex-row items-center justify-center gap-1">
                     {" "}
                     <span>Pedidos</span>
-                    {orders > 0 && (
+                    {orders > 0 && session.user.sellerView=== true && (
                       <span className=" flex h-[16px] w-[16px] items-center justify-center rounded-full border border-black bg-black text-center font-mono text-white">
                         {orders}
                       </span>
