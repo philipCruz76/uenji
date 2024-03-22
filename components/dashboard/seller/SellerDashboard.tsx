@@ -23,7 +23,7 @@ const SellerDashboard: FC<SellerDashboardProps> = ({ user }) => {
       </h3>
 
       <div className="grid w-full gap-4 tablet:grid-cols-2 desktop:grid-cols-3">
-        <Card className="border-black">
+        <Card className="border-2 border-[#a8c4d3] shadow-md">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium ">
               Receita Total
@@ -48,7 +48,8 @@ const SellerDashboard: FC<SellerDashboardProps> = ({ user }) => {
             </p>
           </CardContent>
         </Card>
-        <Card className="border-black">
+
+        <Card className="border-2 border-[#a8c4d3] shadow-md">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium ">Pedidos</CardTitle>
             <svg
@@ -73,7 +74,8 @@ const SellerDashboard: FC<SellerDashboardProps> = ({ user }) => {
             </p>
           </CardContent>
         </Card>
-        <Card className="border-black">
+
+        <Card className="border-2 border-[#a8c4d3] shadow-md">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium ">Vendas</CardTitle>
             <svg
@@ -99,7 +101,7 @@ const SellerDashboard: FC<SellerDashboardProps> = ({ user }) => {
         </Card>
       </div>
       <div className="grid w-full grid-cols-1 gap-4 tablet:grid-cols-2 desktop:grid-cols-7">
-        <Card className="border-black desktop:col-span-4">
+        <Card className="border-2 border-[#a8c4d3] shadow-md desktop:col-span-4">
           <CardHeader>
             <CardTitle>Vendas</CardTitle>
           </CardHeader>
@@ -107,7 +109,8 @@ const SellerDashboard: FC<SellerDashboardProps> = ({ user }) => {
             <SellerSalesChart />
           </CardContent>
         </Card>
-        <Card className="border-black desktop:col-span-3 ">
+
+        <Card className="border-2 border-[#a8c4d3] shadow-md desktop:col-span-3">
           <CardHeader>
             <CardTitle>Últimas Vendas</CardTitle>
             <CardDescription>Voçê vendeu 14 serviços este mês</CardDescription>
