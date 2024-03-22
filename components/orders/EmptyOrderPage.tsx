@@ -8,9 +8,9 @@ const EmptyOrderPage = ({}: EmptyOrderPageProps) => {
         Gerencie os seus pedidos
       </h3>
 
-      <div className="w-full  h-[60dvh] py-[30px] border rounded-md flex items-center justify-center">
+      <div className="flex  h-[60dvh] w-full items-center justify-center rounded-md border py-[30px]">
         <h3 className="text-lg font-semibold">
-            Você ainda não tem nenhum pedido
+          Você ainda não tem nenhum pedido
         </h3>
       </div>
     </div>

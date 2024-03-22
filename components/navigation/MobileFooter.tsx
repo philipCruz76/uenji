@@ -11,8 +11,8 @@ import FooterColumn from "./FooterColumn";
 import { useMobileFooterStore } from "@/lib/stores/mobileFooter-store";
 
 const MobileFooter = ({}) => {
-  const {mobileFooterStyling} = useMobileFooterStore();
-   return (
+  const { mobileFooterStyling } = useMobileFooterStore();
+  return (
     <>
       <footer className={mobileFooterStyling}>
         <Accordion

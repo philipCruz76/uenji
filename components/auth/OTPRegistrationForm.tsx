@@ -137,7 +137,7 @@ const OTPRegistrationForm = () => {
       </div>
 
       {/* OTP form */}
-      <div className=" absolute mt-20  w-[fit] flex flex-col text-left">
+      <div className=" absolute mt-20  flex w-[fit] flex-col text-left">
         <span className="flex justify-start text-2xl font-bold">
           Confirm your email
         </span>

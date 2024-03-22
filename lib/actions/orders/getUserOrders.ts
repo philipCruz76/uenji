@@ -45,5 +45,3 @@ export const getSellerOrders = async () => {
     throw new Error(error.message);
   }
 };
-
-

@@ -51,11 +51,13 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
   }, [pathName]);
 
   useEffect(() => {
-    if(!session) return;
+    if (!session) return;
     const activeOrders = async () => {
       try {
         const orders = await getSellerOrders();
-        const activeOrders = orders.filter((order) => order.status === "active");
+        const activeOrders = orders.filter(
+          (order) => order.status === "active",
+        );
         setOrders(activeOrders.length);
       } catch (error: any) {
         toast.error(error.message);
@@ -163,14 +165,19 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                   <div className="flex flex-row items-center justify-center gap-1">
                     {" "}
                     <span>Pedidos</span>
-                    {orders > 0 && session.user.sellerView=== true && (
+                    {orders > 0 && session.user.sellerView === true && (
                       <span className=" flex h-[16px] w-[16px] items-center justify-center rounded-full border border-black bg-black text-center font-mono text-white">
                         {orders}
                       </span>
                     )}
                   </div>
 
-                  <div className={cn(orders > 0 ? "w-[66px]": "w-[46px]","hidden h-[2px]  bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current ")} />
+                  <div
+                    className={cn(
+                      orders > 0 ? "w-[66px]" : "w-[46px]",
+                      "hidden h-[2px]  bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current ",
+                    )}
+                  />
                 </Link>
                 {!session.user.isSeller ? (
                   <Link

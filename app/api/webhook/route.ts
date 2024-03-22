@@ -85,7 +85,7 @@ export async function POST(request: Request) {
           buyerId: session.metadata.buyerId,
           sellerId: session.metadata.sellerId,
           userIds: [session.metadata.buyerId, session.metadata.sellerId],
-          price: (paymentIntent.amount) * 100,
+          price: paymentIntent.amount * 100,
           gigId: gig.id,
           isCompleted: false,
           title: gig.title,

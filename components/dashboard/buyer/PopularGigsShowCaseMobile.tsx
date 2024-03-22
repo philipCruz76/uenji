@@ -40,7 +40,7 @@ async function PopularGigsShowCaseMobile({}: PopularGigsShowCaseMobileProps) {
                         "-",
                       )}`}
                     >
-                      <Card className="flex h-[240px] w-[250px] flex-col rounded-md border shadow-md bg-[#f8f9fa] font-mono">
+                      <Card className="flex h-[240px] w-[250px] flex-col rounded-md border bg-[#f8f9fa] font-mono shadow-md">
                         <CardTitle className="max-h-[50%] min-w-full border-b">
                           <Image
                             src={gig.coverImage!}

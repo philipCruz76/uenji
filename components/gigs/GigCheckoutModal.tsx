@@ -99,7 +99,7 @@ const GigCheckoutModal = ({
                   selectedPackage={selectedPackage}
                 />
                 */}
-                
+
                 {/* Stripe Payment Elements button */}
                 <button
                   className="h-[50px] w-full  rounded-lg border-[#495057] bg-[#7298cd] font-mono text-[#f8f9fa] transition duration-200 ease-in-out hover:scale-105"

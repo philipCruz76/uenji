@@ -5,8 +5,8 @@ type SellerRecentSalesProps = {};
 
 const SellerRecentSales = ({}: SellerRecentSalesProps) => {
   return (
-    <div className="flex flex-col gap-4 w-full items-start">
-      <div className="flex items-center justify-between min-w-full">
+    <div className="flex w-full flex-col items-start gap-4">
+      <div className="flex min-w-full items-center justify-between">
         <Avatar className="h-9 w-9">
           <AvatarFallback>OM</AvatarFallback>
         </Avatar>
@@ -18,7 +18,7 @@ const SellerRecentSales = ({}: SellerRecentSalesProps) => {
         </div>
         <span className="ml-auto font-medium text-green-600">+$1,999.00</span>
       </div>
-      <div className="flex items-center min-w-full">
+      <div className="flex min-w-full items-center">
         <Avatar className="flex h-9 w-9 items-center justify-center space-y-0 border">
           <AvatarFallback>JL</AvatarFallback>
         </Avatar>
@@ -28,7 +28,7 @@ const SellerRecentSales = ({}: SellerRecentSalesProps) => {
         </div>
         <span className="ml-auto font-medium text-green-600">+$39.00</span>
       </div>
-      <div className="flex items-center min-w-full">
+      <div className="flex min-w-full items-center">
         <Avatar className="h-9 w-9">
           <AvatarFallback>IN</AvatarFallback>
         </Avatar>
@@ -40,7 +40,7 @@ const SellerRecentSales = ({}: SellerRecentSalesProps) => {
         </div>
         <span className="ml-auto font-medium text-green-600">+$299.00</span>
       </div>
-      <div className="flex items-center min-w-full">
+      <div className="flex min-w-full items-center">
         <Avatar className="h-9 w-9">
           <AvatarFallback>WK</AvatarFallback>
         </Avatar>
@@ -50,7 +50,7 @@ const SellerRecentSales = ({}: SellerRecentSalesProps) => {
         </div>
         <span className="ml-auto font-medium text-green-600">+$99.00</span>
       </div>
-      <div className="flex items-center min-w-full">
+      <div className="flex min-w-full items-center">
         <Avatar className="h-9 w-9">
           <AvatarFallback>SD</AvatarFallback>
         </Avatar>

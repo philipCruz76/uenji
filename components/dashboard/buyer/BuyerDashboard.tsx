@@ -11,7 +11,9 @@ const PopularCategoryShowcase = lazy(
 const PopularGigsShowcase = lazy(
   () => import("@/components/dashboard/buyer/PopularGigsShowcase"),
 );
-const PopularGigsShowCaseMobile = lazy( () => import("@/components/dashboard/buyer/PopularGigsShowCaseMobile"));
+const PopularGigsShowCaseMobile = lazy(
+  () => import("@/components/dashboard/buyer/PopularGigsShowCaseMobile"),
+);
 
 type BuyerDashboardProps = {
   user: User;
@@ -20,7 +22,9 @@ type BuyerDashboardProps = {
 const BuyerDashboard = ({ user }: BuyerDashboardProps) => {
   const popularCategories = CategoryDesciptions.filter(
     (category) =>
-      category.category === "programacao" || category.category === "marketing" || category.category === "fotografia",
+      category.category === "programacao" ||
+      category.category === "marketing" ||
+      category.category === "fotografia",
   );
 
   return (
@@ -41,8 +45,10 @@ const BuyerDashboard = ({ user }: BuyerDashboardProps) => {
             popularCategories={popularCategories}
           />
           <div>
-          <h3 className="w-full text-2xl font-semibold py-6">Serviços em destaque</h3>
-          <PopularGigsShowCaseMobile />
+            <h3 className="w-full py-6 text-2xl font-semibold">
+              Serviços em destaque
+            </h3>
+            <PopularGigsShowCaseMobile />
           </div>
         </div>
       </div>

@@ -21,8 +21,8 @@ const Payment = ({ gigId, gigPackage }: PaymentProps) => {
 
   useEffect(() => {
     setStripePromise(
-        loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!),
-      );
+      loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!),
+    );
     fetch(
       // Stripe Embedded Checkout option
       //`/api/stripe/create-checkout-session?gigId=${gigId}&gigPackage=${gigPackage}`,
@@ -47,8 +47,8 @@ const Payment = ({ gigId, gigPackage }: PaymentProps) => {
   return (
     <>
       {clientSecret && stripePromise && (
-        <div className="w-full h-full">
-        {/*
+        <div className="h-full w-full">
+          {/*
         // For Stripe Embedded Checkout option
         <EmbeddedCheckoutProvider
           stripe={stripePromise}
@@ -57,10 +57,10 @@ const Payment = ({ gigId, gigPackage }: PaymentProps) => {
           <EmbeddedCheckout className="desktop:w-[80dvw]" />
         </EmbeddedCheckoutProvider>
       */}
-        {/* For Stripe Payment Elements option */}
-        <Elements stripe={stripePromise} options={{ clientSecret }}>
-          <CheckoutForm />
-        </Elements>
+          {/* For Stripe Payment Elements option */}
+          <Elements stripe={stripePromise} options={{ clientSecret }}>
+            <CheckoutForm />
+          </Elements>
         </div>
       )}
     </>

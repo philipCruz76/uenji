@@ -3,12 +3,11 @@ import Image from "next/image";
 const HeroDesktopOverlay = () => {
   return (
     <>
-      <div className="max-h-[100dvh] max-w-[100dvw] "></div>
       {/*Background Image*/}
       <Image
         alt="backgroung image"
         src="/images/african-american-man-copy-space.jpg"
-        className=" min-h-[100dvh] min-w-[100dvw] items-end justify-end object-fill "
+        className=" min-h-[100dvh] min-w-[100dvw] items-end justify-end object-fill"
         width={3000}
         height={2000}
       />

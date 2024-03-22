@@ -42,7 +42,7 @@ async function newGigLayout({ params, children }: newGigLayoutProps) {
             alt="computer icon"
             className="h-[100px] w-[100px]"
           />
-          <span className=" flex w-full text-center flex-wrap text-lg font-semibold">
+          <span className=" flex w-full flex-wrap text-center text-lg font-semibold">
             Por fazor visitar site através de um computador para poder criar ou
             editar um serviço
           </span>

@@ -326,7 +326,8 @@ const page = ({}) => {
               </span>
             </h3>
             <div className="flex text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
-            Seleccione as línguas em que pode comunicar e o seu nível de proficiência.
+              Seleccione as línguas em que pode comunicar e o seu nível de
+              proficiência.
             </div>
           </aside>
           <div className=" w-full max-w-[855px] flex-col items-start justify-start">

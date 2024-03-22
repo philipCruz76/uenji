@@ -9,19 +9,18 @@ const SellerDashboard = lazy(
   () => import("@/components/dashboard/seller/SellerDashboard"),
 );
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 export default async function Home() {
   const user = await getCurrentUser();
 
-  if (!user) return <Hero />;
-
   return (
-    <>
-      {user.isSeller === true && user.sellerView === true ? (
+    <section className="flex min-h-[100dvh] min-w-[100dvw] max-w-[100dvw] overflow-hidden">
+      {!user && <Hero />}
+
+      {user && user.isSeller === true && user.sellerView === true && (
         <SellerDashboard user={user} />
-      ) : (
-        <BuyerDashboard user={user} />
       )}
-    </>
+      {user && !user.sellerView && <BuyerDashboard user={user} />}
+    </section>
   );
 }

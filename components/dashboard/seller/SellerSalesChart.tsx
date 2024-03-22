@@ -72,12 +72,7 @@ const SellerSalesChart = ({}: SellerSalesChartProps) => {
           axisLine={false}
           tickFormatter={(value) => `$${value}`}
         />
-        <Bar
-          dataKey="total"
-          fill="#608eb5"
-          radius={[4, 4, 0, 0]}
-          
-        />
+        <Bar dataKey="total" fill="#608eb5" radius={[4, 4, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );

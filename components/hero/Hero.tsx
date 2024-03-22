@@ -43,7 +43,7 @@ const Hero = () => {
   }, [userLogged]);
 
   return (
-    <section className="max-w-[100dvw] overflow-x-hidden">
+    <section className="max-w-[100dvw] overflow-hidden">
       <div className="hidden desktop:flex">
         <HeroDesktopOverlay />
       </div>
@@ -51,7 +51,9 @@ const Hero = () => {
       <div className="flex desktop:hidden">
         <HeroMobileOverlay />
       </div>
+
       <HeroCategorySlider />
+
       <div className="w-full px-[20px]">
         <HeroEyeCatch />
       </div>

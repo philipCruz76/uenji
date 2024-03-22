@@ -51,7 +51,9 @@ export type ExtendedGigInfo = Gig & {
   user: PrismaUser;
 };
 
-export type UserOrders = ({gig: Gig} & {users: PrismaUser[]} & Order)[];
-export type UserGigs = (Gig & { user: Pick<PrismaUser, 'username' |'name'|'image'> })[] | undefined;
+export type UserOrders = ({ gig: Gig } & { users: PrismaUser[] } & Order)[];
+export type UserGigs =
+  | (Gig & { user: Pick<PrismaUser, "username" | "name" | "image"> })[]
+  | undefined;
 export type language = ["Português" | "Inglês" | "Francês"];
 export type level = ["Nativo/Bilingue" | "Avançado" | "Intermédio" | "Básico"];

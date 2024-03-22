@@ -25,16 +25,18 @@ export default async function CheckoutPage({ searchParams }: pageProps) {
   ) as GigPricing["packages"];
 
   return (
-    <section className="flex min-h-[100dvh] min-w-[100dvw] max-w-[100dvw] max-h-[100dvh] desktop:flex-row flex-col items-start justify-start gap-2 bg-[#f8f9fa] p-[24px] overflow-hidden ">
-      <div className="desktop:w-[50dvw] desktop:h-[100dvh] w-[100dvw] min-h-[20dvh]">
+    <section className="flex max-h-[100dvh] min-h-[100dvh] min-w-[100dvw] max-w-[100dvw] flex-col items-start justify-start gap-2 overflow-hidden bg-[#f8f9fa] p-[24px] desktop:flex-row ">
+      <div className="min-h-[20dvh] w-[100dvw] desktop:h-[100dvh] desktop:w-[50dvw]">
         <h1 className="text-2xl font-bold">Checkout </h1>
         <h3 className=" font-mono text-xl font-semibold">
           {parsedPackage[packageIndex].title}
         </h3>
-        <h3 className="font-mono font-bold text-3xl">{parsedPackage[packageIndex].price}.00 AOA</h3>
+        <h3 className="font-mono text-3xl font-bold">
+          {parsedPackage[packageIndex].price}.00 AOA
+        </h3>
       </div>
 
-      <div className="desktop:w-[50dvw] desktop:h-[100dvh] max-w-[100dvw] tablet:w-[70dvw] w-full  min-h-[80dvh] ">
+      <div className="min-h-[80dvh] w-full max-w-[100dvw] tablet:w-[70dvw] desktop:h-[100dvh]  desktop:w-[50dvw] ">
         <Payment gigId={gigId} gigPackage={parseInt(gigPackage)} />
       </div>
     </section>
