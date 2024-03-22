@@ -8,11 +8,13 @@ import {
   AccordionTrigger,
 } from "../ui/Accordion";
 import FooterColumn from "./FooterColumn";
+import { useMobileFooterStore } from "@/lib/stores/mobileFooter-store";
 
 const MobileFooter = ({}) => {
-  return (
+  const {mobileFooterStyling} = useMobileFooterStore();
+   return (
     <>
-      <footer className="flex w-full flex-col bg-slate-50 px-6 py-6">
+      <footer className={mobileFooterStyling}>
         <Accordion
           type="multiple"
           className="flex h-full flex-col  bg-slate-50"

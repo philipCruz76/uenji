@@ -74,9 +74,9 @@ const SellerSalesChart = ({}: SellerSalesChartProps) => {
         />
         <Bar
           dataKey="total"
-          fill="#F59E0B"
+          fill="#608eb5"
           radius={[4, 4, 0, 0]}
-          className="fill-primary"
+          
         />
       </BarChart>
     </ResponsiveContainer>

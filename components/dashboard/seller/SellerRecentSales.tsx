@@ -5,60 +5,60 @@ type SellerRecentSalesProps = {};
 
 const SellerRecentSales = ({}: SellerRecentSalesProps) => {
   return (
-    <div className="space-y-8">
-      <div className="flex items-center">
+    <div className="flex flex-col gap-4 w-full items-start">
+      <div className="flex items-center justify-between min-w-full">
         <Avatar className="h-9 w-9">
           <AvatarFallback>OM</AvatarFallback>
         </Avatar>
-        <div className="ml-4 space-y-1">
+        <div className="ml-4 space-y-1 text-start">
           <p className="text-sm font-medium leading-none">Olivia Martin</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs text-muted-foreground">
             olivia.martin@email.com
           </p>
         </div>
-        <div className="ml-auto font-medium">+$1,999.00</div>
+        <span className="ml-auto font-medium text-green-600">+$1,999.00</span>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center min-w-full">
         <Avatar className="flex h-9 w-9 items-center justify-center space-y-0 border">
           <AvatarFallback>JL</AvatarFallback>
         </Avatar>
-        <div className="ml-4 space-y-1">
+        <div className="ml-4 space-y-1 text-start">
           <p className="text-sm font-medium leading-none">Jackson Lee</p>
-          <p className="text-sm text-muted-foreground">jackson.lee@email.com</p>
+          <p className="text-xs text-muted-foreground">jackson.lee@email.com</p>
         </div>
-        <div className="ml-auto font-medium">+$39.00</div>
+        <span className="ml-auto font-medium text-green-600">+$39.00</span>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center min-w-full">
         <Avatar className="h-9 w-9">
           <AvatarFallback>IN</AvatarFallback>
         </Avatar>
-        <div className="ml-4 space-y-1">
+        <div className="ml-4 space-y-1 text-start">
           <p className="text-sm font-medium leading-none">Isabella Nguyen</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-xs text-muted-foreground">
             isabella.nguyen@email.com
           </p>
         </div>
-        <div className="ml-auto font-medium">+$299.00</div>
+        <span className="ml-auto font-medium text-green-600">+$299.00</span>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center min-w-full">
         <Avatar className="h-9 w-9">
           <AvatarFallback>WK</AvatarFallback>
         </Avatar>
-        <div className="ml-4 space-y-1">
+        <div className="ml-4 space-y-1 text-start">
           <p className="text-sm font-medium leading-none">William Kim</p>
-          <p className="text-sm text-muted-foreground">will@email.com</p>
+          <p className="text-xs text-muted-foreground">will@email.com</p>
         </div>
-        <div className="ml-auto font-medium">+$99.00</div>
+        <span className="ml-auto font-medium text-green-600">+$99.00</span>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center min-w-full">
         <Avatar className="h-9 w-9">
           <AvatarFallback>SD</AvatarFallback>
         </Avatar>
-        <div className="ml-4 space-y-1">
+        <div className="ml-4 space-y-1 text-start">
           <p className="text-sm font-medium leading-none">Sofia Davis</p>
-          <p className="text-sm text-muted-foreground">sofia.davis@email.com</p>
+          <p className="text-xs text-muted-foreground">sofia.davis@email.com</p>
         </div>
-        <div className="ml-auto font-medium">+$39.00</div>
+        <span className="ml-auto font-medium text-green-600">+$39.00</span>
       </div>
     </div>
   );
