@@ -89,14 +89,14 @@ const page = ({}) => {
   return (
     <>
       <div className="flex h-fit w-full flex-col gap-4 border-b py-4">
-        <h1 className="text-4xl font-bold"> Personal Info</h1>
+        <h1 className="text-4xl font-bold"> Informação pessoal</h1>
         <h3 className="hidden max-w-[500px] flex-wrap tablet:flex">
-          Tell us a bit about yourself. This information will appear on your
-          public profile, so that potential buyers can get to know you better.
+          Fale-nos um pouco sobre si. Esta informação irá aparecer no seu perfil
+          público, para que potenciais clientes o possam conhecer melhor.
         </h3>
         <h3 className="text-end text-gray-400">
           {" "}
-          <i>* Mandatory fields</i>
+          <i>* Campos obrigatórios</i>
         </h3>
       </div>
       <form
@@ -108,10 +108,10 @@ const page = ({}) => {
           <aside className="block h-fit w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
               <span>
-                Full Name <span className="text-red-500">*</span>
+                Nome Completo<span className="text-red-500">*</span>
               </span>
               <small className="text-gray-400">
-                <i>Private</i>
+                <i>Privado</i>
               </small>
             </h3>
             <div className="flex py-2 text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
@@ -169,16 +169,16 @@ const page = ({}) => {
           <aside className="block w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
               <span>
-                Display Name<span className="text-red-500">*</span>
+                Nome de apresentação<span className="text-red-500">*</span>
               </span>
             </h3>
             <div className="flex py-2 text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
               <span className="flex flex-wrap">
-                To help build credible and authentic connections with customers,
-                they{"’"}ll now see your display name.
+                De forma a ajudar a criar ligações credíveis e autênticas com os
+                seus clientes irá precisar de um nome de apresentação.
                 <br />
-                We suggest using your first name and first initial of your last
-                name.
+                Sugerimos que utilize o seu nome próprio e a primeira inicial do
+                seu apelido.
               </span>
             </div>
           </aside>
@@ -190,10 +190,10 @@ const page = ({}) => {
                 validate: (value) => {
                   const regex = /^[a-zA-Z]+\s[a-zA-Z]+$/;
                   if (value.length < 3) {
-                    return "Display name must be at least 3 characters long.";
+                    return "O nome de apresentação deve ter pelo menos 3 caracteres.";
                   }
                   if (!regex.test(value)) {
-                    return "Please enter a valid display name.";
+                    return "Introduza um nome de apresentação válido.";
                   }
 
                   return true;
@@ -214,12 +214,12 @@ const page = ({}) => {
           <aside className="block w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
               <span>
-                Profile Picture<span className="text-red-500">*</span>
+                Foto de perfil<span className="text-red-500">*</span>
               </span>
             </h3>
             <div className="flex text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
-              Add a profile picture of yourself so customers will know exactly
-              who {"they’ll"} be working with.
+              Adicione uma fotografia de perfil sua para que os clientes saibam
+              exatamente com quem estão a trabalhar.
             </div>
           </aside>
           <div className="flex w-full items-start justify-start ">
@@ -280,13 +280,13 @@ const page = ({}) => {
           <aside className="block w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
               <span>
-                Description<span className="text-red-500">*</span>
+                Descrição<span className="text-red-500">*</span>
               </span>
             </h3>
             <div className="flex text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
-              Tell us about yourself. This information will appear on your
-              public profile, so that potential buyers can get to know you
-              better.
+              Fale-nos de si. Esta informação irá aparecer no seu perfil
+              público, de modo a que potenciais clientes o possam conhecer
+              melhor.
             </div>
           </aside>
           <div className="flex w-full flex-col items-start justify-start ">
@@ -299,7 +299,7 @@ const page = ({}) => {
                 },
                 validate: (value) => {
                   if (value.length < 50) {
-                    return "Description must be at least 50 characters long.";
+                    return "Descrição deve ter pelo menos 50 caracteres.";
                   }
                   return true;
                 },
@@ -322,12 +322,11 @@ const page = ({}) => {
           <aside className="block w-full min-w-[210px]  flex-col flex-wrap py-4 ">
             <h3 className="py-2">
               <span>
-                Languages<span className="text-red-500">*</span>
+                Línguas<span className="text-red-500">*</span>
               </span>
             </h3>
             <div className="flex text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
-              Select which languages you can communicate in and your proficiency
-              level.
+            Seleccione as línguas em que pode comunicar e o seu nível de proficiência.
             </div>
           </aside>
           <div className=" w-full max-w-[855px] flex-col items-start justify-start">
@@ -400,7 +399,7 @@ const page = ({}) => {
                       setShowLanguageSelector(false);
                     }}
                   >
-                    Cancel
+                    Cancelar
                   </button>
                 </div>
               </div>
@@ -428,7 +427,7 @@ const page = ({}) => {
                 setShowLanguageSelector(true);
               }}
             >
-              Add New
+              Adicionar nova
             </button>
           </div>
         </div>

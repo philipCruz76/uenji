@@ -771,9 +771,9 @@ const page = ({}) => {
         <div className="group flex min-h-[60px] w-full flex-col justify-start tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
           <aside className="block h-fit w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
-              <span>Private Website</span>
+              <span>Website Pessoal</span>
               <small className="text-gray-400">
-                <i>Private</i>
+                <i>Privado</i>
               </small>
             </h3>
           </aside>
