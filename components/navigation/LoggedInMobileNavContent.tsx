@@ -100,7 +100,19 @@ const LoggedInMobileNavContent = ({
                 <span className=""> Modo {currentViewTitle} </span>
               </button>
             </div>
-          ) : null}
+          ) : (
+            <div className="flex w-full items-center justify-center pb-4">
+              <Link
+                href="/freelancer_onboarding/overview"
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "w-[80%] cursor-pointer border-[#495057] bg-[#dee2e6] transition duration-200 ease-in-out hover:scale-105 hover:border-[#495057] hover:bg-[#dee2e6] hover:bg-opacity-75",
+                )}
+              >
+                <span> Torne-se num Freelancer </span>
+              </Link>
+            </div>
+          )}
 
           <Link
             href="/"

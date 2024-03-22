@@ -88,7 +88,7 @@ const InboxDropDownMenu: FC<InboxDropDownMenuProps> = ({}) => {
               href="/inbox"
               className="text-sm text-blue-700 transition duration-200 ease-in-out hover:underline"
             >
-              See All in Inbox
+              Abrir caixa de entrada
             </Link>
           </DropdownMenuGroup>
         </DropdownMenuContent>
