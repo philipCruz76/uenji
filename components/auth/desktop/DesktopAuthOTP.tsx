@@ -20,6 +20,7 @@ const DesktopAuthOTP = ({}) => {
   const { newUser } = useNewUserStore();
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(""));
   const [validatedUser, setValidatedUser] = useState<boolean>(false);
+  const [isValidating, setIsValidating] = useState<boolean>(false);
   const [failedValidation, setFailedValidation] = useState<boolean>(false);
   const [activeInput, setActiveInput] = useState<number>(0);
 
@@ -27,10 +28,18 @@ const DesktopAuthOTP = ({}) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [activeInput]);
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === "Backspace" || e.key === "Delete") {
       e.preventDefault();
       if (activeInput > 0) {
+        setFailedValidation(false);
+        setValidatedUser(false);
         const newOTP = [...otp];
         newOTP[activeInput - 1] = "";
         setOtp(newOTP);
@@ -56,16 +65,37 @@ const DesktopAuthOTP = ({}) => {
     setOtp(newOTP);
   };
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
+  const handlePaste = async (e: React.ClipboardEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const pastedData = await e.clipboardData.getData("text");
+    if (pastedData.length != 6 || pastedData.match(/[^0-9]/g)) {
+      toast.error("Código inserido inválido");
+      return;
     }
-  }, [activeInput]);
+
+    const newOtp = [...otp];
+    for (let i = 0; i < pastedData.length; i++) {
+      newOtp[i] = pastedData[i];
+      setActiveInput(i + 1);
+    }
+
+    setOtp(newOtp);
+    const validToken = await verifyOTP(newOtp.join(""));
+    if (!validToken) {
+      setFailedValidation(true);
+    } else {
+      setFailedValidation(false);
+      setValidatedUser(true);
+      toast.success("Código de validação inserido com sucesso!");
+    }
+  };
 
   const handleSubmit = async () => {
     if (!validatedUser) {
       return;
     }
+    setIsValidating(true);
     const { email, password } = newUser;
     const otpString = otp.join("");
     activateUser(email, otpString)
@@ -86,7 +116,8 @@ const DesktopAuthOTP = ({}) => {
           }
         }),
       )
-      .catch((e) => toast.error(e));
+      .catch((e) => toast.error(e))
+      .finally(() => setIsValidating(false));
   };
 
   const handleInput = async (event: React.FormEvent<HTMLInputElement>) => {
@@ -134,20 +165,25 @@ const DesktopAuthOTP = ({}) => {
             <path d="M220,128a4,4,0,0,1-4,4H49.66l65.17,65.17a4,4,0,0,1-5.66,5.66l-72-72a4,4,0,0,1,0-5.66l72-72a4,4,0,0,1,5.66,5.66L49.66,124H216A4,4,0,0,1,220,128Z"></path>
           </svg>
         </button>
-        <span className="px-[2px] text-sm font-semibold">Back</span>
+        <span className="px-[2px] text-sm font-semibold">Voltar</span>
       </div>
 
       {/* OTP form */}
       <div className="container flex h-full w-[438px] flex-col space-y-3 py-20">
         <span className="flex justify-start text-2xl font-bold">
-          Confirm your email
+          Valide o seu email
         </span>
-        <div className="flex flex-col justify-start pb-14">
-          <span>Enter the verification code we emailed to: </span>
+        <div className="flex flex-col justify-start ">
+          <span>
+            Introduza o código de validação que foi enviado para o email:{" "}
+          </span>
           <span className=" text-sm font-light">{newUser.email}</span>
         </div>
 
-        <form className="flex flex-row items-center justify-between space-x-2">
+        <form
+          onPaste={handlePaste}
+          className="flex flex-row items-center justify-between space-x-2 py-12"
+        >
           {otp.map((_, index) => {
             return (
               <Fragment key={index}>
@@ -169,17 +205,26 @@ const DesktopAuthOTP = ({}) => {
         </form>
         {failedValidation && (
           <span className="text-sm text-red-500">
-            You've entered the wrong code. Try again
+            Código de validação introduzido inválido. Por favor, tente
+            novamente.
           </span>
         )}
+        {/*
+         !! TODO : implement resend code function !!
         <span className="cursor-pointer text-sm font-semibold underline">
-          Resend code
+          Reenviar código
         </span>
+        */}
         <button
-          className="rounded-md bg-zinc-700 py-2 text-lg font-semibold text-white"
+          className={cn(
+            "rounded-md py-2 text-lg font-semibold text-white",
+            validatedUser ? "bg-zinc-700" : "bg-zinc-300",
+            isValidating && "cursor-not-allowed bg-zinc-300",
+          )}
+          disabled={!validatedUser || isValidating === true}
           onClick={handleSubmit}
         >
-          Submit
+          Submeter
         </button>
       </div>
     </>

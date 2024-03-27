@@ -1,17 +1,22 @@
-import { CategoryDesciptions } from "@/constants";
+import { CategoryDesciptionsPT, CategoryDesciptionsEN } from "@/constants";
 import { SubCategoriesList } from "@/constants/categoryConstants";
+import { getLocale } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const CategoriesPage = () => {
+const CategoriesPage = async () => {
+  const locale = await getLocale();
+
+  const CategoryDescriptions =
+    locale === "pt" ? CategoryDesciptionsPT : CategoryDesciptionsEN;
   return (
     <section className="flex min-h-[100dvh] min-w-[100dvw] flex-col items-center justify-center gap-6  bg-white px-[80px] pb-[20px] pt-[40px] tablet:p-[80px]">
       <h1 className="items-center justify-start text-start text-3xl font-bold">
         Categorias
       </h1>
       <ul className="flex h-full w-full flex-col  gap-2 tablet:hidden">
-        {CategoryDesciptions.map((category, index) => {
+        {CategoryDescriptions.map((category, index) => {
           const subcategories = SubCategoriesList.find(
             (sub) => sub.category === category.category,
           )?.subcategory.map((sub) => sub.name);
@@ -39,7 +44,7 @@ const CategoriesPage = () => {
         })}
       </ul>
       <ul className="hidden w-full grid-cols-3 gap-6 px-8 tablet:grid">
-        {CategoryDesciptions.map((category) => (
+        {CategoryDescriptions.map((category) => (
           <li key={category.category}>
             <Link
               href={`/categorias/${category.category}`}

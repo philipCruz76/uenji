@@ -1,0 +1,99 @@
+{
+  "Navbar": {
+    "SearchPlaceholder": "Look for gigs",
+    "NavLinks": {
+      "orders": "Orders",
+      "gigs": "Gigs",
+      "sellerCTA": "Become a Seller",
+      "explore": "Explore",
+      "login": "Sign-in",
+      "join": "Join"
+    }
+  },
+  "MobileNav": {
+    "LoggedOut": {
+      "joinCTA": "Join Uenji",
+      "navLinks": {
+        "login": "Login",
+        "explore": "Categories",
+        "generalSeparator": "General",
+        "home": "Home"
+      }
+    },
+    "LoggedIn": {
+      "modeSuffix": "mode",
+      "modePrefix": "View",
+      "seller": "Seller",
+      "buyer": "Buyer",
+      "sellerCTA": "Become a Seller",
+      "navLinks": {
+        "home": "Home",
+        "inbox": "Inbox",
+        "orders": "Orders",
+        "gigs": "Gigs",
+        "explore": "Categories",
+        "generalSeparator": "General",
+        "settings": "Settings",
+        "logout": "Log out"
+      }
+    }
+  },
+  "HeroSection": {
+    "SloganPreFix": "Find the right",
+    "SloganCategories": {
+      "programming": "Programming",
+      "photography": "Photography",
+      "business": "Business",
+      "marketing": "Marketing"
+    },
+    "SloganSuffix": "specialist for your project",
+    "SearchPlaceholder": "Look for gigs",
+    "CategoryHero": {
+      "title": "Popular Categories"
+    },
+    "CTA": {
+      "title": "The best part? You can start right now!",
+      "titlePrefix": "The best part?",
+      "titleSuffix": "You can start right now!",
+      "tagline1": {
+        "title": "Stick to your budget",
+        "text": "Find the right service for every price range. No hourly rates, just prices based on each project."
+      },
+      "tagline2": {
+        "title": "Receive quality work quickly",
+        "text": "Hand over your project to a freelancer in just a few minutes and get results that will last forever."
+      },
+      "tagline3": {
+        "title": "Pay when you're satisfied",
+        "text": "An advance quote means there are no surprises. Payments are only released when you are satisfied with the service."
+      },
+      "categoryTagline": "We have what you need"
+    }
+  },
+  "Locales": {
+    "en": "English",
+    "pt": "Português"
+  },
+  "UserContextMenu": {
+    "modeSuffix": " view",
+    "modePrefix": "Change to ",
+    "seller": "Seller",
+    "buyer": "Buyer",
+    "sellerCTA": "Become a Seller",
+    "profile": "Profile",
+    "inbox": "Inbox",
+    "settings": "Settings",
+    "logout": "Log out"
+  },
+  "GigWizard": {
+    "Overview": {
+      "title": {
+        "heading": "Gig Title",
+        "subheadingPart1": "The title of your gig works as a storefront into your service, as such ",
+        "subheadingBold": "it is the most important part",
+        "subheadingPart2": "to put key information that your future clients will be searching for.",
+        "inputValidation": "Title is required for Gig creation"
+      }
+    }
+  }
+}

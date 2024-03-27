@@ -4,6 +4,7 @@ import { useOpenModalStore } from "@/lib/stores/modals/modal-store";
 import { useMediaQuery } from "react-responsive";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/constants/ui/button";
+import { useTranslations } from "next-intl";
 
 const DesktopAuthModal = lazy(
   () => import("@/components/auth/desktop/DesktopAuthModal"),
@@ -19,6 +20,7 @@ type JoinButtonProps = {
 const JoinButton: FC<JoinButtonProps> = ({ isButton }) => {
   let { setIsOpen } = useOpenModalStore();
   let { setLogin } = useLogInVariantStore();
+  const joinButtonText = useTranslations("Navbar.NavLinks");
 
   const isDesktopOrLaptop = useMediaQuery({ minWidth: 900 });
   const isTablet = useMediaQuery({ minWidth: 600, maxWidth: 899 });
@@ -37,8 +39,7 @@ const JoinButton: FC<JoinButtonProps> = ({ isButton }) => {
             "flex max-w-[100px] cursor-pointer rounded-lg  border-[#495057] bg-[#495057] text-[#f8f9fa] transition-all duration-150 ease-in hover:scale-110 hover:border-[#495057] hover:bg-[#495057] hover:text-[#f8f9fa]",
           )}
         >
-          {" "}
-          Aderir{" "}
+          {joinButtonText("join")}
         </span>
       ) : (
         <span
@@ -48,8 +49,7 @@ const JoinButton: FC<JoinButtonProps> = ({ isButton }) => {
           }}
           className="flex cursor-pointer font-semibold hover:opacity-60"
         >
-          {" "}
-          Join{" "}
+          {joinButtonText("join")}
         </span>
       )}
 

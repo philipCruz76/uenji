@@ -12,9 +12,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/Carousel";
-import { CATEGORIES, CategoryDesciptions } from "@/constants";
+import {
+  CATEGORIES,
+  CategoryDesciptionsPT,
+  CategoryDesciptionsEN,
+} from "@/constants";
 import { categoryFAQs, SubCategoriesList } from "@/constants/categoryConstants";
 import getPopularGigs from "@/lib/actions/gigs/getPopularGigs";
+import { getLocale } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -31,9 +36,12 @@ const categorySchema = z.enum(CATEGORIES);
 const page = async ({ params }: pageProps) => {
   const { category } = params;
   const valid = categorySchema.safeParse(category);
+  const locale = await getLocale();
 
   if (!valid.success) redirect("/");
 
+  const CategoryDesciptions =
+    locale === "pt" ? CategoryDesciptionsPT : CategoryDesciptionsEN;
   const categoryObject = CategoryDesciptions.find(
     (c) => c.category === category,
   );

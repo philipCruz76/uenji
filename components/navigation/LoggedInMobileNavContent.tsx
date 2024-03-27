@@ -9,16 +9,17 @@ import {
   AccordionTrigger,
 } from "@/components/ui/Accordion";
 import Image from "next/image";
-import { footerLinks, languageFilters } from "@/constants";
+import { categoryLinksEN, categoryLinksPT } from "@/constants";
 import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
 import FooterColumn from "@/components/navigation/FooterColumn";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/constants/ui/button";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import { getSellerOrders } from "@/lib/actions/orders/getUserOrders";
 import { User } from "@/types/common.types";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { useLocale, useTranslations } from "next-intl";
 
 type LoggedInMobileNavContentProps = {
   currentUser: User;
@@ -28,11 +29,18 @@ const LoggedInMobileNavContent = ({
   currentUser,
 }: LoggedInMobileNavContentProps) => {
   const { setMobileNav } = useOpenMobileNavStore();
-  const router = useRouter();
   const [currentViewTitle, setCurrentViewTitle] = useState<
     "Comprador" | "Vendedor"
   >(currentUser.sellerView ? "Comprador" : "Vendedor");
   const [orders, setOrders] = useState<number>(0);
+
+  const pathName = usePathname();
+  const router = useRouter();
+  const locale = useLocale();
+  const [isPending, startTransition] = useTransition();
+
+  const mobileNavText = useTranslations("MobileNav.LoggedIn");
+  const navLinksText = useTranslations("MobileNav.LoggedIn.navLinks");
 
   useEffect(() => {
     if (!currentUser) return;
@@ -65,7 +73,7 @@ const LoggedInMobileNavContent = ({
         setMobileNav(false);
         router.refresh();
         toast.success(
-          `Visualização modo ${currentUser.sellerView ? "Comprador" : "Vendedor"}`,
+          `${mobileNavText("modePrefix")} ${currentUser.sellerView ? mobileNavText("buyer") : mobileNavText("seller")}`,
         );
       } else {
         toast.error("Error switching View");
@@ -97,7 +105,20 @@ const LoggedInMobileNavContent = ({
                   "w-[80%] cursor-pointer border-[#495057] bg-[#dee2e6] transition duration-200 ease-in-out hover:scale-105 hover:border-[#495057] hover:bg-[#dee2e6] hover:bg-opacity-75",
                 )}
               >
-                <span className=""> Modo {currentViewTitle} </span>
+                <span className="">
+                  {locale === "pt" &&
+                    mobileNavText("modeSuffix") +
+                      " " +
+                      (currentViewTitle === "Comprador"
+                        ? mobileNavText("buyer")
+                        : mobileNavText("seller"))}
+                  {locale === "en" &&
+                    (currentViewTitle === "Comprador"
+                      ? mobileNavText("buyer")
+                      : mobileNavText("seller")) +
+                      " " +
+                      mobileNavText("modeSuffix")}
+                </span>
               </button>
             </div>
           ) : (
@@ -109,7 +130,7 @@ const LoggedInMobileNavContent = ({
                   "w-[80%] cursor-pointer border-[#495057] bg-[#dee2e6] transition duration-200 ease-in-out hover:scale-105 hover:border-[#495057] hover:bg-[#dee2e6] hover:bg-opacity-75",
                 )}
               >
-                <span> Torne-se num Freelancer </span>
+                <span> {mobileNavText("sellerCTA")} </span>
               </Link>
             </div>
           )}
@@ -120,7 +141,7 @@ const LoggedInMobileNavContent = ({
             key="Home"
             onClick={() => setMobileNav(false)}
           >
-            Página inicial
+            {navLinksText("home")}
           </Link>
           <Link
             href="/inbox"
@@ -128,7 +149,7 @@ const LoggedInMobileNavContent = ({
             key="Inbox"
             onClick={() => setMobileNav(false)}
           >
-            Caixa de entrada
+            {navLinksText("inbox")}
           </Link>
           {currentUser.isSeller ? (
             <>
@@ -137,7 +158,7 @@ const LoggedInMobileNavContent = ({
                 className="flex flex-row items-center justify-start gap-1 hover:underline"
                 key="Manage Orders"
               >
-                <span>Pedidos</span>
+                <span>{navLinksText("orders")}</span>
                 {orders > 0 && currentUser.sellerView === true && (
                   <span className=" flex h-[18px] w-[18px] items-center justify-center rounded-full border border-red-600 text-center font-mono text-xs text-red-600 ">
                     {orders}
@@ -149,7 +170,7 @@ const LoggedInMobileNavContent = ({
                 className="hover:underline"
                 key="Manage Orders"
               >
-                Serviços
+                {navLinksText("gigs")}
               </Link>
             </>
           ) : null}
@@ -157,27 +178,37 @@ const LoggedInMobileNavContent = ({
           <Accordion type="multiple" key="Categories">
             <AccordionItem value="1">
               <AccordionTrigger className="py-0">
-                <span className="font-normal"> Navegar Categorias</span>
+                <span className="font-normal"> {navLinksText("explore")}</span>
               </AccordionTrigger>
               <AccordionContent className="pt-0">
-                <FooterColumn links={footerLinks[0].links} />
+                <FooterColumn
+                  links={
+                    locale === "pt"
+                      ? categoryLinksPT.links
+                      : categoryLinksEN.links
+                  }
+                />
               </AccordionContent>
             </AccordionItem>
           </Accordion>
 
           <div className="flex flex-col gap-4 pt-11">
-            <span className="text-sm font-semibold text-black">Geral</span>
+            <span className="text-sm font-semibold text-black">
+              {navLinksText("generalSeparator")}
+            </span>
             <div className="h-px w-full bg-slate-200" />
           </div>
 
           <Link href="/" className="hover:underline" key="Settings">
-            Settings
+            {navLinksText("settings")}
           </Link>
 
           <Accordion type="multiple" key="Language">
             <AccordionItem value="2">
-              <AccordionTrigger className=" gap-1">
-                <span className="font-normal">Inglês</span>
+              <AccordionTrigger className="flex flex-row gap-2 py-2">
+                <span className="font-mono font-light">
+                  {locale === "pt" ? "Portugês" : "English"}
+                </span>
                 <Image
                   alt="Language"
                   src="/icons/globe-thin.svg"
@@ -187,13 +218,40 @@ const LoggedInMobileNavContent = ({
               </AccordionTrigger>
 
               <AccordionContent>
-                {languageFilters.map((filter) => (
-                  <ul className="relative flex flex-col items-start">
-                    <Link href="/" key={filter} className="hover:underline">
-                      {filter}
-                    </Link>
-                  </ul>
-                ))}
+                <div className="relative flex flex-col items-start">
+                  <a
+                    onClick={() => {
+                      startTransition(() => {
+                        router.replace(pathName, { locale: "pt" });
+                      });
+                    }}
+                    className="flex cursor-pointer flex-row gap-2 font-mono hover:underline"
+                  >
+                    <Image
+                      alt="Language"
+                      src="/icons/flag-pt.svg"
+                      width={20}
+                      height={20}
+                    />
+                    Portugês
+                  </a>
+                  <a
+                    onClick={() => {
+                      startTransition(() => {
+                        router.replace(pathName, { locale: "en" });
+                      });
+                    }}
+                    className="flex cursor-pointer flex-row gap-2 font-mono hover:underline"
+                  >
+                    <Image
+                      alt="Language"
+                      src="/icons/flag-us.svg"
+                      width={20}
+                      height={20}
+                    />
+                    English
+                  </a>
+                </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -206,7 +264,7 @@ const LoggedInMobileNavContent = ({
             }}
             key="Log Out"
           >
-            Sair
+            {navLinksText("logout")}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"

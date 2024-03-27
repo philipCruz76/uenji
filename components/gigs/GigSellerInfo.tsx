@@ -112,7 +112,7 @@ const GigSellerInfo = ({ user, gigTitle }: GigSellerInfoProps) => {
           </span>
 
           <button
-            className="h-[36px] w-[150px] border text-sm font-semibold transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-200"
+            className="h-[36px] w-[150px] rounded-md border text-sm font-semibold transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-200"
             onClick={openChat}
           >
             Entrar em contacto

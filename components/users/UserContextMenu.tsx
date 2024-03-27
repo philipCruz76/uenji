@@ -1,6 +1,5 @@
 import { UserAvatar } from "./UserAvatar";
 import { User } from "@prisma/client";
-import Image from "next/image";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import {
@@ -16,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/constants/ui/button";
 import { useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 type UserContextMenuProps = React.HTMLAttributes<HTMLDivElement> & {
   user: Pick<User, "id" | "image" | "username" | "isSeller" | "sellerView">;
@@ -26,6 +26,10 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
   const [currentViewTitle, setCurrentViewTitle] = useState<
     "Comprador" | "Vendedor"
   >(user.sellerView ? "Comprador" : "Vendedor");
+  const locale = useLocale();
+
+  const conxtextMenuText = useTranslations("UserContextMenu");
+
   const switchView = () => {
     fetch("/api/seller_view", {
       method: "GET",
@@ -35,7 +39,7 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
         router.push("/");
         router.refresh();
         toast.success(
-          `Visualização modo ${user.sellerView ? "Comprador" : "Vendedor"}`,
+          `${conxtextMenuText("modeSuffix")} ${user.sellerView ? conxtextMenuText("buyer") : conxtextMenuText("seller")}`,
         );
       } else {
         toast.error("Error switching View");
@@ -60,7 +64,7 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
               )}
               href="/freelancer_onboarding/overview"
             >
-              <span>Converter-se em vendedor</span>
+              <span>{conxtextMenuText("sellerCTA")}</span>
             </Link>
           </DropdownMenuItem>
         ) : (
@@ -72,7 +76,14 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
                 "flex cursor-pointer border-[#495057] bg-[#dee2e6] transition duration-200 ease-in-out hover:border-[#495057] hover:bg-[#dee2e6] group-hover:scale-105 group-hover:bg-opacity-75",
               )}
             >
-              <span> Mudar para Modo {currentViewTitle} </span>
+              <span>
+                {locale === "pt" &&
+                  conxtextMenuText("modePrefix") + currentViewTitle}
+                {locale === "en" &&
+                  conxtextMenuText("modePrefix") +
+                    (currentViewTitle === "Comprador" ? "Buyer" : "Seller") +
+                    conxtextMenuText("modeSuffix")}
+              </span>
             </button>
           </DropdownMenuItem>
         )}
@@ -93,7 +104,7 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
               className="flex flex-col items-center justify-center"
             >
               <span className="transition duration-200 ease-in-out group-hover:scale-105 ">
-                Perfil
+                {conxtextMenuText("profile")}
               </span>
               <div className="block h-[2px] w-[24px]  bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current " />
             </Link>
@@ -117,7 +128,7 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
               className="flex flex-col items-center justify-center"
             >
               <span className="transition duration-200 ease-in-out group-hover:scale-105 ">
-                Caixa Correio
+                {conxtextMenuText("inbox")}
               </span>
               <div className="block h-[2px] w-[60px]  bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current " />
             </Link>
@@ -138,7 +149,7 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
               className="flex flex-col items-center justify-center"
             >
               <span className="transition duration-200 ease-in-out group-hover:scale-105 ">
-                Configurações
+                {conxtextMenuText("settings")}
               </span>
               <div className="block h-[2px] w-[70px]  bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current " />
             </Link>
@@ -165,7 +176,7 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
             </svg>
             <div className="group flex cursor-pointer flex-col items-start justify-center">
               <span className="transition duration-200 ease-in-out group-hover:scale-105 ">
-                Sair
+                {conxtextMenuText("logout")}
               </span>
               <div className="block h-[2px] w-[24px]  bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current " />
             </div>

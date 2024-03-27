@@ -2,6 +2,7 @@
 import { useActiveNavBarStore } from "@/lib/stores/navbar-store";
 import { useSession } from "next-auth/react";
 import { lazy, useEffect } from "react";
+import HeroEyeCatchMobile from "./HeroEyeCatchMobile";
 
 const HeroCategoryExpo = lazy(
   () => import("@/components/hero/HeroCategoryExpo"),
@@ -44,7 +45,7 @@ const Hero = () => {
 
   return (
     <section className="max-w-[100dvw] overflow-hidden">
-      <div className="hidden desktop:flex">
+      <div className="hidden border-b desktop:flex">
         <HeroDesktopOverlay />
       </div>
 
@@ -52,10 +53,15 @@ const Hero = () => {
         <HeroMobileOverlay />
       </div>
 
-      <HeroCategorySlider />
-
-      <div className="w-full px-[20px]">
+      <div className="w-full py-8">
+        <HeroCategorySlider />
+      </div>
+      <div className="hidden w-full px-[20px] desktop:block">
         <HeroEyeCatch />
+      </div>
+
+      <div className="block w-full px-[20px] desktop:hidden">
+        <HeroEyeCatchMobile />
       </div>
       <HeroCategoryExpo />
     </section>

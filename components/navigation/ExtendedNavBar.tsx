@@ -2,7 +2,7 @@
 
 import { NavLinks } from "@/constants";
 import Link from "next/link";
-import { FC, lazy, useEffect, useState } from "react";
+import { FC, lazy, useEffect, useState, useTransition } from "react";
 import Image from "next/image";
 import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
 import { useOpenModalStore } from "@/lib/stores/modals/modal-store";
@@ -10,9 +10,11 @@ import { useLogInVariantStore } from "@/lib/stores/auth-store";
 import { Session } from "next-auth";
 import { useActiveNavBarStore } from "@/lib/stores/navbar-store";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
 import { getSellerOrders } from "@/lib/actions/orders/getUserOrders";
 import toast from "react-hot-toast";
+import { useLocale, useTranslations } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/Select";
 const MobileNav = lazy(() => import("@/components/navigation/MobileNav"));
 const JoinButton = lazy(() => import("@/components/auth/signIn/JoinButton"));
 const InboxDropDownMenu = lazy(
@@ -31,6 +33,12 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
   let { setLogin } = useLogInVariantStore();
   const [orders, setOrders] = useState<number>(0);
   const pathName = usePathname();
+  const localesText = useTranslations("Locales");
+  const navBarText = useTranslations("Navbar");
+
+  const locale = useLocale();
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const {
     isActiveNavBar,
@@ -126,7 +134,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
               <div className=" hidden w-full px-2  tablet:flex">
                 <input
                   type="text"
-                  placeholder="Encontre o serviço que precisa aqui"
+                  placeholder={navBarText("SearchPlaceholder")}
                   className="h-10 w-full rounded-l-md border-2 border-slate-300 bg-white px-5 text-sm text-black focus:border-slate-500 focus:outline-none"
                 />
                 <button
@@ -152,6 +160,52 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
             ) : null}
           </div>
 
+          {/* Language Selector */}
+
+          <Select
+            value={locale}
+            onValueChange={(value) => {
+              startTransition(() => {
+                router.replace(pathName, { locale: value });
+              });
+            }}
+          >
+            <SelectTrigger className="w-[70px] border-black">
+              {locale.toLocaleUpperCase()}
+              <Image
+                alt="Language"
+                src="/icons/globe-thin.svg"
+                width={20}
+                height={20}
+              />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem defaultChecked value="pt">
+                <div className="flex w-full flex-row justify-between">
+                  <Image
+                    alt="Language"
+                    src="/icons/flag-pt.svg"
+                    width={20}
+                    height={20}
+                  />
+                  <span className="px-2">{localesText("pt")}</span>
+                </div>
+              </SelectItem>
+              <SelectItem value="en">
+                <div className="flex w-full flex-row items-start justify-start">
+                  <Image
+                    alt="Language"
+                    src="/icons/flag-us.svg"
+                    width={20}
+                    height={20}
+                    className="h-[20px] w-[20px]"
+                  />
+                  <span className="px-2">{localesText("en")}</span>
+                </div>
+              </SelectItem>
+            </SelectContent>
+          </Select>
+
           {/*Nav Links and Auth Button Container*/}
           <div className="flex w-full items-center justify-end text-center tablet:min-w-max tablet:gap-8">
             {/*Nav Links*/}
@@ -164,7 +218,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                 >
                   <div className="flex flex-row items-center justify-center gap-1">
                     {" "}
-                    <span>Pedidos</span>
+                    <span>{navBarText("NavLinks.orders")}</span>
                     {orders > 0 && session.user.sellerView === true && (
                       <span className=" flex h-[16px] w-[16px] items-center justify-center rounded-full border border-black bg-black text-center font-mono text-white">
                         {orders}
@@ -184,7 +238,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                     href="/freelancer_onboarding/overview"
                     className="group flex flex-col items-center justify-center"
                   >
-                    <span> Torne-se um vendedor</span>
+                    <span> {navBarText("NavLinks.sellerCTA")}</span>
                     <div className="hidden h-[2px] w-[130px] bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current " />
                   </Link>
                 ) : (
@@ -192,7 +246,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                     href={`/${session.user.username}/gigs`}
                     className="group flex flex-col items-center justify-center"
                   >
-                    <span>Serviços</span>
+                    <span>{navBarText("NavLinks.gigs")}</span>
                     <div className="hidden h-[2px] w-[52px] bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current " />
                   </Link>
                 )}
@@ -206,7 +260,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                     className="group flex flex-col items-center justify-center"
                   >
                     <span className="flex flex-row transition duration-200 ease-in-out group-hover:scale-105">
-                      {link.text}
+                      {navBarText("NavLinks.explore")}
                     </span>
                     <div className="hidden h-[2px] w-[52px] bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current " />
                   </Link>
@@ -237,7 +291,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                     }}
                     className="transition duration-200 ease-in-out group-hover:scale-105"
                   >
-                    Entrar
+                    {navBarText("NavLinks.login")}
                   </span>
                   <div className="hidden h-[2px] w-[42px] bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current " />
                 </div>
@@ -254,8 +308,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                     }}
                     className="flex cursor-pointer font-semibold transition duration-200 ease-in-out hover:scale-105 hover:opacity-60"
                   >
-                    {" "}
-                    Aderir{" "}
+                    {navBarText("NavLinks.join")}
                   </span>
                 </div>
               </div>

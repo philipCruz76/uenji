@@ -1,19 +1,30 @@
-import { CategoryDesciptions } from "@/constants";
+import { CategoryDesciptionsPT, CategoryDesciptionsEN } from "@/constants";
+import { Category } from "@/types/common.types";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 
 const HeroCategoryExpo = () => {
+  const t = useTranslations("HeroSection.CTA");
+  const locale = useLocale();
+
+  let CategoryDescriptions: Category[];
+
+  if (locale === "en") {
+    CategoryDescriptions = CategoryDesciptionsEN;
+  } else {
+    CategoryDescriptions = CategoryDesciptionsPT;
+  }
+
   return (
     <>
       <section className="container flex flex-col justify-center bg-white py-8 tablet:p-[100px,0px] tablet:py-14 desktop:py-24">
-        <h1 className="flex py-6 text-3xl font-bold">
-          Nós temos o que voçê precisa
-        </h1>
+        <h1 className="flex py-6 text-3xl font-bold">{t("categoryTagline")}</h1>
 
         <div className="flex items-center justify-center">
           {/* Category Cards */}
           <ul className="grid min-w-full grid-cols-2 flex-wrap items-center justify-between tablet:grid-cols-3 desktop:grid-cols-5">
-            {CategoryDesciptions.map((category) => (
+            {CategoryDescriptions.map((category) => (
               <li key={category.category}>
                 <Link
                   href={`/categorias/${category.category}`}

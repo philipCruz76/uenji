@@ -1,4 +1,5 @@
-import { footerLinks } from "@/constants";
+import { footerLinksPT, footerLinksEN } from "@/constants";
+import { getLocale } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -27,7 +28,9 @@ const DesktopFooterColumn = ({ title, links }: ColumnProps) => (
   </div>
 );
 
-const Footer = () => {
+const Footer = async () => {
+  const locale = await getLocale();
+  const footerLinks = locale === "en" ? footerLinksEN : footerLinksPT;
   return (
     <>
       <div className="flex h-px w-full bg-gray-200 " />
@@ -64,7 +67,8 @@ const Footer = () => {
           <div className="my-0.5 h-px w-full bg-gray-200" />
           <div className="max-sm:flex-col flex w-full items-center justify-between text-sm font-normal">
             <span className="text-white-500 font-semibold">
-              © 2023 Uenji. All rights reserved
+              © 2023 Uenji. {locale === "en" && "All rights reserved"}
+              {locale === "pt" && "Todos os direitos reservados"}
             </span>
           </div>
         </div>

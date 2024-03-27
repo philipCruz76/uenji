@@ -1,6 +1,6 @@
 "use client";
 
-import { footerLinks } from "@/constants";
+import { footerLinksPT, footerLinksEN } from "@/constants";
 import {
   Accordion,
   AccordionContent,
@@ -9,9 +9,13 @@ import {
 } from "../ui/Accordion";
 import FooterColumn from "./FooterColumn";
 import { useMobileFooterStore } from "@/lib/stores/mobileFooter-store";
+import { useLocale } from "next-intl";
 
 const MobileFooter = ({}) => {
   const { mobileFooterStyling } = useMobileFooterStore();
+  const locale = useLocale();
+  const footerLinks = locale === "en" ? footerLinksEN : footerLinksPT;
+
   return (
     <>
       <footer className={mobileFooterStyling}>

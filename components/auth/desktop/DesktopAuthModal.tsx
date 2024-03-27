@@ -61,7 +61,7 @@ const DesktopAuthModal = () => {
                     height={560}
                   />
                 </Dialog.Title>
-                <div className="w-full p-6">
+                <div className="w-full px-6">
                   {/* Close Button */}
                   <div className="absolute right-6 top-6">
                     <button

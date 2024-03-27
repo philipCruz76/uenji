@@ -1,5 +1,7 @@
-import { CategoryDesciptions } from "@/constants";
-import { User } from "@/types/common.types";
+"use server";
+import { CategoryDesciptionsEN, CategoryDesciptionsPT } from "@/constants";
+import { Category, User } from "@/types/common.types";
+import { getLocale } from "next-intl/server";
 import { lazy } from "react";
 
 const PopularCategoryShowcaseMobile = lazy(
@@ -19,7 +21,17 @@ type BuyerDashboardProps = {
   user: User;
 };
 
-const BuyerDashboard = ({ user }: BuyerDashboardProps) => {
+const BuyerDashboard = async ({ user }: BuyerDashboardProps) => {
+  const locale = await getLocale();
+
+  let CategoryDesciptions: Category[];
+
+  if (locale === "pt") {
+    CategoryDesciptions = CategoryDesciptionsPT;
+  } else {
+    CategoryDesciptions = CategoryDesciptionsEN;
+  }
+
   const popularCategories = CategoryDesciptions.filter(
     (category) =>
       category.category === "programacao" ||
@@ -31,7 +43,8 @@ const BuyerDashboard = ({ user }: BuyerDashboardProps) => {
     <section className=" flex min-h-[100dvh] min-w-[100dvw] px-6 py-8">
       <div className="flex w-full flex-col space-y-6">
         <h1 className="left-0 flex items-center justify-start text-3xl font-bold">
-          Olá, {user.name ? user.name : user.username}
+          {`${locale === "pt" ? "Olá, " : "Hi, "}`}
+          {user.name ? user.name : user.username}
         </h1>
 
         {/* Desktop View */}

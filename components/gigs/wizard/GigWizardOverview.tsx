@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { categoryFilters } from "@/constants";
+import { CategoriesMap, categoryFilters } from "@/constants";
 import {
   GigDescription,
   GigOverview,
@@ -19,6 +19,7 @@ import {
 import toast from "react-hot-toast";
 import useCurrentUser from "@/lib/hooks/useCurrentUser";
 import { Gig } from "@prisma/client";
+import { useLocale, useTranslations } from "next-intl";
 
 type GigWizardOverviewProps = {
   username: string;
@@ -28,6 +29,8 @@ type GigWizardOverviewProps = {
 const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
   const router = useRouter();
   const user = useCurrentUser();
+  const locale = useLocale();
+  const gigOverViewText = useTranslations("GigWizard.Overview");
 
   const {
     getFullGig,
@@ -233,12 +236,13 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
         {/* Title */}
         <div className="flex w-full  flex-row justify-between">
           <div className="flex min-w-[245px] max-w-[245px] flex-col gap-2 pr-[32px]">
-            <span className="text-lg font-semibold">Título do servicço</span>
+            <span className="text-lg font-semibold">
+              {gigOverViewText("title.heading")}
+            </span>
             <span className="text-sm text-gray-500">
-              O Título funciona como uma montra para do seu serviço, e como tal{" "}
-              <b>é o lugar mais importante</b> para meter palavras-chave que
-              serão do interesse para clientes que estejam à procura de serviços
-              como o seu.
+              {gigOverViewText("title.subheadingPart1")}
+              <b>{gigOverViewText("title.subheadingBold")}</b>{" "}
+              {gigOverViewText("title.subheadingPart2")}
             </span>
           </div>
           <div className="flex w-full flex-col gap-2">
@@ -249,7 +253,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
               className="min-h-[80px] justify-items-start rounded-md border-[2px] p-2 text-lg font-bold focus:outline-none"
               maxLength={80}
               {...register("gigTitle", {
-                required: "Gig title is required",
+                required: gigOverViewText("title.inputValidation"),
                 onChange: (e) => {
                   e.preventDefault();
                   setGigOverview({ ...gigOverview, gigTitle: e.target.value });
@@ -294,11 +298,16 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
               <option value="" disabled>
                 Selecionar Categoria
               </option>
-              {categoryFilters.map((occupation) => (
-                <option value={occupation} key={occupation}>
-                  {occupation.toUpperCase()}
-                </option>
-              ))}
+              {CategoriesMap.map((category) => {
+                const categoryObject = category.category;
+                const localizedName =
+                  locale === "pt" ? categoryObject.pt : categoryObject.en;
+                return (
+                  <option value={categoryObject.name} key={categoryObject.name}>
+                    {localizedName.toUpperCase()}
+                  </option>
+                );
+              })}
             </select>
           </div>
           {errors.gigCategory && (

@@ -27,10 +27,17 @@ const OTPRegistrationForm = () => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [activeInput]);
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>): void => {
     if (e.key === "Backspace" || e.key === "Delete") {
       e.preventDefault();
       if (activeInput > 0) {
+        setFailedValidation(false);
         const newOTP = [...otp];
         newOTP[activeInput - 1] = "";
         setOtp(newOTP);
@@ -56,19 +63,38 @@ const OTPRegistrationForm = () => {
     setOtp(newOTP);
   };
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
+  const handlePaste = async (e: React.ClipboardEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const pastedData = await e.clipboardData.getData("text");
+    if (pastedData.length != 6 || pastedData.match(/[^0-9]/g)) {
+      toast.error("Código inserido inválido");
+      return;
     }
-  }, [activeInput]);
+
+    const newOtp = [...otp];
+    for (let i = 0; i < pastedData.length; i++) {
+      newOtp[i] = pastedData[i];
+      setActiveInput(i + 1);
+    }
+
+    setOtp(newOtp);
+    const validToken = await verifyOTP(newOtp.join(""));
+    if (!validToken) {
+      setFailedValidation(true);
+    } else {
+      setFailedValidation(false);
+      setValidatedUser(true);
+    }
+  };
 
   const handleSubmit = async () => {
     if (!validatedUser) {
       return;
     }
+    setIsValidating(true);
     const { email, password } = newUser;
     const otpString = otp.join("");
-
     activateUser(email, otpString)
       .then(() =>
         signIn("credentials", {
@@ -87,7 +113,8 @@ const OTPRegistrationForm = () => {
           }
         }),
       )
-      .catch((e) => toast.error(e));
+      .catch((e) => toast.error(e))
+      .finally(() => setIsValidating(false));
   };
   const handleInput = async (event: React.FormEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -137,15 +164,20 @@ const OTPRegistrationForm = () => {
       </div>
 
       {/* OTP form */}
-      <div className=" absolute mt-20  flex w-[fit] flex-col text-left">
+      <div className=" absolute mt-20 flex-col  px-4 text-left">
         <span className="flex justify-start text-2xl font-bold">
-          Confirm your email
+          Valide o seu email
         </span>
-        <div className="flex flex-col justify-start pb-14">
-          <span>Enter the verification code we emailed to: </span>
+        <div className="flex flex-col justify-start ">
+          <span>
+            Introduza o código de validação que foi enviado para o email:{" "}
+          </span>
           <span className=" text-sm font-light">{newUser.email}</span>
         </div>
-        <form className="flex flex-row items-center justify-between space-x-2 text-[16px]">
+        <form
+          onPaste={handlePaste}
+          className="flex flex-row items-center justify-between space-x-2 py-8 text-[16px]"
+        >
           {otp.map((_, index) => {
             return (
               <Fragment key={index}>
@@ -167,7 +199,8 @@ const OTPRegistrationForm = () => {
         </form>
         {failedValidation && !isValidating && (
           <span className="text-sm text-red-500">
-            You've entered the wrong code. Try again
+            Código de validação introduzido inválido. Por favor, tente
+            novamente.
           </span>
         )}
         {isValidating && (
@@ -179,14 +212,22 @@ const OTPRegistrationForm = () => {
             <span className="flex text-sm font-semibold ">Checking code</span>
           </div>
         )}
+        {/*
+         !! TODO : implement resend code function !!
         <span className="cursor-pointer text-sm font-semibold underline">
-          Resend code
+          Reenviar código
         </span>
+        */}
         <button
-          className="rounded-md bg-zinc-700 py-2 text-lg font-semibold text-white"
+          className={cn(
+            "w-full rounded-md py-2 text-lg font-semibold text-white",
+            validatedUser ? "bg-zinc-700" : "bg-zinc-300",
+            isValidating && "cursor-not-allowed bg-zinc-300",
+          )}
+          disabled={!validatedUser || isValidating === true}
           onClick={handleSubmit}
         >
-          Submit
+          Submeter
         </button>
       </div>
     </>

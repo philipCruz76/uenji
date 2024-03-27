@@ -1,0 +1,99 @@
+{
+  "Navbar": {
+    "SearchPlaceholder": "Procurar por serviços",
+    "NavLinks": {
+      "orders": "Pedidos",
+      "gigs": "Serviços",
+      "sellerCTA": "Torne-se num vendedor",
+      "explore": "Explorar",
+      "login": "Entrar",
+      "join": "Aderir"
+    }
+  },
+  "MobileNav": {
+    "LoggedOut": {
+      "joinCTA": "Adira ao Uenji",
+      "navLinks": {
+        "login": "Entrar",
+        "explore": "Categorias",
+        "generalSeparator": "Geral",
+        "home": "Página Inicial"
+      }
+    },
+    "LoggedIn": {
+      "modeSuffix": "Modo",
+      "modePrefix": "Visualização modo",
+      "seller": "Vendedor",
+      "buyer": "Comprador",
+      "sellerCTA": "Torne-se num vendedor",
+      "navLinks": {
+        "home": "Página Inicial",
+        "inbox": "Caixa de Entrada",
+        "orders": "Pedidos",
+        "gigs": "Serviços",
+        "explore": "Categorias",
+        "generalSeparator": "Geral",
+        "settings": "Definições",
+        "logout": "Sair"
+      }
+    }
+  },
+  "HeroSection": {
+    "SloganPreFix": "Encontre o especialista de",
+    "SloganCategories": {
+      "programming": "Programação",
+      "photography": "Fotografia",
+      "business": "Negócios",
+      "marketing": "Marketing"
+    },
+    "SloganSuffix": "adequado para si",
+    "SearchPlaceholder": "Procurar por serviços",
+    "CategoryHero": {
+      "title": "Categorias em destaque"
+    },
+    "CTA": {
+      "title": "A melhor parte? Você pode começar agora mesmo!",
+      "titlePrefix": "A melhor parte?",
+      "titleSuffix": "Você pode começar agora mesmo!",
+      "tagline1": {
+        "title": "Cumpra com o seu orçamento",
+        "text": "Encontre o serviço certo para cada gama de preço. Sem tarifas horárias, apenas preços baseados em cada projecto."
+      },
+      "tagline2": {
+        "title": "Receba trabalho de qualidade rapidamente",
+        "text": "Entregue o seu projeto a um freelancer em minutos e obtenha resultados que irão durar para sempre."
+      },
+      "tagline3": {
+        "title": "Pague quando estiver satisfeito",
+        "text": "Orçamento antecipado significa que não há surpresas. Os pagamentos só são liberados quando estiver satisfeito com o serviço."
+      },
+      "categoryTagline": "Nós temos o que voçê precisa"
+    }
+  },
+  "Locales": {
+    "en": "English",
+    "pt": "Português"
+  },
+  "UserContextMenu": {
+    "modeSuffix": "Modo",
+    "modePrefix": "Mudar para modo ",
+    "seller": "Vendedor",
+    "buyer": "Comprador",
+    "sellerCTA": "Torne-se num vendedor",
+    "profile": "Perfil",
+    "inbox": "Caixa de Entrada",
+    "settings": "Definições",
+    "logout": "Sair"
+  },
+  "GigWizard": {
+    "Overview": {
+      "title": {
+        "heading": "Título do serviço",
+        "subheadingPart1": "O Título funciona como uma montra para do seu serviço, e como tal ",
+        "subheadingBold": "é o lugar mais importante",
+        "subheadingPart2": "para meter palavras-chave que serão do interesse para clientes que estejam à procura de serviços como o seu.",
+        "inputValidation": "É obrigatório ter um título para o seu serviço."
+      }
+    }
+  }
+}

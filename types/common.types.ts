@@ -42,6 +42,14 @@ export type Category = {
   categoryTagline: string;
 };
 
+export type CategoryFilter = {
+  category: {
+    pt: string;
+    en: string;
+    name: string;
+  };
+};
+
 export type LanguageProficiency = {
   languageName: string;
   languageLevel: string;
