@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/Carousel";
 import getSession from "@/lib/actions/getSession";
 import PublicProfileViewMobile from "./PublicProfileViewMobile";
+import UserGigsShowcaseMobile from "./UserGigsShowcaseMobile";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 
 type UserProfilePageMobileProps = {
   user: User;
@@ -32,8 +34,10 @@ const UserProfileMobilePage = async ({
     const currentUser = await getCurrentUser();
     currentUsername = currentUser?.username || "";
   }
-  const { username, country, image, isSeller, createdAt, isOnline } = user;
+  const { username, country, image, isSeller, createdAt, isOnline, id } = user;
   const userGigs = await getUserGigs(user.id);
+  const publishedGigs = userGigs?.filter((gig) => gig.published === true);
+  const draftGigs = userGigs?.filter((gig) => gig.published === false);
   publicMode !== undefined
     ? (publicMode = publicMode)
     : (publicMode = currentUsername !== username || !session);
@@ -54,33 +58,28 @@ const UserProfileMobilePage = async ({
       {isSeller ? (
         <div className=" w-full gap-4">
           <SellerInfoCard user={user} />
-
-          <Carousel
-            className="px-4 pb-[20px] pt-[10px]"
-            opts={{
-              align: "center",
-              loop: true,
-            }}
-          >
-            <CarouselContent className="  w-full ">
-              {userGigs && userGigs.length > 0
-                ? userGigs.map((userGig, index) => (
-                    <CarouselItem
-                      key={`popular-gig-${index}`}
-                      className="pl-[16dvw]"
-                    >
-                      <GigCard gigToShow={userGig} index={index} />
-                    </CarouselItem>
-                  ))
-                : null}
-            </CarouselContent>
-            {userGigs && userGigs.length > 1 ? (
-              <>
-                <CarouselPrevious className="left-2" />
-                <CarouselNext className="right-2" />
-              </>
-            ) : null}
-          </Carousel>
+          <Tabs defaultValue="published" className="w-full px-4 py-[30px]">
+            <TabsList className="w-full rounded-none  bg-white">
+              <TabsTrigger
+                value="published"
+                className="border-none font-semibold ring-0 focus-visible:ring-0 data-[state=active]:bg-transparent data-[state=active]:text-base data-[state=active]:underline"
+              >
+                Serviços Publicados
+              </TabsTrigger>
+              <TabsTrigger
+                value="drafts"
+                className="border-none font-semibold ring-0 focus-visible:ring-0 data-[state=active]:bg-transparent data-[state=active]:text-base data-[state=active]:underline"
+              >
+                Rascunhos
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="published">
+              <UserGigsShowcaseMobile gigsToShow={publishedGigs} />
+            </TabsContent>
+            <TabsContent value="drafts">
+              <UserGigsShowcaseMobile gigsToShow={draftGigs} drafts />
+            </TabsContent>
+          </Tabs>
         </div>
       ) : publicMode ? null : (
         <SellerOnboardingCard />

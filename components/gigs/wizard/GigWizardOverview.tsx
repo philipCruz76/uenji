@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { CategoriesMap, categoryFilters } from "@/constants";
+import { CategoriesMap } from "@/constants";
 import {
   GigDescription,
   GigOverview,
@@ -275,9 +275,9 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
         {/* Category */}
         <div className="flex w-full  flex-row justify-between">
           <div className="flex min-w-[245px] max-w-[245px] flex-col gap-2 pr-[32px]">
-            <span className="text-lg font-semibold">Categoria</span>
+            <span className="text-lg font-semibold">{gigOverViewText("category.heading")}</span>
             <span className="text-sm text-gray-500">
-              Escolha a <b>categoria</b> mais adequada para o seu serviço
+            {gigOverViewText("category.subheadingPart1")} <b>{gigOverViewText("category.subheadingBold")}</b> {gigOverViewText("category.subheadingPart2")}
             </span>
           </div>
           <div className="flex w-full flex-col gap-2">
@@ -285,7 +285,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
               value={gigOverview.gigCategory}
               className="h-[40px] w-[300px] rounded-sm border border-gray-300 bg-white px-2 text-gray-600"
               {...register("gigCategory", {
-                required: "Category is required",
+                required: gigOverViewText("category.inputValidation"),
                 onChange: (e) => {
                   e.preventDefault();
                   setGigOverview({
@@ -296,7 +296,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
               })}
             >
               <option value="" disabled>
-                Selecionar Categoria
+                {gigOverViewText("category.selectPlaceholder")}
               </option>
               {CategoriesMap.map((category) => {
                 const categoryObject = category.category;
@@ -319,19 +319,15 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
         {/* Search Tags */}
         <div className="flex max-w-full  flex-row justify-between">
           <div className="flex min-w-[245px] max-w-[245px] flex-col gap-2 pr-[32px]">
-            <span className="text-lg font-semibold">Palavras-chave</span>
+            <span className="text-lg font-semibold">{gigOverViewText("searchTags.heading")}</span>
             <span className="text-sm text-gray-500">
-              Marque o seu serviço com palavras-chave que sejam relevantes para
-              os serviços que oferece. Utilize até 5 palavras chave para melhor
-              se destacar.
+            {gigOverViewText("searchTags.subheading")}
             </span>
           </div>
           <div className="flex w-full max-w-full  flex-col gap-2">
-            <span className="text-lg font-semibold">Positive Keywords</span>
+            <span className="text-lg font-semibold">{gigOverViewText("searchTags.keywordsHeading")}</span>
             <span className="text-sm text-gray-500">
-              {" "}
-              Introduza os termos que acredita que os seus compradores irão
-              utilizar quando estiverem a pesquisar pelo o seu serviço.
+            {gigOverViewText("searchTags.keywordsSubheading")}
             </span>
 
             <div
@@ -380,7 +376,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
                 type="text"
                 id="gigTagsInput"
                 className="bg-white outline-none"
-                placeholder="Type something..."
+                placeholder={gigOverViewText("searchTags.tagsPlaceholder")}
                 onKeyDown={handleKeyDown}
               />
             </div>
@@ -409,7 +405,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
               )}
               onClick={handleDelete}
             >
-              Delete Gig
+               {gigOverViewText("deleteButton")}
             </button>
           )}
           <button
@@ -422,7 +418,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
               } rounded-md px-4 py-2 hover:bg-sky-400`,
             )}
           >
-            Gravar e continuar{" "}
+            {gigOverViewText("nextButton")}
           </button>
         </div>
       </form>

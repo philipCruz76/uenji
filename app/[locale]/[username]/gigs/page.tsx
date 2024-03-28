@@ -23,12 +23,12 @@ const page = async ({ params }: pageProps) => {
 
   const userGigs = await getUserGigs(currentUser.id);
   if (!userGigs) return null;
-
+  const gigToShow = userGigs.filter((gig) => gig.published === true);
   return (
     <section className="flex max-h-[100dvh] min-h-[100vh] min-w-[100vw] max-w-[100dvw] flex-col gap-2 overflow-hidden p-6">
       <h1 className="text-3xl font-bold">Serviços</h1>
       <div className=" flex h-full min-w-full max-w-full flex-row  items-center  justify-start overflow-y-hidden overflow-x-scroll py-[10px] pt-[50px]">
-        {userGigs.map((gig, index) => (
+        {gigToShow.map((gig, index) => (
           <div key={`gig-${index}`} className="px-2">
             <GigCard gigToShow={gig} index={index} />
           </div>

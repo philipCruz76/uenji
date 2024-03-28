@@ -2,6 +2,7 @@
 import { useGigWizardStepStore } from "@/lib/stores/gigWizard-store";
 import { useRouter } from "next/navigation";
 import { lazy, useEffect, useMemo } from "react";
+import { useLocale } from "use-intl";
 
 type pageProps = {
   params: { username: string; gigName: string };
@@ -27,6 +28,7 @@ const GigWizardPublish = lazy(
 const page = ({ params, searchParams }: pageProps) => {
   const { username, gigName } = params;
   const router = useRouter();
+  const locale = useLocale();
   const { setGigWizardStepHrefs, getCurrentGigWizardStep } =
     useGigWizardStepStore();
   let { step } = searchParams;
@@ -37,11 +39,11 @@ const page = ({ params, searchParams }: pageProps) => {
 
   useMemo(() => {
     setGigWizardStepHrefs([
-      `/${username}/manage_gigs/${gigName}/edit?step=1`,
-      `/${username}/manage_gigs/${gigName}/edit?step=2`,
-      `/${username}/manage_gigs/${gigName}/edit?step=3`,
-      `/${username}/manage_gigs/${gigName}/edit?step=4`,
-      `/${username}/manage_gigs/${gigName}/edit?step=5`,
+      `/${locale}/${username}/manage_gigs/${gigName}/edit?step=1`,
+      `/${locale}/${username}/manage_gigs/${gigName}/edit?step=2`,
+      `/${locale}/${username}/manage_gigs/${gigName}/edit?step=3`,
+      `/${locale}/${username}/manage_gigs/${gigName}/edit?step=4`,
+      `/${locale}/${username}/manage_gigs/${gigName}/edit?step=5`,
     ]);
   }, [gigName]);
 

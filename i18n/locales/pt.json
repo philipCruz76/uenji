@@ -93,6 +93,46 @@
         "subheadingBold": "é o lugar mais importante",
         "subheadingPart2": "para meter palavras-chave que serão do interesse para clientes que estejam à procura de serviços como o seu.",
         "inputValidation": "É obrigatório ter um título para o seu serviço."
+      },
+      "category": {
+        "heading": "Categoria",
+        "subheadingPart1": "Escolha a ",
+        "subheadingBold": "categoria ",
+        "subheadingPart2": "mais adequada para o seu serviço",
+        "inputValidation": "Por favor selecione uma categoria",
+        "selectPlaceholder": "Selecionar Categoria"
+      },
+      "searchTags": {
+        "heading": "Palavras-chave",
+        "subheading": "Marque o seu serviço com palavras-chave que sejam relevantes para os serviços que oferece.Utilize até 5 palavras chave para melhor se destacar.",
+        "keywordsHeading": "Termos de Pesquisa",
+        "keywordsSubheading": "Introduza os termos que acredita que os seus compradores irão utilizar quando estiverem a pesquisar pelo o seu serviço.",
+        "tagsPlaceholder": "Escreva algo..."
+      },
+      "deleteButton": "Apagar Serviço",
+      "nextButton": "Gravar e continuar"
+    },
+    "Pricing": {
+      "title": "Âmbito e Preço",
+      "packageSwitcher": "Oferecer Pacotes",
+      "packagesTable": {
+        "basic": "básico",
+        "standard": "standard",
+        "premium": "prémium",
+        "title": "Título ",
+        "description": "Descrição",
+        "delivery": "Tempo de entrega",
+        "revisions": "Número de revisões ",
+        "price": "Preço",
+        "placeholders": {
+          "title": "Pacote ",
+          "descriptionPart1": "Descreva o seu pacote ",
+          "descriptionPart2": " aqui...",
+          "delivery": "dias",
+          "revisions": "revisões"
+        },
+        "nextButton":"Gravar e continuar",
+        "backButton":"Voltar"
       }
     }
   }

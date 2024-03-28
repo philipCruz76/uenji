@@ -1,32 +1,24 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
-import getUserGigs from "@/lib/actions/gigs/getUserGigs";
 import { UserGigs } from "@/types/common.types";
 import { GigPricing } from "@/types/gigWizard.types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 type UserGigsShowcaseMobileProps = {
-  userId: string;
+  gigsToShow: UserGigs;
+  drafts?: boolean;
 };
 
 export default function UserGigsShowcaseMobile({
-  userId,
+  gigsToShow,
+  drafts,
 }: UserGigsShowcaseMobileProps) {
   const router = useRouter();
-  const [userGigs, setUserGigs] = useState<UserGigs | null>(null);
-  useEffect(() => {
-    async function fetchUserGigs() {
-      const userGigs = await getUserGigs(userId);
-      setUserGigs(userGigs);
-    }
-    fetchUserGigs();
-  }, []);
-  if (!userGigs) return null;
+  if (!gigsToShow) return null;
   return (
     <div className="h-full w-full space-y-2">
-      {userGigs.map((gig) => {
+      {gigsToShow.map((gig) => {
         const parsedPackages = JSON.parse(
           gig.packages!,
         ) as GigPricing["packages"];
@@ -34,21 +26,30 @@ export default function UserGigsShowcaseMobile({
           <Card
             key={`gig-${gig.id}`}
             className="flex h-[100px] w-full flex-row hover:cursor-pointer"
-            onClick={() =>
-              router.push(
-                `/${gig.user.username}/${gig.title.split(" ").join("-")}/`,
-              )
-            }
+            onClick={() => {
+              if (drafts) {
+                router.push(
+                  `/${gig.user.username}/manage_gigs/${gig.title.replace(/\s/g, "-")}/edit?step=1`,
+                );
+              } else {
+                router.push(
+                  `/${gig.user.username}/${gig.title.split(" ").join("-")}/`,
+                );
+              }
+            }}
           >
-            <CardTitle className="h-full min-w-[120px]">
-              <Image
-                alt={gig.title}
-                src={gig.coverImage!}
-                width={120}
-                height={120}
-                className="h-full w-[120px] rounded-s-md border-r object-fill"
-              />
-            </CardTitle>
+            {!drafts && (
+              <CardTitle className="h-full min-w-[120px]">
+                <Image
+                  alt={gig.title}
+                  src={gig.coverImage!}
+                  width={120}
+                  height={120}
+                  className="h-full w-[120px] rounded-s-md border-r object-fill"
+                />
+              </CardTitle>
+            )}
+
             <CardContent className="flex h-full w-full flex-col items-start bg-[#f8f9fa] p-[8px] text-sm">
               <span className="flex flex-row items-center justify-center gap-[4px] text-[#ffcf00]">
                 <svg
@@ -66,15 +67,17 @@ export default function UserGigsShowcaseMobile({
                 </span>
               </span>
               <span className="font-mono ">{gig.title}</span>
-              <div className="flex h-full w-full items-end justify-end text-end">
-                <span className=" w-full text-end">
-                  {" "}
-                  De{" "}
-                  <span className="px-[4px] font-bold">
-                    {parsedPackages[0].price}.00 AOA
+              {gig.published ? (
+                <div className="flex h-full w-full items-end justify-end text-end">
+                  <span className=" w-full text-end">
+                    {" "}
+                    De{" "}
+                    <span className="px-[4px] font-bold">
+                      {parsedPackages[0].price}.00 AOA
+                    </span>
                   </span>
-                </span>
-              </div>
+                </div>
+              ) : null}
             </CardContent>
           </Card>
         );

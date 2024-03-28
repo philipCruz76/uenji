@@ -16,7 +16,6 @@ type PublicProfileViewProps = {
 const PublicProfileView = async ({ user }: PublicProfileViewProps) => {
   const { image, skills, country, username, id, languages } = user;
 
-  const userGigs = await getUserGigs(id);
   const parsedSkills = JSON.parse(skills!) as SellerPersonalInfo["languages"];
   const parsedLanguages = JSON.parse(
     languages!,
@@ -38,6 +37,8 @@ const PublicProfileView = async ({ user }: PublicProfileViewProps) => {
       ).getMinutes()} minutes ago`;
     }
   };
+  const userGigs = await getUserGigs(id);
+  const publishedGigs = userGigs?.filter((gig) => gig.published === true);
 
   return (
     <section className="flex min-h-[100dvh] w-[100dvw] max-w-[100dvw] flex-col gap-[20px] overflow-hidden  px-6 py-6">
@@ -226,7 +227,7 @@ const PublicProfileView = async ({ user }: PublicProfileViewProps) => {
         {user.isSeller === true ? (
           <>
             <div className="flex flex-row gap-4">
-              {userGigs?.map((gig, index) => (
+              {publishedGigs?.map((gig, index) => (
                 <div key={`gig-${index}`} className="hidden gap-4 tablet:block">
                   <GigCard gigToShow={gig} index={index} />
                 </div>

@@ -1,6 +1,5 @@
 import { lazy } from "react";
 import { User } from "@prisma/client";
-import GigShowCaseSection from "./GigShowCaseSection";
 
 type PrivateProfileViewProps = {
   user: User;
@@ -9,6 +8,8 @@ type PrivateProfileViewProps = {
 const SellerOnboardingCard = lazy(() => import("./SellerOnboardingCard"));
 const ProfileInfoCard = lazy(() => import("./ProfileInfoCard"));
 const SellerInfoCard = lazy(() => import("./SellerInfoCard"));
+const GigShowCaseSection = lazy(() => import("./GigShowCaseSection"));
+
 
 const PrivateProfileView = ({ user }: PrivateProfileViewProps) => {
   const { username, image, country, createdAt, isOnline, id, isSeller } = user;

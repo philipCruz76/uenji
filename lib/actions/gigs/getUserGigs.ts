@@ -4,7 +4,7 @@ import db from "@/lib/db";
 export default async function getUserGigs(userId: string) {
   try {
     const userGigs = await db.gig.findMany({
-      where: {
+      where:  {
         userId: userId,
       },
       include: {

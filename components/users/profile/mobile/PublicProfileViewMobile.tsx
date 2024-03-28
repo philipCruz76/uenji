@@ -4,14 +4,16 @@ import Image from "next/image";
 import UserBasicInfoMobile from "./UserBasicInfoMobile";
 import UserGigsShowcaseMobile from "./UserGigsShowcaseMobile";
 import ProfileContactButton from "../ProfileContactButton";
+import getUserGigs from "@/lib/actions/gigs/getUserGigs";
 
 type PublicProfileViewMobileProps = {
   user: User;
 };
 
-const PublicProfileViewMobile = ({ user }: PublicProfileViewMobileProps) => {
+const PublicProfileViewMobile = async ({ user }: PublicProfileViewMobileProps) => {
   const { username, id, name, isSeller, image } = user;
-
+  const userGigs = await getUserGigs(user.id);
+  const publishedGigs = userGigs?.filter((gig) => gig.published === true);
   return (
     <div className="flex min-h-[100dvh] min-w-full flex-col items-center justify-start px-6 py-4">
       <Image
@@ -52,7 +54,7 @@ const PublicProfileViewMobile = ({ user }: PublicProfileViewMobileProps) => {
         </TabsContent>
         {isSeller && (
           <TabsContent value="gigs">
-            <UserGigsShowcaseMobile userId={id} />
+            <UserGigsShowcaseMobile  gigsToShow={publishedGigs} />
           </TabsContent>
         )}
       </Tabs>

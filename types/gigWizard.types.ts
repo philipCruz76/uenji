@@ -4,7 +4,6 @@ export const GigOverviewValidator = z.object({
   gigTitle: z
     .string()
     .min(15, "Mínimo 15 caracteres")
-    .regex(/^[a-zA-Z0-9\s]+$/, "Apenas letras e números são permitidas")
     .refine(
       (str) => (str.match(/\b\w+\b/g) || []).length >= 4,
       "O seu título deve ter pelo menos 4 palavras",
@@ -14,7 +13,7 @@ export const GigOverviewValidator = z.object({
     .array(
       z
         .string()
-        .regex(/^[a-zA-Z0-9]+$/, "Apenas letras e números são permitidas"),
+        .regex(/^[a-zA-Z0-9]+$/, "Apenas letras e números são permitidos"),
     )
     .min(1, "Pelo menos um tag é necessário")
     .max(5, "Máximo 5 tags permitidos"),
