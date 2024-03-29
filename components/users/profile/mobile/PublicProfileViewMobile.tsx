@@ -10,7 +10,9 @@ type PublicProfileViewMobileProps = {
   user: User;
 };
 
-const PublicProfileViewMobile = async ({ user }: PublicProfileViewMobileProps) => {
+const PublicProfileViewMobile = async ({
+  user,
+}: PublicProfileViewMobileProps) => {
   const { username, id, name, isSeller, image } = user;
   const userGigs = await getUserGigs(user.id);
   const publishedGigs = userGigs?.filter((gig) => gig.published === true);
@@ -54,7 +56,7 @@ const PublicProfileViewMobile = async ({ user }: PublicProfileViewMobileProps) =
         </TabsContent>
         {isSeller && (
           <TabsContent value="gigs">
-            <UserGigsShowcaseMobile  gigsToShow={publishedGigs} />
+            <UserGigsShowcaseMobile gigsToShow={publishedGigs} />
           </TabsContent>
         )}
       </Tabs>

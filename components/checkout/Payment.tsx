@@ -1,10 +1,6 @@
 "use client";
 import { loadStripe, Stripe } from "@stripe/stripe-js";
-import {
-  Elements,
-  EmbeddedCheckout,
-  EmbeddedCheckoutProvider,
-} from "@stripe/react-stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import CheckoutForm from "./CheckoutForm";
@@ -35,7 +31,6 @@ const Payment = ({ gigId, gigPackage }: PaymentProps) => {
     )
       .then(async (res) => {
         const { client_secret } = await res.json();
-        console.log("client_secret", client_secret);
         setClientSecret(client_secret);
       })
       .catch((error) => {

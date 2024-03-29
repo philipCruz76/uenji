@@ -17,6 +17,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import GigFAQAccordion from "./GigFAQAccordion";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 type GigWizardDescriptionProps = {
   username: string;
@@ -42,7 +43,6 @@ const GigWizardDescription = ({
   const router = useRouter();
   const {
     register,
-    watch,
     control,
     handleSubmit,
     trigger,
@@ -52,6 +52,9 @@ const GigWizardDescription = ({
     mode: "onChange",
     resolver: zodResolver(GigDescriptionValidator),
   });
+
+  const gigDescriptionText = useTranslations("GigWizard.Description");
+
   useEffect(() => {
     setGigWizardStepCurrent(2);
     if (gigDescription.faqs)
@@ -82,14 +85,18 @@ const GigWizardDescription = ({
       className="mx-[20%] flex min-h-[100dvh] max-w-[100dvw] flex-col items-center justify-center gap-4 px-6 py-[40px] pt-[50px]"
     >
       <div className="w-full text-start text-gray-600">
-        <h1 className="w-full border-b-2 text-2xl font-medium">Descrição</h1>
-        <h3 className="pt-[20px]">Descreva brevemente o seu gig</h3>
+        <h1 className="w-full border-b-2 text-2xl font-medium">
+          {gigDescriptionText("description.title")}
+        </h1>
+        <h3 className="pt-[20px]">
+          {gigDescriptionText("description.subtitle")}
+        </h3>
       </div>
 
       <div className="group flex w-full flex-row items-start justify-center ">
         <textarea
           {...register("description", {
-            required: "Por favor, descreva o seu serviço",
+            required: gigDescriptionText("description.inputValidation"),
             value: gigDescription.description,
             onChange: (e) =>
               setGigDescription({
@@ -99,13 +106,11 @@ const GigWizardDescription = ({
           })}
           maxLength={1200}
           className="max-h-[300px] min-h-[300px] w-full rounded-md border-2 border-gray-300 p-4"
-          placeholder="Descreva o seu serviço"
+          placeholder={gigDescriptionText("description.descriptionPlaceholder")}
         />
         <span className=" absolute right-[70px] hidden w-[200px] text-ellipsis group-hover:flex">
-          Esta é a sua oportunidade para ser criativo.
-          <br /> <br /> Descreva o que está a oferecer. Seja o mais detalhado
-          possível para que os compradores possam entender se isso se isto vai
-          ao encontro das suas necessidades. Deve ter pelo menos 120 caracteres.
+          {gigDescriptionText("description.hoverTextPart1")}
+          <br /> <br /> {gigDescriptionText("description.hoverTextPart2")}
         </span>
       </div>
       <div className="flex w-full flex-row justify-between pb-[20px] text-start  text-sm">
@@ -122,12 +127,9 @@ const GigWizardDescription = ({
       {/*Gig FAQs */}
       <div className="w-full text-gray-600">
         <h1 className="border-b-2 text-2xl font-medium">
-          Perguntas Frequentes
+          {gigDescriptionText("faq.title")}
         </h1>
-        <h3 className="pt-[20px]">
-          Responda a algumas perguntas para ajudar os compradores a
-          compreenderem a sua proposta
-        </h3>
+        <h3 className="pt-[20px]">{gigDescriptionText("faq.subtitle")}</h3>
         {/*FAQs List */}
         <div className="w-full border-b-2 py-[15px]">
           {!showFAQ ? (
@@ -137,18 +139,18 @@ const GigWizardDescription = ({
                 if (faqCount < 3) {
                   setShowFAQ((value) => !value);
                 } else {
-                  toast.error("You can only add 3 FAQs");
+                  toast.error(gigDescriptionText("faq.toastError"));
                 }
               }}
             >
-              Adicionar Pergunta +
+              {gigDescriptionText("faq.addFaq")}
             </button>
           ) : (
             <div className=" flex w-full flex-col gap-4">
               <input
                 type="text"
                 className="h-[40px] w-full rounded-md border-2 border-gray-300 p-4"
-                placeholder="Adicione uma Pergunta"
+                placeholder={gigDescriptionText("faq.questionPlaceholder")}
                 {...register(`faqs.${faqCount}.question`, {
                   value: currentFAQ.question,
                   onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -162,7 +164,7 @@ const GigWizardDescription = ({
               <textarea
                 className="text-elipsis max-h-[85px] min-h-[85px] w-full rounded-md border-2 border-gray-300 p-4"
                 maxLength={300}
-                placeholder="Escreva a resposta"
+                placeholder={gigDescriptionText("faq.answerPlaceholder")}
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
                   setCurrentFAQ({
                     ...currentFAQ,
@@ -199,8 +201,7 @@ const GigWizardDescription = ({
                     setShowFAQ((value) => !value);
                   }}
                 >
-                  {" "}
-                  Cancelar
+                  {gigDescriptionText("faq.cancelButton")}
                 </button>
                 <button
                   type="button"
@@ -235,8 +236,7 @@ const GigWizardDescription = ({
                     setShowFAQ((value) => !value);
                   }}
                 >
-                  {" "}
-                  Adicionar
+                  {gigDescriptionText("faq.addButton")}
                 </button>
               </div>
             </div>
@@ -273,7 +273,7 @@ const GigWizardDescription = ({
             )}
             onClick={() => {}}
           >
-            Apagar Gig
+            {gigDescriptionText("deleteButton")}
           </button>
         )}
 
@@ -291,13 +291,13 @@ const GigWizardDescription = ({
                 } rounded-md px-4 py-2 `,
               )}
             >
-              Gravar e continuar{" "}
+              {gigDescriptionText("nextButton")}
             </button>
             <Link
               href={`/${username}/manage_gigs/${gigName}/edit?step=2`}
               className="text-center text-sm text-sky-500 hover:underline"
             >
-              Voltar
+              {gigDescriptionText("backButton")}
             </Link>
           </div>
         </div>

@@ -43,11 +43,12 @@ const page = async ({ params }: pageProps) => {
   const CategoryDesciptions =
     locale === "pt" ? CategoryDesciptionsPT : CategoryDesciptionsEN;
   const categoryObject = CategoryDesciptions.find(
-    (c) => c.category === category,
+    (c) => c.categoryName === category,
   );
 
-  const { categoryTagline, categoryTitle, titlecardImage } = categoryObject!;
-  const categoryGigs = await getPopularGigs(categoryTitle);
+  const { categoryTagline, categoryTitle, titlecardImage, categoryName } =
+    categoryObject!;
+  const categoryGigs = await getPopularGigs(categoryName);
   const subcategory = SubCategoriesList.find(
     (c) => c.category === category,
   )?.subcategory;

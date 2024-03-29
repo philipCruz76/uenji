@@ -1,8 +1,12 @@
+"use client";
+import { useLocale } from "next-intl";
+
 type EmptyGigUploadCardProps = {
   type: "photo" | "document";
 };
 
 const EmptyGigUploadCard = ({ type }: EmptyGigUploadCardProps) => {
+  const locale = useLocale();
   return (
     <div className="flex h-full w-full flex-col items-center justify-center text-center">
       {type === "photo" ? (
@@ -28,7 +32,9 @@ const EmptyGigUploadCard = ({ type }: EmptyGigUploadCardProps) => {
         </svg>
       ) : null}
       <span className="text-sm text-sky-500 underline">
-        Selecionar {type === "photo" ? "imagem" : "documento"}
+        {locale === "pt"
+          ? `Selecionar ${type === "photo" ? "imagem" : "documento"}`
+          : `Select ${type === "photo" ? "image" : "document"} `}
       </span>
     </div>
   );

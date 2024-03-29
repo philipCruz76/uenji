@@ -35,7 +35,7 @@ export type FullCategoryType =
   | "Design";
 
 export type Category = {
-  category: string;
+  categoryName: string;
   categoryTitle: string;
   titlecardImage: string;
   thumbnailIcon: string;

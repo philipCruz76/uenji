@@ -2,7 +2,7 @@
 import { useGigWizardStore } from "@/lib/stores/gigWizard-store";
 import { cn } from "@/lib/utils";
 import { GigPricing } from "@/types/gigWizard.types";
-import { get } from "lodash";
+import { useLocale, useTranslations } from "next-intl";
 import { Control, FieldErrors, UseFormSetValue } from "react-hook-form";
 
 type GigPricingPackagesProps = {
@@ -25,6 +25,10 @@ const GigPricingPackages = ({
 }: GigPricingPackagesProps) => {
   const { getGigPricing, setGigPricing } = useGigWizardStore();
   const pricing = getGigPricing();
+  const packagesTranslations = useTranslations(
+    "GigWizard.Pricing.packagesTable",
+  );
+  const locale = useLocale();
 
   return (
     <table className="flex max-h-[600px] min-h-fit w-full flex-col border bg-zinc-50">
@@ -32,15 +36,15 @@ const GigPricingPackages = ({
         <tr className="grid h-[65px] grid-cols-4 grid-rows-1 justify-center  ">
           <th className="col-span-1 border-r bg-slate-50" />
           <th className="col-span-1 border-b border-r bg-gray-100 px-[20px] py-[16px] text-start font-medium">
-            Básico
+            {packagesTranslations("basic")}
           </th>
           {packages ? (
             <>
               <th className="col-span-1 border-b border-r bg-gray-100 px-[20px] py-[16px] text-start font-medium">
-                Standard
+                {packagesTranslations("standard")}
               </th>
               <th className="col-span-1 border-b bg-gray-100 px-[20px] py-[16px] text-start font-medium">
-                Prémium
+                {packagesTranslations("premium")}
               </th>
             </>
           ) : null}
@@ -51,7 +55,8 @@ const GigPricingPackages = ({
         <tr className="grid min-h-[75px] grid-cols-4">
           <td className="col-span-1 border-b border-r bg-slate-50">
             <span className=" h-full  w-full items-center px-[8px] font-medium">
-              Título <br />
+              {packagesTranslations("title")}
+              <br />
               {packageErrors.packages !== undefined ? (
                 <span className="text-ellipsis text-sm  text-red-500">
                   {packageErrors.packages?.[0]?.title?.message ||
@@ -68,7 +73,17 @@ const GigPricingPackages = ({
             )}
           >
             <textarea
-              placeholder="Pacote básico"
+              placeholder={
+                locale === "en"
+                  ? packagesTranslations("basic")
+                      .charAt(0)
+                      .toLocaleUpperCase() +
+                    packagesTranslations("basic").slice(1) +
+                    " " +
+                    packagesTranslations("placeholders.title")
+                  : packagesTranslations("placeholders.title") +
+                    packagesTranslations("basic")
+              }
               maxLength={34}
               className={
                 "h-full w-full text-ellipsis p-2 pr-[24px] text-start text-sm outline-none"
@@ -105,7 +120,17 @@ const GigPricingPackages = ({
                   {...(getGigPricing().packages[1]
                     ? { value: pricing.packages[1].title }
                     : null)}
-                  placeholder="Pacote standard"
+                  placeholder={
+                    locale === "en"
+                      ? packagesTranslations("standard")
+                          .charAt(0)
+                          .toLocaleUpperCase() +
+                        packagesTranslations("standard").slice(1) +
+                        " " +
+                        packagesTranslations("placeholders.title")
+                      : packagesTranslations("placeholders.title") +
+                        packagesTranslations("standard")
+                  }
                   className="h-full w-full text-ellipsis  p-2 pr-[24px] text-start text-sm outline-none"
                   {...formControl.register("packages.1.title", {
                     required: false,
@@ -136,7 +161,17 @@ const GigPricingPackages = ({
                   {...(getGigPricing().packages[2]
                     ? { value: pricing.packages[2].title }
                     : null)}
-                  placeholder="Pacote prémium"
+                  placeholder={
+                    locale === "en"
+                      ? packagesTranslations("premium")
+                          .charAt(0)
+                          .toLocaleUpperCase() +
+                        packagesTranslations("premium").slice(1) +
+                        " " +
+                        packagesTranslations("placeholders.title")
+                      : packagesTranslations("placeholders.title") +
+                        packagesTranslations("premium")
+                  }
                   className="h-full w-full text-ellipsis  p-2 pr-[24px] text-start text-sm outline-none"
                   {...formControl.register("packages.2.title", {
                     onChange(event: React.FormEvent<HTMLTextAreaElement>) {
@@ -162,7 +197,7 @@ const GigPricingPackages = ({
         <tr className="grid min-h-[75px] grid-cols-4">
           <td className="col-span-1 border-b border-r bg-slate-50">
             <span className=" h-full  w-full items-center px-[8px]  font-medium">
-              Descrição <br />
+              {packagesTranslations("description")} <br />
               {packageErrors.packages !== undefined ? (
                 <span className="text-ellipsis text-sm  text-red-500">
                   {packageErrors.packages?.[0]?.description?.message ||
@@ -181,7 +216,11 @@ const GigPricingPackages = ({
             <textarea
               className="h-[125px] w-full text-ellipsis  p-2 pr-[24px] text-start text-sm outline-none"
               maxLength={100}
-              placeholder="Descreva o seu pacote básico aqui..."
+              placeholder={
+                packagesTranslations("placeholders.descriptionPart1") +
+                packagesTranslations("basic") +
+                packagesTranslations("placeholders.descriptionPart2")
+              }
               {...formControl.register("packages.0.description", {
                 required: true,
                 value: pricing.packages[0].description,
@@ -211,7 +250,11 @@ const GigPricingPackages = ({
               >
                 <textarea
                   className="h-[125px] w-full text-ellipsis  p-2 pr-[24px] text-start text-sm outline-none"
-                  placeholder="Descreva o seu pacote standard aqui..."
+                  placeholder={
+                    packagesTranslations("placeholders.descriptionPart1") +
+                    packagesTranslations("standard") +
+                    packagesTranslations("placeholders.descriptionPart2")
+                  }
                   rows={3}
                   {...(getGigPricing().packages[1]
                     ? { value: pricing.packages[1].description }
@@ -241,7 +284,11 @@ const GigPricingPackages = ({
               >
                 <textarea
                   className="h-[125px] w-full text-ellipsis p-2 pr-[24px] text-start text-sm outline-none"
-                  placeholder="Descreva o seu pacote prémium aqui..."
+                  placeholder={
+                    packagesTranslations("placeholders.descriptionPart1") +
+                    packagesTranslations("premium") +
+                    packagesTranslations("placeholders.descriptionPart2")
+                  }
                   rows={3}
                   {...(getGigPricing().packages[2]
                     ? { value: pricing.packages[2].description }
@@ -271,7 +318,8 @@ const GigPricingPackages = ({
         <tr className="grid min-h-[75px] grid-cols-4">
           <td className="col-span-1 border-b border-r bg-slate-50">
             <span className=" h-full  w-full items-center px-[8px] font-medium">
-              Tempo de entrega <br />
+              {packagesTranslations("delivery")}
+              <br />
               {packageErrors.packages !== undefined ? (
                 <span className="text-ellipsis text-sm  text-red-500">
                   {packageErrors.packages?.[0]?.deliveryTime?.message ||
@@ -315,7 +363,7 @@ const GigPricingPackages = ({
                 }}
               />
               <span className="pr-[32px] text-sm text-gray-500 hover:cursor-default">
-                dias
+                {packagesTranslations("placeholders.delivery")}
               </span>
             </div>
           </td>
@@ -355,7 +403,7 @@ const GigPricingPackages = ({
                     }}
                   />
                   <span className="pr-[32px] text-sm text-gray-500 hover:cursor-default">
-                    dias
+                    {packagesTranslations("placeholders.delivery")}
                   </span>
                 </div>
               </td>
@@ -394,7 +442,7 @@ const GigPricingPackages = ({
                     }}
                   />
                   <span className="pr-[32px] text-sm text-gray-500 hover:cursor-default">
-                    dias
+                    {packagesTranslations("placeholders.delivery")}
                   </span>
                 </div>
               </td>
@@ -405,8 +453,8 @@ const GigPricingPackages = ({
         <tr className="grid min-h-[75px] grid-cols-4">
           <td className="col-span-1 border-b border-r bg-slate-50">
             <span className=" h-full w-full items-center px-[8px]  font-medium">
-              {" "}
-              Número de revisões <br />
+              {packagesTranslations("revisions")}
+              <br />
               {packageErrors.packages !== undefined ? (
                 <span className="text-ellipsis text-sm  text-red-500">
                   {packageErrors.packages?.[0]?.revisions?.message ||
@@ -450,7 +498,7 @@ const GigPricingPackages = ({
                 }}
               />
               <span className="pr-[32px] text-sm text-gray-500 hover:cursor-default">
-                revisões
+                {packagesTranslations("placeholders.revisions")}
               </span>
             </div>
           </td>
@@ -490,7 +538,7 @@ const GigPricingPackages = ({
                     }}
                   />
                   <span className="pr-[32px] text-sm text-gray-500 hover:cursor-default">
-                    revisões
+                    {packagesTranslations("placeholders.revisions")}
                   </span>
                 </div>
               </td>
@@ -528,7 +576,7 @@ const GigPricingPackages = ({
                     }}
                   />
                   <span className="pr-[32px] text-sm text-gray-500 hover:cursor-default">
-                    revisões
+                    {packagesTranslations("placeholders.revisions")}
                   </span>
                 </div>
               </td>
@@ -539,7 +587,7 @@ const GigPricingPackages = ({
         <tr className="grid min-h-[75px] grid-cols-4">
           <td className="col-span-1 border-r bg-slate-50">
             <span className=" h-full  w-full items-center px-[8px]  font-medium">
-              Preço
+              {packagesTranslations("price")}
               <br />
               {packageErrors.packages !== undefined ? (
                 <span className="text-ellipsis text-sm  text-red-500">

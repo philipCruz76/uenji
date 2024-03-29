@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 type GigWizardPricingProps = {
   username: string;
@@ -28,8 +28,7 @@ const GigWizardPricing = ({ username, gigName }: GigWizardPricingProps) => {
   const pricing = getGigPricing();
   const [packageView, setPackageView] = useState<boolean>(false);
   const router = useRouter();
-  const locale = useLocale();
-  const gigPricingText = useTranslations("GigWizard.Pricing")
+  const gigPricingText = useTranslations("GigWizard.Pricing");
 
   const {
     control,
@@ -75,7 +74,7 @@ const GigWizardPricing = ({ username, gigName }: GigWizardPricingProps) => {
           <h3 className=" text-2xl "> {gigPricingText("title")}</h3>
           <div className="flex items-center justify-center gap-2">
             <Label htmlFor="offer-packages" className=" text-sm">
-            {gigPricingText("packageSwitcher")}
+              {gigPricingText("packageSwitcher")}
             </Label>
             <Switch
               id="offer-packages"
@@ -113,13 +112,13 @@ const GigWizardPricing = ({ username, gigName }: GigWizardPricingProps) => {
                 } rounded-md px-4 py-2`,
               )}
             >
-             {gigPricingText("nextButton")}
+              {gigPricingText("nextButton")}
             </button>
             <Link
               href={`/${username}/manage_gigs/${gigName}/edit?step=1`}
               className="text-center text-sm text-sky-500 hover:underline"
             >
-             {gigPricingText("backButton")}
+              {gigPricingText("backButton")}
             </Link>
           </div>
         </div>

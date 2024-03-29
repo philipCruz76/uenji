@@ -4,7 +4,6 @@ import Payment from "@/components/checkout/Payment";
 import getGigById from "@/lib/actions/gigs/getGigById";
 import { GigPricing } from "@/types/gigWizard.types";
 import { redirect } from "next/navigation";
-import { Suspense } from "react";
 
 type pageProps = {
   searchParams: {

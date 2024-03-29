@@ -17,86 +17,85 @@ export async function POST(request: Request) {
       signature,
       process.env.STRIPE_WEBHOOK_SECRET!,
     );
-  } catch (error: any) {
-    return new NextResponse(`Webhook Error ${error.message}`, { status: 400 });
-  }
 
-  const session = event.data.object as Stripe.Checkout.Session;
-
-  if (
-    event.type === "checkout.session.completed" ||
-    event.type === "charge.succeeded"
-  ) {
-    const paymentIntent = await stripe.paymentIntents.retrieve(
-      session.payment_intent as string,
-    );
+    const session = event.data.object as Stripe.Checkout.Session;
 
     if (
-      !session?.metadata?.sellerId ||
-      !session?.metadata?.buyerId ||
-      !session?.metadata?.gigId ||
-      !session?.metadata?.packageIdx ||
-      !session?.metadata?.gigDeliveryTime
+      event.type === "checkout.session.completed" ||
+      event.type === "charge.succeeded"
     ) {
-      return new NextResponse("Required user infomration missing!", {
-        status: 400,
+      const paymentIntent = await stripe.paymentIntents.retrieve(
+        session.payment_intent as string,
+      );
+
+      if (
+        !session?.metadata?.sellerId ||
+        !session?.metadata?.buyerId ||
+        !session?.metadata?.gigId ||
+        !session?.metadata?.packageIdx ||
+        !session?.metadata?.gigDeliveryTime
+      ) {
+        throw new Error("Required user information missing!");
+      }
+
+      const buyer = await db.user.findUnique({
+        where: {
+          id: session.metadata.buyerId,
+        },
       });
-    }
 
-    const buyer = await db.user.findUnique({
-      where: {
-        id: session.metadata.buyerId,
-      },
-    });
+      const gig = await db.gig.findUnique({
+        where: {
+          id: session.metadata.gigId,
+        },
+      });
 
-    const gig = await db.gig.findUnique({
-      where: {
-        id: session.metadata.gigId,
-      },
-    });
+      if (!buyer) {
+        return new NextResponse("User not found", { status: 404 });
+      }
 
-    if (!buyer) {
-      return new NextResponse("User not found", { status: 404 });
-    }
+      if (!gig) {
+        return new NextResponse("Gig not found", { status: 404 });
+      }
 
-    if (!gig) {
-      return new NextResponse("Gig not found", { status: 404 });
-    }
+      if (paymentIntent.status === "succeeded") {
+        if (!buyer.stripeCustomerId) {
+          await db.user.update({
+            where: {
+              id: buyer.id,
+            },
+            data: {
+              stripeCustomerId: paymentIntent.customer?.toString(),
+            },
+          });
+        }
+        let deliveryTime = new Date(Date.now());
 
-    if (paymentIntent.status === "succeeded") {
-      if (!buyer.stripeCustomerId) {
-        await db.user.update({
-          where: {
-            id: buyer.id,
-          },
+        deliveryTime.setDate(
+          deliveryTime.getDate() + parseInt(session.metadata.gigDeliveryTime),
+        );
+
+        await db.order.create({
           data: {
-            stripeCustomerId: paymentIntent.customer?.toString(),
+            buyerId: session.metadata.buyerId,
+            sellerId: session.metadata.sellerId,
+            userIds: [session.metadata.buyerId, session.metadata.sellerId],
+            price: paymentIntent.amount * 100,
+            gigId: gig.id,
+            isCompleted: false,
+            title: gig.title,
+            gigPackageIdx: parseInt(session.metadata.packageIdx),
+            gigDeliveryTime: deliveryTime,
+            paymentIntent: paymentIntent.id,
+            status: "active",
           },
         });
       }
-      let deliveryTime = new Date(Date.now());
-
-      deliveryTime.setDate(
-        deliveryTime.getDate() + parseInt(session.metadata.gigDeliveryTime),
-      );
-
-      await db.order.create({
-        data: {
-          buyerId: session.metadata.buyerId,
-          sellerId: session.metadata.sellerId,
-          userIds: [session.metadata.buyerId, session.metadata.sellerId],
-          price: paymentIntent.amount * 100,
-          gigId: gig.id,
-          isCompleted: false,
-          title: gig.title,
-          gigPackageIdx: parseInt(session.metadata.packageIdx),
-          gigDeliveryTime: deliveryTime,
-          paymentIntent: paymentIntent.id,
-          status: "active",
-        },
-      });
     }
-  }
 
-  return new NextResponse("Webhook received", { status: 200 });
+    return new NextResponse("Webhook received", { status: 200 });
+  } catch (error: any) {
+    console.error("Webhook Error", error.message);
+    return new NextResponse(`Webhook Error ${error.message}`, { status: 400 });
+  }
 }

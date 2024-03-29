@@ -114,7 +114,6 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
                 gigSearchTags: [...desiredGig.features],
               },
             });
-            console.log(getFullGig());
             setGigWizardStepCompleted(0);
             setValue("gigTitle", desiredGig.title, { shouldValidate: true });
             setValue("gigCategory", desiredGig.category, {
@@ -126,7 +125,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
           }
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     }
   }, [user]);
@@ -275,9 +274,13 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
         {/* Category */}
         <div className="flex w-full  flex-row justify-between">
           <div className="flex min-w-[245px] max-w-[245px] flex-col gap-2 pr-[32px]">
-            <span className="text-lg font-semibold">{gigOverViewText("category.heading")}</span>
+            <span className="text-lg font-semibold">
+              {gigOverViewText("category.heading")}
+            </span>
             <span className="text-sm text-gray-500">
-            {gigOverViewText("category.subheadingPart1")} <b>{gigOverViewText("category.subheadingBold")}</b> {gigOverViewText("category.subheadingPart2")}
+              {gigOverViewText("category.subheadingPart1")}{" "}
+              <b>{gigOverViewText("category.subheadingBold")}</b>{" "}
+              {gigOverViewText("category.subheadingPart2")}
             </span>
           </div>
           <div className="flex w-full flex-col gap-2">
@@ -319,15 +322,19 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
         {/* Search Tags */}
         <div className="flex max-w-full  flex-row justify-between">
           <div className="flex min-w-[245px] max-w-[245px] flex-col gap-2 pr-[32px]">
-            <span className="text-lg font-semibold">{gigOverViewText("searchTags.heading")}</span>
+            <span className="text-lg font-semibold">
+              {gigOverViewText("searchTags.heading")}
+            </span>
             <span className="text-sm text-gray-500">
-            {gigOverViewText("searchTags.subheading")}
+              {gigOverViewText("searchTags.subheading")}
             </span>
           </div>
           <div className="flex w-full max-w-full  flex-col gap-2">
-            <span className="text-lg font-semibold">{gigOverViewText("searchTags.keywordsHeading")}</span>
+            <span className="text-lg font-semibold">
+              {gigOverViewText("searchTags.keywordsHeading")}
+            </span>
             <span className="text-sm text-gray-500">
-            {gigOverViewText("searchTags.keywordsSubheading")}
+              {gigOverViewText("searchTags.keywordsSubheading")}
             </span>
 
             <div
@@ -405,7 +412,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
               )}
               onClick={handleDelete}
             >
-               {gigOverViewText("deleteButton")}
+              {gigOverViewText("deleteButton")}
             </button>
           )}
           <button

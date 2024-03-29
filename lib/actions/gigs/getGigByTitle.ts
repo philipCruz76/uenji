@@ -5,9 +5,13 @@ export default async function getGigByTitle(
   gigTitle: string,
 ) {
   try {
+    const decoder = new TextDecoder();
+
+    const normalizedTitle = decodeURIComponent(gigTitle);
+
     const gig = await db.gig.findFirstOrThrow({
       where: {
-        AND: [{ user: { username: username } }, { title: gigTitle }],
+        AND: [{ user: { username: username } }, { title: normalizedTitle }],
       },
       include: {
         user: true,

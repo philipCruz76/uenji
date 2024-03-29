@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import db from "./db";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -29,6 +30,26 @@ export async function computeSHA256(file: File) {
     .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
   return hashHex;
+}
+
+export async function userNameToId(username: string) {
+  try {
+    const user = await db.user.findUnique({
+      where: {
+        username,
+      },
+      select: {
+        id: true,
+      },
+    });
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    return user.id;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export function absoluteUrl(path: string) {

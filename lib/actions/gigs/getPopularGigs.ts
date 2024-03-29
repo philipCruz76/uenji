@@ -4,7 +4,7 @@ import db from "@/lib/db";
 
 export default async function getPopularGigs(gigCategory?: string) {
   try {
-    if (!gigCategory) gigCategory = "Programação";
+    if (!gigCategory) gigCategory = "programacao";
 
     const popularGigs = await db.gig.findMany({
       where: {

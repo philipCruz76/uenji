@@ -1,8 +1,7 @@
 "use client";
 import { UserOrders } from "@/types/common.types";
 import { User } from "@prisma/client";
-import { useEffect, useState } from "react";
-import { ScrollArea } from "@/components/ui/ScrollArea";
+import { useState } from "react";
 import {
   Select,
   SelectContent,

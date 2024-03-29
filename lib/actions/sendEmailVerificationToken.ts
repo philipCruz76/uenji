@@ -1,6 +1,8 @@
 "use server";
 import { createTransport } from "nodemailer";
-import { activateAccountEmail } from "@/constants/email/activateAccountEmail";
+import { activateAccountEmailEN } from "@/constants/email/activateAccountEmailEN";
+import { activateAccountEmailPT } from "@/constants/email/activateAccountEmailPT";
+import { getLocale } from "next-intl/server";
 
 export async function sendEmailVerificationToken(
   email: string,
@@ -8,6 +10,7 @@ export async function sendEmailVerificationToken(
   activateLinkToken: string,
 ) {
   try {
+    const locale = await getLocale();
     const emailVerification = await createTransport({
       host: "smtp.hostinger.com",
       port: 465,
@@ -20,7 +23,10 @@ export async function sendEmailVerificationToken(
       from: "Uenji" + "<" + process.env.EMAIL_USER_NOREPLY + ">",
       to: email,
       subject: "Activate your new account",
-      html: activateAccountEmail(email, verificationToken, activateLinkToken),
+      html:
+        locale === "pt"
+          ? activateAccountEmailPT(email, verificationToken, activateLinkToken)
+          : activateAccountEmailEN(email, verificationToken, activateLinkToken),
     });
     console.log("Message sent: %s", emailVerification.messageId);
   } catch (error) {

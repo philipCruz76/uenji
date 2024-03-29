@@ -85,6 +85,12 @@
     "settings": "Definições",
     "logout": "Sair"
   },
+  "PasswordReset": {
+    "title": "Recuperar a Password",
+    "passwordPlaceholder": "Password Nova",
+    "confirmPasswordPlaceholder": "Confirmar Password",
+    "changeButton": "Alterar Password"
+  },
   "GigWizard": {
     "Overview": {
       "title": {
@@ -115,6 +121,8 @@
     "Pricing": {
       "title": "Âmbito e Preço",
       "packageSwitcher": "Oferecer Pacotes",
+      "nextButton": "Gravar e continuar",
+      "backButton": "Voltar",
       "packagesTable": {
         "basic": "básico",
         "standard": "standard",
@@ -130,10 +138,58 @@
           "descriptionPart2": " aqui...",
           "delivery": "dias",
           "revisions": "revisões"
-        },
-        "nextButton":"Gravar e continuar",
-        "backButton":"Voltar"
+        }
       }
+    },
+    "Description": {
+      "description": {
+        "title": "Descrição do Serviço",
+        "subtitle": "Descreva brevemente o seu serviço",
+        "inputValidation": "Por favor descreva o seu serviço",
+        "hoverTextPart1": "Esta é a sua oportunidade para ser criativo.",
+        "hoverTextPart2": "Descreva o que está a oferecer. Seja o mais detalhado possível para que os compradores possam entender se isso se isto vai ao encontro das suas necessidades. Deve ter pelo menos 120 caracteres.",
+        "descriptionPlaceholder": "Descreva o seu serviço aqui..."
+      },
+      "faq": {
+        "title": "Perguntas Frequentes",
+        "subtitle": "Responda a algumas perguntas para ajudar os compradores a compreenderem a sua proposta",
+        "addFaq": "Adicionar Pergunta +",
+        "toastError": "Apenas pode adicionar 3 perguntas",
+        "questionPlaceholder": "Adicione uma pergunta",
+        "answerPlaceholder": "Escreva a resposta",
+        "addButton": "Adicionar",
+        "cancelButton": "Cancelar"
+      },
+      "nextButton": "Gravar e continuar",
+      "deleteButton": "Apagar Serviço",
+      "backButton": "Voltar"
+    },
+    "Gallery": {
+      "title": "Galeria",
+      "subtitle": "Adicione imagens ou documentos para mostrar o seu trabalho.",
+      "disclaimer": "Para cumprir os termos de serviço da Uenji, certifique-se de que carrega apenas conteúdo que lhe pertença ou que tenha permissão ou licença para utilizar.",
+      "images": {
+        "title": "Imagens (até 3)",
+        "subtitle": "Chame a atenção dos seus possíveis cleintes com exemplos visuais dos seus serviços."
+      },
+      "documents": {
+        "title": "Documentos (até 2)",
+        "subtitle": "Documentos ajudam a dar mais credibilidade ao seu trabalho"
+      },
+      "nextButton": "Gravar e continuar",
+      "backButton": "Voltar"
+    }
+  },
+  "Checkout": {
+    "success": {
+      "heading": "Encomenda feita com successo!",
+      "orderCard": {
+        "seller": "Vendedor: ",
+        "gig": "Serviço: ",
+        "package": "Pacote: ",
+        "price": "Preço: "
+      },
+      "homeButton": "Voltar à Página Inicial"
     }
   }
 }

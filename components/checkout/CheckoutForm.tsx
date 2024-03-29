@@ -1,15 +1,10 @@
-import {
-  EmbeddedCheckoutProvider,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
+import { useElements, useStripe } from "@stripe/react-stripe-js";
 import { Suspense, useState } from "react";
-import { PaymentElement, EmbeddedCheckout } from "@stripe/react-stripe-js";
+import { PaymentElement } from "@stripe/react-stripe-js";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/constants/ui/button";
 import { StripeExpressCheckoutElementOptions } from "@stripe/stripe-js";
 import toast from "react-hot-toast";
-import getCurrentUser from "@/lib/actions/getCurrentUser";
 
 type CheckoutFormProps = {};
 
@@ -42,7 +37,7 @@ const CheckoutForm = ({}: CheckoutFormProps) => {
         elements,
         confirmParams: {
           // Make sure to change this to your payment completion page
-          return_url: `${window.location.origin}/`,
+          return_url: `${window.location.origin}/success`,
         },
       });
 
@@ -51,8 +46,6 @@ const CheckoutForm = ({}: CheckoutFormProps) => {
       } else {
         setMessage("An unexpected error occured.");
       }
-
-      toast.success("Pagamento efetuado com sucesso!");
     } catch (error) {
       toast.error;
     } finally {

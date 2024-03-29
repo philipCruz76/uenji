@@ -1,11 +1,14 @@
 "use server";
-import { passwordResetEmail } from "@/constants/email/passwordResetEmail";
+import { passwordResetEmailEN } from "@/constants/email/passwordResetEmailEN";
+import { passwordResetEmailPT } from "@/constants/email/passwordResetEmailPT";
 import { createTransport } from "nodemailer";
 import { generateRandomString } from "../utils";
 import db from "@/lib/db";
+import { getLocale } from "next-intl/server";
 
 export async function sendPasswordResetEmail(email: string) {
   try {
+    const locale = await getLocale();
     const user = await db.user.findUnique({
       where: {
         email: email,
@@ -31,7 +34,10 @@ export async function sendPasswordResetEmail(email: string) {
       from: "Uenji" + "<" + process.env.EMAIL_USER_NOREPLY + ">",
       to: email,
       subject: "Reset your Uenji password",
-      html: passwordResetEmail(email, passwordResetToken),
+      html:
+        locale === "pt"
+          ? passwordResetEmailPT(email, passwordResetToken)
+          : passwordResetEmailEN(email, passwordResetToken),
     });
     console.log("Message sent: %s", emailVerification.messageId);
 

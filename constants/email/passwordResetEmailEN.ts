@@ -1,4 +1,4 @@
-export const passwordResetEmail = (
+export const passwordResetEmailEN = (
   userEmail: string,
   passwordResetToken: string,
 ) => {

@@ -85,6 +85,12 @@
     "settings": "Settings",
     "logout": "Log out"
   },
+  "PasswordReset": {
+    "title": "Recover Password",
+    "passwordPlaceholder": "New Password",
+    "confirmPasswordPlaceholder": "Confirm Password",
+    "changeButton": "Change Password"
+  },
   "GigWizard": {
     "Overview": {
       "title": {
@@ -106,15 +112,17 @@
         "heading": "Search Tags",
         "subheading": "Label your gig with keywords that are relevant to the services you offer. Use up to 5 keywords to stand out.",
         "keywordsHeading": "Positive Keywords",
-        "keywordsSubheading":"Enter the keywords you think your buyers will use when searching for your service.",
-        "tagsPlaceholder":"Type something..."
+        "keywordsSubheading": "Enter the keywords you think your buyers will use when searching for your service.",
+        "tagsPlaceholder": "Type something..."
       },
-      "deleteButton":"Delete Gig",
-      "nextButton":"Save & Continue"
+      "deleteButton": "Delete Gig",
+      "nextButton": "Save & Continue"
     },
     "Pricing": {
       "title": "Scope & Price",
       "packageSwitcher": "Offer packages",
+      "nextButton": "Save & Continue",
+      "backButton": "Back",
       "packagesTable": {
         "basic": "basic",
         "standard": "standard",
@@ -130,10 +138,58 @@
           "descriptionPart2": " package here...",
           "delivery": "days",
           "revisions": "revisions"
-        },
-        "nextButton":"Save & Continue",
-        "backButton":"Back"
+        }
       }
+    },
+    "Description": {
+      "description": {
+        "title": "Gig Description",
+        "subtitle": "Briefly describe your gig",
+        "inputValidation": "Please describe your gig",
+        "hoverTextPart1": "This is your time to be creative.",
+        "hoverTextPart2": "Describe what you are offering. Be as detailed as possible so that potential buyers might understand if your service will be able to meet their requirements. Must be at least 120 characters.",
+        "descriptionPlaceholder": "Describe your gig here..."
+      },
+      "faq": {
+        "title": "F.A.Q.",
+        "subtitle": "Answer some common questions about your gig that might help buyers understand your service.",
+        "addFaq": "Add Question +",
+        "toastError": "You can only have 3 questions",
+        "questionPlaceholder": "Write the question",
+        "answerPlaceholder": "Write the answer",
+        "addButton": "Adicionar",
+        "cancelButton": "Cancelar"
+      },
+      "nextButton": "Save & Continue",
+      "deleteButton": "Delete Gig",
+      "backButton": "Back"
+    },
+    "Gallery": {
+      "title": "Gallery",
+      "subtitle": "Add images or documents to showcase your work",
+      "disclaimer": "In order to abide by Uenji's Terms of Service, make sure that you only upload content that belongs to you or that you have permission or hold a license to use.",
+      "images": {
+        "title": "Images (up to 3)",
+        "subtitle": "Chame a atenção dos seus possíveis cleintes com exemplos visuais dos seus serviços."
+      },
+      "documents": {
+        "title": "Documents (up to 2)",
+        "subtitle": "Documents help give your work more credibility"
+      },
+      "nextButton": "Save & Continue",
+      "backButton": "Back"
+    }
+  },
+  "Checkout": {
+    "success": {
+      "heading": "Purchase successful!",
+      "orderCard": {
+        "seller": "Seller: ",
+        "gig": "Gig: ",
+        "package": "Package: ",
+        "price": "Price: "
+      },
+      "homeButton": "Return to Home"
     }
   }
 }

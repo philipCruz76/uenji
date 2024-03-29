@@ -16,6 +16,7 @@ import {
   useGigWizardStore,
 } from "@/lib/stores/gigWizard-store";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 type GigWizardGalleryProps = {
   username: string;
@@ -29,8 +30,8 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
   const [gigDocumentName, setGigDocumentName] = useState<string[]>([]);
   const { setGigWizardStepCurrent, setGigWizardStepCompleted } =
     useGigWizardStepStore();
+  const gigGalleryText = useTranslations("GigWizard.Gallery");
   const {
-    watch,
     register,
     handleSubmit,
     setValue,
@@ -114,7 +115,6 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
         setValue("gigDocuments", [...gigGallery.gigDocuments, objectLocation], {
           shouldValidate: true,
         });
-        console.log(getGigGallery().gigDocuments);
         toast.success("Document uploaded successfully");
       })
       .catch((error) => {
@@ -140,34 +140,33 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
   return (
     <form className="mx-[10%] flex min-h-[100dvh] max-w-[100dvw] flex-col items-center justify-center gap-4 px-6 py-[40px] pt-[50px]">
       <div className="w-full gap-4">
-        <h1 className="w-full border-b-2 text-3xl font-semibold">Galeria</h1>
-        <h3 className="py-[20px]">
-          Adicione imagens ou documentos para mostrar o seu trabalho.
-        </h3>
+        <h1 className="w-full border-b-2 text-3xl font-semibold">
+          {gigGalleryText("title")}
+        </h1>
+        <h3 className="py-[20px]">{gigGalleryText("subtitle")}</h3>
         <div className=" flex h-[70px] w-full flex-row items-center justify-center gap-2 border bg-gray-100 px-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
             height="32"
-            fill="#666666"
+            fill="#f74225"
             viewBox="0 0 256 256"
           >
             <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm-8-80V80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,172Z"></path>
           </svg>
-          <span className="text-ellipsis px-2 text-slate-600">
-            Para cumprir os termos de serviço da Uenji, certifique-se de que
-            carrega apenas conteúdo que lhe pertença ou que tenha permissão ou
-            licença para utilizar.
+          <span className="text-ellipsis px-2 text-red-600">
+            {gigGalleryText("disclaimer")}
           </span>
         </div>
       </div>
 
       {/* Image Upload */}
       <div className="w-full gap-4 border-b-2  pb-4 pt-[50px]">
-        <h3 className="text-xl font-semibold">{`Images (up to 3)`}</h3>
+        <h3 className="text-xl font-semibold">
+          {gigGalleryText("images.title")}
+        </h3>
         <span className="text-sm text-slate-500">
-          Chame a atenção dos seus possíveis cleintes com exemplos visuais dos
-          seus serviços
+          {gigGalleryText("images.subtitle")}
         </span>
         <div className="flex flex-row gap-8">
           <button
@@ -284,9 +283,11 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
 
       {/* Document Upload */}
       <div className="w-full gap-4 border-b-2  pb-4 pt-[20px]">
-        <h3 className="text-xl font-semibold">{`Documents (up to 2)`}</h3>
+        <h3 className="text-xl font-semibold">
+          {gigGalleryText("images.title")}
+        </h3>
         <span className="text-sm text-slate-500 ">
-          Adicionar documentos para divulgar o seu trabalho
+          {gigGalleryText("images.subtitle")}
         </span>
         <div className="flex flex-row gap-8">
           <button
@@ -376,13 +377,13 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
                 } rounded-md px-4 py-2 `,
               )}
             >
-              Gravar e continuar{" "}
+              {gigGalleryText("nextButton")}
             </button>
             <Link
               href={`/${username}/manage_gigs/${gigName}/edit?step=3`}
               className="text-center text-sm text-sky-500 hover:underline"
             >
-              Voltar
+              {gigGalleryText("backButton")}
             </Link>
           </div>
         </div>

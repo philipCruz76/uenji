@@ -3,6 +3,7 @@ import { FC, FormEvent, useState } from "react";
 import { Input } from "@/components/ui/Input";
 import { resetPassword } from "@/lib/actions/resetUserPassword";
 import { PasswordResetSchema } from "@/types/passwordReset.types";
+import { useTranslations } from "next-intl";
 
 type PasswordResetFormProps = {
   userEmail: string;
@@ -12,6 +13,7 @@ const PasswordResetForm: FC<PasswordResetFormProps> = ({ userEmail }) => {
   const [validPassword, setValidPassword] = useState<string>("");
   const [passWordErrorMessage, setPasswordErrorMessage] = useState<string>("");
   const confirmPasswordErrorMessage = "Passwords do not match";
+  const passwordResetText = useTranslations("PasswordReset");
 
   const validatePassword = async ({
     target,
@@ -40,11 +42,13 @@ const PasswordResetForm: FC<PasswordResetFormProps> = ({ userEmail }) => {
         className="flex h-[305px] w-full max-w-[500px] flex-col space-y-4"
         action={(data) => resetPassword(data, userEmail, validPassword)}
       >
-        <label className="py-2 text-2xl font-semibold">Reset Password</label>
+        <label className="py-2 text-2xl font-semibold">
+          {passwordResetText("title")}
+        </label>
         <Input
           className="w-full rounded-sm border-zinc-300"
           required
-          placeholder="New Password"
+          placeholder={passwordResetText("passwordPlaceholder")}
           type="password"
           id="password"
           onChange={async (data) => validatePassword(data)}
@@ -55,7 +59,7 @@ const PasswordResetForm: FC<PasswordResetFormProps> = ({ userEmail }) => {
           id="confirmPassword"
           required
           className="w-full rounded-sm border-zinc-300"
-          placeholder="Confirm Password"
+          placeholder={passwordResetText("confirmPasswordPlaceholder")}
           onChange={async (data) => validateConfirmPassword(data)}
         />
 
@@ -67,8 +71,7 @@ const PasswordResetForm: FC<PasswordResetFormProps> = ({ userEmail }) => {
           type="submit"
           className="flex h-10 w-full items-center justify-center rounded-md bg-zinc-600 text-sm font-semibold text-white"
         >
-          {" "}
-          Change{" "}
+          {passwordResetText("changeButton")}
         </button>
       </form>
     </div>

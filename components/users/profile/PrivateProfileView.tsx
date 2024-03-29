@@ -10,7 +10,6 @@ const ProfileInfoCard = lazy(() => import("./ProfileInfoCard"));
 const SellerInfoCard = lazy(() => import("./SellerInfoCard"));
 const GigShowCaseSection = lazy(() => import("./GigShowCaseSection"));
 
-
 const PrivateProfileView = ({ user }: PrivateProfileViewProps) => {
   const { username, image, country, createdAt, isOnline, id, isSeller } = user;
 

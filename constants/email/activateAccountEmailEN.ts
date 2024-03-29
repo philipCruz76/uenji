@@ -1,4 +1,4 @@
-export const activateAccountEmail = (
+export const activateAccountEmailEN = (
   userEmail: string,
   token: string,
   activateLinkToken: string,

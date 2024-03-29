@@ -7,7 +7,6 @@ import { GigPricing } from "@/types/gigWizard.types";
 import { useMediaQuery } from "react-responsive";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import CheckoutButton from "../checkout/CheckoutButton";
 
 type GigCheckoutModalProps = {
   selectedPackage: GigPricing["packages"][0];
