@@ -27,7 +27,7 @@ const page = async () => {
           currentUserEmail={currentUser.email}
         />
       </div>
-      <div className="hidden tablet:flex">
+      <div className="hidden desktop:flex">
         <EmptyState user={currentUser} />
       </div>
     </>
