@@ -35,18 +35,18 @@ const PopularCategoryShowcaseMobile = ({
       <ul key="categories-list" className="flex h-full w-full flex-col  gap-2">
         {popularCategories.map((category) => {
           const subcategories = SubCategoriesList.find(
-            (sub) => sub.category === category.category,
+            (sub) => sub.category === category.categoryName,
           )?.subcategory.map((sub) => sub.name);
           return (
             <li key={category.categoryTitle}>
               <Link
-                href={`/categorias/${category.category}`}
+                href={`/categorias/${category.categoryName}`}
                 className="flex w-full  flex-row items-center justify-start gap-4 rounded-md border-2 px-2 py-2"
-                key={category.category}
+                key={category.categoryName}
               >
                 <Image
                   src={category.thumbnailIcon}
-                  alt={category.category}
+                  alt={category.categoryName}
                   width={40}
                   height={40}
                   className="h-[40px] w-[40px]"

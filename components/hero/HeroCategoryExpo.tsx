@@ -25,13 +25,13 @@ const HeroCategoryExpo = () => {
           {/* Category Cards */}
           <ul className="grid min-w-full grid-cols-2 flex-wrap items-center justify-between tablet:grid-cols-3 desktop:grid-cols-5">
             {CategoryDescriptions.map((category) => (
-              <li key={category.category}>
+              <li key={category.categoryName}>
                 <Link
-                  href={`/categorias/${category.category}`}
+                  href={`/categorias/${category.categoryName}`}
                   className="group group flex h-[150px] w-[150px] cursor-pointer flex-col items-center justify-center gap-[10px] text-center"
                 >
                   <Image
-                    alt={category.category}
+                    alt={category.categoryName}
                     src={category.thumbnailIcon}
                     className=" h-[50px] w-[50px] group-hover:animate-wiggle"
                     loading="lazy"

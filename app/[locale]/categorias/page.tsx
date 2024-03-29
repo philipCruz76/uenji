@@ -18,17 +18,17 @@ const CategoriesPage = async () => {
       <ul className="flex h-full w-full flex-col  gap-2 tablet:hidden">
         {CategoryDescriptions.map((category, index) => {
           const subcategories = SubCategoriesList.find(
-            (sub) => sub.category === category.category,
+            (sub) => sub.category === category.categoryName,
           )?.subcategory.map((sub) => sub.name);
           return (
             <li key={`category-${index}`}>
               <Link
-                href={`/categorias/${category.category}`}
+                href={`/categorias/${category.categoryName}`}
                 className="flex min-h-[60px] w-full flex-row items-center justify-center gap-4 rounded-md border-2  border-black px-2 py-2"
               >
                 <Image
                   src={category.thumbnailIcon}
-                  alt={category.category}
+                  alt={category.categoryName}
                   width={40}
                   height={40}
                   className="h-[40px] w-[40px]"
@@ -45,9 +45,9 @@ const CategoriesPage = async () => {
       </ul>
       <ul className="hidden w-full grid-cols-3 gap-6 px-8 tablet:grid">
         {CategoryDescriptions.map((category) => (
-          <li key={category.category}>
+          <li key={category.categoryName}>
             <Link
-              href={`/categorias/${category.category}`}
+              href={`/categorias/${category.categoryName}`}
               className="group flex flex-col items-center justify-center text-xl font-bold"
             >
               <Image

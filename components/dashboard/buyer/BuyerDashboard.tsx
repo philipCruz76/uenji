@@ -34,9 +34,9 @@ const BuyerDashboard = async ({ user }: BuyerDashboardProps) => {
 
   const popularCategories = CategoryDesciptions.filter(
     (category) =>
-      category.category === "programacao" ||
-      category.category === "marketing" ||
-      category.category === "fotografia",
+      category.categoryName === "programacao" ||
+      category.categoryName === "marketing" ||
+      category.categoryName === "fotografia",
   );
 
   return (
