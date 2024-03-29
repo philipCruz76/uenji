@@ -13,6 +13,7 @@ export default async function getUserGigs(userId: string) {
             username: true,
             name: true,
             image: true,
+            displayName: true,
           },
         },
       },

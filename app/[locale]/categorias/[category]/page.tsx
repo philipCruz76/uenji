@@ -1,17 +1,11 @@
-import GigCard from "@/components/gigs/GigCard";
+import CategoriesGigCarousel from "@/components/categories/CategoriesGigCarousel";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/Accordion";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/Carousel";
+import UserGigsShowcaseMobile from "@/components/users/profile/mobile/UserGigsShowcaseMobile";
 import {
   CATEGORIES,
   CategoryDesciptionsPT,
@@ -19,7 +13,7 @@ import {
 } from "@/constants";
 import { categoryFAQs, SubCategoriesList } from "@/constants/categoryConstants";
 import getPopularGigs from "@/lib/actions/gigs/getPopularGigs";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -37,6 +31,7 @@ const page = async ({ params }: pageProps) => {
   const { category } = params;
   const valid = categorySchema.safeParse(category);
   const locale = await getLocale();
+  const categoryPageText = await getTranslations("Categories");
 
   if (!valid.success) redirect("/");
 
@@ -76,39 +71,25 @@ const page = async ({ params }: pageProps) => {
 
       <div className="flex w-full flex-col ">
         <span className="w-full px-6 py-4 text-xl font-bold opacity-90 desktop:px-0">
-          Serviços mais populares de {categoryTitle}
+          {categoryPageText("popularGigs")}
+          {categoryTitle}
         </span>
-        <div className="h-full w-full items-center justify-center px-12 text-center">
-          {/* Popular Gigs Carousel */}
-
-          <Carousel
-            className="w-full"
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-          >
-            <CarouselContent>
-              {categoryGigs
-                ? categoryGigs.map((gig, index) => (
-                    <CarouselItem
-                      key={`popular-gig-${index}`}
-                      className="ml-2  py-6 tablet:basis-1/2 desktop:basis-1/4 "
-                    >
-                      <GigCard gigToShow={gig} index={index} />
-                    </CarouselItem>
-                  ))
-                : null}
-            </CarouselContent>
-
-            <CarouselPrevious className="ml-2" />
-            <CarouselNext />
-          </Carousel>
-        </div>
+        {categoryGigs && categoryGigs.length > 0 && (
+          <div className="h-full w-full items-center justify-center px-12 text-center">
+            {/* Popular Gigs Carousel */}
+            <div className="hidden desktop:flex">
+              <CategoriesGigCarousel categoryGigs={categoryGigs} />
+            </div>
+            <div className="flex desktop:hidden">
+              <UserGigsShowcaseMobile gigsToShow={categoryGigs} />
+            </div>
+          </div>
+        )}
       </div>
       <div className="flex min-w-full flex-col">
         <span className="w-full px-6 py-4  text-xl font-bold opacity-90 desktop:px-0">
-          Explora {categoryTitle}
+          {categoryPageText("explore")}
+          {categoryTitle}
         </span>
         <div className="hidden w-full flex-row gap-4 py-4 desktop:flex">
           {subcategory?.map((sub) => (
@@ -183,7 +164,7 @@ const page = async ({ params }: pageProps) => {
       </div>
       <div className="flex min-w-full flex-col px-6">
         <h2 className="w-full py-4  text-xl  font-bold opacity-90 desktop:text-center desktop:text-2xl">
-          {categoryTitle} FAQ
+          {categoryPageText("faq")}
         </h2>
         {faq?.map((f) => (
           <Accordion type="multiple" key={f.question} className=" border-b">

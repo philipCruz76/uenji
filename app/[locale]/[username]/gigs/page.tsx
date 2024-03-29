@@ -1,7 +1,7 @@
 import GigCard from "@/components/gigs/GigCard";
-import { Card, CardContent } from "@/components/ui/Card";
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 import getUserGigs from "@/lib/actions/gigs/getUserGigs";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -24,9 +24,10 @@ const page = async ({ params }: pageProps) => {
   const userGigs = await getUserGigs(currentUser.id);
   if (!userGigs) return null;
   const gigToShow = userGigs.filter((gig) => gig.published === true);
+  const gigPageText = await getTranslations("Gigs");
   return (
     <section className="flex max-h-[100dvh] min-h-[100vh] min-w-[100vw] max-w-[100dvw] flex-col gap-2 overflow-hidden p-6">
-      <h1 className="text-3xl font-bold">Serviços</h1>
+      <h1 className="text-3xl font-bold">{gigPageText("pageTitle")}</h1>
       <div className=" flex h-full min-w-full max-w-full flex-row  items-center  justify-start overflow-y-hidden overflow-x-scroll py-[10px] pt-[50px]">
         {gigToShow.map((gig, index) => (
           <div key={`gig-${index}`} className="px-2">
@@ -38,7 +39,7 @@ const page = async ({ params }: pageProps) => {
         href={`/${currentUser.username}/manage_gigs/new?step=1`}
         className="group flex h-[50px] w-full items-center justify-center gap-4 rounded-lg border-[#495057]  bg-[#dee2e6] text-center font-mono font-semibold transition duration-200 ease-in-out hover:scale-105 hover:animate-pulse tablet:absolute tablet:right-8 tablet:top-[150px] tablet:w-[200px]"
       >
-        <span className="tablet:w-[60%]">Novo serviço</span>
+        <span className="tablet:w-[60%]">{gigPageText("newGigButton")}</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="28"

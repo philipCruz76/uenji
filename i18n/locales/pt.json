@@ -191,5 +191,28 @@
       },
       "homeButton": "Voltar à Página Inicial"
     }
+  },
+  "Categories": {
+    "popularGigs": "Serviços mais populares de ",
+    "explore": "Explora ",
+    "faq": "Perguntas Frequentes sobre"
+  },
+  "Gigs": {
+    "pageTitle": "Serviços",
+    "newGigButton": "Novo Serviço "
+  },
+  "Orders": {
+    "title": "Pedidos",
+    "subtitle": "Gerir os seus pedidos",
+    "ordersTable": {
+      "active": "Ativos",
+      "late": "Em Atraso",
+      "delivered": "Entregues",
+      "cancelled": "Cancelados",
+      "order": "Pedido",
+      "orderDate": "Data de Pedido",
+      "orderDelivery": "Data de Entrega",
+      "orderPrice": "Preço"
+    }
   }
 }

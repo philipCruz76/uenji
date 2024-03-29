@@ -1,5 +1,5 @@
 "use client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Card, CardContent, CardTitle } from "@/components/ui/Card";
 import { UserGigs } from "@/types/common.types";
 import { GigPricing } from "@/types/gigWizard.types";
 import Image from "next/image";

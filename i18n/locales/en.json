@@ -191,5 +191,28 @@
       },
       "homeButton": "Return to Home"
     }
+  },
+  "Categories": {
+    "popularGigs": "Popular Gigs in ",
+    "explore": "Explore ",
+    "faq": "Frequently Asked Questions"
+  },
+  "Gigs": {
+    "pageTitle": "Gigs",
+    "newGigButton": "New Gig "
+  },
+  "Orders": {
+    "title": "Orders",
+    "subtitle": "Manage your orders",
+    "ordersTable": {
+      "active": "Active",
+      "late": "Late",
+      "delivered": "Delivered",
+      "cancelled": "Cacelled",
+      "order": "Order",
+      "orderDate": "Order Date",
+      "orderDelivery": "Delivery Date",
+      "orderPrice": "Price"
+    }
   }
 }
