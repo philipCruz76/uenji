@@ -21,7 +21,9 @@ export async function POST(request: Request) {
     if (event.type === "charge.succeeded") {
       const charge = event.data.object as Stripe.Charge;
 
-      const paymentIntent = charge.payment_intent as Stripe.PaymentIntent;
+      const paymentIntent = (await stripe.paymentIntents.retrieve(
+        charge.payment_intent as string,
+      )) as Stripe.PaymentIntent;
 
       if (
         !charge.metadata?.sellerId ||
@@ -53,7 +55,7 @@ export async function POST(request: Request) {
         return new NextResponse("Gig not found", { status: 404 });
       }
 
-      if (paymentIntent.status === "succeeded") {
+      if (charge.status === "succeeded") {
         if (!buyer.stripeCustomerId) {
           await db.user.update({
             where: {
