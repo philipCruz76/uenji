@@ -1,12 +1,13 @@
 import { useCallback } from "react";
 import { useLogInVariantStore } from "@/lib/stores/auth-store";
 import { useEmailCredentialsStore } from "@/lib/stores/modals/modal-store";
-import { signInText, signUpText } from "@/constants/auth/signInConstants";
 import { socialAction } from "@/lib/actions/auth/socialAction";
+import { useTranslations } from "next-intl";
 
 const DesktopAuthInitial = () => {
   const { isLogin, setLogin } = useLogInVariantStore();
   const { setShowEmailCredentials } = useEmailCredentialsStore();
+  const authInitialText = useTranslations("Authentication.initial");
 
   const toggleVariant = useCallback(() => {
     if (isLogin === "login") {
@@ -19,17 +20,23 @@ const DesktopAuthInitial = () => {
   return (
     <div className="container mt-12 flex flex-col space-y-3 text-left">
       <p className="text-2xl font-semibold">
-        {isLogin === "login" ? signInText.title : signUpText.title}
+        {isLogin === "login"
+          ? authInitialText("signIn.heading")
+          : authInitialText("signUp.heading")}
       </p>
       <div className="flex space-x-1 text-base font-extralight text-slate-500">
-        <p>{isLogin === "login" ? signInText.subtext : signUpText.subtext}</p>
+        <p>
+          {isLogin === "login"
+            ? authInitialText("signIn.subheading")
+            : authInitialText("signUp.subheading")}
+        </p>
         <a
           className="cursor-pointer font-medium text-[#71a9d2] underline transition duration-200 ease-in-out hover:scale-105"
           onClick={toggleVariant}
         >
           {isLogin === "login"
-            ? signInText.hyperlinkText
-            : signUpText.hyperlinkText}
+            ? authInitialText("signIn.hyperlink")
+            : authInitialText("signUp.hyperlink")}
         </a>
       </div>
 
@@ -58,11 +65,7 @@ const DesktopAuthInitial = () => {
               <polyline points="56 20 32 36 8 20"></polyline>
             </g>
           </svg>
-          <span className="w-full">
-            {isLogin === "login"
-              ? signInText.credentialsText
-              : signUpText.credentialsText}
-          </span>
+          <span className="w-full">{authInitialText("emailButton")}</span>
         </button>
 
         {/* Google Auth */}
@@ -103,11 +106,11 @@ const DesktopAuthInitial = () => {
               ></path>{" "}
             </g>
           </svg>
-          <span className="w-full">Entrar com Google</span>
+          <span className="w-full">{authInitialText("googleButton")}</span>
         </button>
 
         <div className="flex w-full items-center justify-center py-4 text-center font-extralight text-black">
-          <p>OU</p>
+          <p>{authInitialText("or")}</p>
         </div>
 
         <div className="flex w-full flex-row items-center justify-center space-x-2">

@@ -38,6 +38,38 @@
       }
     }
   },
+  "Authentication": {
+    "initial": {
+      "signIn": {
+        "heading": "Entrar na sua conta",
+        "subheading": "Ainda não tem conta?",
+        "hyperlink": "Adira já"
+      },
+      "signUp": {
+        "heading": "Crie uma conta nova",
+        "subheading": "Já tem conta?",
+        "hyperlink": "Entrar"
+      },
+      "emailButton": "Continuar com Email",
+      "googleButton": "Entrar com Google",
+      "or": "OU"
+    },
+    "email": {
+      "heading": "Continuar com o e-mail",
+      "forgottenPassword": "Esqueceu-se da password?",
+      "signInButton": "Entrar",
+      "signUpButton": "Continuar"
+    },
+    "otp": {
+      "heading": "Valide o seu email",
+      "subheading": "Introduza o código de validação que foi enviado para o email: ",
+      "otpError": "Código de validação introduzido inválido. Por favor, tente novamente.",
+      "toastSuccess": "Código de validação inserido com sucesso!",
+      "toastError": "Código inserido inválido",
+      "submitButton": "Submeter"
+    },
+    "backButton": "Voltar"
+  },
   "HeroSection": {
     "SloganPreFix": "Encontre o especialista de",
     "SloganCategories": {

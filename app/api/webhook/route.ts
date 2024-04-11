@@ -7,7 +7,7 @@ import Stripe from "stripe";
 
 export async function POST(request: Request) {
   const body = await request.text();
-  const signature = headers().get("Stripe-Signature") as string;
+  const signature = headers().get("stripe-signature") as string;
 
   let event: Stripe.Event;
 
@@ -18,35 +18,30 @@ export async function POST(request: Request) {
       process.env.STRIPE_WEBHOOK_SECRET!,
     );
 
-    const session = event.data.object as Stripe.Checkout.Session;
+    if (event.type === "charge.succeeded") {
+      const charge = event.data.object as Stripe.Charge;
 
-    if (
-      event.type === "checkout.session.completed" ||
-      event.type === "charge.succeeded"
-    ) {
-      const paymentIntent = await stripe.paymentIntents.retrieve(
-        session.payment_intent as string,
-      );
+      const paymentIntent = charge.payment_intent as Stripe.PaymentIntent;
 
       if (
-        !session?.metadata?.sellerId ||
-        !session?.metadata?.buyerId ||
-        !session?.metadata?.gigId ||
-        !session?.metadata?.packageIdx ||
-        !session?.metadata?.gigDeliveryTime
+        !charge.metadata?.sellerId ||
+        !charge.metadata?.buyerId ||
+        !charge.metadata?.gigId ||
+        !charge.metadata?.packageIdx ||
+        !charge.metadata?.gigDeliveryTime
       ) {
         throw new Error("Required user information missing!");
       }
 
       const buyer = await db.user.findUnique({
         where: {
-          id: session.metadata.buyerId,
+          id: charge.metadata.buyerId,
         },
       });
 
       const gig = await db.gig.findUnique({
         where: {
-          id: session.metadata.gigId,
+          id: charge.metadata.gigId,
         },
       });
 
@@ -72,19 +67,19 @@ export async function POST(request: Request) {
         let deliveryTime = new Date(Date.now());
 
         deliveryTime.setDate(
-          deliveryTime.getDate() + parseInt(session.metadata.gigDeliveryTime),
+          deliveryTime.getDate() + parseInt(charge.metadata.gigDeliveryTime),
         );
 
         await db.order.create({
           data: {
-            buyerId: session.metadata.buyerId,
-            sellerId: session.metadata.sellerId,
-            userIds: [session.metadata.buyerId, session.metadata.sellerId],
+            buyerId: charge.metadata.buyerId,
+            sellerId: charge.metadata.sellerId,
+            userIds: [charge.metadata.buyerId, charge.metadata.sellerId],
             price: paymentIntent.amount * 100,
             gigId: gig.id,
             isCompleted: false,
             title: gig.title,
-            gigPackageIdx: parseInt(session.metadata.packageIdx),
+            gigPackageIdx: parseInt(charge.metadata.packageIdx),
             gigDeliveryTime: deliveryTime,
             paymentIntent: paymentIntent.id,
             status: "active",

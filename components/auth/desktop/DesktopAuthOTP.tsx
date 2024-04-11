@@ -9,6 +9,7 @@ import {
 } from "@/lib/stores/modals/modal-store";
 import { cn } from "@/lib/utils";
 import { signIn } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -23,6 +24,8 @@ const DesktopAuthOTP = ({}) => {
   const [isValidating, setIsValidating] = useState<boolean>(false);
   const [failedValidation, setFailedValidation] = useState<boolean>(false);
   const [activeInput, setActiveInput] = useState<number>(0);
+  const buttonText = useTranslations("Authentication");
+  const otpText = useTranslations("Authentication.otp");
 
   const router = useRouter();
 
@@ -70,7 +73,7 @@ const DesktopAuthOTP = ({}) => {
 
     const pastedData = await e.clipboardData.getData("text");
     if (pastedData.length != 6 || pastedData.match(/[^0-9]/g)) {
-      toast.error("Código inserido inválido");
+      toast.error(otpText("toastError"));
       return;
     }
 
@@ -87,7 +90,7 @@ const DesktopAuthOTP = ({}) => {
     } else {
       setFailedValidation(false);
       setValidatedUser(true);
-      toast.success("Código de validação inserido com sucesso!");
+      toast.success(otpText("toastSuccess"));
     }
   };
 
@@ -165,18 +168,18 @@ const DesktopAuthOTP = ({}) => {
             <path d="M220,128a4,4,0,0,1-4,4H49.66l65.17,65.17a4,4,0,0,1-5.66,5.66l-72-72a4,4,0,0,1,0-5.66l72-72a4,4,0,0,1,5.66,5.66L49.66,124H216A4,4,0,0,1,220,128Z"></path>
           </svg>
         </button>
-        <span className="px-[2px] text-sm font-semibold">Voltar</span>
+        <span className="px-[2px] text-sm font-semibold">
+          {buttonText("backButton")}
+        </span>
       </div>
 
       {/* OTP form */}
       <div className="container flex h-full w-[438px] flex-col space-y-3 py-20">
         <span className="flex justify-start text-2xl font-bold">
-          Valide o seu email
+          {otpText("heading")}
         </span>
         <div className="flex flex-col justify-start ">
-          <span>
-            Introduza o código de validação que foi enviado para o email:{" "}
-          </span>
+          <span>{otpText("subheading")}</span>
           <span className=" text-sm font-light">{newUser.email}</span>
         </div>
 
@@ -204,10 +207,7 @@ const DesktopAuthOTP = ({}) => {
           })}
         </form>
         {failedValidation && (
-          <span className="text-sm text-red-500">
-            Código de validação introduzido inválido. Por favor, tente
-            novamente.
-          </span>
+          <span className="text-sm text-red-500">{otpText("otpError")}</span>
         )}
         {/*
          !! TODO : implement resend code function !!
@@ -224,7 +224,7 @@ const DesktopAuthOTP = ({}) => {
           disabled={!validatedUser || isValidating === true}
           onClick={handleSubmit}
         >
-          Submeter
+          {otpText("submitButton")}
         </button>
       </div>
     </>

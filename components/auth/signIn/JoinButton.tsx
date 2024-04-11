@@ -10,7 +10,7 @@ const DesktopAuthModal = lazy(
   () => import("@/components/auth/desktop/DesktopAuthModal"),
 );
 const MobileAuthModal = lazy(
-  () => import("@/components/auth/mobile/NewMobileAuthModal"),
+  () => import("@/components/auth/mobile/MobileAuthModal"),
 );
 
 type JoinButtonProps = {
@@ -23,9 +23,6 @@ const JoinButton: FC<JoinButtonProps> = ({ isButton }) => {
   const joinButtonText = useTranslations("Navbar.NavLinks");
 
   const isDesktopOrLaptop = useMediaQuery({ minWidth: 900 });
-  const isTablet = useMediaQuery({ minWidth: 600, maxWidth: 899 });
-
-  const isMobile = useMediaQuery({ maxWidth: 599 });
   return (
     <>
       {isButton ? (
@@ -59,7 +56,7 @@ const JoinButton: FC<JoinButtonProps> = ({ isButton }) => {
 
       {/*Tablet and Mobile Auth Modal*/}
 
-      {isTablet || isMobile ? <MobileAuthModal /> : null}
+      {!isDesktopOrLaptop && <MobileAuthModal />}
     </>
   );
 };

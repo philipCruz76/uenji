@@ -17,6 +17,7 @@ import registerNewUser from "@/lib/actions/auth/registerNewUser";
 import { sendPasswordResetEmail } from "@/lib/actions/sentPasswordResetEmail";
 import { LoginCredentials } from "@/types/login.types";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 const DesktopAuthEmail = ({}) => {
   const { setIsOpen } = useOpenModalStore();
@@ -26,6 +27,7 @@ const DesktopAuthEmail = ({}) => {
   const { setShowOTP } = useOTPStore();
   const [emailVerified, setEmailVerified] = useState(false);
   const router = useRouter();
+  const authEmailText = useTranslations("Authentication");
 
   const {
     register,
@@ -92,13 +94,15 @@ const DesktopAuthEmail = ({}) => {
             <path d="M220,128a4,4,0,0,1-4,4H49.66l65.17,65.17a4,4,0,0,1-5.66,5.66l-72-72a4,4,0,0,1,0-5.66l72-72a4,4,0,0,1,5.66,5.66L49.66,124H216A4,4,0,0,1,220,128Z"></path>
           </svg>
         </button>
-        <span className="px-[2px] text-sm font-semibold">Voltar</span>
+        <span className="px-[2px] text-sm font-semibold">
+          {authEmailText("backButton")}
+        </span>
       </div>
 
       {/* Auth form */}
-      <div className="container mt-12 flex w-[438px] flex-col space-y-3 text-left">
+      <div className="container mt-20 flex w-[438px] flex-col space-y-3 text-left">
         <p className="mb-8 flex text-2xl font-semibold ">
-          Continuar com o e-mail
+          {authEmailText("email.heading")}
         </p>
 
         {/* User input form */}
@@ -202,7 +206,7 @@ const DesktopAuthEmail = ({}) => {
                   });
               }}
             >
-              Esqueceu-se da palavra-passe?
+              {authEmailText("email.forgottenPassword")}
             </a>
           ) : null}
 
@@ -216,7 +220,9 @@ const DesktopAuthEmail = ({}) => {
               "h-[40px] rounded-md border font-semibold ",
             )}
           >
-            {isLogin === "register" ? "Continuar" : "Entrar"}
+            {isLogin === "register"
+              ? authEmailText("email.signUpButton")
+              : authEmailText("email.signInButton")}
           </button>
         </form>
       </div>

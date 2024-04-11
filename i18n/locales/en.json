@@ -38,6 +38,38 @@
       }
     }
   },
+  "Authentication": {
+    "initial": {
+      "signIn": {
+        "heading": "Sign in to your account",
+        "subheading": "Don't have an account?",
+        "hyperlink": "Join now"
+      },
+      "signUp": {
+        "heading": "Create an account",
+        "subheading": "Already have an account?",
+        "hyperlink": "Sign in"
+      },
+      "emailButton": "Continue with email",
+      "googleButton": "Sign in with Google",
+      "or": "OR"
+    },
+    "email": {
+      "heading": "Continue with email",
+      "forgottenPassword": "Forgot your password?",
+      "signInButton": "Sign In",
+      "signUpButton": "Continue"
+    },
+    "otp": {
+      "heading": "Validate your email",
+      "subheading": "Insert the code you recieved in your email inbox: ",
+      "otpError": "Invalid validation code. Please try again.",
+      "toastSuccess": "Input code validated successfully!",
+      "toastError": "Código inserido inválido",
+      "submitButton": "Submit"
+    },
+    "backButton": "Back"
+  },
   "HeroSection": {
     "SloganPreFix": "Find the right",
     "SloganCategories": {

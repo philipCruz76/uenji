@@ -1,5 +1,4 @@
 import { CategoryDesciptionsPT, CategoryDesciptionsEN } from "@/constants";
-import { SubCategoriesList } from "@/constants/categoryConstants";
 import { getLocale } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,13 +12,10 @@ const CategoriesPage = async () => {
   return (
     <section className="flex min-h-[100dvh] min-w-[100dvw] flex-col items-center justify-center gap-6  bg-white px-[80px] pb-[20px] pt-[40px] tablet:p-[80px]">
       <h1 className="items-center justify-start text-start text-3xl font-bold">
-        Categorias
+        {locale === "pt" ? "Categorias" : "Categories"}
       </h1>
       <ul className="flex h-full w-full flex-col  gap-2 tablet:hidden">
         {CategoryDescriptions.map((category, index) => {
-          const subcategories = SubCategoriesList.find(
-            (sub) => sub.category === category.categoryName,
-          )?.subcategory.map((sub) => sub.name);
           return (
             <li key={`category-${index}`}>
               <Link

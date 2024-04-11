@@ -1,51 +1,42 @@
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment } from "react";
+"use client";
+import { Drawer, DrawerContent } from "@/components/ui/Drawer";
 import {
   useEmailCredentialsStore,
   useOTPStore,
   useOpenModalStore,
 } from "@/lib/stores/modals/modal-store";
-import MobileAuthInitial from "@/components/auth/mobile/MobileAuthInitial";
-import EmailRegistrationForm from "@/components/auth/EmailRegistrationForm";
-import OTPRegistrationForm from "@/components/auth/OTPRegistrationForm";
 import Image from "next/image";
+import MobileAuthInitial from "@/components/auth/mobile/MobileAuthInitial";
+import OTPRegistrationForm from "@/components/auth/OTPRegistrationForm";
+import EmailRegistrationForm from "@/components/auth/EmailRegistrationForm";
+import { useEffect, useRef } from "react";
 
-const SmallScreenSignInSheet = () => {
+type MobileAuthModalProps = {};
+
+const MobileAuthModal = ({}: MobileAuthModalProps) => {
   let { isOpen, setIsOpen } = useOpenModalStore();
   const { isEmail, setShowEmailCredentials } = useEmailCredentialsStore();
   const { isOTP, setShowOTP } = useOTPStore();
+  const drawerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [isOpen]);
 
   return (
-    <Transition
-      appear
-      show={isOpen}
-      as={Fragment}
-      enter="transition ease-out duration-450 transform"
-      enterFrom="translate-y-full"
-      enterTo="translate-y-0"
-      leave="transition ease-in duration-0 transform"
-      leaveFrom="translate-y-0"
-      leaveTo="translate-y-full"
+    <Drawer
+      open={isOpen}
+      dismissible
+      onOpenChange={(open) => setIsOpen(open)}
+      fixed
     >
-      <Dialog
-        as="div"
-        className="container fixed bottom-0  left-0 right-0 top-0 z-20 flex flex-col overflow-hidden overflow-y-scroll rounded-2xl border border-white bg-white text-black"
-        onClose={() => {
-          setIsOpen(false);
-          setShowEmailCredentials(false);
-          setShowOTP(false);
-        }}
+      <DrawerContent
+        ref={drawerRef}
+        autoFocus
+        className="absolute left-0 top-[-14dvh] flex min-h-[100dvh] w-[100dvw] grow px-4 focus:outline-none"
       >
-        <div className="relative mx-auto flex items-start px-4 py-4  text-3xl font-bold">
-          <Image
-            src={"/images/uenji-logo-black.png"}
-            alt="Uenji Logo"
-            width={200}
-            height={200}
-          />
-        </div>
         {/* Close Button*/}
-        <div className="absolute right-6 top-6">
+        <div className=" flex items-center justify-end ">
           <button
             className="h-6 w-6 rounded-md p-0"
             onClick={() => {
@@ -70,6 +61,16 @@ const SmallScreenSignInSheet = () => {
             </svg>
           </button>
         </div>
+        {isEmail === true ? null : (
+          <div className="flex items-center justify-center">
+            <Image
+              src={"/images/uenji-logo-black.png"}
+              alt="Uenji Logo"
+              width={200}
+              height={200}
+            />
+          </div>
+        )}
 
         {/* Modal Content */}
         {!isEmail ? (
@@ -79,9 +80,9 @@ const SmallScreenSignInSheet = () => {
         ) : (
           <EmailRegistrationForm />
         )}
-      </Dialog>
-    </Transition>
+      </DrawerContent>
+    </Drawer>
   );
 };
 
-export default SmallScreenSignInSheet;
+export default MobileAuthModal;
