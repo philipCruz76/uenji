@@ -141,7 +141,7 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
 
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger }) {
       const dbUser = await db.user.findFirst({
         where: {
           email: token.email,
@@ -157,32 +157,34 @@ export const authOptions: NextAuthOptions = {
         return token;
       }
 
-      if (!dbUser.username) {
-        const emailParts = dbUser.email?.split("@");
-        if (emailParts) {
-          let derivedUsername = emailParts[0].replace(/[^a-zA-Z0-9]/g, "");
-          const userNameExists = await db.user.findUnique({
-            where: {
-              username: derivedUsername,
-            },
-            select: {
-              username: true,
-            },
-          });
+      if (trigger === "signUp") {
+        if (!dbUser.username) {
+          const emailParts = dbUser.email?.split("@");
+          if (emailParts) {
+            let derivedUsername = emailParts[0].replace(/[^a-zA-Z0-9]/g, "");
+            const userNameExists = await db.user.findUnique({
+              where: {
+                username: derivedUsername,
+              },
+              select: {
+                username: true,
+              },
+            });
 
-          if (userNameExists !== null) {
-            const randomTwoDigitNumber = Math.floor(Math.random() * 90 + 10);
-            derivedUsername = `${derivedUsername}_${randomTwoDigitNumber}`;
+            if (userNameExists !== null) {
+              const randomTwoDigitNumber = Math.floor(Math.random() * 90 + 10);
+              derivedUsername = `${derivedUsername}_${randomTwoDigitNumber}`;
+            }
+
+            await db.user.update({
+              where: {
+                id: dbUser.id,
+              },
+              data: {
+                username: derivedUsername,
+              },
+            });
           }
-
-          await db.user.update({
-            where: {
-              id: dbUser.id,
-            },
-            data: {
-              username: derivedUsername,
-            },
-          });
         }
       }
 
