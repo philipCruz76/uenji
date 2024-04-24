@@ -79,7 +79,7 @@
       "marketing": "Marketing"
     },
     "SloganSuffix": "specialist for your project",
-    "SearchPlaceholder": "Look for gigs",
+    "SearchPlaceholder": "Search for gigs",
     "CategoryHero": {
       "title": "Popular Categories"
     },
@@ -202,7 +202,7 @@
       "disclaimer": "In order to abide by Uenji's Terms of Service, make sure that you only upload content that belongs to you or that you have permission or hold a license to use.",
       "images": {
         "title": "Images (up to 3)",
-        "subtitle": "Chame a atenção dos seus possíveis cleintes com exemplos visuais dos seus serviços."
+        "subtitle": "Grab your prospective client's attention by showcasing visual examples of your work."
       },
       "documents": {
         "title": "Documents (up to 2)",

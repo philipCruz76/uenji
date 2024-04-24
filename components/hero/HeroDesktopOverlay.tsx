@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import HeroSearchBar from "../search/HeroSearchBar";
 
 const HeroDesktopOverlay = () => {
   const t = useTranslations("HeroSection");
@@ -48,32 +49,7 @@ const HeroDesktopOverlay = () => {
         </div>
 
         {/*Search Bar*/}
-        <div className="flex py-2 tablet:w-[500px] desktop:w-[600px] desktop:py-6">
-          <input
-            type="text"
-            placeholder={t("SearchPlaceholder")}
-            className="h-12 rounded-l-md border-2 border-slate-600 bg-white px-5 text-sm text-black focus:border-slate-500 focus:outline-none desktop:w-[600px]"
-          />
-          <button
-            type="submit"
-            className="flex  w-[50px] items-center justify-between rounded-r-md border-black bg-black text-center"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="-16 0 50 24"
-              strokeWidth="1.5"
-              stroke="white"
-              className="flex h-12 w-10 items-center justify-between"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-              />
-            </svg>
-          </button>
-        </div>
+        <HeroSearchBar />
       </motion.div>
     </>
   );

@@ -15,6 +15,7 @@ import toast from "react-hot-toast";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/Select";
+import SearchBar from "../search/SearchBar";
 const MobileNav = lazy(() => import("@/components/navigation/MobileNav"));
 const JoinButton = lazy(() => import("@/components/auth/signIn/JoinButton"));
 const InboxDropDownMenu = lazy(
@@ -131,37 +132,14 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
           <div className="hidden w-full items-end justify-end tablet:flex">
             {/*Search Bar*/}
             {isActiveNavBar ? (
-              <div className=" hidden w-full px-2  tablet:flex">
-                <input
-                  type="text"
-                  placeholder={navBarText("SearchPlaceholder")}
-                  className="h-10 w-full rounded-l-md border-2 border-slate-300 bg-white px-5 text-sm text-black focus:border-slate-500 focus:outline-none"
-                />
-                <button
-                  type="submit"
-                  className=" w-12 overflow-visible rounded-r-md border-black bg-black "
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 8 28"
-                    strokeWidth="2"
-                    stroke="white"
-                    className="h-[22px] w-[28px]"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                    />
-                  </svg>
-                </button>
+              <div className=" hidden relative w-full  tablet:flex">
+                <SearchBar />
               </div>
             ) : null}
           </div>
 
           {/* Language Selector */}
-
+            <div className="hidden desktop:flex px-2">
           <Select
             value={locale}
             onValueChange={(value) => {
@@ -205,9 +183,9 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
               </SelectItem>
             </SelectContent>
           </Select>
-
+          </div>
           {/*Nav Links and Auth Button Container*/}
-          <div className="flex w-full items-center justify-end text-center tablet:min-w-max tablet:gap-8">
+          <div className="flex px-2 desktop:px-0 tablet:w-fit w-full items-center justify-end text-center tablet:min-w-max tablet:gap-8">
             {/*Nav Links*/}
             {session ? (
               <ul className="hidden items-center justify-center gap-[20px] px-2 text-base font-semibold desktop:flex">

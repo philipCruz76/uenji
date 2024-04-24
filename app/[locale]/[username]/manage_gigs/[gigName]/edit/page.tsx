@@ -1,7 +1,7 @@
 "use client";
 import { useGigWizardStepStore } from "@/lib/stores/gigWizard-store";
 import { useRouter } from "next/navigation";
-import { lazy, useEffect, useMemo } from "react";
+import { lazy, useMemo } from "react";
 import { useLocale } from "use-intl";
 
 type pageProps = {

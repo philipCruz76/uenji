@@ -284,10 +284,10 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
       {/* Document Upload */}
       <div className="w-full gap-4 border-b-2  pb-4 pt-[20px]">
         <h3 className="text-xl font-semibold">
-          {gigGalleryText("images.title")}
+          {gigGalleryText("documents.title")}
         </h3>
         <span className="text-sm text-slate-500 ">
-          {gigGalleryText("images.subtitle")}
+          {gigGalleryText("documents.subtitle")}
         </span>
         <div className="flex flex-row gap-8">
           <button
