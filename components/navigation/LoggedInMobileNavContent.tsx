@@ -88,6 +88,7 @@ const LoggedInMobileNavContent = ({
         <Link
           href={`/${currentUser.username}`}
           className="flex w-full flex-row items-center justify-start  gap-4 py-2  font-mono font-bold text-black"
+          onClick={() => setMobileNav(false)}
         >
           <UserAvatar avatarPhoto={currentUser?.image!} />
           {currentUser.username!.charAt(0).toUpperCase() +
@@ -129,6 +130,7 @@ const LoggedInMobileNavContent = ({
                   buttonVariants({ variant: "outline" }),
                   "w-[80%] cursor-pointer border-[#495057] bg-[#dee2e6] transition duration-200 ease-in-out hover:scale-105 hover:border-[#495057] hover:bg-[#dee2e6] hover:bg-opacity-75",
                 )}
+                onClick={() => setMobileNav(false)}
               >
                 <span> {mobileNavText("sellerCTA")} </span>
               </Link>
@@ -157,6 +159,7 @@ const LoggedInMobileNavContent = ({
                 href="/orders"
                 className="flex flex-row items-center justify-start gap-1 hover:underline"
                 key="Manage Orders"
+                onClick={() => setMobileNav(false)}
               >
                 <span>{navLinksText("orders")}</span>
                 {orders > 0 && currentUser.sellerView === true && (
@@ -169,6 +172,7 @@ const LoggedInMobileNavContent = ({
                 href={`/${currentUser.username}/gigs`}
                 className="hover:underline"
                 key="Manage Orders"
+                onClick={() => setMobileNav(false)}
               >
                 {navLinksText("gigs")}
               </Link>
@@ -180,7 +184,7 @@ const LoggedInMobileNavContent = ({
               <AccordionTrigger className="py-0">
                 <span className="font-normal"> {navLinksText("explore")}</span>
               </AccordionTrigger>
-              <AccordionContent className="pt-0">
+              <AccordionContent onClick={() => setMobileNav(false)} className="pt-0">
                 <FooterColumn
                   links={
                     locale === "pt"
@@ -199,7 +203,7 @@ const LoggedInMobileNavContent = ({
             <div className="h-px w-full bg-slate-200" />
           </div>
 
-          <Link href="/" className="hover:underline" key="Settings">
+          <Link href="/" className="hover:underline" key="Settings" onClick={() => setMobileNav(false)}>
             {navLinksText("settings")}
           </Link>
 
