@@ -1,4 +1,5 @@
-import { socialAction } from "@/lib/actions/auth/socialAction";
+"use client"
+import toast from "react-hot-toast";
 
 const FacebookButton = () => {
   return (
@@ -6,7 +7,7 @@ const FacebookButton = () => {
       {/* Facebook Button */}
       <button
         className="flex h-[50px] w-[170px] flex-row items-center justify-center space-x-2 border text-center "
-        onClick={() => socialAction("facebook")}
+        onClick={() => toast.error("Facebook login is not available at the moment! We will enable it in the future.")}
       >
         <svg
           width="24px"

@@ -3,6 +3,7 @@ import { useLogInVariantStore } from "@/lib/stores/auth-store";
 import { useEmailCredentialsStore } from "@/lib/stores/modals/modal-store";
 import { socialAction } from "@/lib/actions/auth/socialAction";
 import { useTranslations } from "next-intl";
+import toast from "react-hot-toast";
 
 const DesktopAuthInitial = () => {
   const { isLogin, setLogin } = useLogInVariantStore();
@@ -116,7 +117,7 @@ const DesktopAuthInitial = () => {
         <div className="flex w-full flex-row items-center justify-center space-x-2">
           <button
             className="flex h-[50px] w-[175px] flex-row items-center justify-center space-x-2 border text-center transition duration-200 ease-in-out hover:scale-105 "
-            onClick={() => socialAction("facebook")}
+            onClick={() => toast.error("Facebook login is not available at the moment! We will enable it in the future.")}
           >
             <svg
               width="24px"
@@ -142,7 +143,9 @@ const DesktopAuthInitial = () => {
             <p className="pr-10">Facebook</p>
           </button>
 
-          <button className="flex h-[50px] w-[175px] flex-row items-center justify-center space-x-2 border text-center transition duration-200 ease-in-out hover:scale-105">
+          <button className="flex h-[50px] w-[175px] flex-row items-center justify-center space-x-2 border text-center transition duration-200 ease-in-out hover:scale-105"
+          onClick={()=> toast.error("Apple login is not available at the moment! We will enable it in the future.")}
+          >
             <svg
               fill="#000000"
               width="24px"
