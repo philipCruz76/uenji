@@ -22,7 +22,7 @@ const CategorySliderDesktop = ({}: CategorySliderDesktopProps) => {
         dragConstraints={{ left: -900, right: 50 }}
         initial={{ x: -200 }}
         animate={{ x: -(innerWidth + 960) }}
-        transition={{ duration: 15, ease: "linear", repeat: Infinity }}
+        transition={{ duration: 60, ease: "linear", repeat: Infinity }}
         className=" flex max-w-[80%]  select-none flex-row items-center gap-[4vmin] py-8 "
       >
         {catCards.map((card) => (
