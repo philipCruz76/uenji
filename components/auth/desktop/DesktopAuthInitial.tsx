@@ -1,4 +1,5 @@
-import { useCallback } from "react";
+"use client";
+import { useCallback, useState } from "react";
 import { useLogInVariantStore } from "@/lib/stores/auth-store";
 import { useEmailCredentialsStore } from "@/lib/stores/modals/modal-store";
 import { socialAction } from "@/lib/actions/auth/socialAction";
@@ -7,38 +8,47 @@ import toast from "react-hot-toast";
 
 const DesktopAuthInitial = () => {
   const { isLogin, setLogin } = useLogInVariantStore();
+  const [isLoading, setLoading] = useState(false);
   const { setShowEmailCredentials } = useEmailCredentialsStore();
   const authInitialText = useTranslations("Authentication.initial");
 
   const toggleVariant = useCallback(() => {
-    if (isLogin === "login") {
-      setLogin("register");
-    } else {
-      setLogin("login");
-    }
+    setLoading(true);
+    setTimeout(() => {
+      if (isLogin === "login") {
+        setLogin("register");
+        setLoading(false);
+      } else {
+        setLogin("login");
+        setLoading(false);
+      }
+    }, 500);
   }, [isLogin]);
 
   return (
     <div className="container mt-12 flex flex-col space-y-3 text-left">
-      <p className="text-2xl font-semibold">
+      {isLoading ? <a className="h-[32px] w-[300px] bg-gray-100 rounded-md animate-pulse"/>  : <p className="text-2xl font-semibold">
         {isLogin === "login"
           ? authInitialText("signIn.heading")
           : authInitialText("signUp.heading")}
-      </p>
+      </p>}
+     
       <div className="flex space-x-1 text-base font-extralight text-slate-500">
-        <p>
+        {isLoading ? <a className="h-[24px] w-[180px] bg-gray-100 rounded-md animate-pulse"/>: <p>
           {isLogin === "login"
             ? authInitialText("signIn.subheading")
             : authInitialText("signUp.subheading")}
-        </p>
-        <a
+        </p>}
+        
+       {isLoading ? <a className="h-[24px] w-[80px] bg-gray-100 rounded-md animate-pulse"/> :<a
           className="cursor-pointer font-medium text-[#71a9d2] underline transition duration-200 ease-in-out hover:scale-105"
           onClick={toggleVariant}
         >
           {isLogin === "login"
             ? authInitialText("signIn.hyperlink")
             : authInitialText("signUp.hyperlink")}
-        </a>
+        </a> }
+        
       </div>
 
       {/* Auth buttons */}
@@ -117,7 +127,11 @@ const DesktopAuthInitial = () => {
         <div className="flex w-full flex-row items-center justify-center space-x-2">
           <button
             className="flex h-[50px] w-[175px] flex-row items-center justify-center space-x-2 border text-center transition duration-200 ease-in-out hover:scale-105 "
-            onClick={() => toast.error("Facebook login is not available at the moment! We will enable it in the future.")}
+            onClick={() =>
+              toast.error(
+                "Facebook login is not available at the moment! We will enable it in the future.",
+              )
+            }
           >
             <svg
               width="24px"
@@ -143,8 +157,13 @@ const DesktopAuthInitial = () => {
             <p className="pr-10">Facebook</p>
           </button>
 
-          <button className="flex h-[50px] w-[175px] flex-row items-center justify-center space-x-2 border text-center transition duration-200 ease-in-out hover:scale-105"
-          onClick={()=> toast.error("Apple login is not available at the moment! We will enable it in the future.")}
+          <button
+            className="flex h-[50px] w-[175px] flex-row items-center justify-center space-x-2 border text-center transition duration-200 ease-in-out hover:scale-105"
+            onClick={() =>
+              toast.error(
+                "Apple login is not available at the moment! We will enable it in the future.",
+              )
+            }
           >
             <svg
               fill="#000000"
