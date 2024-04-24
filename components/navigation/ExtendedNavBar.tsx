@@ -247,7 +247,12 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                     className="group flex flex-col items-center justify-center"
                   >
                     <span>{navBarText("NavLinks.gigs")}</span>
-                    <div className={cn("hidden h-[2px] bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current ", locale==="pt"? "w-[52px]":"w-[30px]")} />
+                    <div
+                      className={cn(
+                        "hidden h-[2px] bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current ",
+                        locale === "pt" ? "w-[52px]" : "w-[30px]",
+                      )}
+                    />
                   </Link>
                 )}
               </ul>

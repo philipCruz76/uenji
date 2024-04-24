@@ -14,7 +14,7 @@ const PrivateProfileView = ({ user }: PrivateProfileViewProps) => {
   const { username, image, country, createdAt, isOnline, id, isSeller } = user;
 
   return (
-    <div className="flex max-w-[100dvw] flex-row  gap-4 flex-wrap justify-start min-h-[100dvh] my-20 ">
+    <div className="my-20 flex min-h-[100dvh]  max-w-[100dvw] flex-row flex-wrap justify-start gap-4 ">
       <div className="  w-[400px] gap-4 desktop:max-h-[200dvh] ">
         <ProfileInfoCard
           userId={id}

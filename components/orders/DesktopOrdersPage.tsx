@@ -47,11 +47,11 @@ const DesktopOrdersPage = async ({
         </TabsTrigger>
       </TabsList>
       <TabsContent value="active">
-        <table className="w-full">
+        <table className="w-full pb-10">
           <thead>
             <tr className="border-b border-b-black text-left text-gray-500">
               <th className="w-[45%] font-medium">{orderTableText("order")}</th>
-              <th className="font-medium">{orderTableText("orderDate")}o</th>
+              <th className="font-medium">{orderTableText("orderDate")}</th>
               <th className="font-medium">{orderTableText("orderDelivery")}</th>
 
               <th className="font-medium">{orderTableText("orderPrice")}</th>

@@ -63,7 +63,7 @@ const GigShowCaseSection = async ({
           </div>
         </TabsContent>
         <TabsContent value="drafts">
-          <div className="grid max-h-[450px] min-w-full min-h-full grid-cols-3 grid-rows-1 items-center justify-center gap-4 bg-white px-6">
+          <div className="grid max-h-[450px] min-h-full min-w-full grid-cols-3 grid-rows-1 items-center justify-center gap-4 bg-white px-6">
             <div className="col-span-3">
               <UserGigsShowcaseMobile gigsToShow={draftGigs} drafts />
             </div>
