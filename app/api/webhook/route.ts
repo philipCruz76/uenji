@@ -72,6 +72,7 @@ export async function POST(request: Request) {
           deliveryTime.getDate() + parseInt(charge.metadata.gigDeliveryTime),
         );
 
+        /* MAJOR BUG: order is being created somewhere else in the code, resulting in duplicate orders when this code is uncommented. Once the bug is fixed, uncomment this code.
         await db.order.create({
           data: {
             buyerId: charge.metadata.buyerId,
@@ -87,6 +88,7 @@ export async function POST(request: Request) {
             status: "active",
           },
         });
+        */
       }
     }
 
