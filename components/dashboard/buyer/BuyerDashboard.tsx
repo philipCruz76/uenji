@@ -48,7 +48,7 @@ const BuyerDashboard = async ({ user }: BuyerDashboardProps) => {
         </h1>
 
         {/* Desktop View */}
-        <div className="hidden gap-36 pt-[50px] desktop:flex desktop:flex-col">
+        <div className="hidden gap-16 pt-[50px] desktop:flex desktop:flex-col">
           <PopularCategoryShowcase />
           <PopularGigsShowcase />
         </div>

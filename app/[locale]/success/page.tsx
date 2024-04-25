@@ -1,9 +1,5 @@
 import SuccessPage from "@/components/checkout/SuccessPage";
-import getCurrentUser from "@/lib/actions/getCurrentUser";
-import getGigById from "@/lib/actions/gigs/getGigById";
-import { sendOrderPlacementEmail } from "@/lib/actions/sendOrderPlacementEmail";
-import { stripe } from "@/lib/stripe";
-import { GigPricing } from "@/types/gigWizard.types";
+import orderPlacementSuccess from "@/lib/actions/orders/orderPlacementSucces";
 import { redirect } from "next/navigation";
 type pageProps = {
   searchParams: {
@@ -16,46 +12,7 @@ export default async function successPage({ searchParams }: pageProps) {
     redirect("/");
   }
 
-  const paymentInt = async () => {
-    try {
-      const currentUser = await getCurrentUser();
-      const paymentIntent = await stripe.paymentIntents.retrieve(
-        searchParams.payment_intent,
-      );
-      console.log("PAYMENT_INTENT_RETRIEVED");
-      const gigId = paymentIntent.metadata.gigId;
-      const packageIndex = parseInt(paymentIntent.metadata.packageIdx);
-
-      const selectedGig = await getGigById(gigId);
-
-      if (!selectedGig || !selectedGig.packages) redirect("/");
-      const orderTotal = paymentIntent.amount * 100;
-      const orderPrice = orderTotal - orderTotal * 0.2;
-      const platformFee = orderTotal * 0.2;
-      const parsedPackage = JSON.parse(
-        selectedGig.packages,
-      ) as GigPricing["packages"];
-      let deliveryTime = new Date();
-      deliveryTime.setDate(
-        deliveryTime.getDate() +
-          parseInt(paymentIntent.metadata.gigDeliveryTime),
-      );
-
-      await sendOrderPlacementEmail(
-        currentUser?.email!,
-        selectedGig.title,
-        parsedPackage[packageIndex].title,
-        deliveryTime.toLocaleString(),
-        orderPrice,
-        platformFee,
-        orderTotal,
-      );
-      return { package: parsedPackage[packageIndex], gig: selectedGig };
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const purchase = await paymentInt();
+  const purchase = await orderPlacementSuccess(searchParams.payment_intent);
   if (!purchase) redirect("/");
 
   return (

@@ -86,7 +86,7 @@ const page = async ({ params }: pageProps) => {
           </div>
         )}
       </div>
-      <div className="flex min-w-full flex-col">
+      <div className="flex min-w-full flex-col px-6">
         <span className="w-full px-6 py-4  text-xl font-bold opacity-90 desktop:px-0">
           {categoryPageText("explore")}
           {categoryTitle}

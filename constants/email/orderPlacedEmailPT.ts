@@ -207,7 +207,7 @@ export const orderPlacedEmailPT = (
                                                                                               </tr>
                                                                                               <tr>
                                                                                                   <td>
-                                                                                                      <img style="width: 60px" src="https://res.cloudinary.com/dqe71igxe/image/upload/s--OGENkKw_--/f_auto/v1711664888/gig_uploads/admin/idealize-o-seu-neg%C3%B3cio-com-um-website_gig_picture_0" />
+                                                                                                      <img style="width: 60px" src="cid:orderPlacedGigCover" />
                                                                                                   </td>
                                                                                                   <td style="
                                                           font-size: 12px;

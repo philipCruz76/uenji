@@ -59,22 +59,28 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
     trigger();
   }, [gigName]);
 
-  const handlePhotoUpload = (file: File, photoIndex: number) => {
-    fetch(
-      `/api/cloudinary/upload/gig_uploads?gigName=${gigName}&photoNumber=${photoIndex}`,
-      {
-        method: "POST",
-        body: file,
-        next: {
-          revalidate: 1,
-        },
+  const handlePhotoUpload = async (file: File, photoIndex: number) => {
+    const checksum = await computeSHA256(file);
+    const signedURL = await getSignedURL(file.type, file.size, checksum);
+
+    if (signedURL.error !== undefined) {
+      toast.error(signedURL.error);
+      throw new Error(signedURL.error);
+    }
+
+    const url = signedURL.success.url;
+    await fetch(url, {
+      method: "PUT",
+      body: file,
+      headers: {
+        "Content-Type": file.type,
       },
-    )
-      .then(async (response) => {
-        toast.success("Gig photo uploaded successfully");
-        const { url } = await response.json();
+    })
+      .then((res) => {
+        const resultURL = new URL(res.url);
+        const objectLocation = resultURL.origin + resultURL.pathname;
         const updatedPhotos = [...gigGallery.gigImages];
-        updatedPhotos[photoIndex] = url;
+        updatedPhotos[photoIndex] = objectLocation;
         setGigGallery({ ...gigGallery, gigImages: updatedPhotos });
         setValue("gigImages", [...gigGallery.gigImages, url], {
           shouldValidate: true,
@@ -82,6 +88,7 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
       })
       .catch((error) => {
         toast.error(error.message);
+        console.error(error);
       });
   };
 
@@ -186,7 +193,11 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
                 const target = e.target as HTMLInputElement & {
                   files: FileList;
                 };
-                handlePhotoUpload(target.files[0], 0);
+                toast.promise(handlePhotoUpload(target.files[0], 0), {
+                  loading: "Uploading photo...",
+                  success: "Photo uploaded successfully",
+                  error: "Error uploading photo",
+                })
               }}
               style={{ display: "none" }}
             />

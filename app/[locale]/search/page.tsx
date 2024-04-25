@@ -19,7 +19,7 @@ const searchPage = async ({ searchParams }: pageProps) => {
   });
   if (!searchResults)
     return (
-      <div className="flex justify-center items-center min-h-[100dvh] min-w-[100dvw]">
+      <div className="flex min-h-[100dvh] min-w-[100dvw] items-center justify-center">
         <h1 className="text-3xl">No results found</h1>
       </div>
     );
@@ -30,15 +30,16 @@ const searchPage = async ({ searchParams }: pageProps) => {
       </h1>
 
       {/* This is where the search results will be displayed */}
-      <div className="flex p-8">
+      <div className="tablet:grid hidden w-full justify-between desktop:grid-cols-4 desktop:grid-rows-4 tablet:grid-cols-2 grid-cols-1 p-8">
         {searchResults.map((gig, index) => {
           const gigPackage = JSON.parse(
             gig.packages!,
           ) as GigPricing["packages"];
           return (
             <Link
+              key={`gig-${index}`}
               href={`/${gig.user.username}/${gig.title.replace(/\s/g, "-")}`}
-              className="group"
+              className="flex flex-shrink group col-span-1 pr-2"
             >
               <Card className="flex h-[240px] w-[250px] flex-col rounded-md border bg-[#f8f9fa] font-mono shadow-md transition duration-200 group-hover:scale-105">
                 <CardTitle className="max-h-[50%] min-w-full border-b">

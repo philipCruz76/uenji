@@ -132,64 +132,73 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
           <div className="hidden w-full items-end justify-end tablet:flex">
             {/*Search Bar*/}
             {isActiveNavBar ? (
-              <div className=" hidden relative w-full  tablet:flex">
+              <div className=" relative hidden w-full  tablet:flex">
                 <SearchBar />
               </div>
             ) : null}
           </div>
 
           {/* Language Selector */}
-            <div className="hidden desktop:flex px-2">
-          <Select
-            value={locale}
-            onValueChange={(value) => {
-              startTransition(() => {
-                router.replace(pathName, { locale: value });
-              });
-            }}
-          >
-            <SelectTrigger className="w-[70px] border-black">
-              {locale.toLocaleUpperCase()}
-              <Image
-                alt="Language"
-                src="/icons/globe-thin.svg"
-                width={20}
-                height={20}
-              />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem defaultChecked value="pt">
-                <div className="flex w-full flex-row justify-between">
-                  <Image
-                    alt="Language"
-                    src="/icons/flag-pt.svg"
-                    width={20}
-                    height={20}
-                  />
-                  <span className="px-2">{localesText("pt")}</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="en">
-                <div className="flex w-full flex-row items-start justify-start">
-                  <Image
-                    alt="Language"
-                    src="/icons/flag-us.svg"
-                    width={20}
-                    height={20}
-                    className="h-[20px] w-[20px]"
-                  />
-                  <span className="px-2">{localesText("en")}</span>
-                </div>
-              </SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="hidden px-2 desktop:flex">
+            <Select
+              value={locale}
+              onValueChange={(value) => {
+                startTransition(() => {
+                  router.replace(pathName, { locale: value });
+                });
+              }}
+            >
+              <SelectTrigger className="w-[70px] border-black">
+                {locale.toLocaleUpperCase()}
+                <Image
+                  alt="Language"
+                  src="/icons/globe-thin.svg"
+                  width={20}
+                  height={20}
+                />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem defaultChecked value="pt">
+                  <div className="flex w-full flex-row justify-between">
+                    <Image
+                      alt="Language"
+                      src="/icons/flag-pt.svg"
+                      width={20}
+                      height={20}
+                    />
+                    <span className="px-2">{localesText("pt")}</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="en">
+                  <div className="flex w-full flex-row items-start justify-start">
+                    <Image
+                      alt="Language"
+                      src="/icons/flag-us.svg"
+                      width={20}
+                      height={20}
+                      className="h-[20px] w-[20px]"
+                    />
+                    <span className="px-2">{localesText("en")}</span>
+                  </div>
+                </SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           {/*Nav Links and Auth Button Container*/}
-          <div className="flex px-2 desktop:px-0 tablet:w-fit w-full items-center justify-end text-center tablet:min-w-max tablet:gap-8">
+          <div className="flex w-full items-center justify-end px-2 text-center tablet:w-fit tablet:min-w-max tablet:gap-8 desktop:px-0">
             {/*Nav Links*/}
             {session ? (
               <ul className="hidden items-center justify-center gap-[20px] px-2 text-base font-semibold desktop:flex">
                 <InboxDropDownMenu />
+                <Link
+                  href={"/categorias"}
+                  className="group flex flex-col items-center justify-center"
+                >
+                  <span className="flex flex-row transition duration-200 ease-in-out group-hover:scale-105">
+                    {navBarText("NavLinks.explore")}
+                  </span>
+                  <div className="hidden h-[2px] w-[52px] bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current " />
+                </Link>
                 <Link
                   href="/orders"
                   className="group flex flex-col items-center justify-center"

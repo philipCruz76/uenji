@@ -105,6 +105,6 @@
     "cross-env": "^7.0.3",
     "prettier": "^3.2.4",
     "prettier-plugin-tailwindcss": "^0.4.1",
-    "prisma": "^5.9.1"
+    "prisma": "^5.13.0"
   }
 }

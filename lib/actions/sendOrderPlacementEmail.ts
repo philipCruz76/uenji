@@ -8,6 +8,7 @@ import { createTransport } from "nodemailer";
 export async function sendOrderPlacementEmail(
   email: string,
   gigName: string,
+  gigPhoto: string,
   packageName: string,
   orderDate: string,
   orderPrice: number,
@@ -31,6 +32,11 @@ export async function sendOrderPlacementEmail(
         locale === "en"
           ? "Good news: Order Placed!"
           : "Boas notícias: Serviço encomendado!",
+        attachments:[{
+          filename: "gigCover.jpg",
+          path: gigPhoto,
+          cid: "orderPlacedGigCover"
+        }],
       html:
         locale === "pt"
           ? orderPlacedEmailPT(
