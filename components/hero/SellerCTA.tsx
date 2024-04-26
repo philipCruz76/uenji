@@ -12,7 +12,7 @@ const SellerCTA = () => {
   const controls = useAnimation();
   const { setIsOpen } = useOpenModalStore();
   const { setLogin } = useLogInVariantStore();
-  const eyeCatchText = useTranslations("HeroSection.CTA");
+  const sellerCTAText = useTranslations("HeroSection.SellerCTA");
 
   const variants = {
     hidden: { opacity: 0, x: -100 },
@@ -32,18 +32,17 @@ const SellerCTA = () => {
     <section className=" flex h-full max-w-full flex-col items-center justify-center gap-6  px-[20px] tablet:py-8 desktop:py-16">
       <div className="flex flex-col gap-2 text-center">
         <h1 className="col-span-3 flex w-full justify-center  font-sans text-3xl font-bold">
-          {" "}
-          Become a Seller with Uenji today!
+          {sellerCTAText("heading")}
         </h1>
         <h3 className="font-sans text-2xl font-semibold">
-          It's easy as one, two three!{" "}
+        {sellerCTAText("subheading")}
         </h3>
       </div>
 
       <div className="grid grid-cols-1 grid-rows-3 desktop:grid-cols-3 desktop:grid-rows-1 h-full min-w-full  items-center justify-between desktop:gap-12  gap-6 px-12 ">
         <div className="group w-full flex border rounded-md h-fit desktop:w-[250px] flex-col items-center justify-start gap-2  px-2 py-6 m-auto desktop:min-h-[350px]">
           <h3 className="text-center font-sans font-semibold">
-            Create a free account
+          {sellerCTAText("step1")}
           </h3>
 
           <Image
@@ -71,7 +70,7 @@ const SellerCTA = () => {
         </div>
         <div className="group flex border rounded-md h-fit max-h-[280px] w-full desktop:w-[250px] flex-col items-center justify-start  px-2 py-6  m-auto desktop:min-h-[350px]">
           <h3 className="text-center min-w-full font-sans font-semibold">
-            Fill-in the details to become a seller
+          {sellerCTAText("step2")}
           </h3>
           <Image
             alt="OTP Verification"
@@ -97,7 +96,7 @@ const SellerCTA = () => {
         </div>
         <div className="group flex border rounded-md h-fit max-h-[280px] w-full desktop:w-[250px] flex-col items-center justify-start gap-2  px-2 py-6 m-auto desktop:min-h-[350px]">
           <h3 className="text-center font-sans font-semibold">
-            Publish your gigs and make money!
+          {sellerCTAText("step3")}
           </h3>
 
           <Image
@@ -130,7 +129,7 @@ const SellerCTA = () => {
         }}
         className="flex h-[60px] w-[200px] items-center justify-center rounded-xl border bg-[#495057] font-mono text-lg font-bold text-[#f8f9fa] shadow-md transition duration-300 hover:scale-110"
       >
-        Start Now!
+       {sellerCTAText("button")}
       </button>
     </section>
   );

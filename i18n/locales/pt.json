@@ -100,6 +100,14 @@
         "text": "Orçamento antecipado significa que não há surpresas. Os pagamentos só são liberados quando estiver satisfeito com o serviço."
       },
       "categoryTagline": "Nós temos o que voçê precisa"
+    },
+    "SellerCTA": {
+      "heading": "Torne-se num Vendedor no Uenji hoje mesmo!",
+      "subheading": "É tão fácil como um, dois, três!",
+      "step1": "Crie uma conta gratuita",
+      "step2": "Preencha os dados para se tornar um vendedor",
+      "step3": "Publique seus serviços e ganhe dinheiro!",
+      "button": "Começe Já!"
     }
   },
   "Locales": {

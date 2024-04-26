@@ -100,6 +100,14 @@
         "text": "An advance quote means there are no surprises. Payments are only released when you are satisfied with the service."
       },
       "categoryTagline": "We have what you need"
+    },
+    "SellerCTA": {
+      "heading": "Become a Seller with Uenji today!",
+      "subheading": "It's easy as one, two three!",
+      "step1": "Create a free account",
+      "step2": "Fill-in the details to become a seller",
+      "step3": "Publish your gigs and make money!",
+      "button": "Start Now!"
     }
   },
   "Locales": {
