@@ -3,6 +3,7 @@ import { useActiveNavBarStore } from "@/lib/stores/navbar-store";
 import { useSession } from "next-auth/react";
 import { lazy, useEffect } from "react";
 import HeroEyeCatchMobile from "./HeroEyeCatchMobile";
+import SellerCTA from "./SellerCTA";
 
 const HeroCategoryExpo = lazy(
   () => import("@/components/hero/HeroCategoryExpo"),
@@ -64,6 +65,10 @@ const Hero = () => {
         <HeroEyeCatchMobile />
       </div>
       <HeroCategoryExpo />
+
+      <div className="block px-[20px] pb-24">
+        <SellerCTA />
+      </div>
     </section>
   );
 };
