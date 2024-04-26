@@ -1,6 +1,7 @@
 "use client";
 import { catCards } from "@/constants";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLocale } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
 type CategorySliderDesktopProps = {};
@@ -9,6 +10,7 @@ const CategorySliderDesktop = ({}: CategorySliderDesktopProps) => {
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const dragConstraintRef = useRef<HTMLDivElement>(null);
   const [innerWidth, setInnerWidth] = useState<number>(0);
+  const locale = useLocale();
 
   useEffect(() => {
     setInnerWidth(window.innerWidth);
@@ -28,9 +30,11 @@ const CategorySliderDesktop = ({}: CategorySliderDesktopProps) => {
         {catCards.map((card) => (
           <motion.div
             key={`${card.alt}1`}
-            layoutId={card.title + "-card1"}
-            onClick={() => setSelectedCard(card.title)}
-            className="block min-h-[300px] min-w-[180px] overflow-hidden rounded-md"
+            layoutId={card.titleEN + "-card1"}
+            onClick={() =>
+              setSelectedCard(locale === "pt" ? card.titlePT : card.titleEN)
+            }
+            className="relative block min-h-[300px] min-w-[180px] overflow-hidden rounded-md"
           >
             <motion.img
               src={card.image}
@@ -38,14 +42,19 @@ const CategorySliderDesktop = ({}: CategorySliderDesktopProps) => {
               draggable={false}
               className={`max-h-[300px] min-h-[300px] min-w-[250px] rounded-md transition-transform`}
             />
+            <span className="absolute left-[10%]  top-[80%] font-sans text-xl font-semibold text-white">
+              {locale === "pt" ? card.titlePT : card.titleEN}
+            </span>
           </motion.div>
         ))}
         {catCards.map((card) => (
           <motion.div
             key={`${card.alt}2`}
-            layoutId={card.title + "-card2"}
-            onClick={() => setSelectedCard(card.title)}
-            className=" block min-h-[300px] min-w-[180px] overflow-hidden rounded-md"
+            layoutId={card.titleEN + "-card2"}
+            onClick={() =>
+              setSelectedCard(locale === "pt" ? card.titlePT : card.titleEN)
+            }
+            className=" relative block min-h-[300px] min-w-[180px] overflow-hidden rounded-md"
           >
             <motion.img
               src={card.image}
@@ -53,6 +62,9 @@ const CategorySliderDesktop = ({}: CategorySliderDesktopProps) => {
               draggable={false}
               className={`max-h-[300px] min-h-[300px] min-w-[250px] rounded-md transition-transform`}
             />
+            <span className="absolute left-[10%]  top-[80%] font-sans text-xl font-semibold text-white">
+              {locale === "pt" ? card.titlePT : card.titleEN}
+            </span>
           </motion.div>
         ))}
       </motion.div>
@@ -67,7 +79,13 @@ const CategorySliderDesktop = ({}: CategorySliderDesktopProps) => {
             onClick={() => setSelectedCard(null)}
           >
             <img
-              src={catCards.find((card) => card.title === selectedCard)?.image}
+              src={
+                catCards.find((card) =>
+                  locale === "pt"
+                    ? card.titlePT
+                    : card.titleEN === selectedCard,
+                )?.image
+              }
               className={`min-h-[56vmin] min-w-[40vmin]  object-cover object-[100%,50%] transition-transform `}
             />
           </motion.div>
