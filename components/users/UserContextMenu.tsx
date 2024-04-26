@@ -106,7 +106,12 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
               <span className="transition duration-200 ease-in-out group-hover:scale-105 ">
                 {conxtextMenuText("profile")}
               </span>
-              <div className={cn("block h-[2px]  bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current ",locale==="pt"? "w-[24px]": "w-[30px]")} />
+              <div
+                className={cn(
+                  "block h-[2px]  bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current ",
+                  locale === "pt" ? "w-[24px]" : "w-[30px]",
+                )}
+              />
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
@@ -130,7 +135,12 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
               <span className="transition duration-200 ease-in-out group-hover:scale-105 ">
                 {conxtextMenuText("inbox")}
               </span>
-              <div className={cn("block h-[2px] bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current ", locale==="pt"? " w-[80px]": "w-[25px]")} />
+              <div
+                className={cn(
+                  "block h-[2px] bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current ",
+                  locale === "pt" ? " w-[80px]" : "w-[25px]",
+                )}
+              />
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="group">
@@ -151,7 +161,12 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
               <span className="transition duration-200 ease-in-out group-hover:scale-105 ">
                 {conxtextMenuText("settings")}
               </span>
-              <div className={cn("block h-[2px]  bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current ",locale==="pt"? "w-[50px] ": "w-[40px]")} />
+              <div
+                className={cn(
+                  "block h-[2px]  bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current ",
+                  locale === "pt" ? "w-[50px] " : "w-[40px]",
+                )}
+              />
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
@@ -175,10 +190,15 @@ export default function UserContextMenu({ user }: UserContextMenuProps) {
               <path d="M112,216a8,8,0,0,1-8,8H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h56a8,8,0,0,1,0,16H48V208h56A8,8,0,0,1,112,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L196.69,120H104a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,221.66,122.34Z"></path>
             </svg>
             <div className="group flex cursor-pointer flex-col items-start justify-start">
-              <span className="transition text-start duration-200 ease-in-out group-hover:scale-105 ">
+              <span className="text-start transition duration-200 ease-in-out group-hover:scale-105 ">
                 {conxtextMenuText("logout")}
               </span>
-              <div className={cn("block h-[2px] bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current ", locale==="pt"? "w-[24px]": "ml-2 w-[38px]")} />
+              <div
+                className={cn(
+                  "block h-[2px] bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current ",
+                  locale === "pt" ? "w-[24px]" : "ml-2 w-[38px]",
+                )}
+              />
             </div>
           </DropdownMenuItem>
         </DropdownMenuGroup>

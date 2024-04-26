@@ -27,13 +27,13 @@ const searchGigs = async (query: string) => {
         ],
       },
       select: {
-        title:true,
+        title: true,
         user: {
-            select: {
-                username:true,
-            }
-        }
-      }
+          select: {
+            username: true,
+          },
+        },
+      },
     });
     return searchResults;
   } catch (error: any) {

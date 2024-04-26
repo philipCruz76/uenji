@@ -30,7 +30,7 @@ const searchPage = async ({ searchParams }: pageProps) => {
       </h1>
 
       {/* This is where the search results will be displayed */}
-      <div className="tablet:grid hidden w-full justify-between desktop:grid-cols-4 desktop:grid-rows-4 tablet:grid-cols-2 grid-cols-1 p-8">
+      <div className="hidden w-full grid-cols-1 justify-between p-8 tablet:grid tablet:grid-cols-2 desktop:grid-cols-4 desktop:grid-rows-4">
         {searchResults.map((gig, index) => {
           const gigPackage = JSON.parse(
             gig.packages!,
@@ -39,7 +39,7 @@ const searchPage = async ({ searchParams }: pageProps) => {
             <Link
               key={`gig-${index}`}
               href={`/${gig.user.username}/${gig.title.replace(/\s/g, "-")}`}
-              className="flex flex-shrink group col-span-1 pr-2"
+              className="group col-span-1 flex flex-shrink pr-2"
             >
               <Card className="flex h-[240px] w-[250px] flex-col rounded-md border bg-[#f8f9fa] font-mono shadow-md transition duration-200 group-hover:scale-105">
                 <CardTitle className="max-h-[50%] min-w-full border-b">

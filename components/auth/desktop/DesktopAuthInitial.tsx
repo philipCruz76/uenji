@@ -27,28 +27,39 @@ const DesktopAuthInitial = () => {
 
   return (
     <div className="container mt-12 flex flex-col space-y-3 text-left">
-      {isLoading ? <a className="h-[32px] w-[300px] bg-gray-100 rounded-md animate-pulse"/>  : <p className="text-2xl font-semibold">
-        {isLogin === "login"
-          ? authInitialText("signIn.heading")
-          : authInitialText("signUp.heading")}
-      </p>}
-     
+      {isLoading ? (
+        <a className="h-[32px] w-[300px] animate-pulse rounded-md bg-gray-100" />
+      ) : (
+        <p className="text-2xl font-semibold">
+          {isLogin === "login"
+            ? authInitialText("signIn.heading")
+            : authInitialText("signUp.heading")}
+        </p>
+      )}
+
       <div className="flex space-x-1 text-base font-extralight text-slate-500">
-        {isLoading ? <a className="h-[24px] w-[180px] bg-gray-100 rounded-md animate-pulse"/>: <p>
-          {isLogin === "login"
-            ? authInitialText("signIn.subheading")
-            : authInitialText("signUp.subheading")}
-        </p>}
-        
-       {isLoading ? <a className="h-[24px] w-[80px] bg-gray-100 rounded-md animate-pulse"/> :<a
-          className="cursor-pointer font-medium text-[#71a9d2] underline transition duration-200 ease-in-out hover:scale-105"
-          onClick={toggleVariant}
-        >
-          {isLogin === "login"
-            ? authInitialText("signIn.hyperlink")
-            : authInitialText("signUp.hyperlink")}
-        </a> }
-        
+        {isLoading ? (
+          <a className="h-[24px] w-[180px] animate-pulse rounded-md bg-gray-100" />
+        ) : (
+          <p>
+            {isLogin === "login"
+              ? authInitialText("signIn.subheading")
+              : authInitialText("signUp.subheading")}
+          </p>
+        )}
+
+        {isLoading ? (
+          <a className="h-[24px] w-[80px] animate-pulse rounded-md bg-gray-100" />
+        ) : (
+          <a
+            className="cursor-pointer font-medium text-[#71a9d2] underline transition duration-200 ease-in-out hover:scale-105"
+            onClick={toggleVariant}
+          >
+            {isLogin === "login"
+              ? authInitialText("signIn.hyperlink")
+              : authInitialText("signUp.hyperlink")}
+          </a>
+        )}
       </div>
 
       {/* Auth buttons */}

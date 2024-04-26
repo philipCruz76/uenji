@@ -32,11 +32,13 @@ export async function sendOrderPlacementEmail(
         locale === "en"
           ? "Good news: Order Placed!"
           : "Boas notícias: Serviço encomendado!",
-        attachments:[{
+      attachments: [
+        {
           filename: "gigCover.jpg",
           path: gigPhoto,
-          cid: "orderPlacedGigCover"
-        }],
+          cid: "orderPlacedGigCover",
+        },
+      ],
       html:
         locale === "pt"
           ? orderPlacedEmailPT(

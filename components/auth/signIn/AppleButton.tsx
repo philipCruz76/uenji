@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import toast from "react-hot-toast";
 
@@ -6,8 +6,13 @@ const AppleButton = () => {
   return (
     <>
       {/* Apple Button */}
-      <button className="flex h-[50px] w-[170px] flex-row items-center justify-center space-x-2 border text-center"
-      onClick={() => toast.error("Apple login is not available at the moment! We will enable it in the future.")}
+      <button
+        className="flex h-[50px] w-[170px] flex-row items-center justify-center space-x-2 border text-center"
+        onClick={() =>
+          toast.error(
+            "Apple login is not available at the moment! We will enable it in the future.",
+          )
+        }
       >
         <svg
           fill="#000000"

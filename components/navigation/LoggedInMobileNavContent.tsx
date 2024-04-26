@@ -184,7 +184,10 @@ const LoggedInMobileNavContent = ({
               <AccordionTrigger className="py-0">
                 <span className="font-normal"> {navLinksText("explore")}</span>
               </AccordionTrigger>
-              <AccordionContent onClick={() => setMobileNav(false)} className="pt-0">
+              <AccordionContent
+                onClick={() => setMobileNav(false)}
+                className="pt-0"
+              >
                 <FooterColumn
                   links={
                     locale === "pt"
@@ -203,7 +206,12 @@ const LoggedInMobileNavContent = ({
             <div className="h-px w-full bg-slate-200" />
           </div>
 
-          <Link href="/" className="hover:underline" key="Settings" onClick={() => setMobileNav(false)}>
+          <Link
+            href="/"
+            className="hover:underline"
+            key="Settings"
+            onClick={() => setMobileNav(false)}
+          >
             {navLinksText("settings")}
           </Link>
 

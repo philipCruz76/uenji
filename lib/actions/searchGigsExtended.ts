@@ -4,7 +4,8 @@ import db from "@/lib/db";
 
 const searchGigsFull = async (query: string) => {
   try {
-    if(query.length < 3) throw new Error("Query must be at least 3 characters long");
+    if (query.length < 3)
+      throw new Error("Query must be at least 3 characters long");
     const searchResults = await db.gig.findMany({
       where: {
         OR: [

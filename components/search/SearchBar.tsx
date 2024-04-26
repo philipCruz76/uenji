@@ -95,7 +95,7 @@ const SearchBar = ({}) => {
         </button>
       </div>
       {Array.isArray(gigs) && gigs.length > 0 && showResults ? (
-        <div className=" flex-col absolute left-[-1px] top-[20px] hidden w-full rounded-md border border-slate-300 bg-white tablet:flex">
+        <div className=" absolute left-[-1px] top-[20px] hidden w-full flex-col rounded-md border border-slate-300 bg-white tablet:flex">
           {gigs.map((gig) => (
             <a
               key={gig.title}

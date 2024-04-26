@@ -14,7 +14,7 @@ const PopularCategoryShowcase = async ({}: PopularCategoryShowcaseProps) => {
   const popularCategories = CategoryDescriptions.filter(
     (category) =>
       category.categoryName === "programacao" ||
-      category.categoryName === "fotografia"||
+      category.categoryName === "fotografia" ||
       category.categoryName === "negocios" ||
       category.categoryName === "design",
   );

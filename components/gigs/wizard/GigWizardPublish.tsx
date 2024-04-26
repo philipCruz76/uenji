@@ -60,7 +60,7 @@ const GigWizardPublish = ({ username, gigName }: GigWizardPublishProps) => {
           onClick={publishGig}
           className={cn(
             buttonVariants({ variant: "outline", size: "lg" }),
-            " border-black transition duration-300 hover:scale-110 hover:text-white hover:bg-[#7298cd]",
+            " border-black transition duration-300 hover:scale-110 hover:bg-[#7298cd] hover:text-white",
           )}
         >
           <span className="w-full">Publicar Serviço</span>

@@ -197,7 +197,7 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
                   loading: "Uploading photo...",
                   success: "Photo uploaded successfully",
                   error: "Error uploading photo",
-                })
+                });
               }}
               style={{ display: "none" }}
             />

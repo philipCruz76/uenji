@@ -72,7 +72,7 @@ export async function POST(request: Request) {
           deliveryTime.getDate() + parseInt(charge.metadata.gigDeliveryTime),
         );
 
-        // MAJOR BUG: order is created twice when both local and live webhooks are active. 
+        // MAJOR BUG: order is created twice when both local and live webhooks are active.
         await db.order.create({
           data: {
             buyerId: charge.metadata.buyerId,
@@ -88,7 +88,6 @@ export async function POST(request: Request) {
             status: "active",
           },
         });
-       
       }
     }
 

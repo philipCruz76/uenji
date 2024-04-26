@@ -13,7 +13,7 @@ type GigCardProps = {
   size?: "small" | "large";
 };
 
-const GigCard = async({ gigToShow, size }: GigCardProps) => {
+const GigCard = async ({ gigToShow, size }: GigCardProps) => {
   const parsedPackages = JSON.parse(
     gigToShow.packages!,
   ) as GigPricing["packages"];
@@ -27,7 +27,7 @@ const GigCard = async({ gigToShow, size }: GigCardProps) => {
     CategoryDescriptions = CategoryDesciptionsPT;
   }
 
-   const category = CategoryDescriptions.find(
+  const category = CategoryDescriptions.find(
     (category) => category.categoryName === gigToShow.category,
   )!;
   return (

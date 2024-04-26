@@ -35,25 +35,28 @@ const SellerCTA = () => {
           {sellerCTAText("heading")}
         </h1>
         <h3 className="font-sans text-2xl font-semibold">
-        {sellerCTAText("subheading")}
+          {sellerCTAText("subheading")}
         </h3>
       </div>
 
-      <div className="grid grid-cols-1 grid-rows-3 desktop:grid-cols-3 desktop:grid-rows-1 h-full min-w-full  items-center justify-between desktop:gap-12  gap-6 px-12 ">
-        <div className="group relative w-full flex border rounded-md h-fit desktop:w-[250px] flex-col items-center justify-start gap-2  px-2 py-6 m-auto desktop:min-h-[350px]">
+      <div className="grid h-full min-w-full grid-cols-1 grid-rows-3 items-center justify-between  gap-6 px-12 desktop:grid-cols-3  desktop:grid-rows-1 desktop:gap-12 ">
+        <div className="group relative m-auto flex h-fit w-full flex-col items-center justify-start gap-2 rounded-md border  px-2 py-6 desktop:min-h-[350px] desktop:w-[250px]">
           <h3 className="text-center font-sans font-semibold">
-          {sellerCTAText("step1")}
+            {sellerCTAText("step1")}
           </h3>
 
           <Image
             alt="OTP Verification"
+            unoptimized
             src="/animations/otp-verification.gif"
             width={200}
             height={200}
             className="top-[24%] desktop:absolute"
           />
 
-          <h3 className="absolute font-sans font-bold top-[80%] desktop:top-[85%] left-[90%] desktop:left-[80%] text-4xl">1</h3>
+          <h3 className="absolute left-[90%] top-[80%] font-sans text-4xl font-bold desktop:left-[80%] desktop:top-[85%]">
+            1
+          </h3>
           <small className="absolute top-[92%] hidden text-xs text-gray-500 group-hover:desktop:block">
             Illustration by{" "}
             <a
@@ -68,18 +71,21 @@ const SellerCTA = () => {
             </a>
           </small>
         </div>
-        <div className="group relative flex border rounded-md h-fit max-h-[280px] w-full desktop:w-[250px] flex-col items-center justify-start  px-2 py-6  m-auto desktop:min-h-[350px]">
-          <h3 className="text-center min-w-full font-sans font-semibold">
-          {sellerCTAText("step2")}
+        <div className="group relative m-auto flex h-fit max-h-[280px] w-full flex-col items-center justify-start rounded-md border  px-2 py-6  desktop:min-h-[350px] desktop:w-[250px]">
+          <h3 className="min-w-full text-center font-sans font-semibold">
+            {sellerCTAText("step2")}
           </h3>
           <Image
             alt="OTP Verification"
+            unoptimized
             src="/animations/profile-details.gif"
             width={200}
             height={200}
             className=" top-[24%] desktop:absolute"
           />
-          <h3 className="absolute top-[83%] font-sans font-bold left-[88%] desktop:left-[80%] text-4xl">2</h3>
+          <h3 className="absolute left-[88%] top-[83%] font-sans text-4xl font-bold desktop:left-[80%]">
+            2
+          </h3>
           <small className="absolute top-[92%] hidden text-xs text-gray-500 group-hover:desktop:block">
             Illustration by{" "}
             <a
@@ -94,19 +100,22 @@ const SellerCTA = () => {
             </a>
           </small>
         </div>
-        <div className="group relative flex border rounded-md h-fit max-h-[280px] w-full desktop:w-[250px] flex-col items-center justify-start gap-2  px-2 py-6 m-auto desktop:min-h-[350px]">
+        <div className="group relative m-auto flex h-fit max-h-[280px] w-full flex-col items-center justify-start gap-2 rounded-md border  px-2 py-6 desktop:min-h-[350px] desktop:w-[250px]">
           <h3 className="text-center font-sans font-semibold">
-          {sellerCTAText("step3")}
+            {sellerCTAText("step3")}
           </h3>
 
           <Image
             alt="Programmer coding"
+            unoptimized
             src="/animations/payment.gif"
             width={200}
             height={200}
             className="top-[20%] desktop:absolute"
           />
-          <h3 className="absolute font-sans font-bold top-[83%] left-[88%] desktop:left-[80%] text-4xl">3</h3>
+          <h3 className="absolute left-[88%] top-[83%] font-sans text-4xl font-bold desktop:left-[80%]">
+            3
+          </h3>
           <small className="absolute top-[92%] hidden text-xs text-gray-500 group-hover:desktop:block">
             Illustration by{" "}
             <a
@@ -129,7 +138,7 @@ const SellerCTA = () => {
         }}
         className="flex h-[60px] w-[200px] items-center justify-center rounded-xl border bg-[#495057] font-mono text-lg font-bold text-[#f8f9fa] shadow-md transition duration-300 hover:scale-110"
       >
-       {sellerCTAText("button")}
+        {sellerCTAText("button")}
       </button>
     </section>
   );
