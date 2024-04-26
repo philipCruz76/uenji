@@ -40,7 +40,7 @@ const SellerCTA = () => {
       </div>
 
       <div className="grid grid-cols-1 grid-rows-3 desktop:grid-cols-3 desktop:grid-rows-1 h-full min-w-full  items-center justify-between desktop:gap-12  gap-6 px-12 ">
-        <div className="group w-full flex border rounded-md h-fit desktop:w-[250px] flex-col items-center justify-start gap-2  px-2 py-6 m-auto desktop:min-h-[350px]">
+        <div className="group relative w-full flex border rounded-md h-fit desktop:w-[250px] flex-col items-center justify-start gap-2  px-2 py-6 m-auto desktop:min-h-[350px]">
           <h3 className="text-center font-sans font-semibold">
           {sellerCTAText("step1")}
           </h3>
@@ -50,11 +50,11 @@ const SellerCTA = () => {
             src="/animations/otp-verification.gif"
             width={200}
             height={200}
-            className="top-10 desktop:relative"
+            className="top-[24%] desktop:absolute"
           />
 
-          <h3 className="relative font-sans font-bold left-[100px] top-[20px] tablet:top-[10px] tablet:left-[170px] desktop:top-[80px] desktop:left-[80px] text-4xl">1</h3>
-          <small className="relative top-[65px] hidden text-xs text-gray-500 group-hover:desktop:block">
+          <h3 className="absolute font-sans font-bold top-[80%] desktop:top-[85%] left-[90%] desktop:left-[80%] text-4xl">1</h3>
+          <small className="absolute top-[92%] hidden text-xs text-gray-500 group-hover:desktop:block">
             Illustration by{" "}
             <a
               className="underline"
@@ -68,7 +68,7 @@ const SellerCTA = () => {
             </a>
           </small>
         </div>
-        <div className="group flex border rounded-md h-fit max-h-[280px] w-full desktop:w-[250px] flex-col items-center justify-start  px-2 py-6  m-auto desktop:min-h-[350px]">
+        <div className="group relative flex border rounded-md h-fit max-h-[280px] w-full desktop:w-[250px] flex-col items-center justify-start  px-2 py-6  m-auto desktop:min-h-[350px]">
           <h3 className="text-center min-w-full font-sans font-semibold">
           {sellerCTAText("step2")}
           </h3>
@@ -77,10 +77,10 @@ const SellerCTA = () => {
             src="/animations/profile-details.gif"
             width={200}
             height={200}
-            className="top-4 desktop:relative"
+            className=" top-[24%] desktop:absolute"
           />
-          <h3 className="relative font-sans font-bold top-[-40px] left-[100px] tablet:top-[-20px] tablet:left-[170px] desktop:top-[20px] desktop:left-[80px] text-4xl">2</h3>
-          <small className="relative top-[4px] hidden text-xs text-gray-500 group-hover:desktop:block">
+          <h3 className="absolute top-[85%] font-sans font-bold left-[90%] desktop:left-[80%] text-4xl">2</h3>
+          <small className="absolute top-[92%] hidden text-xs text-gray-500 group-hover:desktop:block">
             Illustration by{" "}
             <a
               className="underline"
@@ -94,7 +94,7 @@ const SellerCTA = () => {
             </a>
           </small>
         </div>
-        <div className="group flex border rounded-md h-fit max-h-[280px] w-full desktop:w-[250px] flex-col items-center justify-start gap-2  px-2 py-6 m-auto desktop:min-h-[350px]">
+        <div className="group relative flex border rounded-md h-fit max-h-[280px] w-full desktop:w-[250px] flex-col items-center justify-start gap-2  px-2 py-6 m-auto desktop:min-h-[350px]">
           <h3 className="text-center font-sans font-semibold">
           {sellerCTAText("step3")}
           </h3>
@@ -104,10 +104,10 @@ const SellerCTA = () => {
             src="/animations/payment.gif"
             width={200}
             height={200}
-            className="top-4 desktop:relative"
+            className="top-[20%] desktop:absolute"
           />
-          <h3 className="relative font-sans font-bold top-[-60px] left-[100px] tablet:top-[-40px] tablet:left-[170px] desktop:top-[1px] desktop:left-[80px] text-4xl">3</h3>
-          <small className="relative desktop:top-[-22px] hidden text-xs text-gray-500 group-hover:desktop:block">
+          <h3 className="absolute font-sans font-bold top-[85%] left-[90%] desktop:left-[80%] text-4xl">3</h3>
+          <small className="absolute top-[92%] hidden text-xs text-gray-500 group-hover:desktop:block">
             Illustration by{" "}
             <a
               className="underline"
