@@ -59,7 +59,7 @@ const HeroSearchBar = ({}) => {
           ref={inputRef}
           placeholder={t("SearchPlaceholder")}
           defaultValue={searchParams.get("query")?.toString()}
-          className="z-10 h-12 rounded-l-md border-2 border-slate-600 bg-white px-5 text-sm text-black focus:border-slate-500 focus:outline-none desktop:w-[600px]"
+          className="z-4 h-12 rounded-l-md border-2 border-slate-600 bg-white px-5 text-sm text-black focus:border-slate-500 focus:outline-none desktop:w-[600px]"
           onBlur={(e) => {
             e.preventDefault();
             setShowResults(false);
@@ -85,7 +85,7 @@ const HeroSearchBar = ({}) => {
                handleSearch(inputRef.current.value);
              }
            }}
-          className=" aboslute inset-0 z-10 h-12 w-12 overflow-visible rounded-r-md border-black bg-black "
+          className=" aboslute inset-0 z-4 h-12 w-12 overflow-visible rounded-r-md border-black bg-black "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
