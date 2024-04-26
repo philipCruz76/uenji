@@ -16,6 +16,7 @@
       "navLinks": {
         "login": "Entrar",
         "explore": "Categorias",
+        "search": "Procurar",
         "generalSeparator": "Geral",
         "home": "Página Inicial"
       }
@@ -30,6 +31,7 @@
         "home": "Página Inicial",
         "inbox": "Caixa de Entrada",
         "orders": "Pedidos",
+        "search": "Procurar",
         "gigs": "Serviços",
         "explore": "Categorias",
         "generalSeparator": "Geral",

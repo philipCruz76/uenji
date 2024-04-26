@@ -95,7 +95,14 @@ const LoggedOutMobileNavContent = () => {
           >
             {navLinksText("home")}
           </Link>
-
+          <Link
+            href="/search"
+            className="hover:underline"
+            key="Search"
+            onClick={() => setMobileNav(false)}
+          >
+            {navLinksText("search")}
+          </Link>
           <Accordion type="multiple" key="Language">
             <AccordionItem value="2">
               <AccordionTrigger className="flex flex-row gap-2 py-2">

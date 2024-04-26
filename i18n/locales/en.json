@@ -16,6 +16,7 @@
       "navLinks": {
         "login": "Login",
         "explore": "Categories",
+        "search": "Search",
         "generalSeparator": "General",
         "home": "Home"
       }
@@ -30,6 +31,7 @@
         "home": "Home",
         "inbox": "Inbox",
         "orders": "Orders",
+        "search": "Search",
         "gigs": "Gigs",
         "explore": "Categories",
         "generalSeparator": "General",

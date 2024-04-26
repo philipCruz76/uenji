@@ -153,6 +153,14 @@ const LoggedInMobileNavContent = ({
           >
             {navLinksText("inbox")}
           </Link>
+          <Link
+            href="/search"
+            className="hover:underline"
+            key="Search"
+            onClick={() => setMobileNav(false)}
+          >
+            {navLinksText("search")}
+          </Link>
           {currentUser.isSeller ? (
             <>
               <Link

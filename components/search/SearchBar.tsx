@@ -1,9 +1,10 @@
 "use client";
 
+import { usePathname } from "@/i18n/navigation";
 import searchGigs from "@/lib/actions/searchGigs";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useDebouncedCallback } from "use-debounce";
@@ -60,14 +61,11 @@ const SearchBar = ({}) => {
           placeholder={t("SearchPlaceholder")}
           defaultValue={searchParams.get("query")?.toString()}
           className="h-10 w-full rounded-l-md border-2 border-slate-300 bg-white px-5 text-sm text-black focus:border-slate-500 focus:outline-none"
-          onBlur={(e) => {
-            e.preventDefault();
-            setShowResults(false);
-          }}
           onKeyDown={(e) => {
             e.key === "Enter" && handleSearch(e.currentTarget.value);
             if (e.key === "Escape") {
               inputRef?.current?.blur();
+              setShowResults(false);
             }
           }}
           onChange={(e) => {

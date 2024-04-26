@@ -1,3 +1,5 @@
+import MobileSearchBar from "@/components/search/MobileSearchBar";
+import SearchBar from "@/components/search/SearchBar";
 import { Card, CardContent, CardTitle } from "@/components/ui/Card";
 import searchGigsFull from "@/lib/actions/searchGigsExtended";
 import { GigPricing } from "@/types/gigWizard.types";
@@ -25,12 +27,16 @@ const searchPage = async ({ searchParams }: pageProps) => {
     );
   return (
     <section className="flex min-h-[100dvh] min-w-[100dvw] flex-col justify-start p-6">
+      <div className="block py-8 tablet:hidden">
+        <MobileSearchBar withoutButton />
+      </div>
+
       <h1 className="text-3xl">
         Results for <b>{query}</b>
       </h1>
 
       {/* This is where the search results will be displayed */}
-      <div className="hidden w-full grid-cols-1 justify-between p-8 tablet:grid tablet:grid-cols-2 desktop:grid-cols-4 desktop:grid-rows-4">
+      <div className=" m-auto grid w-full grid-cols-1 items-center justify-center gap-4 p-8 tablet:grid-cols-2 desktop:grid-cols-4 desktop:grid-rows-4">
         {searchResults.map((gig, index) => {
           const gigPackage = JSON.parse(
             gig.packages!,
@@ -41,7 +47,7 @@ const searchPage = async ({ searchParams }: pageProps) => {
               href={`/${gig.user.username}/${gig.title.replace(/\s/g, "-")}`}
               className="group col-span-1 flex flex-shrink pr-2"
             >
-              <Card className="flex h-[240px] w-[250px] flex-col rounded-md border bg-[#f8f9fa] font-mono shadow-md transition duration-200 group-hover:scale-105">
+              <Card className="flex h-[240px] w-full flex-col rounded-md border bg-[#f8f9fa] font-mono shadow-md transition duration-200 group-hover:scale-105 tablet:w-[250px]">
                 <CardTitle className="max-h-[50%] min-w-full border-b">
                   <Image
                     src={gig.coverImage!}

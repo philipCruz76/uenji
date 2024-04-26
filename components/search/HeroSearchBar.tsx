@@ -3,7 +3,7 @@
 import searchGigs from "@/lib/actions/searchGigs";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useDebouncedCallback } from "use-debounce";
@@ -16,8 +16,6 @@ type gigSearchResults = {
 };
 
 const HeroSearchBar = ({}) => {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
   const router = useRouter();
   const t = useTranslations("HeroSection");
   const [gigs, setGigs] = useState<gigSearchResults[]>();
@@ -25,17 +23,7 @@ const HeroSearchBar = ({}) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = (searchTerm: string) => {
-    const params = new URLSearchParams(searchParams);
-    if (searchTerm) {
-      params.set("query", searchTerm);
-    } else {
-      params.delete("query");
-    }
-    if (pathname === "/search") {
-      router.replace(`${pathname}?${params.toString()}`);
-    } else {
-      router.push(`/search?query=${searchTerm}`);
-    }
+    router.push(`/search?query=${searchTerm}`);
   };
   const searchResults = useDebouncedCallback(async (query: string) => {
     if (!query) return setGigs([]);
@@ -58,16 +46,12 @@ const HeroSearchBar = ({}) => {
           type="text"
           ref={inputRef}
           placeholder={t("SearchPlaceholder")}
-          defaultValue={searchParams.get("query")?.toString()}
           className="z-4 h-12 rounded-l-md border-2 border-slate-600 bg-white px-5 text-sm text-black focus:border-slate-500 focus:outline-none desktop:w-[600px]"
-          onBlur={(e) => {
-            e.preventDefault();
-            setShowResults(false);
-          }}
           onKeyDown={(e) => {
             e.key === "Enter" && handleSearch(e.currentTarget.value);
             if (e.key === "Escape") {
               inputRef?.current?.blur();
+              setShowResults(false);
             }
           }}
           onChange={(e) => {
@@ -79,13 +63,13 @@ const HeroSearchBar = ({}) => {
           }}
         />
         <button
-           type="button"
-           onClick={() => {
-             if (inputRef.current && inputRef.current.value.length > 2) {
-               handleSearch(inputRef.current.value);
-             }
-           }}
-          className=" aboslute inset-0 z-4 h-12 w-12 overflow-visible rounded-r-md border-black bg-black "
+          type="button"
+          onClick={() => {
+            if (inputRef.current && inputRef.current.value.length > 2) {
+              handleSearch(inputRef.current.value);
+            }
+          }}
+          className=" aboslute z-4 inset-0 h-12 w-12 overflow-visible rounded-r-md border-black bg-black "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
