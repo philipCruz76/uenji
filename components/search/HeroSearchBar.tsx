@@ -2,6 +2,7 @@
 
 import searchGigs from "@/lib/actions/searchGigs";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
@@ -59,7 +60,10 @@ const HeroSearchBar = ({}) => {
           placeholder={t("SearchPlaceholder")}
           defaultValue={searchParams.get("query")?.toString()}
           className="z-10 h-12 rounded-l-md border-2 border-slate-600 bg-white px-5 text-sm text-black focus:border-slate-500 focus:outline-none desktop:w-[600px]"
-          onBlur={() => setShowResults(false)}
+          onBlur={(e) => {
+            e.preventDefault();
+            setShowResults(false);
+          }}
           onKeyDown={(e) => {
             e.key === "Enter" && handleSearch(e.currentTarget.value);
             if (e.key === "Escape") {
@@ -75,7 +79,12 @@ const HeroSearchBar = ({}) => {
           }}
         />
         <button
-          type="submit"
+           type="button"
+           onClick={() => {
+             if (inputRef.current && inputRef.current.value.length > 2) {
+               handleSearch(inputRef.current.value);
+             }
+           }}
           className=" aboslute inset-0 z-10 h-12 w-12 overflow-visible rounded-r-md border-black bg-black "
         >
           <svg
@@ -97,7 +106,7 @@ const HeroSearchBar = ({}) => {
       {Array.isArray(gigs) && gigs.length > 0 && showResults ? (
         <div className=" z-3 absolute left-[-1px] top-[24px] hidden w-full flex-col rounded-b-md border border-slate-300 bg-white tablet:flex">
           {gigs.map((gig) => (
-            <a
+            <Link
               key={gig.title}
               href={`/${gig.user.username}/${gig.title.replace(/\s/g, "-")}`}
               className="block w-full p-2 hover:bg-slate-100"
@@ -105,7 +114,7 @@ const HeroSearchBar = ({}) => {
               <span className="font-mono text-sm font-semibold">
                 {gig.title}
               </span>
-            </a>
+            </Link>
           ))}
         </div>
       ) : null}
