@@ -42,7 +42,7 @@ const LoggedOutMobileNavContent = () => {
           }}
           className={cn(
             buttonVariants({ variant: "outline" }),
-            "flex max-w-[120px] cursor-pointer border-[#495057] bg-[#dee2e6] font-mono transition duration-200 ease-in-out hover:scale-105 hover:border-[#495057] hover:bg-[#dee2e6] hover:bg-opacity-75",
+            "flex max-w-[120px] rounded-md cursor-pointer border-[#495057] bg-[#dee2e6] font-mono transition duration-200 ease-in-out hover:scale-105 hover:border-[#495057] hover:bg-[#dee2e6] hover:bg-opacity-75",
           )}
         >
           {mobileNavText("joinCTA")}

@@ -103,7 +103,7 @@ const LoggedInMobileNavContent = ({
                 onClick={switchView}
                 className={cn(
                   buttonVariants({ variant: "outline" }),
-                  "w-[80%] cursor-pointer border-[#495057] bg-[#dee2e6] transition duration-200 ease-in-out hover:scale-105 hover:border-[#495057] hover:bg-[#dee2e6] hover:bg-opacity-75",
+                  "w-[80%] cursor-pointer border-[#495057] rounded-md bg-[#dee2e6] transition duration-200 ease-in-out hover:scale-105 hover:border-[#495057] hover:bg-[#dee2e6] hover:bg-opacity-75",
                 )}
               >
                 <span className="">
