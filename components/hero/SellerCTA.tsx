@@ -79,7 +79,7 @@ const SellerCTA = () => {
             height={200}
             className=" top-[24%] desktop:absolute"
           />
-          <h3 className="absolute top-[85%] font-sans font-bold left-[90%] desktop:left-[80%] text-4xl">2</h3>
+          <h3 className="absolute top-[83%] font-sans font-bold left-[88%] desktop:left-[80%] text-4xl">2</h3>
           <small className="absolute top-[92%] hidden text-xs text-gray-500 group-hover:desktop:block">
             Illustration by{" "}
             <a
@@ -106,7 +106,7 @@ const SellerCTA = () => {
             height={200}
             className="top-[20%] desktop:absolute"
           />
-          <h3 className="absolute font-sans font-bold top-[85%] left-[90%] desktop:left-[80%] text-4xl">3</h3>
+          <h3 className="absolute font-sans font-bold top-[83%] left-[88%] desktop:left-[80%] text-4xl">3</h3>
           <small className="absolute top-[92%] hidden text-xs text-gray-500 group-hover:desktop:block">
             Illustration by{" "}
             <a
