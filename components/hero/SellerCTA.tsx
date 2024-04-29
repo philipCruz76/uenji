@@ -1,33 +1,14 @@
 "use client";
 import Image from "next/image";
-import { motion, useInView, useAnimation } from "framer-motion";
-import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { useOpenModalStore } from "@/lib/stores/modals/modal-store";
 import { useLogInVariantStore } from "@/lib/stores/auth-store";
 
 const SellerCTA = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const controls = useAnimation();
   const { setIsOpen } = useOpenModalStore();
   const { setLogin } = useLogInVariantStore();
   const sellerCTAText = useTranslations("HeroSection.SellerCTA");
 
-  const variants = {
-    hidden: { opacity: 0, x: -100 },
-    visible: { opacity: 1, x: 0 },
-  };
-  const transition = {
-    duration: 1,
-    delay: 0.5,
-  };
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start(variants.visible);
-    }
-  }, [isInView]);
   return (
     <section className=" flex h-full max-w-full flex-col items-center justify-center gap-6  px-[20px] tablet:py-8 desktop:py-16">
       <div className="flex flex-col gap-2 text-center">

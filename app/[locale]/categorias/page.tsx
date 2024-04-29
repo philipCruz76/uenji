@@ -1,11 +1,15 @@
+"use client";
 import { CategoryDesciptionsPT, CategoryDesciptionsEN } from "@/constants";
-import { getLocale } from "next-intl/server";
+import { useLocale } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const CategoriesPage = async () => {
-  const locale = await getLocale();
+import Lottie from "lottie-react";
+import chooseCategoryAnimation from "@/lib/chooseCategoryAnimation";
+
+const CategoriesPage = () => {
+  const locale = useLocale();
 
   const CategoryDescriptions =
     locale === "pt" ? CategoryDesciptionsPT : CategoryDesciptionsEN;
@@ -40,30 +44,33 @@ const CategoriesPage = async () => {
         })}
       </ul>
       <ul className="hidden w-full grid-cols-3 gap-6 px-8 tablet:grid">
-        {CategoryDescriptions.map((category) => (
-          <li key={category.categoryName}>
-            <Link
-              href={`/categorias/${category.categoryName}`}
-              className="group flex flex-col items-center justify-center text-xl font-bold"
-            >
-              <Image
-                src={
-                  !category.titlecardImage
-                    ? "https://res.cloudinary.com/dqe71igxe/image/upload/v1695893990/category%20bg.jpg"
-                    : category.titlecardImage
-                }
-                width={250}
-                height={250}
-                alt={category.categoryTitle}
-                className=" h-[100px]  w-[150px] rounded-md object-fill transition duration-200 ease-in-out group-hover:scale-105"
-              />
-              <span className="flex flex-row transition duration-200 ease-in-out group-hover:scale-105">
-                {category.categoryTitle}
-              </span>
-              <div className="block h-[3px] w-[52px]  bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current " />
-            </Link>
-          </li>
-        ))}
+        {CategoryDescriptions.map((category) => {
+          const freelancerAnimation = chooseCategoryAnimation(
+            category.categoryName,
+          );
+
+          return (
+            <li key={category.categoryName}>
+              <Link
+                href={`/categorias/${category.categoryName}`}
+                className="group flex flex-col items-center justify-center text-xl font-bold"
+              >
+                <Lottie
+                  animationData={freelancerAnimation}
+                  loop={true}
+                  width={200}
+                  height={200}
+                  className="h-[200px] w-[200px] object-fill"
+                />
+
+                <span className="flex flex-row transition duration-200 ease-in-out group-hover:scale-105">
+                  {category.categoryTitle}
+                </span>
+                <div className="block h-[3px] w-[52px]  bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current " />
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

@@ -1,12 +1,14 @@
+"use client"
 import { CategoryDesciptionsEN, CategoryDesciptionsPT } from "@/constants";
-import { getLocale } from "next-intl/server";
-import Image from "next/image";
+import chooseCategoryAnimation from "@/lib/chooseCategoryAnimation";
+import Lottie from "lottie-react";
+import { useLocale } from "next-intl";
 import Link from "next/link";
 
 type PopularCategoryShowcaseProps = {};
 
-const PopularCategoryShowcase = async ({}: PopularCategoryShowcaseProps) => {
-  const locale = await getLocale();
+const PopularCategoryShowcase =  ({}: PopularCategoryShowcaseProps) => {
+  const locale =  useLocale();
 
   const CategoryDescriptions =
     locale === "pt" ? CategoryDesciptionsPT : CategoryDesciptionsEN;
@@ -25,30 +27,32 @@ const PopularCategoryShowcase = async ({}: PopularCategoryShowcaseProps) => {
       </h1>
 
       <ul className=" grid w-full grid-cols-5 grid-rows-1 gap-6 py-8">
-        {popularCategories.map((category) => (
-          <li key={category.categoryName}>
-            <Link
-              href={`/categorias/${category.categoryName}`}
-              className="group flex flex-col items-center justify-center text-xl font-bold"
-            >
-              <Image
-                src={
-                  !category.titlecardImage
-                    ? "https://res.cloudinary.com/dqe71igxe/image/upload/v1695893990/category%20bg.jpg"
-                    : category.titlecardImage
-                }
-                width={250}
-                height={250}
-                alt={category.categoryTitle}
-                className=" h-[100px]  w-[150px] rounded-md object-fill transition duration-200 ease-in-out group-hover:scale-105"
-              />
-              <span className="flex flex-row transition duration-200 ease-in-out group-hover:scale-105">
-                {category.categoryTitle}
-              </span>
-              <div className="block h-[3px] w-[52px]  bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current " />
-            </Link>
-          </li>
-        ))}
+        {popularCategories.map((category) => {
+          const freelancerAnimation = chooseCategoryAnimation(
+            category.categoryName,
+          );
+          return (
+            <li key={category.categoryName}>
+              <Link
+                href={`/categorias/${category.categoryName}`}
+                className="group flex flex-col items-center justify-center text-xl font-bold"
+              >
+                <Lottie
+                  animationData={freelancerAnimation}
+                  loop={true}
+                  width={100}
+                  height={100}
+                  className="max-h-[100] max-w-[100] object-fill"
+                />
+
+                <span className="flex flex-row transition duration-200 ease-in-out group-hover:scale-105">
+                  {category.categoryTitle}
+                </span>
+                <div className="block h-[3px] w-[80px]  bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current " />
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

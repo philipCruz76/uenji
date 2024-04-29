@@ -386,7 +386,7 @@ export const CategoryDesciptionsPT: Category[] = [
   {
     categoryName: "marketing",
     categoryTitle: "Marketing",
-    titlecardImage: "",
+    titlecardImage: "/category-banners/advertising-planning.svg",
     thumbnailIcon: "/icons/copyright-duotone.svg",
     categoryTagline: "Aumenta a tua audiência",
   },

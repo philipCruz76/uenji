@@ -23,18 +23,18 @@ const PopularGigsShowcase = async ({}: PopularGigsShowcaseProps) => {
       {/* Popular Gigs Carousel */}
       <div className="px-6 py-6">
         <Carousel
-          className=" max-w-[75dvw]"
+          className="max-w-[90dvw]"
           opts={{
             align: "start",
             loop: true,
           }}
         >
-          <CarouselContent className="px-4 py-4">
+          <CarouselContent className="px-4 py-4 gap-4">
             {popularGigs
               ? popularGigs.map((gig, index) => (
                   <CarouselItem
                     key={`popular-gig-${index}`}
-                    className=" pl-4  tablet:basis-1/2 desktop:basis-1/3 "
+                    className=" pl-4 tablet:basis-1/2 desktop:basis-1/3 "
                   >
                     <GigCard gigToShow={gig} index={index} />
                   </CarouselItem>
@@ -55,18 +55,18 @@ const PopularGigsShowcase = async ({}: PopularGigsShowcaseProps) => {
       {/* Popular Gigs Carousel */}
       <div className="px-6 py-6">
         <Carousel
-          className=" max-w-[75dvw]"
+          className="max-w-[90dvw]"
           opts={{
             align: "start",
             loop: true,
           }}
         >
-          <CarouselContent className="px-4 py-4">
+          <CarouselContent className="px-4 py-4 gap-4">
             {popularPhotoGigs
               ? popularPhotoGigs.map((gig, index) => (
                   <CarouselItem
                     key={`popular-gig-${index}`}
-                    className=" pl-4  tablet:basis-1/2 desktop:basis-1/3 "
+                    className="pl-4 tablet:basis-1/2 desktop:basis-1/3 "
                   >
                     <GigCard gigToShow={gig} index={index} />
                   </CarouselItem>

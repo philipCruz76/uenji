@@ -48,12 +48,12 @@ const BuyerDashboard = async ({ user }: BuyerDashboardProps) => {
         </h1>
 
         {/* Desktop View */}
-        <div className="hidden gap-16 pt-[50px] desktop:flex desktop:flex-col">
+        <div className="hidden gap-16 pt-[50px] tablet:flex tablet:flex-col">
           <PopularCategoryShowcase />
           <PopularGigsShowcase />
         </div>
         {/* Mobile View */}
-        <div className="flex flex-col gap-8 desktop:hidden">
+        <div className="flex flex-col gap-8 tablet:hidden">
           <PopularCategoryShowcaseMobile
             popularCategories={popularCategories}
           />
