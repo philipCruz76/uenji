@@ -7,17 +7,19 @@ import {
   CarouselPrevious,
 } from "@/components/ui/Carousel";
 import getPopularGigs from "@/lib/actions/gigs/getPopularGigs";
+import { getTranslations } from "next-intl/server";
 
 type PopularGigsShowcaseProps = {};
 
 const PopularGigsShowcase = async ({}: PopularGigsShowcaseProps) => {
   const popularGigs = await getPopularGigs();
   const popularPhotoGigs = await getPopularGigs("fotografia");
+  const popularGigsText = await getTranslations("Dashboard.buyer")
   return (
     <section className="flex h-full w-full flex-col gap-4 ">
       {/* Programming Gigs Showcase */}
       <h1 className="w-full text-2xl font-semibold">
-        Aqui tens os serviços de <i>Programação</i> mais populares
+        {popularGigsText("popularGigspart1")} <i>{popularGigsText("programming")}</i> {popularGigsText("popularGigspart2")}
       </h1>
 
       {/* Popular Gigs Carousel */}
@@ -49,7 +51,7 @@ const PopularGigsShowcase = async ({}: PopularGigsShowcaseProps) => {
 
       {/* Photography Gigs Showcase */}
       <h1 className="w-full text-2xl font-semibold">
-        Aqui tens os serviços de <i>Fotografia</i> mais populares
+      {popularGigsText("popularGigspart1")}<i>{popularGigsText("photography")}</i> {popularGigsText("popularGigspart2")}
       </h1>
 
       {/* Popular Gigs Carousel */}

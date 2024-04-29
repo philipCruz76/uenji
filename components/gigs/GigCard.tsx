@@ -3,7 +3,7 @@ import { CategoryDesciptionsEN, CategoryDesciptionsPT } from "@/constants";
 import { cn } from "@/lib/utils";
 import { Category, UserGigs } from "@/types/common.types";
 import { GigPricing } from "@/types/gigWizard.types";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ const GigCard = async ({ gigToShow, size }: GigCardProps) => {
     gigToShow.packages!,
   ) as GigPricing["packages"];
   const locale = await getLocale();
-
+  const t = await getTranslations("Gigs")
   let CategoryDescriptions: Category[];
 
   if (locale === "en") {
@@ -101,7 +101,7 @@ const GigCard = async ({ gigToShow, size }: GigCardProps) => {
             {/* Gig Price */}
             <div>
               <span className="text-ellipsis text-lg font-semibold">
-                Desde {parsedPackages[0].price} AOA
+                {t("GigCardPrice")} {parsedPackages[0].price} AOA
               </span>
             </div>
           </div>

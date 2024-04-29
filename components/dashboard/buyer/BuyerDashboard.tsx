@@ -1,7 +1,7 @@
 "use server";
 import { CategoryDesciptionsEN, CategoryDesciptionsPT } from "@/constants";
 import { Category, User } from "@/types/common.types";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { lazy } from "react";
 
 const PopularCategoryShowcaseMobile = lazy(
@@ -23,7 +23,7 @@ type BuyerDashboardProps = {
 
 const BuyerDashboard = async ({ user }: BuyerDashboardProps) => {
   const locale = await getLocale();
-
+  const popularGigsText = await getTranslations("Dashboard.buyer");
   let CategoryDesciptions: Category[];
 
   if (locale === "pt") {
@@ -59,7 +59,7 @@ const BuyerDashboard = async ({ user }: BuyerDashboardProps) => {
           />
           <div>
             <h3 className="w-full py-6 text-2xl font-semibold">
-              Serviços em destaque
+              {popularGigsText("popularGigsMobile")}
             </h3>
             <PopularGigsShowCaseMobile />
           </div>

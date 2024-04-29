@@ -18,6 +18,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ISOCountries, categoryFilters } from "@/constants";
 import { useSellerProfileStore } from "@/lib/stores/sellerProfile-store";
+import { useLocale, useTranslations } from "next-intl";
 
 type SellerCeritifcation = {
   fieldName: string;
@@ -39,6 +40,10 @@ const DataTable = lazy(
 const SkillLevels = ["Beginner", "Intermediate", "Expert"];
 
 const page = ({}) => {
+  const locale = useLocale();
+  const professionalInfoText = useTranslations(
+    "FreelancerOnboarding.professionalInfo",
+  );
   const router = useRouter();
   const [startYear, setStartYear] = useState<number>(2023);
   const [endYear, setEndYear] = useState<number>(2023);
@@ -130,18 +135,17 @@ const page = ({}) => {
   return (
     <>
       <div className="flex h-fit w-full flex-col gap-4 border-b py-4">
-        <h1 className="text-4xl font-bold">Dados Profissionais</h1>
+        <h1 className="text-4xl font-bold">
+          {professionalInfoText("heading")}
+        </h1>
         <h3 className="hidden max-w-[500px] flex-wrap tablet:flex">
-          Este é o seu momento para brilhar. Deixe que os potenciais clientes
-          saibam o que faz melhor e como adquiriu as suas competências,
-          certificações e experiência.
+          {professionalInfoText("subheading")}
         </h3>
         {/* DEBUG ONLY
         <h3>Watched values: {JSON.stringify(watchForm)}</h3>
         */}
         <h3 className="text-end text-gray-400">
-          {" "}
-          <i>* Campos obrigatórios</i>
+          <i>{professionalInfoText("mandatoryFields")}</i>
         </h3>
       </div>
 
@@ -154,7 +158,8 @@ const page = ({}) => {
           <aside className="block h-fit w-full min-w-[210px] flex-col flex-wrap">
             <h3 className="py-2">
               <span>
-                Profissão <span className="text-red-500">*</span>
+                {professionalInfoText("occupation.heading")}{" "}
+                <span className="text-red-500">*</span>
               </span>
             </h3>
           </aside>
@@ -168,7 +173,7 @@ const page = ({}) => {
                 }}
               >
                 <option value="" disabled>
-                  Selecionar Ramo
+                  {locale === "pt" ? "Selecionar Ramo" : "Choose Field"}
                 </option>
                 {categoryFilters.map((occupation) => (
                   <option value={occupation} key={occupation}>
@@ -216,9 +221,11 @@ const page = ({}) => {
               <>
                 <div className="flex flex-col gap-3">
                   <small>
-                    {" "}
-                    Escolha entre <b>duas a cinco</b> das suas melhores
-                    competências neste ramo
+                    {professionalInfoText("occupation.subheadingPart1")}
+                    <b>
+                      {professionalInfoText("occupation.subheadingPart2")}
+                    </b>{" "}
+                    {professionalInfoText("occupation.subheadingPart3")}
                   </small>
                   <div className="grid grid-cols-2 tablet:grid-cols-3 ">
                     {Array.from({ length: 8 }, (_: number, i) => i + 1).map(
@@ -266,12 +273,12 @@ const page = ({}) => {
           <aside className="block h-fit w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
               <span>
-                Competências <span className="text-red-500">*</span>
+                {professionalInfoText("skills.heading")}{" "}
+                <span className="text-red-500">*</span>
               </span>
             </h3>
             <div className="flex py-2 text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
-              Indique as competências relacionadas com os serviços que irá
-              oferecer e inclua o seu nível de experiência.
+              {professionalInfoText("skills.subheading")}
             </div>
           </aside>
           <div className="flex flex-col tablet:min-w-[60%]">
@@ -356,7 +363,7 @@ const page = ({}) => {
                       }
                     }}
                   >
-                    Atualizar
+                    {locale === "pt" ? "Atualizar" : "Update"}
                   </button>
                   <button
                     type="button"
@@ -370,7 +377,7 @@ const page = ({}) => {
                       clearErrors("skills");
                     }}
                   >
-                    Cancelar
+                    {locale === "pt" ? "Cancelar" : "Cancel"}
                   </button>
                 </div>
               </div>
@@ -396,7 +403,7 @@ const page = ({}) => {
                   setShowAddSkillInput(true);
                 }}
               >
-                Adicionar Nova
+                {locale === "pt" ? "Adicionar Nova" : "Add New"}
               </button>
             ) : null}
           </div>
@@ -406,11 +413,10 @@ const page = ({}) => {
         <div className="group flex min-h-[60px] w-full flex-col justify-start tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
           <aside className="block h-fit w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
-              <span>Educação</span>
+              <span>{professionalInfoText("education.heading")}</span>
             </h3>
             <div className="flex py-2 text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
-              Adicione quaisquer informações relevantes sobre educação que
-              ajudem os clientes a a conhecê-lo melhor.
+              {professionalInfoText("education.subheading")}
             </div>
           </aside>
           <div className="flex flex-col gap-2 tablet:min-w-[60%]">
@@ -430,7 +436,9 @@ const page = ({}) => {
                     }}
                   >
                     <option value="" disabled>
-                      País de Formação
+                      {locale === "pt"
+                        ? "País de Formação"
+                        : "Education Country"}
                     </option>
                     {ISOCountries.map((country: string) => (
                       <option value={country} key={country}>
@@ -463,10 +471,19 @@ const page = ({}) => {
                       });
                     }}
                   >
-                    <option value={"Bacharelado"}>Bacharelado</option>
-                    <option value={"Pós-graduação"}>Pós-graduação</option>
-                    <option value={"Mestrado"}>Mestrado</option>
-                    <option value={"Doutoramento"}>Doutoramento</option>
+                    <option value={"Bacharelado"}>
+                      {" "}
+                      {professionalInfoText("education.bachelors")}
+                    </option>
+                    <option value={"Pós-graduação"}>
+                      {professionalInfoText("education.postGrad")}
+                    </option>
+                    <option value={"Mestrado"}>
+                      {professionalInfoText("education.masters")}
+                    </option>
+                    <option value={"Doutoramento"}>
+                      {professionalInfoText("education.phd")}
+                    </option>
                   </select>
                 </div>
 
@@ -544,7 +561,7 @@ const page = ({}) => {
                         });
                       }}
                     >
-                      Atualizar
+                      {locale === "pt" ? "Atualizar" : "Update"}
                     </button>
                     <button
                       type="button"
@@ -561,7 +578,7 @@ const page = ({}) => {
                         clearErrors("education");
                       }}
                     >
-                      Cancelar
+                      {locale === "pt" ? "Cancelar" : "Cancel"}
                     </button>
                   </div>
                 </div>
@@ -591,7 +608,7 @@ const page = ({}) => {
                   setShowAddEducationInput(true);
                 }}
               >
-                Adicionar Nova
+                {locale === "pt" ? "Adicionar Nova" : "Add New"}
               </button>
             ) : null}
           </div>
@@ -601,11 +618,10 @@ const page = ({}) => {
         <div className="group flex min-h-[60px] w-full flex-col justify-start tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
           <aside className="block h-fit w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
-              <span>Certificações</span>
+              <span>{professionalInfoText("certifications.heading")}</span>
             </h3>
             <div className="flex py-2 text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
-              Inclua todos os certificados ou prémios que sejam relevantes para
-              os serviços que irá oferecer.
+              {professionalInfoText("certifications.subheading")}
             </div>
           </aside>
           <div className="flex flex-col gap-2 tablet:min-w-[60%]">
@@ -662,7 +678,9 @@ const page = ({}) => {
                       });
                     }}
                   />
-                  <span className="hidden text-gray-400 tablet:block">em</span>
+                  <span className="hidden text-gray-400 tablet:block">
+                    {locale === "pt" ? "em" : "in"}
+                  </span>
                   <select
                     className="h-[40px] w-full rounded-sm border border-gray-300 bg-white px-2 text-gray-600 tablet:w-[100px]"
                     value={currentSelectedCertification.fieldLevel}
@@ -717,7 +735,7 @@ const page = ({}) => {
                       });
                     }}
                   >
-                    Atualizar
+                    {locale === "pt" ? "Atualizar" : "Update"}
                   </button>
                   <button
                     type="button"
@@ -732,7 +750,7 @@ const page = ({}) => {
                       clearErrors("certifications");
                     }}
                   >
-                    Cancelar
+                    {locale === "pt" ? "Cancelar" : "Cancel"}
                   </button>
                 </div>
               </>
@@ -761,7 +779,7 @@ const page = ({}) => {
                   setShowAddCertificationInput(true);
                 }}
               >
-                Adicionar Nova
+                {locale === "pt" ? "Adicionar Nova" : "Add New"}
               </button>
             ) : null}
           </div>
@@ -771,9 +789,9 @@ const page = ({}) => {
         <div className="group flex min-h-[60px] w-full flex-col justify-start tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
           <aside className="block h-fit w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
-              <span>Website Pessoal</span>
+              <span>{professionalInfoText("personalWebsite")}</span>
               <small className="text-gray-400">
-                <i>Privado</i>
+                <i>{locale === "pt" ? "Privado" : "Private"}</i>
               </small>
             </h3>
           </aside>
@@ -795,7 +813,7 @@ const page = ({}) => {
             } rounded-sm text-white`,
           )}
         >
-          Continuar
+          {locale === "pt" ? "Continuar" : "Continue"}
         </button>
       </form>
     </>

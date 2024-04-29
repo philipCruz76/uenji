@@ -2,14 +2,14 @@
 import { CategoryDesciptionsEN, CategoryDesciptionsPT } from "@/constants";
 import chooseCategoryAnimation from "@/lib/chooseCategoryAnimation";
 import Lottie from "lottie-react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 
 type PopularCategoryShowcaseProps = {};
 
 const PopularCategoryShowcase =  ({}: PopularCategoryShowcaseProps) => {
   const locale =  useLocale();
-
+  const popularCategoriesText = useTranslations("Dashboard.buyer")
   const CategoryDescriptions =
     locale === "pt" ? CategoryDesciptionsPT : CategoryDesciptionsEN;
 
@@ -23,7 +23,7 @@ const PopularCategoryShowcase =  ({}: PopularCategoryShowcaseProps) => {
   return (
     <section className="h-full w-full">
       <h1 className="text-2xl font-semibold">
-        Consulte estas categorias populares
+        {popularCategoriesText("popularCategories")}
       </h1>
 
       <ul className=" grid w-full grid-cols-5 grid-rows-1 gap-6 py-8">

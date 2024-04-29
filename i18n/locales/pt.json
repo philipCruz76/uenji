@@ -133,6 +133,71 @@
     "confirmPasswordPlaceholder": "Confirmar Password",
     "changeButton": "Alterar Password"
   },
+  "FreelancerOnboarding": {
+    "personalInfo": {
+      "heading": "Informação pessoal",
+      "subheading": "Fale-nos um pouco sobre si. Esta informação irá aparecer no seu perfil público, para que potenciais clientes o possam conhecer melhor.",
+      "mandatoryFields": "* Campos obrigatórios",
+      "private": "Privado",
+      "fullName": {
+        "heading": "Nome Completo",
+        "subheading": " Ex. José António"
+      },
+      "displayName": {
+        "heading": "Nome de apresentação",
+        "subheading": "De forma a ajudar a criar ligações credíveis e autênticas com os seus clientes irá precisar de um nome de apresentação. Sugerimos que utilize o seu nome próprio e a primeira inicial do seu apelido."
+      },
+      "profilePhoto": {
+        "heading": "Foto de perfil",
+        "subheading": "Adicione uma fotografia de perfil sua para que os clientes saibam exatamente com quem estão a trabalhar."
+      },
+      "description": {
+        "heading": "Descrição",
+        "subheading": "Fale-nos de si. Esta informação irá aparecer no seu perfil público, de modo a que potenciais clientes o possam conhecer melhor."
+      },
+      "languages": {
+        "heading": "Línguas",
+        "subheading": " Seleccione as línguas em que pode comunicar e o seu nível de proficiência."
+      }
+    },
+    "professionalInfo": {
+      "subheading": "Este é o seu momento para brilhar. Deixe que os potenciais clientes saibam o que faz melhor e como adquiriu as suas competências, certificações e experiência.",
+      "heading": "Dados Profissionais",
+      "occupation": {
+        "heading": "Profissão",
+        "subheadingPart1": "Escolha entre ",
+        "subheadingPart2": "duas a cinco ",
+        "subheadingPart3": "das suas melhores competências neste ramo"
+      },
+      "skills": {
+        "heading": "Competências",
+        "subheading": "Indique as competências relacionadas com os serviços que irá oferecer e inclua o seu nível de experiência."
+      },
+      "education": {
+        "heading": "Educação",
+        "subheading": "Adicione quaisquer informações relevantes sobre educação que ajudem os clientes a a conhecê-lo melhor.",
+        "bachelors": "Bacharelado",
+        "postGrad": "Pós-Graduação",
+        "masters": "Mestrado",
+        "phd": "Doutoramento"
+      },
+      "certifications": {
+        "heading": "Certificações",
+        "subheading": "Inclua todos os certificados ou prémios que sejam relevantes para os serviços que irá oferecer."
+      },
+      "personalWebsite": "Website Pessoal",
+      "mandatoryFields": "* Campos obrigatórios"
+    },
+    "accountSecurity":{
+      "heading":"Segurança de Perfil",
+      "subheading":"A confiança e a segurança são muito importantes na nossa comunidade. Por favor, verifique o seu e-mail e número de telemóvel.",
+      "private":"Privado",
+      "cellphone":"Número de telemóvel",
+      "verified":"Verificado",
+      "unverified":"Não verificado",
+      "submitButton":"Concluir"
+    }
+  },
   "GigWizard": {
     "Overview": {
       "title": {
@@ -241,11 +306,25 @@
   },
   "Gigs": {
     "pageTitle": "Serviços",
-    "newGigButton": "Novo Serviço "
+    "newGigButton": "Novo Serviço ",
+    "GigCardPrice":"From ",
+    "desktopPage":{
+      "editGig":"Editar Serviço",
+      "languages":"Sei falar ",
+      "choosePackage":"Escolher pacote",
+      "contactButton":"Entrar em Contacto",
+      "about":"Sobre este serviço",
+      "delivery":"Dias para entrega",
+      "revisions":"revisões",
+      "basic":"Básico",
+      "standard":"Standard",
+      "premium":"Prémium"
+    }
   },
   "Orders": {
     "title": "Pedidos",
     "subtitle": "Gerir os seus pedidos",
+    "noOrders":"You don't have any orders yet",
     "ordersTable": {
       "active": "Ativos",
       "late": "Em Atraso",
@@ -255,6 +334,30 @@
       "orderDate": "Data de Pedido",
       "orderDelivery": "Data de Entrega",
       "orderPrice": "Preço"
+    }
+  },
+  "Dashboard":{
+    "buyer":{
+      "popularCategories":"Consulte estas categorias populares",
+      "popularGigsMobile":"Serviços em destaque",
+      "popularGigspart1":"Aqui tens os serviços de ",
+      "popularGigspart2":"mais populares",
+      "programming":"Programação",
+      "photography":"Fotografia",
+      "seeAll":"Ver todas"
+    },
+    "seller":{
+      "greeting":"Olá, ",
+      "subheading":"Eis o seu painel de controlo de vendedor",
+      "sellerAnalytics":{
+        "lastMonth":" que no mês passado",
+        "totalEarnings":"Receita Total",
+        "orders":"Pedidos",
+        "sales":"Vendas",
+        "lastSales":"Últimas Vendas",
+        "salesSubTextPart1":"Voçê vendeu ",
+        "salesSubTextPart2":" serviços este mês"
+      }
     }
   }
 }

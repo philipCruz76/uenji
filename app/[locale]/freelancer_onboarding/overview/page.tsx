@@ -1,14 +1,22 @@
-import { sellerOnboarding } from "@/constants/sellerOnBoarding";
+import {
+  sellerOnboardingEN,
+  sellerOnboardingPT,
+} from "@/constants/sellerOnBoarding";
 import { buttonVariants } from "@/constants/ui/button";
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 import { cn } from "@/lib/utils";
+import { getLocale } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 const page = async ({}) => {
+  const locale = await getLocale();
   const isSeller = await getCurrentUser().then((user) => user?.isSeller);
   if (isSeller?.valueOf() === true) redirect("/");
+
+  const sellerOnboarding =
+    locale === "pt" ? sellerOnboardingPT : sellerOnboardingEN;
 
   return (
     <section className="container flex min-h-[100dvh]  max-w-[100dvw] ">
@@ -16,7 +24,9 @@ const page = async ({}) => {
         <div className="flex h-full w-full flex-col px-[2rem]">
           <h1 className="box-border flex w-full pb-[25px] text-xl font-bold text-[#303030] tablet:max-w-[590px] tablet:pr-[80px] tablet:text-2xl">
             {" "}
-            Pronto para começar a vender no Uenji? Aqui está o resumo:
+            {locale === "pt"
+              ? "Pronto para começar a vender no Uenji? Aqui está o resumo:"
+              : "Ready to start selling on Uenji? Here's the overview:"}
           </h1>
 
           <ul className="flex h-full w-full flex-col gap-8 border-t py-4">
@@ -40,7 +50,7 @@ const page = async ({}) => {
               "flex w-full bg-sky-500 text-white tablet:w-[160px]",
             )}
           >
-            Continuar
+            {locale === "pt" ? "Continuar" : "Continue"}
           </Link>
         </div>
         <div className="flex w-full flex-col  items-center py-[20px] text-center  ">

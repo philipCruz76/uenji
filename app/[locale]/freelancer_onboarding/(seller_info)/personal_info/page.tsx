@@ -1,15 +1,17 @@
 "use client";
 import { Input } from "@/components/ui/Input";
 import DataTable from "@/components/users/seller_profile/DataTable";
+import { getSignedURL } from "@/lib/actions/getSignedURL";
 import { useSellerOnboardingStore } from "@/lib/stores/sellerOboarding-store";
 import { useSellerProfileStore } from "@/lib/stores/sellerProfile-store";
-import { cn } from "@/lib/utils";
+import { cn, computeSHA256 } from "@/lib/utils";
 import {
   PersonalInfoValidator,
   SellerInfo,
   SellerPersonalInfo,
 } from "@/types/sellerProfile.types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -21,12 +23,19 @@ import {
 } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const Languages = ["Português", "Inglês", "Francês"] as const;
-const LanguageLevels = [
+const LanguagesPT = ["Português", "Inglês", "Francês"] as const;
+const LanguagesEN = ["Portuguese", "English", "French"] as const;
+const LanguageLevelsPT = [
   "Nativo/Bilingue",
   "Avançado",
   "Intermédio",
   "Básico",
+] as const;
+const LanguageLevelsEN = [
+  "Native/Bi-lingual",
+  "Advanced",
+  "Intermediate",
+  "Basic",
 ] as const;
 
 const page = ({}) => {
@@ -42,12 +51,15 @@ const page = ({}) => {
   });
   const { sellerOnboardingStep, setSellerOnboardingStep } =
     useSellerOnboardingStore();
-
+  const personalInfoText = useTranslations("FreelancerOnboarding.personalInfo");
+  const locale = useLocale();
   useEffect(() => {
     sellerOnboardingStep !== 1 && setSellerOnboardingStep(1);
   }, [sellerOnboardingStep]);
 
   const router = useRouter();
+  const Languages = locale === "pt" ? LanguagesPT : LanguagesEN;
+  const LanguageLevels = locale === "pt" ? LanguageLevelsPT : LanguageLevelsEN;
   const { setSellerPersonalInfo, getSellerPersonalInfo } =
     useSellerProfileStore();
   const {
@@ -68,35 +80,44 @@ const page = ({}) => {
     router.push("/freelancer_onboarding/professional_info");
   };
 
-  const handleProfilePicture = (file: File) => {
-    fetch("/api/cloudinary/upload", {
-      method: "POST",
+  const handleProfilePicture = async (file: File) => {
+    const checksum = await computeSHA256(file);
+    const signedURL = await getSignedURL(file.type, file.size, checksum);
+
+    if (signedURL.error !== undefined) {
+      toast.error(signedURL.error);
+      throw new Error(signedURL.error);
+    }
+
+    const url = signedURL.success.url;
+    await fetch(url, {
+      method: "PUT",
       body: file,
-      next: {
-        revalidate: 1,
+      headers: {
+        "Content-Type": file.type,
       },
     })
-      .then(async (response) => {
-        toast.success("Profile picture updated successfully");
-        const { url } = await response.json();
-        setProfilePictureSrc(url);
-        setValue("profilePicture", url);
+      .then((res) => {
+        const resultURL = new URL(res.url);
+        const objectLocation = resultURL.origin + resultURL.pathname;
+        setProfilePictureSrc(objectLocation);
+        setValue("profilePicture", objectLocation);
       })
       .catch((error) => {
         toast.error(error.message);
+        console.error(error);
       });
   };
   return (
     <>
       <div className="flex h-fit w-full flex-col gap-4 border-b py-4">
-        <h1 className="text-4xl font-bold"> Informação pessoal</h1>
+        <h1 className="text-4xl font-bold"> {personalInfoText("heading")}</h1>
         <h3 className="hidden max-w-[500px] flex-wrap tablet:flex">
-          Fale-nos um pouco sobre si. Esta informação irá aparecer no seu perfil
-          público, para que potenciais clientes o possam conhecer melhor.
+          {personalInfoText("subheading")}
         </h3>
         <h3 className="text-end text-gray-400">
           {" "}
-          <i>* Campos obrigatórios</i>
+          <i>{personalInfoText("mandatoryFields")}</i>
         </h3>
       </div>
       <form
@@ -108,14 +129,15 @@ const page = ({}) => {
           <aside className="block h-fit w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
               <span>
-                Nome Completo<span className="text-red-500">*</span>
+                {personalInfoText("fullName.heading")}
+                <span className="text-red-500">*</span>
               </span>
               <small className="text-gray-400">
-                <i>Privado</i>
+                <i>{personalInfoText("private")}</i>
               </small>
             </h3>
             <div className="flex py-2 text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
-              Ex. José António
+              {personalInfoText("fullName.subheading")}
             </div>
           </aside>
           <div className="flex w-full flex-col">
@@ -169,16 +191,13 @@ const page = ({}) => {
           <aside className="block w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
               <span>
-                Nome de apresentação<span className="text-red-500">*</span>
+                {personalInfoText("displayName.heading")}
+                <span className="text-red-500">*</span>
               </span>
             </h3>
             <div className="flex py-2 text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
               <span className="flex flex-wrap">
-                De forma a ajudar a criar ligações credíveis e autênticas com os
-                seus clientes irá precisar de um nome de apresentação.
-                <br />
-                Sugerimos que utilize o seu nome próprio e a primeira inicial do
-                seu apelido.
+                {personalInfoText("displayName.subheading")}
               </span>
             </div>
           </aside>
@@ -214,12 +233,12 @@ const page = ({}) => {
           <aside className="block w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
               <span>
-                Foto de perfil<span className="text-red-500">*</span>
+                {personalInfoText("profilePhoto.heading")}
+                <span className="text-red-500">*</span>
               </span>
             </h3>
             <div className="flex text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
-              Adicione uma fotografia de perfil sua para que os clientes saibam
-              exatamente com quem estão a trabalhar.
+              {personalInfoText("profilePhoto.subheading")}
             </div>
           </aside>
           <div className="flex w-full items-start justify-start ">
@@ -280,13 +299,12 @@ const page = ({}) => {
           <aside className="block w-full min-w-[210px]  flex-col flex-wrap ">
             <h3 className="py-2">
               <span>
-                Descrição<span className="text-red-500">*</span>
+                {personalInfoText("description.heading")}
+                <span className="text-red-500">*</span>
               </span>
             </h3>
             <div className="flex text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
-              Fale-nos de si. Esta informação irá aparecer no seu perfil
-              público, de modo a que potenciais clientes o possam conhecer
-              melhor.
+              {personalInfoText("description.subheading")}
             </div>
           </aside>
           <div className="flex w-full flex-col items-start justify-start ">
@@ -322,12 +340,12 @@ const page = ({}) => {
           <aside className="block w-full min-w-[210px]  flex-col flex-wrap py-4 ">
             <h3 className="py-2">
               <span>
-                Línguas<span className="text-red-500">*</span>
+                {personalInfoText("languages.heading")}
+                <span className="text-red-500">*</span>
               </span>
             </h3>
             <div className="flex text-xs text-gray-400 tablet:hidden tablet:group-hover:flex">
-              Seleccione as línguas em que pode comunicar e o seu nível de
-              proficiência.
+              {personalInfoText("languages.subheading")}
             </div>
           </aside>
           <div className=" w-full max-w-[855px] flex-col items-start justify-start">
@@ -387,7 +405,7 @@ const page = ({}) => {
                       setShowLanguageSelector(false);
                     }}
                   >
-                    Update
+                    {locale === "pt" ? "Atualizar" : "Update"}
                   </button>
                   <button
                     type="button"
@@ -400,7 +418,7 @@ const page = ({}) => {
                       setShowLanguageSelector(false);
                     }}
                   >
-                    Cancelar
+                    {locale === "pt" ? "Cancelar" : "Cancel"}
                   </button>
                 </div>
               </div>
@@ -428,7 +446,7 @@ const page = ({}) => {
                 setShowLanguageSelector(true);
               }}
             >
-              Adicionar nova
+              {locale === "pt" ? "Adicionar nova" : "Add new"}
             </button>
           </div>
         </div>
@@ -443,7 +461,7 @@ const page = ({}) => {
           )}
           onClick={handleSubmit(personalInfoHandler)}
         >
-          Continuar
+          {locale === "pt" ? "Continuar" : "Continue"}
         </button>
       </form>
     </>

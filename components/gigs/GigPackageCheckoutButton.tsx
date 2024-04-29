@@ -4,6 +4,7 @@ import useCurrentUser from "@/lib/hooks/useCurrentUser";
 import { useCheckoutModalStore } from "@/lib/stores/modals/checkout-modal-store";
 import { useOpenModalStore } from "@/lib/stores/modals/modal-store";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 import toast from "react-hot-toast";
 
 type GigPackageCheckoutButtonProps = {
@@ -16,6 +17,7 @@ const GigPackageCheckoutButton = ({
   const { setIsOpen } = useOpenModalStore();
   const { setOpenCheckout, setOpenMobileCheckout } = useCheckoutModalStore();
   const currentUser = useCurrentUser();
+  const t = useTranslations("Gigs.desktopPage");
   const openCheckoutModal = (mobile: boolean) => {
     if (!currentUser) {
       setIsOpen(true);
@@ -38,7 +40,7 @@ const GigPackageCheckoutButton = ({
         )}
         onClick={() => openCheckoutModal(false)}
       >
-        Escolher Pacote
+        {t("choosePackage")}
       </button>
     </>
   );

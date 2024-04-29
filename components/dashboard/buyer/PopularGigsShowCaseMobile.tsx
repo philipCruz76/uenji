@@ -33,7 +33,7 @@ async function PopularGigsShowCaseMobile({}: PopularGigsShowCaseMobileProps) {
                 return (
                   <CarouselItem
                     key={`popular-gig-${index}`}
-                    className="ml-2  basis-[75%]"
+                    className="ml-2 basis-[70%]"
                   >
                     <Link
                       href={`/${gig.user.username}/${gig.title.replace(

@@ -7,6 +7,7 @@ import {
   SellerProfessionalInfo,
 } from "@/types/sellerProfile.types";
 import { User } from "@prisma/client";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -20,6 +21,7 @@ type GigSellerInfoProps = {
 const GigSellerInfo = ({ user, gigTitle }: GigSellerInfoProps) => {
   const currentUser = useCurrentUser();
   const router = useRouter();
+  const t = useTranslations("Gigs.desktopPage")
   const { setIsOpen } = useOpenModalStore();
   const { displayName, image, country, languages, id, username, skills, name } =
     user;
@@ -103,7 +105,7 @@ const GigSellerInfo = ({ user, gigTitle }: GigSellerInfoProps) => {
               <path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"></path>
             </svg>
             <span>
-              Sei falar{" "}
+              {t("languages")}
               {parsedLanguages.map((language, index) => {
                 if (index === parsedLanguages.length - 1) return language.name;
                 return `${language.name}, `;
@@ -115,7 +117,7 @@ const GigSellerInfo = ({ user, gigTitle }: GigSellerInfoProps) => {
             className="h-[36px] w-[150px] rounded-md border text-sm font-semibold transition duration-200 ease-in-out hover:scale-105 hover:bg-gray-200"
             onClick={openChat}
           >
-            Entrar em contacto
+            {t("contactButton")}
           </button>
         </div>
       </div>

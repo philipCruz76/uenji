@@ -133,6 +133,71 @@
     "confirmPasswordPlaceholder": "Confirm Password",
     "changeButton": "Change Password"
   },
+  "FreelancerOnboarding": {
+    "personalInfo": {
+      "heading": "Personal Info",
+      "subheading": "Tell us a bit about yourself. This information will appear on your public profile so that potential clients can get to know you better.",
+      "mandatoryFields": "* Mandatory fields",
+      "private": "Private",
+      "fullName": {
+        "heading": "Full Name",
+        "subheading": "Ex. John Doe"
+      },
+      "displayName": {
+        "heading": "Display Name",
+        "subheading": "In order to help you create credible and authentic connections with your customers, you will need an introduction name. We suggest you use your first name and the first initial of your surname."
+      },
+      "profilePhoto": {
+        "heading": "Profile Photo",
+        "subheading": "Add a profile photo of yourself so that clients know exactly who they are working with."
+      },
+      "description": {
+        "heading": "Description",
+        "subheading": "Tell us about yourself. This information will appear on your public profile so that potential clients can get to know you better."
+      },
+      "languages": {
+        "heading": "Languages",
+        "subheading": "Select the languages you can communicate in and your level of proficiency."
+      }
+    },
+    "professionalInfo": {
+      "subheading": "This is your moment to shine. Let potential clients know what you do best and how you acquired your skills, certifications and experience.",
+      "heading": "Professional Info",
+      "occupation": {
+        "heading": "Occupation",
+        "subheadingPart1": "Choose between ",
+        "subheadingPart2": "two and five ",
+        "subheadingPart3": "of your best skills in this field"
+      },
+      "skills": {
+        "heading": "Skills",
+        "subheading": "Indicate the skills related to the services you will be offering and include your level of experience."
+      },
+      "education": {
+        "heading": "Education",
+        "subheading": "Add any relevant education details that will help customers get to know you better.",
+        "bachelors": "Bachelors",
+        "postGrad": "Post Graduate",
+        "masters": "Masters",
+        "phd": "Doctorate"
+      },
+      "certifications": {
+        "heading": "Certifications",
+        "subheading": "Include any certificates or awards that are relevant to the services you offer."
+      },
+      "personalWebsite": "Personal Website",
+      "mandatoryFields": "* Mandatory fields"
+    },
+    "accountSecurity":{
+      "heading":"Account Security",
+      "subheading":"Trust and security are very important in our community. Please check your e-mail address and cell phone number.",
+      "private":"Private",
+      "cellphone":"Cellphone Number",
+      "verified":"Verified",
+      "unverified":"Unverified",
+      "submitButton":"Finish"
+    }
+  },
   "GigWizard": {
     "Overview": {
       "title": {
@@ -241,11 +306,25 @@
   },
   "Gigs": {
     "pageTitle": "Gigs",
-    "newGigButton": "New Gig "
+    "newGigButton": "New Gig ",
+    "GigCardPrice":"From ",
+    "desktopPage":{
+      "editGig":"Edit Gig",
+      "languages":"I can speak ",
+      "choosePackage":"Select Package",
+      "contactButton":"Contact Seller",
+      "about":"About this gig",
+      "delivery":"Days to deliver",
+      "revisions":"revisions",
+      "basic":"Basic",
+      "standard":"Standard",
+      "premium":"Premium"
+    }
   },
   "Orders": {
     "title": "Orders",
     "subtitle": "Manage your orders",
+    "noOrders":"You don't have any orders yet",
     "ordersTable": {
       "active": "Active",
       "late": "Late",
@@ -255,6 +334,30 @@
       "orderDate": "Order Date",
       "orderDelivery": "Delivery Date",
       "orderPrice": "Price"
+    }
+  },
+  "Dashboard":{
+    "buyer":{
+      "popularCategories":"Check out these popular categories",
+      "popularGigsMobile":"Popular Gigs",
+      "popularGigspart1":"Here are some of the most popular ",
+      "popularGigspart2":" gigs",
+      "programming":"Programming",
+      "photography":"Photography",
+      "seeAll":"See all"
+    },
+    "seller":{
+      "greeting":"Hi, ",
+      "subheading":"Here is your seller dashboard",
+      "sellerAnalytics":{
+        "lastMonth":" than the previous month",
+        "totalEarnings":"Total Earnings",
+        "orders":"Orders",
+        "sales":"Sales",
+        "lastSales":"Recent Sales",
+        "salesSubTextPart1":"You sold ",
+        "salesSubTextPart2":" gigs this month"
+      }
     }
   }
 }

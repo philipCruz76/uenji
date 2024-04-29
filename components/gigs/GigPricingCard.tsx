@@ -5,6 +5,7 @@ import { useState } from "react";
 import GigPackageCheckoutButton from "./GigPackageCheckoutButton";
 import GigCheckoutModal from "./GigCheckoutModal";
 import { ExtendedGigInfo } from "@/types/common.types";
+import { useTranslations } from "next-intl";
 
 type GigPricingCardProps = {
   gig: ExtendedGigInfo;
@@ -18,6 +19,7 @@ type PackageType = {
 const GigPricingCard = ({ gig }: GigPricingCardProps) => {
   if (!gig) return null;
   const parsedPackages = JSON.parse(gig.packages!) as GigPricing["packages"];
+  const t = useTranslations("Gigs.desktopPage");
   const [selectedPackage, setSelectedPackage] = useState<PackageType>({
     type: "basic",
     index: 0,
@@ -41,7 +43,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                       : null,
                   )}
                 >
-                  Básico
+                  {t("basic")}
                 </label>
               </div>
               <div className="flex min-h-full min-w-full justify-between">
@@ -65,7 +67,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                         <path d="M232,136.66A104.12,104.12,0,1,1,119.34,24,8,8,0,0,1,120.66,40,88.12,88.12,0,1,0,216,135.34,8,8,0,0,1,232,136.66ZM120,72v56a8,8,0,0,0,8,8h56a8,8,0,0,0,0-16H136V72a8,8,0,0,0-16,0Zm40-24a12,12,0,1,0-12-12A12,12,0,0,0,160,48Zm36,24a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm24,36a12,12,0,1,0-12-12A12,12,0,0,0,220,108Z"></path>
                       </svg>
                       <span className="pr-[12px]">
-                        {parsedPackages[0].deliveryTime} Dia para entrega
+                        {parsedPackages[0].deliveryTime} {t("delivery")}
                       </span>
 
                       <svg
@@ -81,7 +83,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                         {!parsedPackages[0].revisions
                           ? "0"
                           : parsedPackages[0].revisions}{" "}
-                        revisões
+                        {t("revisions")}
                       </span>
                     </span>
                     <span className="flex flex-row items-center  justify-end text-xl font-medium text-gray-800">
@@ -116,7 +118,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                       : null,
                   )}
                 >
-                  Básico
+                  {t("basic")}
                 </label>
                 <label
                   onClick={() => {
@@ -129,7 +131,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                     "border-l border-r",
                   )}
                 >
-                  Standard
+                  {t("standard")}
                 </label>
                 <label
                   onClick={() => {
@@ -141,7 +143,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                       : null,
                   )}
                 >
-                  Premium
+                  {t("premium")}
                 </label>
               </div>
               <div className="flex min-h-full min-w-full justify-between">
@@ -165,7 +167,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                         <path d="M232,136.66A104.12,104.12,0,1,1,119.34,24,8,8,0,0,1,120.66,40,88.12,88.12,0,1,0,216,135.34,8,8,0,0,1,232,136.66ZM120,72v56a8,8,0,0,0,8,8h56a8,8,0,0,0,0-16H136V72a8,8,0,0,0-16,0Zm40-24a12,12,0,1,0-12-12A12,12,0,0,0,160,48Zm36,24a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm24,36a12,12,0,1,0-12-12A12,12,0,0,0,220,108Z"></path>
                       </svg>
                       <span className="pr-[12px]">
-                        {parsedPackages[0].deliveryTime} Dia para entrega
+                        {parsedPackages[0].deliveryTime} {t("delivery")}
                       </span>
 
                       <svg
@@ -181,7 +183,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                         {!parsedPackages[0].revisions
                           ? "0"
                           : parsedPackages[0].revisions}{" "}
-                        revisões
+                        {t("revisions")}
                       </span>
                     </span>
                     <span className="flex flex-row items-center  justify-end text-xl font-medium text-gray-800">
@@ -218,7 +220,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                         <path d="M232,136.66A104.12,104.12,0,1,1,119.34,24,8,8,0,0,1,120.66,40,88.12,88.12,0,1,0,216,135.34,8,8,0,0,1,232,136.66ZM120,72v56a8,8,0,0,0,8,8h56a8,8,0,0,0,0-16H136V72a8,8,0,0,0-16,0Zm40-24a12,12,0,1,0-12-12A12,12,0,0,0,160,48Zm36,24a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm24,36a12,12,0,1,0-12-12A12,12,0,0,0,220,108Z"></path>
                       </svg>
                       <span className="pr-[12px]">
-                        {parsedPackages[1].deliveryTime} Dia para entrega
+                        {parsedPackages[1].deliveryTime} {t("delivery")}
                       </span>
 
                       <svg
@@ -234,7 +236,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                         {!parsedPackages[1].revisions
                           ? "0"
                           : parsedPackages[1].revisions}{" "}
-                        revisões
+                        {t("revisions")}
                       </span>
                     </span>
                     <span className="flex flex-row items-center  justify-end text-xl font-medium text-gray-800">
@@ -272,7 +274,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                           <path d="M232,136.66A104.12,104.12,0,1,1,119.34,24,8,8,0,0,1,120.66,40,88.12,88.12,0,1,0,216,135.34,8,8,0,0,1,232,136.66ZM120,72v56a8,8,0,0,0,8,8h56a8,8,0,0,0,0-16H136V72a8,8,0,0,0-16,0Zm40-24a12,12,0,1,0-12-12A12,12,0,0,0,160,48Zm36,24a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm24,36a12,12,0,1,0-12-12A12,12,0,0,0,220,108Z"></path>
                         </svg>
                         <span className="pr-[12px]">
-                          {parsedPackages[2].deliveryTime} Dia para entrega
+                          {parsedPackages[2].deliveryTime} {t("delivery")}
                         </span>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -287,7 +289,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                           {!parsedPackages[2].revisions
                             ? "0"
                             : parsedPackages[2].revisions}{" "}
-                          revisões
+                          {t("revisions")}
                         </span>
                       </span>
                       <span className="flex flex-row items-center  justify-end text-xl font-medium text-gray-800">

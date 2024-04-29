@@ -1,4 +1,6 @@
+"use client";
 import { SellerInfo } from "@/types/sellerProfile.types";
+import { useLocale } from "next-intl";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
 import { Control, UseFormRegister, useFieldArray } from "react-hook-form";
@@ -30,6 +32,7 @@ function DataTable({
   formControl,
   fieldName,
 }: DataTableProps) {
+  const locale = useLocale();
   let fieldToRegister: "languages" | "skills" | "education" | "certifications";
   let column1Name = "";
   let column2Name = "";
@@ -37,23 +40,23 @@ function DataTable({
   switch (fieldName) {
     case "languages":
       fieldToRegister = "languages";
-      column1Name = "Language";
-      column2Name = "Level";
+      column1Name = locale === "pt" ? "Língua" : "Language";
+      column2Name = locale === "pt" ? "Nível" : "Level";
       break;
     case "skills":
       fieldToRegister = "skills";
-      column1Name = "Skill";
-      column2Name = "Level";
+      column1Name = locale === "pt" ? "Competências" : "Skill";
+      column2Name = locale === "pt" ? "Nível" : "Level";
       break;
     case "education":
       fieldToRegister = "education";
-      column1Name = "Education";
-      column2Name = "Year";
+      column1Name = locale === "pt" ? "Educação" : "Education";
+      column2Name = locale === "pt" ? "Ano" : "Year";
       break;
     case "certifications":
       fieldToRegister = "certifications";
-      column1Name = "Certification";
-      column2Name = "Year";
+      column1Name = locale === "pt" ? "Certificação" : "Certification";
+      column2Name = locale === "pt" ? "Ano" : "Year";
       break;
     default:
       break;

@@ -2,25 +2,26 @@ import { Category } from "@/types/common.types";
 import { SubCategoriesList } from "@/constants/categoryConstants";
 import Link from "next/link";
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 
 type PopularCategoryShowcaseMobileProps = {
   popularCategories: Category[];
 };
 
-const PopularCategoryShowcaseMobile = ({
+const PopularCategoryShowcaseMobile = async({
   popularCategories,
 }: PopularCategoryShowcaseMobileProps) => {
+  const t = await getTranslations("Dashboard.buyer");
   return (
     <div className="flex w-full flex-col gap-6">
       <div className="flex h-fit w-full flex-row justify-between ">
-        <h2 className=" text-xl font-bold"> Categorias Populares</h2>
+        <h2 className=" text-xl font-bold"> {t("popularCategories")}</h2>
 
         <Link
           href={"/categorias"}
           className="flex flex-row items-center justify-center gap-[4px] text-sm  text-[#0000CC] underline"
         >
-          {" "}
-          Ver todas{" "}
+          {t("seeAll")}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

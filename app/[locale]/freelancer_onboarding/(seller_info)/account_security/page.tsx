@@ -10,6 +10,7 @@ import {
   SellerProfileValidator,
 } from "@/types/sellerProfile.types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {  useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -17,6 +18,7 @@ import toast from "react-hot-toast";
 
 const page = ({}) => {
   const user = useCurrentUser();
+  const accountSecurityText = useTranslations("FreelancerOnboarding.accountSecurity")
   const router = useRouter();
   const { sellerOnboardingStep, setSellerOnboardingStep } =
     useSellerOnboardingStore();
@@ -64,10 +66,9 @@ const page = ({}) => {
   return (
     <>
       <div className="flex h-fit w-full flex-col gap-4 border-b py-4">
-        <h1 className="text-4xl font-bold">Segurança de Perfil</h1>
+        <h1 className="text-4xl font-bold">{accountSecurityText("heading")}</h1>
         <h3 className="hidden max-w-[500px] flex-wrap tablet:flex">
-          A confiança e a segurança são muito importantes na nossa comunidade.
-          Por favor, verifique o seu e-mail e número de telemóvel.
+        {accountSecurityText("subheading")}
         </h3>
       </div>
       <form
@@ -88,7 +89,7 @@ const page = ({}) => {
             <h3 className="py-2">
               <span>Email</span>
               <small className="px-3 text-gray-400">
-                <i>Privado</i>
+                <i>{accountSecurityText("private")}</i>
               </small>
             </h3>
           </aside>
@@ -101,7 +102,7 @@ const page = ({}) => {
               })}
               className="flex w-full items-center justify-center rounded-md border border-slate-400 bg-sky-200  px-4 py-2 text-sm font-medium text-gray-500 shadow-sm  focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 tablet:w-[150px]"
             >
-              Verified
+             {accountSecurityText("verified")}
             </a>
           </div>
         </div>
@@ -118,9 +119,9 @@ const page = ({}) => {
               <path d="M231.88,175.08A56.26,56.26,0,0,1,176,224C96.6,224,32,159.4,32,80A56.26,56.26,0,0,1,80.92,24.12a16,16,0,0,1,16.62,9.52l21.12,47.15,0,.12A16,16,0,0,1,117.39,96c-.18.27-.37.52-.57.77L96,121.45c7.49,15.22,23.41,31,38.83,38.51l24.34-20.71a8.12,8.12,0,0,1,.75-.56,16,16,0,0,1,15.17-1.4l.13.06,47.11,21.11A16,16,0,0,1,231.88,175.08Z"></path>
             </svg>
             <h3 className="py-2">
-              <span>Número de telemóvel</span>
+              <span>{accountSecurityText("cellphone")}</span>
               <small className="px-3 text-gray-400">
-                <i>Privado</i>
+                <i>{accountSecurityText("private")}</i>
               </small>
             </h3>
           </aside>
@@ -132,7 +133,7 @@ const page = ({}) => {
               })}
               className="flex w-full items-center justify-center rounded-md border border-slate-400 bg-sky-200  px-4 py-2 text-sm font-medium text-gray-500 shadow-sm  focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 tablet:w-[150px]"
             >
-              Não verificado
+              {accountSecurityText("unverified")}
             </a>
           </div>
         </div>
@@ -146,7 +147,7 @@ const page = ({}) => {
               }  rounded-sm text-white`,
             )}
           >
-            Concluir
+            {accountSecurityText("submitButton")}
           </button>
         </div>
       </form>
