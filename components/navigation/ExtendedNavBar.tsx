@@ -2,7 +2,7 @@
 
 import { NavLinks } from "@/constants";
 import Link from "next/link";
-import { FC, lazy, useEffect, useState, useTransition } from "react";
+import { FC, lazy, useEffect, useState } from "react";
 import Image from "next/image";
 import { useOpenMobileNavStore } from "@/lib/stores/mobileNav-store";
 import { useOpenModalStore } from "@/lib/stores/modals/modal-store";
@@ -38,7 +38,6 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
   const navBarText = useTranslations("Navbar");
 
   const locale = useLocale();
-  const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
   const {
@@ -69,7 +68,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
         );
         setOrders(activeOrders.length);
       } catch (error: any) {
-        toast.error(error.message);
+        console.error(error);
       }
     };
     activeOrders();
@@ -143,9 +142,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
             <Select
               value={locale}
               onValueChange={(value) => {
-                startTransition(() => {
-                  router.replace(pathName, { locale: value });
-                });
+                router.replace(pathName, { locale: value });
               }}
             >
               <SelectTrigger className="w-[70px] border-black">

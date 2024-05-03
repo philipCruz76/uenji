@@ -1,5 +1,6 @@
 import DesktopOrdersPage from "@/components/orders/DesktopOrdersPage";
 import MobileOrdersPage from "@/components/orders/MobileOrdersPage";
+import SellerOrderPage from "@/components/orders/SellerOrderPage";
 import getCurrentUser from "@/lib/actions/getCurrentUser";
 import {
   getBuyerOrders,
@@ -38,11 +39,15 @@ async function page({}: pageProps) {
             {orderPageText("subtitle")}
           </h3>
 
-          <div className="hidden desktop:flex">
-            <DesktopOrdersPage orders={orders} currentUser={currentUser} />
+          <div className="hidden tablet:flex">
+            {currentUser.sellerView ? (
+              <SellerOrderPage orders={orders} />
+            ) : (
+              <DesktopOrdersPage orders={orders} currentUser={currentUser} />
+            )}
           </div>
 
-          <div className="flex w-full desktop:hidden">
+          <div className="flex w-full tablet:hidden">
             <MobileOrdersPage orders={orders} currentUser={currentUser} />
           </div>
         </div>

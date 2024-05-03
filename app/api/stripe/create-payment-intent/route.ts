@@ -44,11 +44,30 @@ async function POST(request: Request) {
       gig.packages!,
     ) as GigPricing["packages"];
 
+    if (user.stripeCustomerId === null) {
+      const customer = await stripe.customers.create({
+        name: user.name!,
+        email: user.email!,
+      });
+
+      await db.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          stripeCustomerId: customer.id,
+        },
+      });
+    }
+    
+
     const paymentIntent = await stripe.paymentIntents.create({
       currency: "usd",
       amount: parseInt(selectedGigPackage[gigPackage].price) / 100,
       payment_method_types: ["card", "paypal"],
       receipt_email: user.email!,
+      customer: user.stripeCustomerId!,
+      setup_future_usage:"on_session",
       metadata: {
         buyerId: user.id,
         sellerId: gig.user.id,

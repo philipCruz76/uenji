@@ -67,7 +67,7 @@ const SuccessPage = ({ pruchasedPackage, purchasedGig }: SuccessPageProps) => {
         <Card className="flex max-h-[300px] w-[300px] flex-col  items-center justify-start overflow-hidden border-none hover:cursor-pointer">
           <CardTitle>
             <Image
-              alt={pruchasedPackage.title}
+              alt={purchasedGig.title}
               src={purchasedGig.coverImage!}
               width={200}
               height={200}
@@ -81,7 +81,7 @@ const SuccessPage = ({ pruchasedPackage, purchasedGig }: SuccessPageProps) => {
             </h3>
             <span className="font-light">
               {successPageText("orderCard.gig")}
-              {pruchasedPackage.title}
+              {purchasedGig.title}
             </span>
             <span className="font-light">
               {successPageText("orderCard.package")}

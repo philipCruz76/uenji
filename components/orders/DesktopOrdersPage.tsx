@@ -37,7 +37,7 @@ const DesktopOrdersPage = async ({
           value="delivered"
           className="data-[state=active]:bg-transparent data-[state=active]:text-base data-[state=active]:underline"
         >
-          {orderTableText("delivered")}
+          {orderTableText("accepted")}
         </TabsTrigger>
         <TabsTrigger
           value="cancelled"
@@ -71,7 +71,7 @@ const DesktopOrdersPage = async ({
                       width={80}
                       height={80}
                     />
-                    <Link href={`/`}>{order.title}</Link>
+                    <Link href={`/orders/${order.id}`}>{order.title}</Link>
                   </td>
                   <td className="text-left">
                     {order.createdAt.toLocaleDateString()}

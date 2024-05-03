@@ -325,15 +325,24 @@
     "title": "Orders",
     "subtitle": "Manage your orders",
     "noOrders":"You don't have any orders yet",
+    "events": {
+      "orderPlaced": "Has placed an order",
+      "orderAccepted": "Has accepted the order",
+      "orderRejected": "Has rejected the order",
+      "orderDelivered": "Has delivered the order. Please review",
+      "orderCancelled": "Has cancelled the order"
+    },
     "ordersTable": {
       "active": "Active",
       "late": "Late",
-      "delivered": "Delivered",
-      "cancelled": "Cacelled",
+      "accepted": "Delivered",
+      "review":"In Review",
+      "cancelled": "Cancelled",
       "order": "Order",
       "orderDate": "Order Date",
       "orderDelivery": "Delivery Date",
-      "orderPrice": "Price"
+      "orderPrice": "Price",
+      "saveButton":"Save Board"
     }
   },
   "Dashboard":{

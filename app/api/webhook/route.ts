@@ -4,6 +4,8 @@ import { NextResponse } from "next/server";
 import db from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
+import { orderEvent } from "@/types/common.types";
+
 
 export async function POST(request: Request) {
   const body = await request.text();
@@ -72,6 +74,16 @@ export async function POST(request: Request) {
           deliveryTime.getDate() + parseInt(charge.metadata.gigDeliveryTime),
         );
 
+        const newOrderEvent: orderEvent = [
+          {
+            type: "order.created",
+            createdAt: new Date(Date.now()),
+            user: buyer.displayName || buyer.username! ,
+            event: `Has placed an order`,
+          },
+        ];
+
+        const orderEvent = JSON.stringify(newOrderEvent);
         // MAJOR BUG: order is created twice when both local and live webhooks are active.
         await db.order.create({
           data: {
@@ -82,6 +94,7 @@ export async function POST(request: Request) {
             gigId: gig.id,
             isCompleted: false,
             title: gig.title,
+            events: orderEvent,
             gigPackageIdx: parseInt(charge.metadata.packageIdx),
             gigDeliveryTime: deliveryTime,
             paymentIntent: paymentIntent.id,

@@ -58,7 +58,7 @@ export type LanguageProficiency = {
 export type ExtendedGigInfo = Gig & {
   user: PrismaUser;
 };
-
+export type orderEvent = { type: string; createdAt:Date; user:string; event: string }[];
 export type UserOrders = ({ gig: Gig } & { users: PrismaUser[] } & Order)[];
 export type UserGigs =
   | (Gig & {

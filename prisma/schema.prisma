@@ -72,12 +72,10 @@ model User {
   accounts            Account[]
   sessions            Session[]
 
-  stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
-  stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
-  stripePriceId          String?   @map(name: "stripe_price_id")
-  stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
-  Gig                    Gig[]
-  Review                 Review[]
+  stripeCustomerId String?  @unique @map(name: "stripe_customer_id")
+  stripePriceId    String?  @map(name: "stripe_price_id")
+  Gig              Gig[]
+  Review           Review[]
 
   ordersIDs       String[]       @db.ObjectId
   orders          Order[]        @relation(fields: [ordersIDs], references: [id])
@@ -162,6 +160,7 @@ model Order {
   title           String   @db.String
   price           Float
   status          String   @db.String
+  events          String   @db.String
   isCompleted     Boolean? @default(false) @map(name: "is_completed")
   paymentIntent   String   @map(name: "payment_intent")
   createdAt       DateTime @default(now()) @map(name: "created_at")

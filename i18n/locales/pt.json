@@ -325,15 +325,24 @@
     "title": "Pedidos",
     "subtitle": "Gerir os seus pedidos",
     "noOrders":"You don't have any orders yet",
+    "events": {
+      "orderPlaced": "Encomendou este serviço",
+      "orderAccepted": "Aceitou o pedido",
+      "orderRejected": "Rejeitou o pedido",
+      "orderDelivered": "Entregou o pedido. Por favor, reveja",
+      "orderCancelled": "Cancelou o pedido"
+    },
     "ordersTable": {
       "active": "Ativos",
       "late": "Em Atraso",
-      "delivered": "Entregues",
+      "review": "Em revisão",
+      "accepted": "Entregues",
       "cancelled": "Cancelados",
       "order": "Pedido",
       "orderDate": "Data de Pedido",
       "orderDelivery": "Data de Entrega",
-      "orderPrice": "Preço"
+      "orderPrice": "Preço",
+      "saveButton":"Guardar Alterações"
     }
   },
   "Dashboard":{

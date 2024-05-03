@@ -1,7 +1,6 @@
 "use client";
 
 import { Progress } from "@/components/ui/Progress";
-import Link from "next/link";
 import { useSellerOnboardingStore } from "@/lib/stores/sellerOboarding-store";
 import { cn } from "@/lib/utils";
 import { redirect } from "next/navigation";
@@ -22,7 +21,7 @@ export default function SellerInfoLayout({
   return (
     <section className="flex min-h-[100dvh] max-w-[100dvw] flex-col px-[24px] desktop:px-0">
       <div className="flex h-[70px] w-full justify-between border-b pt-6">
-        <ul className="hidden cursor-pointer flex-row gap-2 px-4 tablet:flex">
+        <ul className="hidden  flex-row gap-2 px-4 tablet:flex">
           <li
             key="personalInfo"
             className="flex flex-row items-center justify-center gap-4 text-center"
@@ -35,8 +34,7 @@ export default function SellerInfoLayout({
             >
               1
             </i>
-            <Link
-              href={"/freelancer_onboarding/personal_info"}
+            <span
               className={cn(
                 "text-sm",
                 sellerOnboardingStep === 1 ? "text-sky-600" : "text-gray-400",
@@ -44,7 +42,7 @@ export default function SellerInfoLayout({
             >
               {" "}
               Personal Info
-            </Link>
+            </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -67,8 +65,7 @@ export default function SellerInfoLayout({
             >
               2
             </i>
-            <Link
-              href={"/freelancer_onboarding/professional_info"}
+            <span
               className={cn(
                 "text-sm",
                 sellerOnboardingStep === 2 ? "text-sky-600" : "text-gray-400",
@@ -76,7 +73,7 @@ export default function SellerInfoLayout({
             >
               {" "}
               Professional Info
-            </Link>
+            </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -99,8 +96,7 @@ export default function SellerInfoLayout({
             >
               3
             </i>
-            <Link
-              href={"/freelancer_onboarding/account_security"}
+            <span
               className={cn(
                 "text-sm",
                 sellerOnboardingStep === 3 ? "text-sky-600" : "text-gray-400",
@@ -108,7 +104,7 @@ export default function SellerInfoLayout({
             >
               {" "}
               Account Security
-            </Link>
+            </span>
           </li>
         </ul>
         <div className="flex h-full w-full flex-col gap-2 px-4">

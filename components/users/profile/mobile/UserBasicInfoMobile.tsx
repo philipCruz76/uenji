@@ -77,7 +77,7 @@ const UserBasicInfoMobile = ({ user }: UserBasicInfoMobileProps) => {
         <div className="flex flex-col justify-start gap-2 text-start text-xs">
           <span className="text-[#adb5bd]">Idiomas</span>
           <span className="font-semibold">
-            {parsedLanguages.length < 1
+            {parsedLanguages === null || parsedLanguages.length < 1
               ? "Nenhuma informação disponível"
               : parsedLanguages.map((language) => {
                   return (
@@ -107,7 +107,7 @@ const UserBasicInfoMobile = ({ user }: UserBasicInfoMobileProps) => {
         <div className="flex flex-col justify-start gap-2 text-start text-xs">
           <span className="text-[#adb5bd]">Habilidades</span>
           <span className="font-semibold">
-            {parsedSkills.length < 1
+            { parsedSkills === null || parsedSkills.length < 1
               ? "Unknown"
               : parsedSkills.map((skill) => {
                   return `${skill.name} `;
