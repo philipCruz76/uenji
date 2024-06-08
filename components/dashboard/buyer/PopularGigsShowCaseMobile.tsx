@@ -52,7 +52,7 @@ async function PopularGigsShowCaseMobile({}: PopularGigsShowCaseMobileProps) {
                           />
                         </CardTitle>
                         <CardContent className="max-h-[50%] min-w-full p-[4px]">
-                          <div className="flex h-full w-full flex-col ">
+                          <div className="flex h-full w-full flex-col">
                             <div className="flex w-full flex-row items-center justify-start gap-2">
                               <Image
                                 src={gig.user.image!}
@@ -61,7 +61,7 @@ async function PopularGigsShowCaseMobile({}: PopularGigsShowCaseMobileProps) {
                                 height={30}
                                 className="max-h-[30px] min-h-[30px] max-w-[30px] rounded-full border bg-white"
                               />
-                              <span className=" text-sm font-semibold">
+                              <span className="text-sm font-semibold">
                                 {!gig.user.displayName
                                   ? gig.user.username
                                   : gig.user.displayName}
@@ -73,7 +73,7 @@ async function PopularGigsShowCaseMobile({}: PopularGigsShowCaseMobileProps) {
                                   gig.title.slice(1)}
                               </span>
 
-                              <span className=" flex items-end  text-sm font-semibold">
+                              <span className="flex items-end text-sm font-semibold">
                                 {gigPackage[0].price}.00 AOA
                               </span>
                             </div>
@@ -93,7 +93,7 @@ async function PopularGigsShowCaseMobile({}: PopularGigsShowCaseMobileProps) {
                 return (
                   <CarouselItem
                     key={`popular-gig-${index}`}
-                    className="ml-2  basis-[75%]"
+                    className="ml-2 basis-[75%]"
                   >
                     <Link
                       href={`/${gig.user.username}/${gig.title.replace(
@@ -112,7 +112,7 @@ async function PopularGigsShowCaseMobile({}: PopularGigsShowCaseMobileProps) {
                           />
                         </CardTitle>
                         <CardContent className="max-h-[50%] min-w-full p-[4px]">
-                          <div className="flex h-full w-full flex-col ">
+                          <div className="flex h-full w-full flex-col">
                             <div className="flex w-full flex-row items-center justify-start gap-2">
                               <Image
                                 src={gig.user.image!}
@@ -121,7 +121,7 @@ async function PopularGigsShowCaseMobile({}: PopularGigsShowCaseMobileProps) {
                                 height={30}
                                 className="max-h-[30px] min-h-[30px] max-w-[30px] rounded-full border bg-white"
                               />
-                              <span className=" text-sm font-semibold">
+                              <span className="text-sm font-semibold">
                                 {!gig.user.displayName
                                   ? gig.user.username
                                   : gig.user.displayName}
@@ -133,7 +133,7 @@ async function PopularGigsShowCaseMobile({}: PopularGigsShowCaseMobileProps) {
                                   gig.title.slice(1)}
                               </span>
 
-                              <span className=" flex items-end  text-sm font-semibold">
+                              <span className="flex items-end text-sm font-semibold">
                                 {gigPackage[0].price}.00 AOA
                               </span>
                             </div>

@@ -18,19 +18,19 @@ const page = async () => {
     locale === "pt" ? sellerOnBoardingDontsPT : sellerOnBoardingDontsEN;
   return (
     <section className="container flex min-h-[100dvh] max-w-[100dvw] py-8">
-      <div className="flex h-full w-full flex-col-reverse items-center justify-between tablet:pl-[25px]  desktop:flex-row-reverse ">
+      <div className="flex h-full w-full flex-col-reverse items-center justify-between tablet:pl-[25px] desktop:flex-row-reverse">
         <div className="container flex h-full max-w-[900px] flex-col items-start justify-center tablet:px-[60px]">
           <h1 className="box-border flex pb-[20px] text-2xl font-bold text-[#303030] tablet:max-w-[590px] tablet:pr-[80px]">
             {locale === "pt"
               ? "Agora, vamos falar sobre as coisas que deve evitar."
               : "Now, let's talk about the things you should avoid."}
           </h1>
-          <h3 className="text-sm text-gray-600 ">
+          <h3 className="text-sm text-gray-600">
             {locale === "pt"
               ? "O seu sucesso no Uenji é importante para nós. Evite o seguinte para se manter em conformidade com as normas da nossa comunidade:"
               : "Your success on Uenji is important to us. Avoid the following to stay compliant with our community standards:"}
           </h3>
-          <ul className="box-border grid min-h-[310px] max-w-full grid-cols-1 justify-between  pt-[42px]  tablet:grid-cols-2  desktop:grid-cols-3">
+          <ul className="box-border grid min-h-[310px] max-w-full grid-cols-1 justify-between pt-[42px] tablet:grid-cols-2 desktop:grid-cols-3">
             {sellerOnBoardingDonts.map((item) => (
               <li
                 key={item.key}
@@ -67,7 +67,7 @@ const page = async () => {
             </Link>
           </div>
         </div>
-        <div className="hidden h-fit  max-h-[100dvh] overflow-hidden rounded-md  border desktop:flex ">
+        <div className="hidden h-fit max-h-[100dvh] overflow-hidden rounded-md border desktop:flex">
           <video
             autoPlay
             muted

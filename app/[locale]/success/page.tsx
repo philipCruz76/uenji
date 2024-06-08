@@ -16,7 +16,7 @@ export default async function successPage({ searchParams }: pageProps) {
   if (!purchase) redirect("/");
 
   return (
-    <section className="flex max-h-[25px] min-h-[100dvh]  min-w-[100dvw] flex-col items-center justify-center gap-6 p-6">
+    <section className="flex max-h-[25px] min-h-[100dvh] min-w-[100dvw] flex-col items-center justify-center gap-6 p-6">
       <SuccessPage
         pruchasedPackage={purchase.package}
         purchasedGig={purchase.gig}

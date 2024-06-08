@@ -35,7 +35,7 @@ const MobileOrdersPage = ({ currentUser, orders }: MobileOrdersPageProps) => {
           setSelectedOrderType(value as OrderType);
         }}
       >
-        <SelectTrigger className=" h-[35px] w-full rounded-md border font-semibold underline focus:outline-none data-[state=active]:bg-transparent data-[state=active]:text-base">
+        <SelectTrigger className="h-[35px] w-full rounded-md border font-semibold underline focus:outline-none data-[state=active]:bg-transparent data-[state=active]:text-base">
           <SelectValue placeholder="Pedidos" />
         </SelectTrigger>
         <SelectContent>
@@ -65,13 +65,13 @@ const MobileOrdersPage = ({ currentUser, orders }: MobileOrdersPageProps) => {
                 />
                 <div className="flex h-full w-full flex-col">
                   <h3 className="text-base font-bold">{order.price}.00 AOA</h3>
-                  <h3 className="text-xs ">{order.title}</h3>
+                  <h3 className="text-xs">{order.title}</h3>
                 </div>
               </CardTitle>
               <CardContent className="w-full p-2">
                 <div className="flex h-full w-full flex-col gap-2">
                   <div className="flex w-full flex-row items-center justify-between gap-2 py-1">
-                    <div className="flex flex-row  items-center justify-start gap-2">
+                    <div className="flex flex-row items-center justify-start gap-2">
                       <Image
                         src={seller.image!}
                         alt={`${seller.username} Profile picture`}

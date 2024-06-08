@@ -38,7 +38,7 @@ const ProfilePage = async ({ params, searchParams }: ProfilePageProps) => {
       <section className="container hidden min-h-[100dvh] max-w-[100dvw] bg-[#FFFFFF] desktop:flex">
         <UserProfilePage user={user} publicMode={publicView} />
       </section>
-      <section className="flex min-h-[100dvh]  max-w-[100dvw] desktop:hidden">
+      <section className="flex min-h-[100dvh] max-w-[100dvw] desktop:hidden">
         <UserProfileMobilePage user={user} publicMode={publicView} />
       </section>
     </>

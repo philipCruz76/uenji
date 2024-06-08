@@ -33,15 +33,15 @@ const Footer = async () => {
   const footerLinks = locale === "en" ? footerLinksEN : footerLinksPT;
   return (
     <>
-      <div className="flex h-px w-full bg-gray-200 " />
+      <div className="flex h-px w-full bg-gray-200" />
 
-      <footer className=" flex h-fit min-w-full bg-[#f8f9fa] text-black">
-        <div className=" flex flex-col justify-between gap-6 px-5 py-6 desktop:px-20">
+      <footer className="flex h-fit min-w-full bg-[#f8f9fa] text-black">
+        <div className="flex flex-col justify-between gap-6 px-5 py-6 desktop:px-20">
           <div className="w-full gap-12">
             <Image
               src={"/images/uenji-logo-black.png"}
               alt="Uenji Logo"
-              className="h-auto  w-auto items-start"
+              className="h-auto w-auto items-start"
               width={150}
               height={150}
             />

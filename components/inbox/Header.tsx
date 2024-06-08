@@ -25,7 +25,7 @@ const Header: FC<HeaderProps> = async ({ chatPartner }) => {
     }
   };
   return (
-    <header className="container flex h-[80px] w-full items-center border-b  py-4">
+    <header className="container flex h-[80px] w-full items-center border-b py-4">
       <div className="flex w-full justify-between">
         <Link href="/inbox" className="flex cursor-pointer tablet:hidden">
           <svg
@@ -39,7 +39,7 @@ const Header: FC<HeaderProps> = async ({ chatPartner }) => {
           </svg>
         </Link>
         <div className="flex flex-col">
-          <div className="flex min-w-fit  flex-row items-center gap-2">
+          <div className="flex min-w-fit flex-row items-center gap-2">
             <div className="h-[14px] w-[14px] rounded-full bg-gray-300" />
             <h1 className="flex w-full">
               <Link

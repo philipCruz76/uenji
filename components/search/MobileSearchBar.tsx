@@ -32,13 +32,13 @@ const MobileSearchBar = ({ withoutButton }: { withoutButton?: boolean }) => {
           handleSearch(inputRef.current.value);
         }
       }}
-      className="relative mb-4  flex h-[50px] w-full max-w-[440px] flex-col gap-4 "
+      className="relative mb-4 flex h-[50px] w-full max-w-[440px] flex-col gap-4"
     >
       <input
         type="text"
         ref={inputRef}
         placeholder={t("SearchPlaceholder")}
-        className="z-4 flex-1 rounded-md border border-black bg-white p-2 text-[16px] focus:outline-none "
+        className="z-4 flex-1 rounded-md border border-black bg-white p-2 text-[16px] focus:outline-none"
         onKeyDown={(e) => {
           e.key === "Enter" && handleSearch(e.currentTarget.value);
           if (e.key === "Escape") {
@@ -59,7 +59,7 @@ const MobileSearchBar = ({ withoutButton }: { withoutButton?: boolean }) => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="white"
-              className="flex h-5 w-5 "
+              className="flex h-5 w-5"
             >
               <path
                 strokeLinecap="round"

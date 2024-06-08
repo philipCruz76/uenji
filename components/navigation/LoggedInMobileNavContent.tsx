@@ -87,7 +87,7 @@ const LoggedInMobileNavContent = ({
       <div className="flex-1 overflow-y-auto">
         <Link
           href={`/${currentUser.username}`}
-          className="flex w-full flex-row items-center justify-start  gap-4 py-2  font-mono font-bold text-black"
+          className="flex w-full flex-row items-center justify-start gap-4 py-2 font-mono font-bold text-black"
           onClick={() => setMobileNav(false)}
         >
           <UserAvatar avatarPhoto={currentUser?.image!} />
@@ -96,14 +96,14 @@ const LoggedInMobileNavContent = ({
         </Link>
 
         {/*Nav Links*/}
-        <ul className="flex flex-col gap-[8px] py-[20px] font-mono text-base font-normal text-[#000000] ">
+        <ul className="flex flex-col gap-[8px] py-[20px] font-mono text-base font-normal text-[#000000]">
           {currentUser.isSeller ? (
             <div className="flex w-full items-center justify-center pb-4">
               <button
                 onClick={switchView}
                 className={cn(
                   buttonVariants({ variant: "outline" }),
-                  "w-[80%] cursor-pointer border-[#495057] rounded-md bg-[#dee2e6] transition duration-200 ease-in-out hover:scale-105 hover:border-[#495057] hover:bg-[#dee2e6] hover:bg-opacity-75",
+                  "w-[80%] cursor-pointer rounded-md border-[#495057] bg-[#dee2e6] transition duration-200 ease-in-out hover:scale-105 hover:border-[#495057] hover:bg-[#dee2e6] hover:bg-opacity-75",
                 )}
               >
                 <span className="">
@@ -171,7 +171,7 @@ const LoggedInMobileNavContent = ({
               >
                 <span>{navLinksText("orders")}</span>
                 {orders > 0 && currentUser.sellerView === true && (
-                  <span className=" flex h-[18px] w-[18px] items-center justify-center rounded-full border border-red-600 text-center font-mono text-xs text-red-600 ">
+                  <span className="flex h-[18px] w-[18px] items-center justify-center rounded-full border border-red-600 text-center font-mono text-xs text-red-600">
                     {orders}
                   </span>
                 )}

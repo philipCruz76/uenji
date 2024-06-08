@@ -6,7 +6,6 @@ import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
 import { orderEvent } from "@/types/common.types";
 
-
 export async function POST(request: Request) {
   const body = await request.text();
   const signature = headers().get("stripe-signature") as string;
@@ -78,7 +77,7 @@ export async function POST(request: Request) {
           {
             type: "order.created",
             createdAt: new Date(Date.now()),
-            user: buyer.displayName || buyer.username! ,
+            user: buyer.displayName || buyer.username!,
             event: `Has placed an order`,
           },
         ];

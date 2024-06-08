@@ -82,7 +82,7 @@ const GigSellerInfoMobile = ({
               src={image || "/icons/default-user.svg"}
               alt="profile picture"
               referrerPolicy="no-referrer"
-              className="h-[50px] w-[50px] rounded-full border transition duration-150 ease-in-out "
+              className="h-[50px] w-[50px] rounded-full border transition duration-150 ease-in-out"
             />
             <div className="flex flex-col">
               <span className="text-lg font-bold">{name}</span>
@@ -100,7 +100,7 @@ const GigSellerInfoMobile = ({
               src={image || "/icons/default-user.svg"}
               alt="profile picture"
               referrerPolicy="no-referrer"
-              className="h-[50px] w-[50px] rounded-full border transition duration-150 ease-in-out "
+              className="h-[50px] w-[50px] rounded-full border transition duration-150 ease-in-out"
             />
             <div className="flex w-full flex-col">
               <span className="text-lg font-bold">{name}</span>
@@ -119,7 +119,7 @@ const GigSellerInfoMobile = ({
             <div className="flex h-[60px] w-full items-center justify-start border-b border-t">
               <span className="text-sm">{gigSeller.description}</span>
             </div>
-            <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2 ">
+            <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
@@ -136,7 +136,7 @@ const GigSellerInfoMobile = ({
                 </span>
               </div>
             </div>
-            <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2 ">
+            <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
@@ -157,7 +157,7 @@ const GigSellerInfoMobile = ({
                 </span>
               </div>
             </div>
-            <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2 ">
+            <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"

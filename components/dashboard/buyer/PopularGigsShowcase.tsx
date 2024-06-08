@@ -14,12 +14,14 @@ type PopularGigsShowcaseProps = {};
 const PopularGigsShowcase = async ({}: PopularGigsShowcaseProps) => {
   const popularGigs = await getPopularGigs();
   const popularPhotoGigs = await getPopularGigs("fotografia");
-  const popularGigsText = await getTranslations("Dashboard.buyer")
+  const popularGigsText = await getTranslations("Dashboard.buyer");
   return (
-    <section className="flex h-full w-full flex-col gap-4 ">
+    <section className="flex h-full w-full flex-col gap-4">
       {/* Programming Gigs Showcase */}
       <h1 className="w-full text-2xl font-semibold">
-        {popularGigsText("popularGigspart1")} <i>{popularGigsText("programming")}</i> {popularGigsText("popularGigspart2")}
+        {popularGigsText("popularGigspart1")}{" "}
+        <i>{popularGigsText("programming")}</i>{" "}
+        {popularGigsText("popularGigspart2")}
       </h1>
 
       {/* Popular Gigs Carousel */}
@@ -31,12 +33,12 @@ const PopularGigsShowcase = async ({}: PopularGigsShowcaseProps) => {
             loop: true,
           }}
         >
-          <CarouselContent className="px-4 py-4 gap-4">
+          <CarouselContent className="gap-4 px-4 py-4">
             {popularGigs
               ? popularGigs.map((gig, index) => (
                   <CarouselItem
                     key={`popular-gig-${index}`}
-                    className=" pl-4 tablet:basis-1/2 desktop:basis-1/3 "
+                    className="pl-4 tablet:basis-1/2 desktop:basis-1/3"
                   >
                     <GigCard gigToShow={gig} index={index} />
                   </CarouselItem>
@@ -51,7 +53,9 @@ const PopularGigsShowcase = async ({}: PopularGigsShowcaseProps) => {
 
       {/* Photography Gigs Showcase */}
       <h1 className="w-full text-2xl font-semibold">
-      {popularGigsText("popularGigspart1")}<i>{popularGigsText("photography")}</i> {popularGigsText("popularGigspart2")}
+        {popularGigsText("popularGigspart1")}
+        <i>{popularGigsText("photography")}</i>{" "}
+        {popularGigsText("popularGigspart2")}
       </h1>
 
       {/* Popular Gigs Carousel */}
@@ -63,12 +67,12 @@ const PopularGigsShowcase = async ({}: PopularGigsShowcaseProps) => {
             loop: true,
           }}
         >
-          <CarouselContent className="px-4 py-4 gap-4">
+          <CarouselContent className="gap-4 px-4 py-4">
             {popularPhotoGigs
               ? popularPhotoGigs.map((gig, index) => (
                   <CarouselItem
                     key={`popular-gig-${index}`}
-                    className="pl-4 tablet:basis-1/2 desktop:basis-1/3 "
+                    className="pl-4 tablet:basis-1/2 desktop:basis-1/3"
                   >
                     <GigCard gigToShow={gig} index={index} />
                   </CarouselItem>

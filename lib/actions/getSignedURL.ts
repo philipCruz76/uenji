@@ -15,6 +15,7 @@ const acceptedTypes = [
   "image/svg",
   "image/webp",
   "image/tiff",
+  "image/svg+xml",
   "image/bmp",
   "image/ico",
   "image/cur",

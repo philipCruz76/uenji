@@ -19,8 +19,8 @@ const page = async ({}) => {
     locale === "pt" ? sellerOnboardingPT : sellerOnboardingEN;
 
   return (
-    <section className="container flex min-h-[100dvh]  max-w-[100dvw] ">
-      <div className="flex h-full w-full  flex-col-reverse items-center justify-between py-8 tablet:pl-[25px] desktop:flex-row ">
+    <section className="container flex min-h-[100dvh] max-w-[100dvw]">
+      <div className="flex h-full w-full flex-col-reverse items-center justify-between py-8 tablet:pl-[25px] desktop:flex-row">
         <div className="flex h-full w-full flex-col px-[2rem]">
           <h1 className="box-border flex w-full pb-[25px] text-xl font-bold text-[#303030] tablet:max-w-[590px] tablet:pr-[80px] tablet:text-2xl">
             {" "}
@@ -53,7 +53,7 @@ const page = async ({}) => {
             {locale === "pt" ? "Continuar" : "Continue"}
           </Link>
         </div>
-        <div className="flex w-full flex-col  items-center py-[20px] text-center  ">
+        <div className="flex w-full flex-col items-center py-[20px] text-center">
           <video controls muted className="box-content flex min-w-full">
             <source
               src="https://res.cloudinary.com/dqe71igxe/video/upload/f_auto:video,q_auto/v1/videos/WorkingStockVideo"

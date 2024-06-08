@@ -42,7 +42,7 @@ const ProfileContactButton = ({ username, id }: ProfileContactButtonProps) => {
   return (
     <a
       onClick={handleClick}
-      className="group flex h-fit w-full transform cursor-pointer  items-center justify-center gap-3 rounded-sm border  border-black bg-black px-4 py-2 text-center text-sm font-semibold text-white duration-200 ease-in-out  hover:scale-105"
+      className="group flex h-fit w-full transform cursor-pointer items-center justify-center gap-3 rounded-md border border-black bg-black px-4 py-2 text-center text-sm font-semibold text-white duration-200 ease-in-out hover:scale-105 hover:opacity-80"
     >
       Contact Me
       <svg

@@ -23,9 +23,9 @@ const InboxTypeComboBox = () => {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         asChild
-        className=" flex h-[40px] w-[150px] flex-row items-center justify-center rounded-sm hover:bg-neutral-100 hover:bg-opacity-80"
+        className="flex h-[40px] w-[150px] flex-row items-center justify-center rounded-sm hover:bg-neutral-100 hover:bg-opacity-80"
       >
-        <button className=" font-semibold">
+        <button className="font-semibold">
           {value
             ? inboxSettings.find((item) => item.value === value)?.label
             : "All messages"}
@@ -37,9 +37,9 @@ const InboxTypeComboBox = () => {
           />
         </button>
       </PopoverTrigger>
-      <PopoverContent className="h-[290px] w-[200px] bg-white  p-0">
+      <PopoverContent className="h-[290px] w-[200px] bg-white p-0">
         <Command>
-          <CommandGroup className=" h-full w-full space-y-2">
+          <CommandGroup className="h-full w-full space-y-2">
             {inboxSettings.map((item) => (
               <CommandItem
                 key={item.value}

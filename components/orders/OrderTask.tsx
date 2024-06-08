@@ -34,7 +34,7 @@ const OrderTask = ({ order }: OrderTaskProps) => {
             alt={buyer?.username!}
             width={20}
             height={20}
-            className="rounded-full border "
+            className="rounded-full border"
           />
           <span className="text-sm">{buyer?.username}</span>
         </div>

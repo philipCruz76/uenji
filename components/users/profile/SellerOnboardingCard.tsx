@@ -5,7 +5,7 @@ import React from "react";
 
 const SellerOnboardingCard = () => {
   return (
-    <div className="relative flex h-[450px] flex-col items-center justify-center space-y-4 border bg-white  text-center tablet:w-[500px]  desktop:w-[730px]">
+    <div className="relative flex h-[450px] flex-col items-center justify-center space-y-4 border bg-white text-center tablet:w-[500px] desktop:w-[730px]">
       <svg
         width="83px"
         height="83px"

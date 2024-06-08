@@ -14,7 +14,7 @@ const GigBasicInfoMobile = ({
   // {!gigDescription ? "Random lorem ipsum gibberish": gigDescription}
   return (
     <div className="flex w-full flex-col gap-2 px-4">
-      <span className="w-full text-2xl font-bold ">
+      <span className="w-full text-2xl font-bold">
         {gigTitle.charAt(0).toLocaleUpperCase() + gigTitle.slice(1)}
       </span>
 

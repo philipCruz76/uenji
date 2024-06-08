@@ -157,7 +157,7 @@ const DesktopAuthOTP = ({}) => {
           setShowEmailCredentials(true);
         }}
       >
-        <button className="h-6 w-6 p-0 ">
+        <button className="h-6 w-6 p-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -178,9 +178,9 @@ const DesktopAuthOTP = ({}) => {
         <span className="flex justify-start text-2xl font-bold">
           {otpText("heading")}
         </span>
-        <div className="flex flex-col justify-start ">
+        <div className="flex flex-col justify-start">
           <span>{otpText("subheading")}</span>
-          <span className=" text-sm font-light">{newUser.email}</span>
+          <span className="text-sm font-light">{newUser.email}</span>
         </div>
 
         <form

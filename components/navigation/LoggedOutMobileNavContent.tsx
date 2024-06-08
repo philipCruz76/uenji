@@ -33,7 +33,7 @@ const LoggedOutMobileNavContent = () => {
   return (
     <>
       {/* Mobile Menu Content */}
-      <div className=" flex-1">
+      <div className="flex-1">
         {/*Join Button*/}
         <span
           onClick={() => {
@@ -42,14 +42,14 @@ const LoggedOutMobileNavContent = () => {
           }}
           className={cn(
             buttonVariants({ variant: "outline" }),
-            "flex max-w-[120px] rounded-md cursor-pointer border-[#495057] bg-[#dee2e6] font-mono transition duration-200 ease-in-out hover:scale-105 hover:border-[#495057] hover:bg-[#dee2e6] hover:bg-opacity-75",
+            "flex max-w-[120px] cursor-pointer rounded-md border-[#495057] bg-[#dee2e6] font-mono transition duration-200 ease-in-out hover:scale-105 hover:border-[#495057] hover:bg-[#dee2e6] hover:bg-opacity-75",
           )}
         >
           {mobileNavText("joinCTA")}
         </span>
 
         {/*Nav Links*/}
-        <ul className="flex flex-col py-8 text-base font-light text-black ">
+        <ul className="flex flex-col py-8 text-base font-light text-black">
           <span
             className="cursor-pointer font-mono hover:underline"
             onClick={() => {

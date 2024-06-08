@@ -59,7 +59,6 @@ async function POST(request: Request) {
         },
       });
     }
-    
 
     const paymentIntent = await stripe.paymentIntents.create({
       currency: "usd",
@@ -67,7 +66,7 @@ async function POST(request: Request) {
       payment_method_types: ["card", "paypal"],
       receipt_email: user.email!,
       customer: user.stripeCustomerId!,
-      setup_future_usage:"on_session",
+      setup_future_usage: "on_session",
       metadata: {
         buyerId: user.id,
         sellerId: gig.user.id,

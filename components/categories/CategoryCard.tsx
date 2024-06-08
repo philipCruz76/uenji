@@ -21,7 +21,7 @@ const CategoryCard: FC<CategoryCardProps> = ({
   return (
     <Link
       href={href}
-      className="relative m-auto flex h-[344px] w-[252px] cursor-pointer items-center rounded-lg  bg-white font-mono text-white"
+      className="relative m-auto flex h-[344px] w-[252px] cursor-pointer items-center rounded-lg bg-white font-mono text-white"
     >
       <Image
         src={image}
@@ -30,11 +30,11 @@ const CategoryCard: FC<CategoryCardProps> = ({
         width={600}
         height={600}
       />
-      <span className="absolute bottom-[15px] left-[15px] flex w-full text-base  ">
+      <span className="absolute bottom-[15px] left-[15px] flex w-full text-base">
         {" "}
         {description}
       </span>
-      <span className="absolute bottom-[40px] left-[15px] flex text-2xl font-semibold ">
+      <span className="absolute bottom-[40px] left-[15px] flex text-2xl font-semibold">
         {title}
       </span>
     </Link>

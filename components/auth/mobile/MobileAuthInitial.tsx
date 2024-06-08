@@ -10,13 +10,13 @@ const MobileAuthInitial = () => {
   return (
     <>
       {/* Auth buttons */}
-      <div className="flex flex-col items-center justify-center space-y-2 py-[20dvh] font-semibold ">
-        <div className="flex h-[40px] w-[100dvw]  flex-row space-x-2 px-6 ">
+      <div className="flex flex-col items-center justify-center space-y-2 py-[20dvh] font-semibold">
+        <div className="flex h-[40px] w-[100dvw] flex-row space-x-2 px-6">
           <button
             className="flex h-[40px] w-[100dvw] flex-row items-center justify-between rounded-sm border"
             onClick={() => setShowEmailCredentials(true)}
           >
-            <div className="pl-1 ">
+            <div className="pl-1">
               <svg
                 width="24px"
                 height="24px"
@@ -47,7 +47,7 @@ const MobileAuthInitial = () => {
         </div>
 
         {/* Google Button */}
-        <div className="flex h-[40px] w-[100dvw]  flex-row space-x-2 px-6 ">
+        <div className="flex h-[40px] w-[100dvw] flex-row space-x-2 px-6">
           <button
             className="flex h-[40px] w-[100dvw] items-center justify-center rounded-sm border"
             onClick={() => socialAction("google")}
@@ -94,9 +94,9 @@ const MobileAuthInitial = () => {
           <p>OR</p>
         </div>
 
-        <div className="flex h-[40px]  w-[100dvw]  flex-row items-center justify-between space-x-2 px-6 ">
+        <div className="flex h-[40px] w-[100dvw] flex-row items-center justify-between space-x-2 px-6">
           <button
-            className="flex h-[40px] w-full flex-row items-center  justify-center space-x-2 rounded-sm border text-center"
+            className="flex h-[40px] w-full flex-row items-center justify-center space-x-2 rounded-sm border text-center"
             onClick={() => socialAction("facebook")}
           >
             <svg

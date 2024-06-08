@@ -40,7 +40,7 @@ const BuyerDashboard = async ({ user }: BuyerDashboardProps) => {
   );
 
   return (
-    <section className=" flex min-h-[100dvh] min-w-[100dvw] px-6 py-8">
+    <section className="flex min-h-[100dvh] min-w-[100dvw] px-6 py-8">
       <div className="flex w-full flex-col space-y-6">
         <h1 className="left-0 flex items-center justify-start text-3xl font-bold">
           {`${locale === "pt" ? "Olá, " : "Hi, "}`}

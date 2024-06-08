@@ -35,11 +35,11 @@ const GigWizardPublish = ({ username, gigName }: GigWizardPublishProps) => {
       });
   };
   return (
-    <section className="mx-[20%]  min-h-[100dvh] max-w-[100dvw]  items-center justify-center  px-6 py-[40px] pt-[50px]">
+    <section className="mx-[20%] min-h-[100dvh] max-w-[100dvw] items-center justify-center px-6 py-[40px] pt-[50px]">
       <h1 className="py-[20px] text-center text-2xl font-semibold">
         Publique o seu serviço
       </h1>
-      <div className=" flex max-h-[80dvh] min-h-[60dvh] min-w-[60dvw] max-w-[80dvw]  flex-col items-center justify-center gap-4 rounded-md border border-zinc-300">
+      <div className="flex max-h-[80dvh] min-h-[60dvh] min-w-[60dvw] max-w-[80dvw] flex-col items-center justify-center gap-4 rounded-md border border-zinc-300">
         <Image
           src={"/icons/office-svgrepo-com.svg"}
           width={100}

@@ -233,7 +233,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
         }}
       >
         {/* Title */}
-        <div className="flex w-full  flex-row justify-between">
+        <div className="flex w-full flex-row justify-between">
           <div className="flex min-w-[245px] max-w-[245px] flex-col gap-2 pr-[32px]">
             <span className="text-lg font-semibold">
               {gigOverViewText("title.heading")}
@@ -260,7 +260,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
               })}
             />
             <div className="flex w-full flex-row-reverse justify-between">
-              <span className=" text-xs text-gray-500">
+              <span className="text-xs text-gray-500">
                 {gigOverview.gigTitle.length}/80 max
               </span>
               {errors.gigTitle && (
@@ -272,7 +272,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
           </div>
         </div>
         {/* Category */}
-        <div className="flex w-full  flex-row justify-between">
+        <div className="flex w-full flex-row justify-between">
           <div className="flex min-w-[245px] max-w-[245px] flex-col gap-2 pr-[32px]">
             <span className="text-lg font-semibold">
               {gigOverViewText("category.heading")}
@@ -320,7 +320,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
           )}
         </div>
         {/* Search Tags */}
-        <div className="flex max-w-full  flex-row justify-between">
+        <div className="flex max-w-full flex-row justify-between">
           <div className="flex min-w-[245px] max-w-[245px] flex-col gap-2 pr-[32px]">
             <span className="text-lg font-semibold">
               {gigOverViewText("searchTags.heading")}
@@ -329,7 +329,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
               {gigOverViewText("searchTags.subheading")}
             </span>
           </div>
-          <div className="flex w-full max-w-full  flex-col gap-2">
+          <div className="flex w-full max-w-full flex-col gap-2">
             <span className="text-lg font-semibold">
               {gigOverViewText("searchTags.keywordsHeading")}
             </span>
@@ -345,10 +345,10 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
               {gigOverview.gigSearchTags.map((tag, index) => (
                 <button
                   type="button"
-                  className=" flex max-h-full max-w-full items-center justify-center justify-items-center gap-1 rounded-md bg-slate-100 px-[8px] py-[8px] text-center "
+                  className="flex max-h-full max-w-full items-center justify-center justify-items-center gap-1 rounded-md bg-slate-100 px-[8px] py-[8px] text-center"
                   key={index}
                 >
-                  <span className="h-full w-full  font-semibold text-gray-500 hover:cursor-default">
+                  <span className="h-full w-full font-semibold text-gray-500 hover:cursor-default">
                     {tag.toUpperCase()}
                   </span>
 
@@ -368,7 +368,7 @@ const GigWizardOverview = ({ username, gigName }: GigWizardOverviewProps) => {
                         { shouldValidate: true },
                       );
                     }}
-                    className=" h-full w-full hover:cursor-pointer"
+                    className="h-full w-full hover:cursor-pointer"
                     xmlns="http://www.w3.org/2000/svg"
                     width="12"
                     height="12"

@@ -15,20 +15,21 @@ interface SellerDashboardProps {
   user: User;
 }
 
-const SellerDashboard: FC<SellerDashboardProps> = async({ user }) => {
+const SellerDashboard: FC<SellerDashboardProps> = async ({ user }) => {
   const sellerDashboardText = await getTranslations("Dashboard.seller");
   return (
     <section className="flex min-h-[100dvh] min-w-[100dvw] max-w-[100dvw] flex-col items-center justify-center gap-4 bg-white p-[24px] text-center">
-      <h1 className=" text-3xl font-bold">{sellerDashboardText("greeting")}{user.name}</h1>
-      <h3 className="text-xl font-bold">
-      {sellerDashboardText("subheading")}
-      </h3>
+      <h1 className="text-3xl font-bold">
+        {sellerDashboardText("greeting")}
+        {user.name}
+      </h1>
+      <h3 className="text-xl font-bold">{sellerDashboardText("subheading")}</h3>
 
       <div className="grid w-full gap-4 tablet:grid-cols-2 desktop:grid-cols-3">
         <Card className="border-2 border-[#a8c4d3] shadow-md">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium ">
-            {sellerDashboardText("sellerAnalytics.totalEarnings")}
+            <CardTitle className="text-sm font-medium">
+              {sellerDashboardText("sellerAnalytics.totalEarnings")}
             </CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +45,7 @@ const SellerDashboard: FC<SellerDashboardProps> = async({ user }) => {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold ">$45,231.89</div>
+            <div className="text-2xl font-bold">$45,231.89</div>
             <p className="text-xs text-muted-foreground">
               +20.1% {sellerDashboardText("sellerAnalytics.lastMonth")}
             </p>
@@ -53,7 +54,9 @@ const SellerDashboard: FC<SellerDashboardProps> = async({ user }) => {
 
         <Card className="border-2 border-[#a8c4d3] shadow-md">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium ">{sellerDashboardText("sellerAnalytics.orders")}</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              {sellerDashboardText("sellerAnalytics.orders")}
+            </CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -70,7 +73,7 @@ const SellerDashboard: FC<SellerDashboardProps> = async({ user }) => {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold ">+2350</div>
+            <div className="text-2xl font-bold">+2350</div>
             <p className="text-xs text-muted-foreground">
               +180.1% {sellerDashboardText("sellerAnalytics.lastMonth")}
             </p>
@@ -79,7 +82,9 @@ const SellerDashboard: FC<SellerDashboardProps> = async({ user }) => {
 
         <Card className="border-2 border-[#a8c4d3] shadow-md">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium ">{sellerDashboardText("sellerAnalytics.sales")}</CardTitle>
+            <CardTitle className="text-sm font-medium">
+              {sellerDashboardText("sellerAnalytics.sales")}
+            </CardTitle>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -95,7 +100,7 @@ const SellerDashboard: FC<SellerDashboardProps> = async({ user }) => {
             </svg>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold ">+12,234</div>
+            <div className="text-2xl font-bold">+12,234</div>
             <p className="text-xs text-muted-foreground">
               +19% {sellerDashboardText("sellerAnalytics.lastMonth")}
             </p>
@@ -105,7 +110,9 @@ const SellerDashboard: FC<SellerDashboardProps> = async({ user }) => {
       <div className="grid w-full grid-cols-1 gap-4 tablet:grid-cols-2 desktop:grid-cols-7">
         <Card className="border-2 border-[#a8c4d3] shadow-md desktop:col-span-4">
           <CardHeader>
-            <CardTitle>{sellerDashboardText("sellerAnalytics.sales")}</CardTitle>
+            <CardTitle>
+              {sellerDashboardText("sellerAnalytics.sales")}
+            </CardTitle>
           </CardHeader>
           <CardContent className="pl-2">
             <SellerSalesChart />
@@ -114,8 +121,13 @@ const SellerDashboard: FC<SellerDashboardProps> = async({ user }) => {
 
         <Card className="border-2 border-[#a8c4d3] shadow-md desktop:col-span-3">
           <CardHeader>
-            <CardTitle>{sellerDashboardText("sellerAnalytics.lastSales")}</CardTitle>
-            <CardDescription>{sellerDashboardText("sellerAnalytics.salesSubTextPart1")}14{sellerDashboardText("sellerAnalytics.salesSubTextPart2")}</CardDescription>
+            <CardTitle>
+              {sellerDashboardText("sellerAnalytics.lastSales")}
+            </CardTitle>
+            <CardDescription>
+              {sellerDashboardText("sellerAnalytics.salesSubTextPart1")}14
+              {sellerDashboardText("sellerAnalytics.salesSubTextPart2")}
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <SellerRecentSales />

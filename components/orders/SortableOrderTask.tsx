@@ -21,7 +21,13 @@ const SortableOrderTask = ({ children, id }: SortableOrderTaskProps) => {
     opacity: isDragging ? 0 : 1,
   };
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners} className="touch-none" >
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      className="touch-none"
+    >
       {children}
     </div>
   );

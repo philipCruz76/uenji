@@ -41,9 +41,9 @@ const PublicProfileView = async ({ user }: PublicProfileViewProps) => {
   const publishedGigs = userGigs?.filter((gig) => gig.published === true);
 
   return (
-    <section className="flex min-h-[100dvh] w-[100dvw] max-w-[100dvw] flex-col gap-[20px] overflow-hidden  px-6 py-6">
-      <div className="flex w-full flex-row ">
-        <div className="flex w-full gap-4 ">
+    <section className="flex min-h-[100dvh] w-[100dvw] max-w-[100dvw] flex-col gap-[20px] overflow-hidden px-6 py-6">
+      <div className="flex w-full flex-row">
+        <div className="flex w-full gap-4">
           <Image
             width={150}
             height={150}
@@ -81,7 +81,7 @@ const PublicProfileView = async ({ user }: PublicProfileViewProps) => {
                   <path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0h0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path>
                 </svg>
                 <span className="text-sm font-bold text-gray-800">4.9</span>
-                <span className="text-sm text-gray-800 hover:cursor-pointer ">
+                <span className="text-sm text-gray-800 hover:cursor-pointer">
                   (<u>22</u>)
                 </span>
                 <span className="text-sm font-bold text-gray-800">
@@ -114,7 +114,7 @@ const PublicProfileView = async ({ user }: PublicProfileViewProps) => {
                     height="16"
                     fill="#575b60"
                     viewBox="0 0 256 256"
-                    className=" mr-2"
+                    className="mr-2"
                   >
                     <path d="M232,128A104,104,0,0,1,79.12,219.82L45.07,231.17a16,16,0,0,1-20.24-20.24l11.35-34.05A104,104,0,1,1,232,128Z"></path>
                   </svg>
@@ -133,7 +133,7 @@ const PublicProfileView = async ({ user }: PublicProfileViewProps) => {
         {/* Contact Card */}
 
         <div className="flex h-[200px] w-[600px] flex-col gap-4 rounded-lg border border-gray-200 bg-white px-6 py-6">
-          <div className="flex flex-row items-center justify-start gap-2 ">
+          <div className="flex flex-row items-center justify-start gap-2">
             <Image
               width={40}
               height={40}
@@ -146,8 +146,8 @@ const PublicProfileView = async ({ user }: PublicProfileViewProps) => {
               <span className="text-lg font-bold text-gray-800">
                 {user.displayName}
               </span>
-              <div className="flex flex-row  items-center justify-start gap-2">
-                <span className=" text-gray-800">
+              <div className="flex flex-row items-center justify-start gap-2">
+                <span className="text-gray-800">
                   {user.isOnline ? "Online" : "Offline"}
                 </span>
                 <svg
@@ -192,7 +192,7 @@ const PublicProfileView = async ({ user }: PublicProfileViewProps) => {
                     >
                       <span
                         key={`SKill ${index}`}
-                        className=" text-black hover:cursor-pointer hover:underline"
+                        className="text-black hover:cursor-pointer hover:underline"
                       >
                         {skill.name}
                       </span>
@@ -212,7 +212,7 @@ const PublicProfileView = async ({ user }: PublicProfileViewProps) => {
                   return (
                     <span
                       key={`SKill ${index}`}
-                      className=" text-black hover:cursor-pointer hover:underline"
+                      className="text-black hover:cursor-pointer hover:underline"
                     >
                       {skill.name}
                     </span>
@@ -235,7 +235,7 @@ const PublicProfileView = async ({ user }: PublicProfileViewProps) => {
             </div>
             {/* User Reviews Showcase */}
             <div className="h-[200px] w-[80%] items-center justify-center border bg-white text-center">
-              <span className=" text-lg font-bold text-gray-800 ">
+              <span className="text-lg font-bold text-gray-800">
                 Reviews placeholder
               </span>
             </div>

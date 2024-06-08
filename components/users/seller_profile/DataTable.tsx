@@ -77,7 +77,7 @@ function DataTable({
   return (
     <table className="mt-4 flex w-full flex-col border">
       <thead className="border-b bg-gray-100 p-2">
-        <tr className="flex flex-row gap-4 ">
+        <tr className="flex flex-row gap-4">
           <th className="w-full text-left font-normal">{column1Name}</th>
           <th className="w-full text-left font-normal">{column2Name}</th>
           <th className="w-full text-left"></th>

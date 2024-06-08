@@ -92,8 +92,7 @@ const GigWizardDescription = ({
           {gigDescriptionText("description.subtitle")}
         </h3>
       </div>
-
-      <div className="group flex w-full flex-row items-start justify-center ">
+      <div className="group flex w-full flex-row items-start justify-center">
         <textarea
           {...register("description", {
             required: gigDescriptionText("description.inputValidation"),
@@ -108,18 +107,18 @@ const GigWizardDescription = ({
           className="max-h-[300px] min-h-[300px] w-full rounded-md border-2 border-gray-300 p-4"
           placeholder={gigDescriptionText("description.descriptionPlaceholder")}
         />
-        <span className=" absolute right-[70px] hidden w-[200px] text-ellipsis group-hover:flex">
+        <span className="absolute right-[70px] hidden w-[200px] text-ellipsis group-hover:flex">
           {gigDescriptionText("description.hoverTextPart1")}
           <br /> <br /> {gigDescriptionText("description.hoverTextPart2")}
         </span>
       </div>
-      <div className="flex w-full flex-row justify-between pb-[20px] text-start  text-sm">
+      <div className="flex w-full flex-row justify-between pb-[20px] text-start text-sm">
         {errors.description && (
           <span className="w-full text-red-500">
             {errors.description.message}
           </span>
         )}
-        <span className=" w-full text-end">
+        <span className="w-full text-end">
           {gigDescription.description.length} / 1200{" "}
           <span className="text-gray-400">characters</span>
         </span>
@@ -146,7 +145,7 @@ const GigWizardDescription = ({
               {gigDescriptionText("faq.addFaq")}
             </button>
           ) : (
-            <div className=" flex w-full flex-col gap-4">
+            <div className="flex w-full flex-col gap-4">
               <input
                 type="text"
                 className="h-[40px] w-full rounded-md border-2 border-gray-300 p-4"
@@ -178,7 +177,7 @@ const GigWizardDescription = ({
                     {errors.faqs[faqCount]?.question?.message} <br />
                   </span>
                 ) : null}
-                <span className=" w-full text-end">
+                <span className="w-full text-end">
                   {currentFAQ.answer.length} / 300{" "}
                   <span className="text-gray-400">characters</span>
                 </span>
@@ -277,7 +276,7 @@ const GigWizardDescription = ({
           </button>
         )}
 
-        <div className="flex items-end justify-end ">
+        <div className="flex items-end justify-end">
           <div className="flex flex-col gap-2">
             <button
               type="button"

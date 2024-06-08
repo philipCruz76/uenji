@@ -21,7 +21,7 @@ export default function SellerInfoLayout({
   return (
     <section className="flex min-h-[100dvh] max-w-[100dvw] flex-col px-[24px] desktop:px-0">
       <div className="flex h-[70px] w-full justify-between border-b pt-6">
-        <ul className="hidden  flex-row gap-2 px-4 tablet:flex">
+        <ul className="hidden flex-row gap-2 px-4 tablet:flex">
           <li
             key="personalInfo"
             className="flex flex-row items-center justify-center gap-4 text-center"

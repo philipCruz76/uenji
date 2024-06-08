@@ -36,7 +36,7 @@ const searchPage = async ({ searchParams }: pageProps) => {
       </h1>
 
       {/* This is where the search results will be displayed */}
-      <div className=" m-auto grid w-full grid-cols-1 items-center justify-center gap-4 p-8 tablet:grid-cols-2 desktop:grid-cols-4 desktop:grid-rows-4">
+      <div className="m-auto grid w-full grid-cols-1 items-center justify-center gap-4 p-8 tablet:grid-cols-2 desktop:grid-cols-4 desktop:grid-rows-4">
         {searchResults.map((gig, index) => {
           const gigPackage = JSON.parse(
             gig.packages!,
@@ -58,7 +58,7 @@ const searchPage = async ({ searchParams }: pageProps) => {
                   />
                 </CardTitle>
                 <CardContent className="max-h-[50%] min-w-full p-[4px]">
-                  <div className="flex h-full w-full flex-col ">
+                  <div className="flex h-full w-full flex-col">
                     <div className="flex w-full flex-row items-center justify-start gap-2">
                       <Image
                         src={gig.user.image!}
@@ -67,7 +67,7 @@ const searchPage = async ({ searchParams }: pageProps) => {
                         height={30}
                         className="max-h-[30px] min-h-[30px] max-w-[30px] rounded-full border bg-white"
                       />
-                      <span className=" text-sm font-semibold">
+                      <span className="text-sm font-semibold">
                         {!gig.user.displayName
                           ? gig.user.username
                           : gig.user.displayName}
@@ -78,7 +78,7 @@ const searchPage = async ({ searchParams }: pageProps) => {
                         {gig.title.charAt(0).toUpperCase() + gig.title.slice(1)}
                       </span>
 
-                      <span className=" flex items-end  text-sm font-semibold">
+                      <span className="flex items-end text-sm font-semibold">
                         {gigPackage[0].price}.00 AOA
                       </span>
                     </div>

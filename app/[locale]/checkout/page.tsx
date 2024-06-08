@@ -24,10 +24,10 @@ export default async function CheckoutPage({ searchParams }: pageProps) {
   ) as GigPricing["packages"];
 
   return (
-    <section className="flex max-h-[100dvh] min-h-[100dvh] min-w-[100dvw] max-w-[100dvw] flex-col items-start justify-start gap-2 overflow-hidden bg-[#f8f9fa] p-[24px] desktop:flex-row ">
+    <section className="flex max-h-[100dvh] min-h-[100dvh] min-w-[100dvw] max-w-[100dvw] flex-col items-start justify-start gap-2 overflow-hidden bg-[#f8f9fa] p-[24px] desktop:flex-row">
       <div className="min-h-[20dvh] w-[100dvw] desktop:h-[100dvh] desktop:w-[50dvw]">
         <h1 className="text-2xl font-bold">Checkout </h1>
-        <h3 className=" font-mono text-xl font-semibold">
+        <h3 className="font-mono text-xl font-semibold">
           {parsedPackage[packageIndex].title}
         </h3>
         <h3 className="font-mono text-3xl font-bold">
@@ -35,7 +35,7 @@ export default async function CheckoutPage({ searchParams }: pageProps) {
         </h3>
       </div>
 
-      <div className="min-h-[80dvh] w-full max-w-[100dvw] tablet:w-[70dvw] desktop:h-[100dvh]  desktop:w-[50dvw] ">
+      <div className="min-h-[80dvh] w-full max-w-[100dvw] tablet:w-[70dvw] desktop:h-[100dvh] desktop:w-[50dvw]">
         <Payment gigId={gigId} gigPackage={parseInt(gigPackage)} />
       </div>
     </section>

@@ -25,7 +25,7 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
   return (
     <div className="h-full w-full">
       {singlePackage ? (
-        <div className="grid h-[50px] w-full grid-cols-1  grid-rows-1 border-b bg-slate-50 text-lg font-medium">
+        <div className="grid h-[50px] w-full grid-cols-1 grid-rows-1 border-b bg-slate-50 text-lg font-medium">
           <label
             onClick={() => {
               setSelectedPackage({ type: "basic", index: 0 });
@@ -52,7 +52,7 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
           </label>
         </div>
       ) : (
-        <div className="grid h-[50px] w-full grid-cols-3  grid-rows-1 border-b bg-slate-50 text-lg font-medium">
+        <div className="grid h-[50px] w-full grid-cols-3 grid-rows-1 border-b bg-slate-50 text-lg font-medium">
           <label
             onClick={() => {
               setSelectedPackage({ type: "premium", index: 2 });
@@ -131,11 +131,11 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
       <div className="h-full w-full">
         {selectedPackage.type === "basic" && (
           <div className="grid grid-cols-1 grid-rows-4 gap-8 p-4 pt-[24px] text-start">
-            <h3 className=" text-xl font-semibold">
+            <h3 className="text-xl font-semibold">
               {parsedPackages[0].title.charAt(0).toLocaleUpperCase() +
                 parsedPackages[0].title.slice(1)}
             </h3>
-            <span className="font-normal text-gray-500 ">
+            <span className="font-normal text-gray-500">
               {parsedPackages[0].description}
             </span>
             <span className="flex flex-row items-center justify-start gap-2 text-sm font-bold text-gray-700">
@@ -171,11 +171,11 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
         )}
         {selectedPackage.type === "standard" && (
           <div className="grid grid-cols-1 grid-rows-4 gap-8 p-4 pt-[24px] text-start">
-            <h3 className=" text-xl font-semibold">
+            <h3 className="text-xl font-semibold">
               {parsedPackages[1].title.charAt(0).toLocaleUpperCase() +
                 parsedPackages[1].title.slice(1)}
             </h3>
-            <span className="font-normal text-gray-500 ">
+            <span className="font-normal text-gray-500">
               {parsedPackages[1].description}
             </span>
             <span className="flex flex-row items-center justify-start gap-2 text-sm font-bold text-gray-700">
@@ -211,11 +211,11 @@ const GigPricingMobile = ({ gig }: GigPricingMobileProps) => {
         )}
         {selectedPackage.type === "premium" && (
           <div className="grid grid-cols-1 grid-rows-4 gap-8 p-4 pt-[24px] text-start">
-            <h3 className=" text-xl font-semibold">
+            <h3 className="text-xl font-semibold">
               {parsedPackages[2].title.charAt(0).toLocaleUpperCase() +
                 parsedPackages[2].title.slice(1)}
             </h3>
-            <span className="font-normal text-gray-500 ">
+            <span className="font-normal text-gray-500">
               {parsedPackages[2].description}
             </span>
             <span className="flex flex-row items-center justify-start gap-2 text-sm font-bold text-gray-700">

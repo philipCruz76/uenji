@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
+import toast from "react-hot-toast";
 
 interface MessageAttachmentProps {
   fileUrl: string;
@@ -37,6 +38,24 @@ const MessageAttachment: FC<MessageAttachmentProps> = ({ fileUrl }) => {
   )
     isImage = true;
 
+  const downloadAttachment = () => {
+    fetch(`${fileLink}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "blob",
+      },
+    })
+      .then(async (response) => {
+        const result = await response.blob();
+        const resultLink = document.createElement("a");
+        resultLink.href = URL.createObjectURL(result);
+        resultLink.setAttribute("download", fileName);
+        resultLink.click();
+      })
+      .catch((error) => {
+        toast.error("Failed to download file" + error.message);
+      });
+  };
   return isImage === true ? (
     <div className="flex flex-col gap-2">
       <Image
@@ -46,8 +65,8 @@ const MessageAttachment: FC<MessageAttachmentProps> = ({ fileUrl }) => {
         width="160"
         className="translate rounded-md object-cover transition hover:scale-110"
       />
-      <Link
-        href={fileLink}
+      <button
+        onClick={downloadAttachment}
         className="flex cursor-pointer flex-row gap-1 text-xs hover:underline"
       >
         <svg
@@ -60,12 +79,12 @@ const MessageAttachment: FC<MessageAttachmentProps> = ({ fileUrl }) => {
           <path d="M50.34,117.66a8,8,0,0,1,11.32-11.32L120,164.69V32a8,8,0,0,1,16,0V164.69l58.34-58.35a8,8,0,0,1,11.32,11.32l-72,72a8,8,0,0,1-11.32,0ZM216,208H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
         </svg>
         Download ({fileName}, {fileSize})
-      </Link>
+      </button>
     </div>
   ) : (
     <div className="flex h-[60px] flex-col items-center justify-center gap-2 rounded-md border">
-      <Link
-        href={fileLink}
+      <button
+        onClick={downloadAttachment}
         className="flex cursor-pointer flex-row gap-1 text-xs hover:underline"
       >
         <svg
@@ -78,7 +97,7 @@ const MessageAttachment: FC<MessageAttachmentProps> = ({ fileUrl }) => {
           <path d="M50.34,117.66a8,8,0,0,1,11.32-11.32L120,164.69V32a8,8,0,0,1,16,0V164.69l58.34-58.35a8,8,0,0,1,11.32,11.32l-72,72a8,8,0,0,1-11.32,0ZM216,208H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
         </svg>
         Download ({fileName}, {fileSize})
-      </Link>
+      </button>
     </div>
   );
 };

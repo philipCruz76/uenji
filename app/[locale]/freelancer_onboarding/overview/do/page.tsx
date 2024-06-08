@@ -18,19 +18,19 @@ const page = async () => {
     locale === "pt" ? sellerOnBoardingDosPT : sellerOnBoardingDosEN;
   return (
     <section className="container flex min-h-[100dvh] max-w-[100dvw] overflow-y-scroll py-8">
-      <div className="flex h-full w-full flex-col-reverse items-center justify-between tablet:pl-[25px]  desktop:flex-row-reverse ">
+      <div className="flex h-full w-full flex-col-reverse items-center justify-between tablet:pl-[25px] desktop:flex-row-reverse">
         <div className="container flex h-full max-w-[900px] flex-col items-start justify-center tablet:px-[60px]">
           <h1 className="box-border flex pb-[20px] text-2xl font-bold text-[#303030] tablet:max-w-[590px] tablet:pr-[80px]">
             {locale === "pt"
               ? "O que caracteriza um perfil de vendedor Uenji bem-sucedido?"
               : "What makes a successful Uenji seller profile?"}
           </h1>
-          <h3 className="text-sm text-gray-600 ">
+          <h3 className="text-sm text-gray-600">
             {locale === "pt"
               ? "A sua primeira impressão é fundamental! Crie um perfil que se destaque da multidão no Uenji."
               : "Your first impression is crucial! Create a profile that stands out from the crowd on Uenji."}
           </h3>
-          <ul className="box-border grid min-h-[310px] max-w-full grid-cols-1 justify-between  pt-[42px]  tablet:grid-cols-2  desktop:grid-cols-3">
+          <ul className="box-border grid min-h-[310px] max-w-full grid-cols-1 justify-between pt-[42px] tablet:grid-cols-2 desktop:grid-cols-3">
             {sellerOnBoardingDos.map((item) => (
               <li
                 key={item.key}
@@ -61,7 +61,7 @@ const page = async () => {
             </Link>
           </div>
         </div>
-        <div className="hidden h-fit  max-h-[100dvh] overflow-hidden rounded-md  border desktop:block ">
+        <div className="hidden h-fit max-h-[100dvh] overflow-hidden rounded-md border desktop:block">
           <video
             autoPlay
             muted

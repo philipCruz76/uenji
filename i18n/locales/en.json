@@ -188,14 +188,14 @@
       "personalWebsite": "Personal Website",
       "mandatoryFields": "* Mandatory fields"
     },
-    "accountSecurity":{
-      "heading":"Account Security",
-      "subheading":"Trust and security are very important in our community. Please check your e-mail address and cell phone number.",
-      "private":"Private",
-      "cellphone":"Cellphone Number",
-      "verified":"Verified",
-      "unverified":"Unverified",
-      "submitButton":"Finish"
+    "accountSecurity": {
+      "heading": "Account Security",
+      "subheading": "Trust and security are very important in our community. Please check your e-mail address and cell phone number.",
+      "private": "Private",
+      "cellphone": "Cellphone Number",
+      "verified": "Verified",
+      "unverified": "Unverified",
+      "submitButton": "Finish"
     }
   },
   "GigWizard": {
@@ -307,24 +307,24 @@
   "Gigs": {
     "pageTitle": "Gigs",
     "newGigButton": "New Gig ",
-    "GigCardPrice":"From ",
-    "desktopPage":{
-      "editGig":"Edit Gig",
-      "languages":"I can speak ",
-      "choosePackage":"Select Package",
-      "contactButton":"Contact Seller",
-      "about":"About this gig",
-      "delivery":"Days to deliver",
-      "revisions":"revisions",
-      "basic":"Basic",
-      "standard":"Standard",
-      "premium":"Premium"
+    "GigCardPrice": "From ",
+    "desktopPage": {
+      "editGig": "Edit Gig",
+      "languages": "I can speak ",
+      "choosePackage": "Select Package",
+      "contactButton": "Contact Seller",
+      "about": "About this gig",
+      "delivery": "Days to deliver",
+      "revisions": "revisions",
+      "basic": "Basic",
+      "standard": "Standard",
+      "premium": "Premium"
     }
   },
   "Orders": {
     "title": "Orders",
     "subtitle": "Manage your orders",
-    "noOrders":"You don't have any orders yet",
+    "noOrders": "You don't have any orders yet",
     "events": {
       "orderPlaced": "Has placed an order",
       "orderAccepted": "Has accepted the order",
@@ -336,36 +336,36 @@
       "active": "Active",
       "late": "Late",
       "accepted": "Delivered",
-      "review":"In Review",
+      "review": "In Review",
       "cancelled": "Cancelled",
       "order": "Order",
       "orderDate": "Order Date",
       "orderDelivery": "Delivery Date",
       "orderPrice": "Price",
-      "saveButton":"Save Board"
+      "saveButton": "Save Board"
     }
   },
-  "Dashboard":{
-    "buyer":{
-      "popularCategories":"Check out these popular categories",
-      "popularGigsMobile":"Popular Gigs",
-      "popularGigspart1":"Here are some of the most popular ",
-      "popularGigspart2":" gigs",
-      "programming":"Programming",
-      "photography":"Photography",
-      "seeAll":"See all"
+  "Dashboard": {
+    "buyer": {
+      "popularCategories": "Check out these popular categories",
+      "popularGigsMobile": "Popular Gigs",
+      "popularGigspart1": "Here are some of the most popular ",
+      "popularGigspart2": " gigs",
+      "programming": "Programming",
+      "photography": "Photography",
+      "seeAll": "See all"
     },
-    "seller":{
-      "greeting":"Hi, ",
-      "subheading":"Here is your seller dashboard",
-      "sellerAnalytics":{
-        "lastMonth":" than the previous month",
-        "totalEarnings":"Total Earnings",
-        "orders":"Orders",
-        "sales":"Sales",
-        "lastSales":"Recent Sales",
-        "salesSubTextPart1":"You sold ",
-        "salesSubTextPart2":" gigs this month"
+    "seller": {
+      "greeting": "Hi, ",
+      "subheading": "Here is your seller dashboard",
+      "sellerAnalytics": {
+        "lastMonth": " than the previous month",
+        "totalEarnings": "Total Earnings",
+        "orders": "Orders",
+        "sales": "Sales",
+        "lastSales": "Recent Sales",
+        "salesSubTextPart1": "You sold ",
+        "salesSubTextPart2": " gigs this month"
       }
     }
   }

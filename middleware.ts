@@ -2,6 +2,7 @@ import { withAuth } from "next-auth/middleware";
 import { availableLocaleCodes, defaultLocale } from "./next.locales.mjs";
 import createMiddleware from "next-intl/middleware";
 import { NextRequest } from "next/server";
+import { rateLimit } from "./lib/rate-limit";
 
 const privatePages = [
   "/checkout/:path*",
@@ -40,7 +41,13 @@ const authMiddleware = withAuth(
   },
 );
 
-export default function middleware(req: NextRequest) {
+export default async function middleware(req: NextRequest) {
+  const ip = (req.headers.get("x-forwarded-for") || "").split(",")[0];
+
+  const { remaining } = await rateLimit().limit(ip);
+  if (remaining < 1) {
+    return new Response("Rate limit exceeded", { status: 429 });
+  }
   const privatePathnameRegex = RegExp(
     `^(/(${availableLocaleCodes.join("|")}))?(${privatePages
       .flatMap((p) => (p === "/" ? ["", "/"] : p))

@@ -18,7 +18,7 @@ const GigCard = async ({ gigToShow, size }: GigCardProps) => {
     gigToShow.packages!,
   ) as GigPricing["packages"];
   const locale = await getLocale();
-  const t = await getTranslations("Gigs")
+  const t = await getTranslations("Gigs");
   let CategoryDescriptions: Category[];
 
   if (locale === "en") {
@@ -72,7 +72,7 @@ const GigCard = async ({ gigToShow, size }: GigCardProps) => {
             "-",
           )}`}
         >
-          <div className="flex w-full flex-row items-center justify-between  gap-2 ">
+          <div className="flex w-full flex-row items-center justify-between gap-2">
             <Image
               src={gigToShow.user.image!}
               width={40}
@@ -80,7 +80,7 @@ const GigCard = async ({ gigToShow, size }: GigCardProps) => {
               alt={`${gigToShow.user.username}'s profile picture`}
               className="h-[40px] w-[40px] rounded-full"
             />
-            <span className=" text-ellipsis text-sm font-semibold ">
+            <span className="text-ellipsis text-sm font-semibold">
               {gigToShow.user.name}
             </span>
             <Image

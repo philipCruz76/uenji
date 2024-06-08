@@ -20,10 +20,10 @@ const UserChatList: FC<UserChatListProps> = ({ data, chatPartner }) => {
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center">
-      <div className="h-[80px] w-[95%] rounded-md pr-4  transition duration-200 ease-in-out hover:scale-105 hover:bg-zinc-100">
+      <div className="h-[80px] w-[95%] rounded-md pr-4 transition duration-200 ease-in-out hover:scale-105 hover:bg-zinc-100">
         <Link
           href={`/inbox/${chatPartner.username}?chatId=${data?.id}`}
-          className="mx-2 flex h-full w-full flex-1 flex-row items-center justify-start gap-2 "
+          className="mx-2 flex h-full w-full flex-1 flex-row items-center justify-start gap-2"
         >
           <ChatAvatar user={chatPartner} />
           <div className="flex w-full flex-col gap-2">
@@ -43,7 +43,7 @@ const UserChatList: FC<UserChatListProps> = ({ data, chatPartner }) => {
                   : ""}
               </span>
             </div>
-            <span className="relative flex text-sm text-gray-600">
+            <span className="relative flex text-start text-sm text-gray-600">
               {lastMessage?.sender?.username === chatPartner.username
                 ? `${
                     !chatPartner.name ? chatPartner.username : chatPartner.name

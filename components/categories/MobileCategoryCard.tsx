@@ -20,7 +20,7 @@ const MobileCategoryCard: FC<MobileCategoryCardProps> = ({
   return (
     <Link
       href={href}
-      className="relative m-auto flex h-[280px] w-[200px] cursor-pointer items-center rounded-lg  bg-white font-mono text-white"
+      className="relative m-auto flex h-[280px] w-[200px] cursor-pointer items-center rounded-lg bg-white font-mono text-white"
     >
       <Image
         src={image}
@@ -33,7 +33,7 @@ const MobileCategoryCard: FC<MobileCategoryCardProps> = ({
         {" "}
         {description}
       </span>
-      <span className="absolute bottom-[40px] left-[15px] flex text-2xl font-semibold ">
+      <span className="absolute bottom-[40px] left-[15px] flex text-2xl font-semibold">
         {title}
       </span>
     </Link>

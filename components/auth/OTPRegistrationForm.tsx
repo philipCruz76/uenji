@@ -150,7 +150,7 @@ const OTPRegistrationForm = () => {
           setShowEmailCredentials(true);
         }}
       >
-        <button className="h-6 w-6 p-0 ">
+        <button className="h-6 w-6 p-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -164,15 +164,15 @@ const OTPRegistrationForm = () => {
       </div>
 
       {/* OTP form */}
-      <div className=" absolute mt-20 flex-col  px-4 text-left">
+      <div className="absolute mt-20 flex-col px-4 text-left">
         <span className="flex justify-start text-2xl font-bold">
           Valide o seu email
         </span>
-        <div className="flex flex-col justify-start ">
+        <div className="flex flex-col justify-start">
           <span>
             Introduza o código de validação que foi enviado para o email:{" "}
           </span>
-          <span className=" text-sm font-light">{newUser.email}</span>
+          <span className="text-sm font-light">{newUser.email}</span>
         </div>
         <form
           onPaste={handlePaste}
@@ -206,10 +206,10 @@ const OTPRegistrationForm = () => {
         {isValidating && (
           <div className="relative flex flex-row space-x-4">
             <div
-              className="flex  h-[16px] w-[16px] animate-spin rounded-full border-2 border-solid border-zinc-400 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+              className="flex h-[16px] w-[16px] animate-spin rounded-full border-2 border-solid border-zinc-400 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
               role="status"
             ></div>
-            <span className="flex text-sm font-semibold ">Checking code</span>
+            <span className="flex text-sm font-semibold">Checking code</span>
           </div>
         )}
         {/*

@@ -154,7 +154,7 @@ const page = ({}) => {
         onSubmit={handleSubmit(professionalInfoHandler)}
       >
         {/* Occupation field */}
-        <div className="group flex h-fit w-full flex-col justify-start tablet:flex-row tablet:pt-[35px] ">
+        <div className="group flex h-fit w-full flex-col justify-start tablet:flex-row tablet:pt-[35px]">
           <aside className="block h-fit w-full min-w-[210px] flex-col flex-wrap">
             <h3 className="py-2">
               <span>
@@ -184,7 +184,7 @@ const page = ({}) => {
 
               {showYearsOfExperience ? (
                 <div className="flex flex-row items-center justify-center gap-3 pl-3">
-                  <span className="text-gray-400 ">De</span>
+                  <span className="text-gray-400">De</span>
                   <select
                     value={startYear}
                     className="h-[40px] w-full rounded-sm border border-gray-300 bg-white px-2 text-gray-600 tablet:w-[100px]"
@@ -198,7 +198,7 @@ const page = ({}) => {
                       <option key={year}>{year}</option>
                     ))}
                   </select>
-                  <span className="text-gray-400 ">a</span>
+                  <span className="text-gray-400">a</span>
                   <select
                     className="h-[40px] w-full rounded-sm border border-gray-300 bg-white px-2 text-gray-600 tablet:w-[100px]"
                     {...register("occupation.endYear")}
@@ -227,7 +227,7 @@ const page = ({}) => {
                     </b>{" "}
                     {professionalInfoText("occupation.subheadingPart3")}
                   </small>
-                  <div className="grid grid-cols-2 tablet:grid-cols-3 ">
+                  <div className="grid grid-cols-2 tablet:grid-cols-3">
                     {Array.from({ length: 8 }, (_: number, i) => i + 1).map(
                       (skill) => (
                         <div
@@ -237,10 +237,10 @@ const page = ({}) => {
                           <Input
                             type="checkbox"
                             value={skill}
-                            className="h-[20px] w-[20px] "
+                            className="h-[20px] w-[20px]"
                             {...register("occupation.bestSkills")}
                           />
-                          <span className=" text-slate-700">Skill {skill}</span>
+                          <span className="text-slate-700">Skill {skill}</span>
                         </div>
                       ),
                     )}
@@ -270,7 +270,7 @@ const page = ({}) => {
 
         {/* Skills field */}
         <div className="group flex min-h-[60px] w-full flex-col justify-start tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
-          <aside className="block h-fit w-full min-w-[210px]  flex-col flex-wrap ">
+          <aside className="block h-fit w-full min-w-[210px] flex-col flex-wrap">
             <h3 className="py-2">
               <span>
                 {professionalInfoText("skills.heading")}{" "}
@@ -287,7 +287,7 @@ const page = ({}) => {
               <div className="flex flex-col gap-2 p-[12px] tablet:flex-row tablet:p-0">
                 <input
                   type="text"
-                  className="h-[40px] w-full rounded-sm border border-gray-300 bg-white  px-2 text-gray-600 focus:outline-none tablet:w-[300px] "
+                  className="h-[40px] w-full rounded-sm border border-gray-300 bg-white px-2 text-gray-600 focus:outline-none tablet:w-[300px]"
                   placeholder="Skill"
                   value={currentSelectedSkill.fieldName}
                   onChange={(e) => {
@@ -308,7 +308,7 @@ const page = ({}) => {
                   }}
                 />
                 <select
-                  className="h-[40px] w-full rounded-sm border border-gray-300 bg-white  px-2 text-gray-600 tablet:w-[300px]"
+                  className="h-[40px] w-full rounded-sm border border-gray-300 bg-white px-2 text-gray-600 tablet:w-[300px]"
                   id="proficiency"
                   value={currentSelectedSkill.fieldLevel}
                   onChange={(e) => {
@@ -325,7 +325,7 @@ const page = ({}) => {
                     </option>
                   ))}
                 </select>
-                <div className="flex flex-row justify-between gap-1 px-2 ">
+                <div className="flex flex-row justify-between gap-1 px-2">
                   <button
                     type="button"
                     disabled={
@@ -411,7 +411,7 @@ const page = ({}) => {
 
         {/* Education field */}
         <div className="group flex min-h-[60px] w-full flex-col justify-start tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
-          <aside className="block h-fit w-full min-w-[210px]  flex-col flex-wrap ">
+          <aside className="block h-fit w-full min-w-[210px] flex-col flex-wrap">
             <h3 className="py-2">
               <span>{professionalInfoText("education.heading")}</span>
             </h3>
@@ -449,7 +449,7 @@ const page = ({}) => {
                   </select>
                   <input
                     type="text"
-                    className="h-[40px] w-full rounded-sm border border-gray-300 bg-white  px-2 text-gray-600 focus:outline-none tablet:w-[400px] "
+                    className="h-[40px] w-full rounded-sm border border-gray-300 bg-white px-2 text-gray-600 focus:outline-none tablet:w-[400px]"
                     placeholder="Colégio/Universidade"
                     value={currentSelectedEducationInfo.institutionName}
                     onChange={(e) => {
@@ -490,7 +490,7 @@ const page = ({}) => {
                 <div className="flex flex-col items-center gap-2 p-[12px] tablet:flex-row tablet:p-0">
                   <input
                     type="text"
-                    className="h-[40px] w-full rounded-sm border border-gray-300 bg-white  px-2 text-gray-600 focus:outline-none tablet:w-[400px] "
+                    className="h-[40px] w-full rounded-sm border border-gray-300 bg-white px-2 text-gray-600 focus:outline-none tablet:w-[400px]"
                     placeholder="Formação"
                     value={currentSelectedEducationInfo.fieldName}
                     onChange={(e) => {
@@ -519,7 +519,7 @@ const page = ({}) => {
                       </option>
                     ))}
                   </select>
-                  <div className="flex flex-row items-center justify-start gap-1  ">
+                  <div className="flex flex-row items-center justify-start gap-1">
                     <button
                       type="button"
                       disabled={
@@ -616,7 +616,7 @@ const page = ({}) => {
 
         {/* Certification field */}
         <div className="group flex min-h-[60px] w-full flex-col justify-start tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
-          <aside className="block h-fit w-full min-w-[210px]  flex-col flex-wrap ">
+          <aside className="block h-fit w-full min-w-[210px] flex-col flex-wrap">
             <h3 className="py-2">
               <span>{professionalInfoText("certifications.heading")}</span>
             </h3>
@@ -631,7 +631,7 @@ const page = ({}) => {
                 <div className="flex flex-col items-center gap-2 p-[12px] tablet:flex-row tablet:p-0">
                   <input
                     type="text"
-                    className="h-[40px] w-full rounded-sm border border-gray-300 bg-white  px-2 text-gray-600 focus:outline-none tablet:w-[300px] "
+                    className="h-[40px] w-full rounded-sm border border-gray-300 bg-white px-2 text-gray-600 focus:outline-none tablet:w-[300px]"
                     placeholder="Certificado"
                     value={currentSelectedCertification.fieldName}
                     onChange={(e) => {
@@ -651,7 +651,7 @@ const page = ({}) => {
                   />
                   <input
                     type="text"
-                    className="h-[40px] w-full rounded-sm border border-gray-300 bg-white  px-2 text-gray-600 focus:outline-none tablet:w-[300px] "
+                    className="h-[40px] w-full rounded-sm border border-gray-300 bg-white px-2 text-gray-600 focus:outline-none tablet:w-[300px]"
                     placeholder="Atribuído por"
                     value={currentSelectedCertification.institutionName}
                     onChange={(e) => {
@@ -699,7 +699,7 @@ const page = ({}) => {
                     ))}
                   </select>
                 </div>
-                <div className="flex flex-row items-center justify-start gap-1  ">
+                <div className="flex flex-row items-center justify-start gap-1">
                   <button
                     type="button"
                     disabled={
@@ -787,7 +787,7 @@ const page = ({}) => {
 
         {/* Private Website field */}
         <div className="group flex min-h-[60px] w-full flex-col justify-start tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
-          <aside className="block h-fit w-full min-w-[210px]  flex-col flex-wrap ">
+          <aside className="block h-fit w-full min-w-[210px] flex-col flex-wrap">
             <h3 className="py-2">
               <span>{professionalInfoText("personalWebsite")}</span>
               <small className="text-gray-400">
@@ -800,7 +800,7 @@ const page = ({}) => {
               type="text"
               placeholder="Provide a link to your own professional website"
               {...register("personalWebsite")}
-              className=" h-[40px] w-full rounded-sm border border-gray-300  bg-white px-2 text-gray-600 focus:outline-none"
+              className="h-[40px] w-full rounded-sm border border-gray-300 bg-white px-2 text-gray-600 focus:outline-none"
             />
           </div>
         </div>

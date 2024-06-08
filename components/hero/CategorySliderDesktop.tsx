@@ -25,7 +25,7 @@ const CategorySliderDesktop = ({}: CategorySliderDesktopProps) => {
         initial={{ x: -200 }}
         animate={{ x: -(innerWidth + 960) }}
         transition={{ duration: 60, ease: "linear", repeat: Infinity }}
-        className=" flex max-w-[80%]  select-none flex-row items-center gap-[4vmin] py-8 "
+        className="flex max-w-[80%] select-none flex-row items-center gap-[4vmin] py-8"
       >
         {catCards.map((card) => (
           <motion.div
@@ -42,7 +42,7 @@ const CategorySliderDesktop = ({}: CategorySliderDesktopProps) => {
               draggable={false}
               className={`max-h-[300px] min-h-[300px] min-w-[250px] rounded-md transition-transform`}
             />
-            <span className="absolute left-[10%]  top-[80%] font-sans text-xl font-semibold text-white">
+            <span className="absolute left-[10%] top-[80%] font-sans text-xl font-semibold text-white">
               {locale === "pt" ? card.titlePT : card.titleEN}
             </span>
           </motion.div>
@@ -54,7 +54,7 @@ const CategorySliderDesktop = ({}: CategorySliderDesktopProps) => {
             onClick={() =>
               setSelectedCard(locale === "pt" ? card.titlePT : card.titleEN)
             }
-            className=" relative block min-h-[300px] min-w-[180px] overflow-hidden rounded-md"
+            className="relative block min-h-[300px] min-w-[180px] overflow-hidden rounded-md"
           >
             <motion.img
               src={card.image}
@@ -62,7 +62,7 @@ const CategorySliderDesktop = ({}: CategorySliderDesktopProps) => {
               draggable={false}
               className={`max-h-[300px] min-h-[300px] min-w-[250px] rounded-md transition-transform`}
             />
-            <span className="absolute left-[10%]  top-[80%] font-sans text-xl font-semibold text-white">
+            <span className="absolute left-[10%] top-[80%] font-sans text-xl font-semibold text-white">
               {locale === "pt" ? card.titlePT : card.titleEN}
             </span>
           </motion.div>

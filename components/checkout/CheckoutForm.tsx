@@ -67,14 +67,14 @@ const CheckoutForm = ({}: CheckoutFormProps) => {
             "group transition duration-200 ease-in-out hover:scale-105",
           )}
         >
-          <span className="transform  duration-200 ease-in-out group-hover:text-base">
+          <span className="transform duration-200 ease-in-out group-hover:text-base">
             {isProcessing ? "Processing..." : `Pay Now`}
           </span>
         </button>
 
         {/* Show any error that happens when processing the payment */}
         {message && (
-          <div className="rounded-md border bg-[#0a253c] p-[20px] font-sans text-white ">
+          <div className="rounded-md border bg-[#0a253c] p-[20px] font-sans text-white">
             {message}
           </div>
         )}

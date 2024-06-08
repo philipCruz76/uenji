@@ -79,7 +79,7 @@ const EmailRegistrationForm = () => {
         className="absolute left-6 top-6 flex cursor-pointer flex-row items-center justify-center"
         onClick={() => setShowEmailCredentials(false)}
       >
-        <button className="h-6 w-6 p-0 ">
+        <button className="h-6 w-6 p-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -93,13 +93,13 @@ const EmailRegistrationForm = () => {
       </div>
 
       {/* Auth form */}
-      <div className=" absolute mt-20 flex w-[90dvw] flex-col text-left">
-        <p className=" text-xl font-semibold ">Continuar com e-mail</p>
+      <div className="absolute mt-20 flex w-[90dvw] flex-col text-left">
+        <p className="text-xl font-semibold">Continuar com e-mail</p>
 
         {/* User input form */}
         <form
           onSubmit={handleSubmit(loginHandler)}
-          className=" mt-8 flex flex-col gap-2 text-[16px]"
+          className="mt-8 flex flex-col gap-2 text-[16px]"
         >
           <label className="font-semibold">Email</label>
 

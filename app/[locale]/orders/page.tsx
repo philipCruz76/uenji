@@ -34,8 +34,8 @@ async function page({}: pageProps) {
         <EmptyOrderPage />
       ) : (
         <div className="flex h-full w-full max-w-[100dvw] flex-col overflow-hidden p-[24px] font-mono">
-          <h1 className="text-2xl font-bold ">{orderPageText("title")}</h1>
-          <h3 className=" pb-[20px] font-mono text-xl font-semibold">
+          <h1 className="text-2xl font-bold">{orderPageText("title")}</h1>
+          <h3 className="pb-[20px] font-mono text-xl font-semibold">
             {orderPageText("subtitle")}
           </h3>
 

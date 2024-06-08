@@ -19,13 +19,10 @@ const MobileFooter = ({}) => {
   return (
     <>
       <footer className={mobileFooterStyling}>
-        <Accordion
-          type="multiple"
-          className="flex h-full flex-col  bg-slate-50"
-        >
+        <Accordion type="multiple" className="flex h-full flex-col bg-slate-50">
           <AccordionItem value="1">
             <AccordionTrigger className="flex w-[600px] max-w-lg flex-row">
-              <div className="flex items-start justify-center text-start  font-semibold">
+              <div className="flex items-start justify-center text-start font-semibold">
                 {footerLinks[0].title}
               </div>
             </AccordionTrigger>
@@ -37,7 +34,7 @@ const MobileFooter = ({}) => {
 
           <AccordionItem value="2">
             <AccordionTrigger className="flex w-[600px] max-w-lg flex-row">
-              <div className="flex items-start justify-center text-start  font-semibold">
+              <div className="flex items-start justify-center text-start font-semibold">
                 {footerLinks[1].title}
               </div>
             </AccordionTrigger>
@@ -49,7 +46,7 @@ const MobileFooter = ({}) => {
 
           <AccordionItem value="3">
             <AccordionTrigger className="flex w-[600px] max-w-lg flex-row">
-              <div className="flex items-start justify-center text-start  font-semibold">
+              <div className="flex items-start justify-center text-start font-semibold">
                 {footerLinks[2].title}
               </div>
             </AccordionTrigger>
@@ -63,7 +60,7 @@ const MobileFooter = ({}) => {
         {/* Footer Bottom */}
         <div className="flex flex-col items-center justify-between gap-1 py-4">
           <p className="text-2xl font-extrabold text-slate-500">Uenji</p>
-          <span className=" text-sm font-light text-slate-500">
+          <span className="text-sm font-light text-slate-500">
             © 2023 Uenji. All rights reserved
           </span>
 

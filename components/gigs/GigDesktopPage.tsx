@@ -31,16 +31,16 @@ const GigDesktopPage = async ({ pageGig }: GigDesktopPageProps) => {
     <>
       <section className="flex w-[100dvw] flex-row justify-between p-[32px]">
         <div className="w-[70%]">
-          <ul className="w flex flex-row items-center  justify-start gap-2">
+          <ul className="w flex flex-row items-center justify-start gap-2">
             <li key={"home-link"}>
-              <Link href="/" className=" group">
+              <Link href="/" className="group">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
                   height="16"
                   fill="#000000"
                   viewBox="0 0 256 256"
-                  className="transition duration-200 ease-in-out group-hover:scale-125 "
+                  className="transition duration-200 ease-in-out group-hover:scale-125"
                 >
                   <path d="M240,208H224V115.55a16,16,0,0,0-5.17-11.78l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM48,115.55l.11-.1L128,40l79.9,75.43.11.1V208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48ZM144,208H112V160h32Z"></path>
                 </svg>
@@ -84,11 +84,11 @@ const GigDesktopPage = async ({ pageGig }: GigDesktopPageProps) => {
       </section>
 
       <section className="flex min-h-[100dvh] w-[100dvw] max-w-[100dvw] flex-row-reverse items-start px-[32px] pb-[32px] desktop:h-[200dvh]">
-        <aside className="sticky top-10 h-full max-h-[460px] w-full max-w-[450px] items-center justify-center rounded-sm border  text-center shadow-lg">
+        <aside className="sticky top-10 h-full max-h-[460px] w-full max-w-[450px] items-center justify-center rounded-sm border text-center shadow-lg">
           <GigPricingCard gig={pageGig} />
         </aside>
 
-        <div className="flex h-full w-full flex-col items-start justify-center ">
+        <div className="flex h-full w-full flex-col items-start justify-center">
           <GigSellerInfo user={gigUser} gigTitle={pageGig.title} />
           <GigBasicInfo gig={pageGig} />
         </div>

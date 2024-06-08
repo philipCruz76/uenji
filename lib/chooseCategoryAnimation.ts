@@ -9,29 +9,29 @@ import tutoring from "@/public/animations/lottie-animations/e-learning.json";
 import video from "@/public/animations/lottie-animations/video-editing.json";
 import photography from "@/public/animations/lottie-animations/photography.json";
 
- const chooseCategoryAnimation = (categoryName: string) => {
-    switch (categoryName) {
-      case "analises":
-        return analysis;
-      case "negocios":
-        return business;
-      case "programacao":
-        return programming;
-      case "design":
-        return design;
-      case "marketing":
-        return marketing;
-      case "musica":
-        return music;
-      case "escrita":
-        return writing;
-      case "formacao":
-        return tutoring;
-      case "video":
-        return video;
-      case "fotografia":
-        return photography;
-    }
-  };
-  
-  export default chooseCategoryAnimation;
+const chooseCategoryAnimation = (categoryName: string) => {
+  switch (categoryName) {
+    case "analises":
+      return analysis;
+    case "negocios":
+      return business;
+    case "programacao":
+      return programming;
+    case "design":
+      return design;
+    case "marketing":
+      return marketing;
+    case "musica":
+      return music;
+    case "escrita":
+      return writing;
+    case "formacao":
+      return tutoring;
+    case "video":
+      return video;
+    case "fotografia":
+      return photography;
+  }
+};
+
+export default chooseCategoryAnimation;

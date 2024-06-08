@@ -32,8 +32,8 @@ const SellerInfoCard = ({ user }: SellerInfoCardProps) => {
   ) as SellerProfessionalInfo["certifications"];
 
   return (
-    <div className="relative flex h-fit  min-h-[450px] bg-white tablet:w-[400px]">
-      <div className="flex h-fit w-full flex-col items-center justify-center gap-2  space-y-3 border border-zinc-200 px-[20px] py-[20px] tablet:px-[30px] tablet:py-[30px]">
+    <div className="relative flex h-fit min-h-[450px] bg-white tablet:w-[400px]">
+      <div className="flex h-fit w-full flex-col items-center justify-center gap-2 space-y-3 border border-zinc-200 px-[20px] py-[20px] tablet:px-[30px] tablet:py-[30px]">
         {true ? (
           <>
             {/* Seller Description */}
@@ -47,7 +47,7 @@ const SellerInfoCard = ({ user }: SellerInfoCardProps) => {
               </div>
               <span className="w-full text-justify text-sm">{description}</span>
             </div>
-            <div className="flex h-px w-full bg-gray-200 " />
+            <div className="flex h-px w-full bg-gray-200" />
 
             {/* Seller Languages */}
             <div className="flex w-full flex-col gap-2">
@@ -67,7 +67,7 @@ const SellerInfoCard = ({ user }: SellerInfoCardProps) => {
                 </span>
               ))}
             </div>
-            <div className="flex h-px w-full bg-gray-200 " />
+            <div className="flex h-px w-full bg-gray-200" />
 
             {/* Seller Occupation */}
             <div className="flex w-full flex-col gap-2">
@@ -85,7 +85,7 @@ const SellerInfoCard = ({ user }: SellerInfoCardProps) => {
                 </span>
               </span>
             </div>
-            <div className="flex h-px w-full bg-gray-200 " />
+            <div className="flex h-px w-full bg-gray-200" />
 
             {/* Seller Skills */}
             <div className="flex w-full flex-col gap-2">
@@ -100,14 +100,14 @@ const SellerInfoCard = ({ user }: SellerInfoCardProps) => {
                 {parsedSkills.map((skill) => (
                   <li
                     key={skill.name}
-                    className=" w-[90px] rounded-2xl border px-[4px] py-[4px] text-center text-sm hover:bg-gray-200"
+                    className="w-[90px] rounded-2xl border px-[4px] py-[4px] text-center text-sm hover:bg-gray-200"
                   >
                     {skill.name}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="flex h-px w-full bg-gray-200 " />
+            <div className="flex h-px w-full bg-gray-200" />
 
             {/* Seller Education */}
             <div className="flex w-full flex-col gap-2">
@@ -127,7 +127,7 @@ const SellerInfoCard = ({ user }: SellerInfoCardProps) => {
                 </span>
               ))}
             </div>
-            <div className="flex h-px w-full bg-gray-200 " />
+            <div className="flex h-px w-full bg-gray-200" />
 
             {/* Seller Certification */}
             <div className="flex w-full flex-col gap-2">

@@ -151,7 +151,7 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
           {gigGalleryText("title")}
         </h1>
         <h3 className="py-[20px]">{gigGalleryText("subtitle")}</h3>
-        <div className=" flex h-[70px] w-full flex-row items-center justify-center gap-2 border bg-gray-100 px-4">
+        <div className="flex h-[70px] w-full flex-row items-center justify-center gap-2 border bg-gray-100 px-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="32"
@@ -168,7 +168,7 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
       </div>
 
       {/* Image Upload */}
-      <div className="w-full gap-4 border-b-2  pb-4 pt-[50px]">
+      <div className="w-full gap-4 border-b-2 pb-4 pt-[50px]">
         <h3 className="text-xl font-semibold">
           {gigGalleryText("images.title")}
         </h3>
@@ -178,7 +178,7 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
         <div className="flex flex-row gap-8">
           <button
             type="button"
-            className=" h-[160px] w-[240px] rounded-md border-2 border-gray-300 p-4 hover:border-none hover:outline-dashed hover:outline-2 hover:outline-blue-400"
+            className="h-[160px] w-[240px] rounded-md border-2 border-gray-300 p-4 hover:border-none hover:outline-dashed hover:outline-2 hover:outline-blue-400"
             onClick={() => {
               document.getElementById("gigImage1")?.click();
             }}
@@ -208,7 +208,7 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
                 src={getGigGallery().gigImages[0]}
                 width={200}
                 height={200}
-                className=" h-full w-full object-cover"
+                className="h-full w-full object-cover"
               />
             ) : (
               <EmptyGigUploadCard type="photo" />
@@ -216,7 +216,7 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
           </button>
           <button
             type="button"
-            className=" h-[160px] w-[240px] rounded-md border-2 border-gray-300 p-4 text-white hover:border-none hover:outline-dashed hover:outline-2 hover:outline-blue-400"
+            className="h-[160px] w-[240px] rounded-md border-2 border-gray-300 p-4 text-white hover:border-none hover:outline-dashed hover:outline-2 hover:outline-blue-400"
             onClick={() => {
               document.getElementById("gigImage2")?.click();
             }}
@@ -231,8 +231,11 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
                 const target = e.target as HTMLInputElement & {
                   files: FileList;
                 };
-
-                handlePhotoUpload(target.files[0], 1);
+                toast.promise(handlePhotoUpload(target.files[0], 1), {
+                  loading: "Uploading photo...",
+                  success: "Photo uploaded successfully",
+                  error: "Error uploading photo",
+                });
               }}
               style={{ display: "none" }}
             />
@@ -243,7 +246,7 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
                 src={getGigGallery().gigImages[1]}
                 width={200}
                 height={200}
-                className=" h-full w-full object-cover"
+                className="h-full w-full object-cover"
               />
             ) : (
               <EmptyGigUploadCard type="photo" />
@@ -251,7 +254,7 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
           </button>
           <button
             type="button"
-            className=" h-[160px] w-[240px] rounded-md border-2 border-gray-300 p-4 text-black hover:border-none hover:outline-dashed hover:outline-2 hover:outline-blue-400"
+            className="h-[160px] w-[240px] rounded-md border-2 border-gray-300 p-4 text-black hover:border-none hover:outline-dashed hover:outline-2 hover:outline-blue-400"
             onClick={() => {
               document.getElementById("gigImage3")?.click();
             }}
@@ -266,7 +269,11 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
                 const target = e.target as HTMLInputElement & {
                   files: FileList;
                 };
-                handlePhotoUpload(target.files[0], 2);
+                toast.promise(handlePhotoUpload(target.files[0], 2), {
+                  loading: "Uploading photo...",
+                  success: "Photo uploaded successfully",
+                  error: "Error uploading photo",
+                });
               }}
               style={{ display: "none" }}
             />
@@ -278,7 +285,7 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
                 src={getGigGallery().gigImages[2]}
                 width={200}
                 height={200}
-                className=" h-full w-full object-cover"
+                className="h-full w-full object-cover"
               />
             ) : (
               <EmptyGigUploadCard type="photo" />
@@ -293,17 +300,17 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
       </div>
 
       {/* Document Upload */}
-      <div className="w-full gap-4 border-b-2  pb-4 pt-[20px]">
+      <div className="w-full gap-4 border-b-2 pb-4 pt-[20px]">
         <h3 className="text-xl font-semibold">
           {gigGalleryText("documents.title")}
         </h3>
-        <span className="text-sm text-slate-500 ">
+        <span className="text-sm text-slate-500">
           {gigGalleryText("documents.subtitle")}
         </span>
         <div className="flex flex-row gap-8">
           <button
             type="button"
-            className=" h-[160px] w-[240px] rounded-md border-2 border-gray-300 p-4 text-black hover:border-none hover:outline-dashed hover:outline-2 hover:outline-blue-400"
+            className="h-[160px] w-[240px] rounded-md border-2 border-gray-300 p-4 text-black hover:border-none hover:outline-dashed hover:outline-2 hover:outline-blue-400"
             onClick={() => {
               document.getElementById("gigDocument1")?.click();
             }}
@@ -318,7 +325,11 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
                 const target = e.target as HTMLInputElement & {
                   files: FileList;
                 };
-                handleDocumentUpload(target.files[0], 1);
+                toast.promise(handleDocumentUpload(target.files[0], 1), {
+                  loading: "Uploading photo...",
+                  success: "Photo uploaded successfully",
+                  error: "Error uploading photo",
+                });
               }}
               style={{ display: "none" }}
             />
@@ -333,7 +344,7 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
           </button>
           <button
             type="button"
-            className=" h-[160px] w-[240px] rounded-md border-2 border-gray-300 p-4 text-black hover:border-none hover:outline-dashed hover:outline-2 hover:outline-blue-400"
+            className="h-[160px] w-[240px] rounded-md border-2 border-gray-300 p-4 text-black hover:border-none hover:outline-dashed hover:outline-2 hover:outline-blue-400"
             onClick={() => {
               document.getElementById("gigDocument2")?.click();
             }}
@@ -349,7 +360,11 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
                   files: FileList;
                 };
 
-                handleDocumentUpload(target.files[0], 2);
+                toast.promise(handleDocumentUpload(target.files[0], 2), {
+                  loading: "Uploading photo...",
+                  success: "Photo uploaded successfully",
+                  error: "Error uploading photo",
+                });
               }}
               style={{ display: "none" }}
             />
@@ -374,7 +389,7 @@ const GigWizardGallery = ({ username, gigName }: GigWizardGalleryProps) => {
           !gigName ? "flex w-full justify-end" : "flex w-full justify-between",
         )}
       >
-        <div className="flex items-end justify-end ">
+        <div className="flex items-end justify-end">
           <div className="flex flex-col gap-2">
             <button
               type="button"

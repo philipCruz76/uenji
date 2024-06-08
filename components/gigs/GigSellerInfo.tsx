@@ -21,7 +21,7 @@ type GigSellerInfoProps = {
 const GigSellerInfo = ({ user, gigTitle }: GigSellerInfoProps) => {
   const currentUser = useCurrentUser();
   const router = useRouter();
-  const t = useTranslations("Gigs.desktopPage")
+  const t = useTranslations("Gigs.desktopPage");
   const { setIsOpen } = useOpenModalStore();
   const { displayName, image, country, languages, id, username, skills, name } =
     user;
@@ -65,11 +65,11 @@ const GigSellerInfo = ({ user, gigTitle }: GigSellerInfoProps) => {
             src={image! || "/icons/default-user.svg"}
             alt="profile picture"
             referrerPolicy="no-referrer"
-            className="h-[100px] w-[100px] rounded-full border transition duration-150 ease-in-out "
+            className="h-[100px] w-[100px] rounded-full border transition duration-150 ease-in-out"
           />
         </Link>
         {/* user info */}
-        <div className="flex flex-col items-start justify-start gap-3 ">
+        <div className="flex flex-col items-start justify-start gap-3">
           <Link href={`/${username}`}>
             <h3
               className="text-2xl font-bold text-gray-800"
@@ -130,7 +130,7 @@ const GigSellerInfo = ({ user, gigTitle }: GigSellerInfoProps) => {
         {parsedSkills.map((skill) => (
           <li
             key={skill.name}
-            className=" w-fit rounded-2xl border bg-gray-100 px-[6px] py-[6px] text-center text-sm"
+            className="w-fit rounded-2xl border bg-gray-100 px-[6px] py-[6px] text-center text-sm"
           >
             {skill.name}
           </li>

@@ -25,20 +25,20 @@ const ProfileInfoCard: FC<SellerCardProps> = ({
   });
 
   return (
-    <div className="relative flex h-[450px]  bg-white tablet:w-[400px]">
-      <div className=" max-h-full w-full flex-col  items-center justify-center space-y-3 border border-[#dee2e6] px-[30px] py-[30px]">
+    <div className="relative flex h-[450px] bg-white tablet:w-[400px]">
+      <div className="max-h-full w-full flex-col items-center justify-center space-y-3 border border-[#dee2e6] px-[30px] py-[30px]">
         {/* user profile info */}
 
         <div className="container absolute right-0 flex flex-row">
           {isOnline ? (
-            <div className=" z-1 absolute right-[30px] flex max-h-[20px] w-[68px] flex-row items-center justify-center rounded-xl border border-green-400 text-green-400">
+            <div className="z-1 absolute right-[30px] flex max-h-[20px] w-[68px] flex-row items-center justify-center rounded-xl border border-green-400 text-green-400">
               <p className="absolute left-1 top-1/2 -translate-y-[70%] transform">
                 .
               </p>
               <span>Online</span>
             </div>
           ) : (
-            <div className=" z-1 absolute right-[30px] flex max-h-[20px] w-[68px] flex-row items-center justify-center rounded-xl border border-zinc-400 text-zinc-400">
+            <div className="z-1 absolute right-[30px] flex max-h-[20px] w-[68px] flex-row items-center justify-center rounded-xl border border-zinc-400 text-zinc-400">
               <span>Offline</span>
             </div>
           )}
@@ -57,10 +57,10 @@ const ProfileInfoCard: FC<SellerCardProps> = ({
           <h1 className="text-2xl font-bold text-gray-800">{username}</h1>
           <p className="text-sm text-zinc-600">@{username}</p>
         </div>
-        <div className="flex  h-auto">
+        <div className="flex h-auto">
           <Link
             href={`/${username}?publicMode=true`}
-            className="h-fit w-full transform cursor-pointer rounded-sm border  border-zinc-600 px-4 py-2 text-center text-sm font-semibold text-zinc-600 transition-colors duration-300  ease-in-out  hover:bg-zinc-600 hover:text-white"
+            className="h-fit w-full transform cursor-pointer rounded-sm border border-zinc-600 px-4 py-2 text-center text-sm font-semibold text-zinc-600 transition-colors duration-300 ease-in-out hover:bg-zinc-600 hover:text-white"
           >
             Preview Uenji Profile
           </Link>

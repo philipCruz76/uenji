@@ -188,14 +188,14 @@
       "personalWebsite": "Website Pessoal",
       "mandatoryFields": "* Campos obrigatórios"
     },
-    "accountSecurity":{
-      "heading":"Segurança de Perfil",
-      "subheading":"A confiança e a segurança são muito importantes na nossa comunidade. Por favor, verifique o seu e-mail e número de telemóvel.",
-      "private":"Privado",
-      "cellphone":"Número de telemóvel",
-      "verified":"Verificado",
-      "unverified":"Não verificado",
-      "submitButton":"Concluir"
+    "accountSecurity": {
+      "heading": "Segurança de Perfil",
+      "subheading": "A confiança e a segurança são muito importantes na nossa comunidade. Por favor, verifique o seu e-mail e número de telemóvel.",
+      "private": "Privado",
+      "cellphone": "Número de telemóvel",
+      "verified": "Verificado",
+      "unverified": "Não verificado",
+      "submitButton": "Concluir"
     }
   },
   "GigWizard": {
@@ -307,24 +307,24 @@
   "Gigs": {
     "pageTitle": "Serviços",
     "newGigButton": "Novo Serviço ",
-    "GigCardPrice":"From ",
-    "desktopPage":{
-      "editGig":"Editar Serviço",
-      "languages":"Sei falar ",
-      "choosePackage":"Escolher pacote",
-      "contactButton":"Entrar em Contacto",
-      "about":"Sobre este serviço",
-      "delivery":"Dias para entrega",
-      "revisions":"revisões",
-      "basic":"Básico",
-      "standard":"Standard",
-      "premium":"Prémium"
+    "GigCardPrice": "From ",
+    "desktopPage": {
+      "editGig": "Editar Serviço",
+      "languages": "Sei falar ",
+      "choosePackage": "Escolher pacote",
+      "contactButton": "Entrar em Contacto",
+      "about": "Sobre este serviço",
+      "delivery": "Dias para entrega",
+      "revisions": "revisões",
+      "basic": "Básico",
+      "standard": "Standard",
+      "premium": "Prémium"
     }
   },
   "Orders": {
     "title": "Pedidos",
     "subtitle": "Gerir os seus pedidos",
-    "noOrders":"You don't have any orders yet",
+    "noOrders": "You don't have any orders yet",
     "events": {
       "orderPlaced": "Encomendou este serviço",
       "orderAccepted": "Aceitou o pedido",
@@ -342,30 +342,30 @@
       "orderDate": "Data de Pedido",
       "orderDelivery": "Data de Entrega",
       "orderPrice": "Preço",
-      "saveButton":"Guardar Alterações"
+      "saveButton": "Guardar Alterações"
     }
   },
-  "Dashboard":{
-    "buyer":{
-      "popularCategories":"Consulte estas categorias populares",
-      "popularGigsMobile":"Serviços em destaque",
-      "popularGigspart1":"Aqui tens os serviços de ",
-      "popularGigspart2":"mais populares",
-      "programming":"Programação",
-      "photography":"Fotografia",
-      "seeAll":"Ver todas"
+  "Dashboard": {
+    "buyer": {
+      "popularCategories": "Consulte estas categorias populares",
+      "popularGigsMobile": "Serviços em destaque",
+      "popularGigspart1": "Aqui tens os serviços de ",
+      "popularGigspart2": "mais populares",
+      "programming": "Programação",
+      "photography": "Fotografia",
+      "seeAll": "Ver todas"
     },
-    "seller":{
-      "greeting":"Olá, ",
-      "subheading":"Eis o seu painel de controlo de vendedor",
-      "sellerAnalytics":{
-        "lastMonth":" que no mês passado",
-        "totalEarnings":"Receita Total",
-        "orders":"Pedidos",
-        "sales":"Vendas",
-        "lastSales":"Últimas Vendas",
-        "salesSubTextPart1":"Voçê vendeu ",
-        "salesSubTextPart2":" serviços este mês"
+    "seller": {
+      "greeting": "Olá, ",
+      "subheading": "Eis o seu painel de controlo de vendedor",
+      "sellerAnalytics": {
+        "lastMonth": " que no mês passado",
+        "totalEarnings": "Receita Total",
+        "orders": "Pedidos",
+        "sales": "Vendas",
+        "lastSales": "Últimas Vendas",
+        "salesSubTextPart1": "Voçê vendeu ",
+        "salesSubTextPart2": " serviços este mês"
       }
     }
   }

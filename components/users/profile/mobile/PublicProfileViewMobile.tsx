@@ -24,7 +24,7 @@ const PublicProfileViewMobile = async ({
         src={image || "/icons/default-user.svg"}
         alt="profile picture"
         referrerPolicy="no-referrer"
-        className="max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] rounded-full border transition duration-150 ease-in-out "
+        className="max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] rounded-full border transition duration-150 ease-in-out"
       />
 
       <span className="text-lg font-bold">{name}</span>

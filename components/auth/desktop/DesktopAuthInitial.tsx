@@ -137,7 +137,7 @@ const DesktopAuthInitial = () => {
 
         <div className="flex w-full flex-row items-center justify-center space-x-2">
           <button
-            className="flex h-[50px] w-[175px] flex-row items-center justify-center space-x-2 border text-center transition duration-200 ease-in-out hover:scale-105 "
+            className="flex h-[50px] w-[175px] flex-row items-center justify-center space-x-2 border text-center transition duration-200 ease-in-out hover:scale-105"
             onClick={() =>
               toast.error(
                 "Facebook login is not available at the moment! We will enable it in the future.",

@@ -62,16 +62,16 @@ const SuccessPage = ({ pruchasedPackage, purchasedGig }: SuccessPageProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
-        className="max-w-[100dvw] px-6  text-center font-mono text-2xl font-bold"
+        className="max-w-[100dvw] px-6 text-center font-mono text-2xl font-bold"
       >
-        <Card className="flex max-h-[300px] w-[300px] flex-col  items-center justify-start overflow-hidden border-none hover:cursor-pointer">
+        <Card className="flex max-h-[300px] w-[300px] flex-col items-center justify-start overflow-hidden border-none hover:cursor-pointer">
           <CardTitle>
             <Image
               alt={purchasedGig.title}
               src={purchasedGig.coverImage!}
               width={200}
               height={200}
-              className="max-h-[100px] min-h-[100px] min-w-[100px]  max-w-[100px]  rounded-full border-r object-fill"
+              className="max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] rounded-full border-r object-fill"
             />
           </CardTitle>
           <CardContent className="flex h-full w-full flex-col gap-1 rounded-sm border bg-[#f8f9fa] p-[8px] text-start text-sm">

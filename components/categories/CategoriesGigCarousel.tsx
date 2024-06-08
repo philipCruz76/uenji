@@ -28,7 +28,7 @@ const CategoriesGigCarousel = ({
           ? categoryGigs.map((gig, index) => (
               <CarouselItem
                 key={`popular-gig-${index}`}
-                className="ml-2  py-6 tablet:basis-1/2 desktop:basis-1/4 "
+                className="ml-2 py-6 tablet:basis-1/2 desktop:basis-1/4"
               >
                 <GigCard gigToShow={gig} index={index} />
               </CarouselItem>

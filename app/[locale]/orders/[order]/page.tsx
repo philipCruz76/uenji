@@ -10,7 +10,6 @@ type pageProps = {
 };
 
 const BuyerOrderView = lazy(() => import("@/components/orders/BuyerOrderView"));
-const SellerOrderView = lazy(() => import("@/components/orders/SellerOrderView"));
 const page = async ({ params }: pageProps) => {
   const { order } = params;
   const currentUser = await getCurrentUser();
@@ -20,8 +19,6 @@ const page = async ({ params }: pageProps) => {
   });
   if (!order || !currentUser) redirect("/");
 
-  const isBuyer = currentUser.id === desiredOrder.buyerId;
-  const isSeller = currentUser.id === desiredOrder.sellerId;
   return (
     <section className="flex min-h-[100dvh] min-w-[100dvw] flex-col gap-16 p-6">
       <h1 className="font-sans text-3xl font-bold">
@@ -29,9 +26,7 @@ const page = async ({ params }: pageProps) => {
           desiredOrder.title.slice(1)}
       </h1>
 
-      
-        <BuyerOrderView order={desiredOrder} />
-     
+      <BuyerOrderView order={desiredOrder} />
     </section>
   );
 };

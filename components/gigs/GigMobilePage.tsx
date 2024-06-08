@@ -37,7 +37,7 @@ const GigMobilePage = async ({ pageGig }: GigMobilePageProps) => {
     <section className="flex min-h-[100dvh] min-w-[100dvw] max-w-[100dvw] flex-col gap-2">
       {/* Gig Gallery */}
 
-      <Carousel className=" flex min-h-[200px] min-w-[100dvw] items-center justify-center">
+      <Carousel className="flex min-h-[200px] min-w-[100dvw] items-center justify-center">
         <CarouselContent className="flex h-full min-w-full">
           {multipleImages ? (
             pageGig.images.map((gigImage, index) => (

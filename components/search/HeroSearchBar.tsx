@@ -40,7 +40,7 @@ const HeroSearchBar = ({}) => {
       });
   }, 500);
   return (
-    <div className=" relative top-[40px] flex tablet:w-[500px] desktop:w-[600px] desktop:py-6">
+    <div className="relative top-[40px] flex tablet:w-[500px] desktop:w-[600px] desktop:py-6">
       <div className="absolute inset-0 top-[-20px] flex flex-row">
         <input
           type="text"
@@ -69,7 +69,7 @@ const HeroSearchBar = ({}) => {
               handleSearch(inputRef.current.value);
             }
           }}
-          className=" aboslute z-4 inset-0 h-12 w-12 overflow-visible rounded-r-md border-black bg-black "
+          className="aboslute z-4 inset-0 h-12 w-12 overflow-visible rounded-r-md border-black bg-black"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +88,7 @@ const HeroSearchBar = ({}) => {
         </button>
       </div>
       {Array.isArray(gigs) && gigs.length > 0 && showResults ? (
-        <div className=" z-3 absolute left-[-1px] top-[24px] hidden w-full flex-col rounded-b-md border border-slate-300 bg-white tablet:flex">
+        <div className="z-3 absolute left-[-1px] top-[24px] hidden w-full flex-col rounded-b-md border border-slate-300 bg-white tablet:flex">
           {gigs.map((gig) => (
             <Link
               key={gig.title}

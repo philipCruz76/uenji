@@ -33,7 +33,7 @@ const HeroCategoryExpo = () => {
                   <Image
                     alt={category.categoryName}
                     src={category.thumbnailIcon}
-                    className=" h-[50px] w-[50px] group-hover:animate-wiggle"
+                    className="h-[50px] w-[50px] group-hover:animate-wiggle"
                     loading="lazy"
                     width={50}
                     height={50}
@@ -41,7 +41,7 @@ const HeroCategoryExpo = () => {
                   <p className="flex text-sm font-medium">
                     {category.categoryTitle}
                   </p>
-                  <div className="flex h-[3px] w-12  bg-[#dee2e6] transition duration-300 ease-in-out group-hover:scale-x-150  group-hover:bg-black " />
+                  <div className="flex h-[3px] w-12 bg-[#dee2e6] transition duration-300 ease-in-out group-hover:scale-x-150 group-hover:bg-black" />
                 </Link>
               </li>
             ))}

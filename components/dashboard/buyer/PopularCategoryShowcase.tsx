@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { CategoryDesciptionsEN, CategoryDesciptionsPT } from "@/constants";
 import chooseCategoryAnimation from "@/lib/chooseCategoryAnimation";
 import Lottie from "lottie-react";
@@ -7,9 +7,9 @@ import Link from "next/link";
 
 type PopularCategoryShowcaseProps = {};
 
-const PopularCategoryShowcase =  ({}: PopularCategoryShowcaseProps) => {
-  const locale =  useLocale();
-  const popularCategoriesText = useTranslations("Dashboard.buyer")
+const PopularCategoryShowcase = ({}: PopularCategoryShowcaseProps) => {
+  const locale = useLocale();
+  const popularCategoriesText = useTranslations("Dashboard.buyer");
   const CategoryDescriptions =
     locale === "pt" ? CategoryDesciptionsPT : CategoryDesciptionsEN;
 
@@ -26,7 +26,7 @@ const PopularCategoryShowcase =  ({}: PopularCategoryShowcaseProps) => {
         {popularCategoriesText("popularCategories")}
       </h1>
 
-      <ul className=" grid w-full grid-cols-5 grid-rows-1 gap-6 py-8">
+      <ul className="grid w-full grid-cols-5 grid-rows-1 gap-6 py-8">
         {popularCategories.map((category) => {
           const freelancerAnimation = chooseCategoryAnimation(
             category.categoryName,
@@ -48,7 +48,7 @@ const PopularCategoryShowcase =  ({}: PopularCategoryShowcaseProps) => {
                 <span className="flex flex-row transition duration-200 ease-in-out group-hover:scale-105">
                   {category.categoryTitle}
                 </span>
-                <div className="block h-[3px] w-[80px]  bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150  group-hover:bg-current " />
+                <div className="block h-[3px] w-[80px] bg-transparent transition duration-200 ease-in-out group-hover:scale-x-150 group-hover:bg-current" />
               </Link>
             </li>
           );

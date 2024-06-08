@@ -126,7 +126,7 @@ const page = ({}) => {
       >
         {/* Full Name */}
         <div className="group flex min-h-[60px] w-full flex-col justify-start tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
-          <aside className="block h-fit w-full min-w-[210px]  flex-col flex-wrap ">
+          <aside className="block h-fit w-full min-w-[210px] flex-col flex-wrap">
             <h3 className="py-2">
               <span>
                 {personalInfoText("fullName.heading")}
@@ -188,7 +188,7 @@ const page = ({}) => {
 
         {/* Display Name */}
         <div className="group flex min-h-[60px] w-full flex-col tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
-          <aside className="block w-full min-w-[210px]  flex-col flex-wrap ">
+          <aside className="block w-full min-w-[210px] flex-col flex-wrap">
             <h3 className="py-2">
               <span>
                 {personalInfoText("displayName.heading")}
@@ -230,7 +230,7 @@ const page = ({}) => {
 
         {/* Profile Picture */}
         <div className="group flex w-full flex-col tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
-          <aside className="block w-full min-w-[210px]  flex-col flex-wrap ">
+          <aside className="block w-full min-w-[210px] flex-col flex-wrap">
             <h3 className="py-2">
               <span>
                 {personalInfoText("profilePhoto.heading")}
@@ -241,10 +241,10 @@ const page = ({}) => {
               {personalInfoText("profilePhoto.subheading")}
             </div>
           </aside>
-          <div className="flex w-full items-start justify-start ">
+          <div className="flex w-full items-start justify-start">
             <button
               type="button"
-              className=" group/uploadButton h-[150px] w-[150px] overflow-hidden rounded-full border border-gray-300 text-white hover:bg-gray-700 hover:bg-opacity-50"
+              className="group/uploadButton h-[150px] w-[150px] overflow-hidden rounded-full border border-gray-300 text-white hover:bg-gray-700 hover:bg-opacity-50"
               onClick={() => {
                 document.getElementById("profilePicture")?.click();
               }}
@@ -287,7 +287,7 @@ const page = ({}) => {
                   src={profilePictureSrc}
                   width={200}
                   height={200}
-                  className=" h-full w-full object-cover"
+                  className="h-full w-full object-cover"
                 />
               ) : null}
             </button>
@@ -296,7 +296,7 @@ const page = ({}) => {
 
         {/* Description */}
         <div className="group flex w-full flex-col tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
-          <aside className="block w-full min-w-[210px]  flex-col flex-wrap ">
+          <aside className="block w-full min-w-[210px] flex-col flex-wrap">
             <h3 className="py-2">
               <span>
                 {personalInfoText("description.heading")}
@@ -307,7 +307,7 @@ const page = ({}) => {
               {personalInfoText("description.subheading")}
             </div>
           </aside>
-          <div className="flex w-full flex-col items-start justify-start ">
+          <div className="flex w-full flex-col items-start justify-start">
             <textarea
               className="h-[150px] w-full rounded-sm border border-gray-300"
               {...register("description", {
@@ -337,7 +337,7 @@ const page = ({}) => {
 
         {/* Languages */}
         <div className="group flex max-w-full flex-col tablet:flex-row tablet:pb-[95px] tablet:pt-[35px]">
-          <aside className="block w-full min-w-[210px]  flex-col flex-wrap py-4 ">
+          <aside className="block w-full min-w-[210px] flex-col flex-wrap py-4">
             <h3 className="py-2">
               <span>
                 {personalInfoText("languages.heading")}
@@ -348,7 +348,7 @@ const page = ({}) => {
               {personalInfoText("languages.subheading")}
             </div>
           </aside>
-          <div className=" w-full max-w-[855px] flex-col items-start justify-start">
+          <div className="w-full max-w-[855px] flex-col items-start justify-start">
             {showLanguageSelector && (
               <div className="flex flex-col border p-[12px] tablet:flex-row tablet:p-2">
                 <select
@@ -373,7 +373,7 @@ const page = ({}) => {
                   })}
                 </select>
                 <select
-                  className="h-[40px] w-full rounded-sm border border-gray-300 bg-white  px-2 text-gray-600 tablet:w-[300px]"
+                  className="h-[40px] w-full rounded-sm border border-gray-300 bg-white px-2 text-gray-600 tablet:w-[300px]"
                   name="proficiency"
                   id="proficiency"
                   value={currentSelectedLanguage.fieldLevel}
@@ -391,10 +391,10 @@ const page = ({}) => {
                     </option>
                   ))}
                 </select>
-                <div className="flex flex-row justify-between gap-1 px-2 ">
+                <div className="flex flex-row justify-between gap-1 px-2">
                   <button
                     type="button"
-                    className="h-[40px]  w-[150px] rounded-sm bg-sky-600 font-semibold text-white hover:opacity-50"
+                    className="h-[40px] w-[150px] rounded-sm bg-sky-600 font-semibold text-white hover:opacity-50"
                     onClick={() => {
                       setLanguages(
                         languages.set(

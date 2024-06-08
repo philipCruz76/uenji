@@ -66,10 +66,10 @@ export default function UserGigsShowcaseMobile({
                   {"(5)"}
                 </span>
               </span>
-              <span className="font-mono ">{gig.title}</span>
+              <span className="font-mono">{gig.title}</span>
               {gig.published ? (
                 <div className="flex h-full w-full items-end justify-end text-end">
-                  <span className=" w-full text-end">
+                  <span className="w-full text-end">
                     {" "}
                     De{" "}
                     <span className="px-[4px] font-bold">

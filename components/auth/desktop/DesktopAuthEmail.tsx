@@ -83,7 +83,7 @@ const DesktopAuthEmail = ({}) => {
         className="absolute left-[400px] top-6 flex cursor-pointer flex-row items-center justify-center"
         onClick={() => setShowEmailCredentials(false)}
       >
-        <button className="h-6 w-6 p-0 ">
+        <button className="h-6 w-6 p-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -101,13 +101,13 @@ const DesktopAuthEmail = ({}) => {
 
       {/* Auth form */}
       <div className="container mt-20 flex w-[438px] flex-col space-y-3 text-left">
-        <p className="mb-8 flex text-2xl font-semibold ">
+        <p className="mb-8 flex text-2xl font-semibold">
           {authEmailText("email.heading")}
         </p>
 
         {/* User input form */}
         <form
-          className=" mt-8 flex flex-col space-y-3"
+          className="mt-8 flex flex-col space-y-3"
           onSubmit={handleSubmit(loginHandler)}
         >
           <label className="font-semibold">Email</label>

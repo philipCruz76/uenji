@@ -10,7 +10,7 @@ import {
   SellerProfileValidator,
 } from "@/types/sellerProfile.types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {  useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -18,7 +18,9 @@ import toast from "react-hot-toast";
 
 const page = ({}) => {
   const user = useCurrentUser();
-  const accountSecurityText = useTranslations("FreelancerOnboarding.accountSecurity")
+  const accountSecurityText = useTranslations(
+    "FreelancerOnboarding.accountSecurity",
+  );
   const router = useRouter();
   const { sellerOnboardingStep, setSellerOnboardingStep } =
     useSellerOnboardingStore();
@@ -68,15 +70,15 @@ const page = ({}) => {
       <div className="flex h-fit w-full flex-col gap-4 border-b py-4">
         <h1 className="text-4xl font-bold">{accountSecurityText("heading")}</h1>
         <h3 className="hidden max-w-[500px] flex-wrap tablet:flex">
-        {accountSecurityText("subheading")}
+          {accountSecurityText("subheading")}
         </h3>
       </div>
       <form
         className="flex h-fit w-full flex-col gap-4 border-b py-4"
         onSubmit={handleSubmit(accountSecurityHandler)}
       >
-        <div className="group flex h-fit w-full flex-col justify-start tablet:flex-row tablet:pt-[35px] ">
-          <aside className="flex h-fit w-full  min-w-[210px] flex-row flex-wrap items-center justify-start gap-2">
+        <div className="group flex h-fit w-full flex-col justify-start tablet:flex-row tablet:pt-[35px]">
+          <aside className="flex h-fit w-full min-w-[210px] flex-row flex-wrap items-center justify-start gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -100,15 +102,15 @@ const page = ({}) => {
                 required: true,
                 value: user?.isActive!,
               })}
-              className="flex w-full items-center justify-center rounded-md border border-slate-400 bg-sky-200  px-4 py-2 text-sm font-medium text-gray-500 shadow-sm  focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 tablet:w-[150px]"
+              className="flex w-full items-center justify-center rounded-md border border-slate-400 bg-sky-200 px-4 py-2 text-sm font-medium text-gray-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 tablet:w-[150px]"
             >
-             {accountSecurityText("verified")}
+              {accountSecurityText("verified")}
             </a>
           </div>
         </div>
 
-        <div className="group flex h-fit w-full flex-col justify-start tablet:flex-row tablet:pt-[35px] ">
-          <aside className="flex h-fit w-full  min-w-[210px] flex-row flex-wrap items-center justify-start gap-2">
+        <div className="group flex h-fit w-full flex-col justify-start tablet:flex-row tablet:pt-[35px]">
+          <aside className="flex h-fit w-full min-w-[210px] flex-row flex-wrap items-center justify-start gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -131,7 +133,7 @@ const page = ({}) => {
                 required: true,
                 value: false,
               })}
-              className="flex w-full items-center justify-center rounded-md border border-slate-400 bg-sky-200  px-4 py-2 text-sm font-medium text-gray-500 shadow-sm  focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 tablet:w-[150px]"
+              className="flex w-full items-center justify-center rounded-md border border-slate-400 bg-sky-200 px-4 py-2 text-sm font-medium text-gray-500 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 tablet:w-[150px]"
             >
               {accountSecurityText("unverified")}
             </a>

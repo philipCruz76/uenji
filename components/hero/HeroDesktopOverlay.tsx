@@ -13,7 +13,7 @@ const HeroDesktopOverlay = () => {
         <Image
           alt="backgroung image"
           src="/images/bg-work-image.png"
-          className=" relative right-0 flex h-fit w-[fit] justify-end object-fill"
+          className="relative right-0 flex h-fit w-[fit] justify-end object-fill"
           width={300}
           height={600}
         />
@@ -28,13 +28,13 @@ const HeroDesktopOverlay = () => {
         initial="hidden"
         animate="visible"
         transition={{ duration: 0.5, delay: 0.25 }}
-        className="z-1 container absolute inset-0 mt-56 flex flex-col items-start justify-start px-6 "
+        className="z-1 container absolute inset-0 mt-56 flex flex-col items-start justify-start px-6"
       >
         {/*Slogan*/}
-        <div className=" min-h-[100px] gap-[4px] tablet:w-[440px] tablet:gap-2 desktop:w-[640px] desktop:gap-4">
-          <span className="text-3xl font-bold text-black tablet:text-4xl desktop:text-5xl ">
+        <div className="min-h-[100px] gap-[4px] tablet:w-[440px] tablet:gap-2 desktop:w-[640px] desktop:gap-4">
+          <span className="text-3xl font-bold text-black tablet:text-4xl desktop:text-5xl">
             {t("SloganPreFix")}
-            <div className="h-[48px] overflow-hidden  font-serif text-[42px] font-medium uppercase  leading-[48px]">
+            <div className="h-[48px] overflow-hidden font-serif text-[42px] font-medium uppercase leading-[48px]">
               <span className="relative animate-rotating-text-desktop text-[#425664]">
                 {keys.map((key) => (
                   <i key={key}>

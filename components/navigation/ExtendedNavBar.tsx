@@ -86,13 +86,13 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
         )}
       >
         {/*NavBar items*/}
-        <div className="xl:gap-8 flex w-full items-center justify-between font-mono ">
+        <div className="xl:gap-8 flex w-full items-center justify-between font-mono">
           {/* Hambuger Menu and Logo Container */}
-          <div className="flex   w-full items-center justify-between tablet:w-auto">
+          <div className="flex w-full items-center justify-between tablet:w-auto">
             {/*Mobile Nav Button*/}
-            <div className=" flex px-2 focus:outline-none desktop:hidden">
+            <div className="flex px-2 focus:outline-none desktop:hidden">
               <button
-                className="group flex items-center py-2 "
+                className="group flex items-center py-2"
                 onClick={() => setMobileNav(true)}
               >
                 <svg
@@ -131,7 +131,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
           <div className="hidden w-full items-end justify-end tablet:flex">
             {/*Search Bar*/}
             {isActiveNavBar ? (
-              <div className=" relative hidden w-full  tablet:flex">
+              <div className="relative hidden w-full tablet:flex">
                 <SearchBar />
               </div>
             ) : null}
@@ -194,7 +194,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                   <span className="flex flex-row transition duration-200 ease-in-out group-hover:scale-105">
                     {navBarText("NavLinks.explore")}
                   </span>
-                  <div className="hidden h-[2px] w-[52px] bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current " />
+                  <div className="hidden h-[2px] w-[52px] bg-transparent transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150 group-hover:bg-current" />
                 </Link>
                 <Link
                   href="/orders"
@@ -204,7 +204,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                     {" "}
                     <span>{navBarText("NavLinks.orders")}</span>
                     {orders > 0 && session.user.sellerView === true && (
-                      <span className=" flex h-[16px] w-[16px] items-center justify-center rounded-full border border-black bg-black text-center font-mono text-white">
+                      <span className="flex h-[16px] w-[16px] items-center justify-center rounded-full border border-black bg-black text-center font-mono text-white">
                         {orders}
                       </span>
                     )}
@@ -223,7 +223,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                     className="group flex flex-col items-center justify-center"
                   >
                     <span> {navBarText("NavLinks.sellerCTA")}</span>
-                    <div className="hidden h-[2px] w-[130px] bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current " />
+                    <div className="hidden h-[2px] w-[130px] bg-transparent transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150 group-hover:bg-current" />
                   </Link>
                 ) : (
                   <Link
@@ -241,7 +241,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                 )}
               </ul>
             ) : (
-              <ul className="hidden gap-[20px]  px-2 text-base font-semibold desktop:flex">
+              <ul className="hidden gap-[20px] px-2 text-base font-semibold desktop:flex">
                 {NavLinks.map((link) => (
                   <Link
                     href={link.href}
@@ -251,7 +251,7 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                     <span className="flex flex-row transition duration-200 ease-in-out group-hover:scale-105">
                       {navBarText("NavLinks.explore")}
                     </span>
-                    <div className="hidden h-[2px] w-[52px] bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current " />
+                    <div className="hidden h-[2px] w-[52px] bg-transparent transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150 group-hover:bg-current" />
                   </Link>
                 ))}
               </ul>
@@ -282,10 +282,10 @@ const ExtendedNavBar: FC<ExtendedNavBarProps> = ({ session }) => {
                   >
                     {navBarText("NavLinks.login")}
                   </span>
-                  <div className="hidden h-[2px] w-[42px] bg-transparent  transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150  group-hover:bg-current " />
+                  <div className="hidden h-[2px] w-[42px] bg-transparent transition duration-200 ease-in-out group-hover:block group-hover:scale-x-150 group-hover:bg-current" />
                 </div>
 
-                <div className="sm:w-[80px] px-auto  hidden w-[60px] tablet:block ">
+                <div className="sm:w-[80px] px-auto hidden w-[60px] tablet:block">
                   <JoinButton isButton />
                 </div>
 

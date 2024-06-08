@@ -53,7 +53,7 @@ const SearchBar = ({}) => {
       });
   }, 500);
   return (
-    <div className=" hidden w-full flex-col  px-2 tablet:flex">
+    <div className="hidden w-full flex-col px-2 tablet:flex">
       <div className="absolute inset-0 top-[-20px] flex flex-row">
         <input
           type="text"
@@ -83,7 +83,7 @@ const SearchBar = ({}) => {
               handleSearch(inputRef.current.value);
             }
           }}
-          className=" aboslute inset-0 h-10 w-12 overflow-visible rounded-r-md border-black bg-black "
+          className="aboslute inset-0 h-10 w-12 overflow-visible rounded-r-md border-black bg-black"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +102,7 @@ const SearchBar = ({}) => {
         </button>
       </div>
       {Array.isArray(gigs) && gigs.length > 0 && showResults ? (
-        <div className=" absolute left-[-1px] top-[20px] hidden w-full flex-col rounded-md border border-slate-300 bg-white tablet:flex">
+        <div className="absolute left-[-1px] top-[20px] hidden w-full flex-col rounded-md border border-slate-300 bg-white tablet:flex">
           {gigs.map((gig) => (
             <Link
               key={gig.title}

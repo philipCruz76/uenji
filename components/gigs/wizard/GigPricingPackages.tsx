@@ -33,7 +33,7 @@ const GigPricingPackages = ({
   return (
     <table className="flex max-h-[600px] min-h-fit w-full flex-col border bg-zinc-50">
       <thead>
-        <tr className="grid h-[65px] grid-cols-4 grid-rows-1 justify-center  ">
+        <tr className="grid h-[65px] grid-cols-4 grid-rows-1 justify-center">
           <th className="col-span-1 border-r bg-slate-50" />
           <th className="col-span-1 border-b border-r bg-gray-100 px-[20px] py-[16px] text-start font-medium">
             {packagesTranslations("basic")}
@@ -54,11 +54,11 @@ const GigPricingPackages = ({
         {/* Title */}
         <tr className="grid min-h-[75px] grid-cols-4">
           <td className="col-span-1 border-b border-r bg-slate-50">
-            <span className=" h-full  w-full items-center px-[8px] font-medium">
+            <span className="h-full w-full items-center px-[8px] font-medium">
               {packagesTranslations("title")}
               <br />
               {packageErrors.packages !== undefined ? (
-                <span className="text-ellipsis text-sm  text-red-500">
+                <span className="text-ellipsis text-sm text-red-500">
                   {packageErrors.packages?.[0]?.title?.message ||
                     packageErrors.packages?.[1]?.title?.message ||
                     packageErrors.packages?.[2]?.title?.message}
@@ -131,7 +131,7 @@ const GigPricingPackages = ({
                       : packagesTranslations("placeholders.title") +
                         packagesTranslations("standard")
                   }
-                  className="h-full w-full text-ellipsis  p-2 pr-[24px] text-start text-sm outline-none"
+                  className="h-full w-full text-ellipsis p-2 pr-[24px] text-start text-sm outline-none"
                   {...formControl.register("packages.1.title", {
                     required: false,
                     onChange(event: React.FormEvent<HTMLTextAreaElement>) {
@@ -172,7 +172,7 @@ const GigPricingPackages = ({
                       : packagesTranslations("placeholders.title") +
                         packagesTranslations("premium")
                   }
-                  className="h-full w-full text-ellipsis  p-2 pr-[24px] text-start text-sm outline-none"
+                  className="h-full w-full text-ellipsis p-2 pr-[24px] text-start text-sm outline-none"
                   {...formControl.register("packages.2.title", {
                     onChange(event: React.FormEvent<HTMLTextAreaElement>) {
                       event.preventDefault();
@@ -196,10 +196,10 @@ const GigPricingPackages = ({
         {/* Description */}
         <tr className="grid min-h-[75px] grid-cols-4">
           <td className="col-span-1 border-b border-r bg-slate-50">
-            <span className=" h-full  w-full items-center px-[8px]  font-medium">
+            <span className="h-full w-full items-center px-[8px] font-medium">
               {packagesTranslations("description")} <br />
               {packageErrors.packages !== undefined ? (
-                <span className="text-ellipsis text-sm  text-red-500">
+                <span className="text-ellipsis text-sm text-red-500">
                   {packageErrors.packages?.[0]?.description?.message ||
                     packageErrors.packages?.[1]?.description?.message ||
                     packageErrors.packages?.[2]?.description?.message}
@@ -214,7 +214,7 @@ const GigPricingPackages = ({
             )}
           >
             <textarea
-              className="h-[125px] w-full text-ellipsis  p-2 pr-[24px] text-start text-sm outline-none"
+              className="h-[125px] w-full text-ellipsis p-2 pr-[24px] text-start text-sm outline-none"
               maxLength={100}
               placeholder={
                 packagesTranslations("placeholders.descriptionPart1") +
@@ -249,7 +249,7 @@ const GigPricingPackages = ({
                 )}
               >
                 <textarea
-                  className="h-[125px] w-full text-ellipsis  p-2 pr-[24px] text-start text-sm outline-none"
+                  className="h-[125px] w-full text-ellipsis p-2 pr-[24px] text-start text-sm outline-none"
                   placeholder={
                     packagesTranslations("placeholders.descriptionPart1") +
                     packagesTranslations("standard") +
@@ -317,11 +317,11 @@ const GigPricingPackages = ({
         {/* Delivery Time */}
         <tr className="grid min-h-[75px] grid-cols-4">
           <td className="col-span-1 border-b border-r bg-slate-50">
-            <span className=" h-full  w-full items-center px-[8px] font-medium">
+            <span className="h-full w-full items-center px-[8px] font-medium">
               {packagesTranslations("delivery")}
               <br />
               {packageErrors.packages !== undefined ? (
-                <span className="text-ellipsis text-sm  text-red-500">
+                <span className="text-ellipsis text-sm text-red-500">
                   {packageErrors.packages?.[0]?.deliveryTime?.message ||
                     packageErrors.packages?.[1]?.deliveryTime?.message ||
                     packageErrors.packages?.[2]?.deliveryTime?.message}
@@ -335,7 +335,7 @@ const GigPricingPackages = ({
               `${packageErrors.packages?.[0]?.deliveryTime && "border border-red-500"}`,
             )}
           >
-            <div className="flex h-full w-full flex-row items-center justify-start ">
+            <div className="flex h-full w-full flex-row items-center justify-start">
               <input
                 type="text"
                 maxLength={2}
@@ -375,7 +375,7 @@ const GigPricingPackages = ({
                   `${packageErrors.packages?.[1]?.deliveryTime && "border border-red-500"}`,
                 )}
               >
-                <div className="flex h-full w-full flex-row items-center justify-start ">
+                <div className="flex h-full w-full flex-row items-center justify-start">
                   <input
                     type="text"
                     maxLength={2}
@@ -414,7 +414,7 @@ const GigPricingPackages = ({
                   `${packageErrors.packages?.[2]?.deliveryTime && "border border-red-500"}`,
                 )}
               >
-                <div className="flex h-full w-full flex-row items-center justify-start ">
+                <div className="flex h-full w-full flex-row items-center justify-start">
                   <input
                     type="text"
                     maxLength={2}
@@ -452,11 +452,11 @@ const GigPricingPackages = ({
         {/* Revision */}
         <tr className="grid min-h-[75px] grid-cols-4">
           <td className="col-span-1 border-b border-r bg-slate-50">
-            <span className=" h-full w-full items-center px-[8px]  font-medium">
+            <span className="h-full w-full items-center px-[8px] font-medium">
               {packagesTranslations("revisions")}
               <br />
               {packageErrors.packages !== undefined ? (
-                <span className="text-ellipsis text-sm  text-red-500">
+                <span className="text-ellipsis text-sm text-red-500">
                   {packageErrors.packages?.[0]?.revisions?.message ||
                     packageErrors.packages?.[1]?.revisions?.message ||
                     packageErrors.packages?.[2]?.revisions?.message}
@@ -470,7 +470,7 @@ const GigPricingPackages = ({
               `${packageErrors.packages?.[0]?.revisions && "border border-red-500"}`,
             )}
           >
-            <div className="flex h-full w-full flex-row items-center justify-start ">
+            <div className="flex h-full w-full flex-row items-center justify-start">
               <input
                 type="text"
                 onInput={handleNumberInput}
@@ -510,7 +510,7 @@ const GigPricingPackages = ({
                   `${packageErrors.packages?.[1]?.revisions && "border border-red-500"}`,
                 )}
               >
-                <div className="flex h-full w-full flex-row items-center justify-start ">
+                <div className="flex h-full w-full flex-row items-center justify-start">
                   <input
                     type="text"
                     onInput={handleNumberInput}
@@ -548,7 +548,7 @@ const GigPricingPackages = ({
                   `${packageErrors.packages?.[2]?.revisions && "border border-red-500"}`,
                 )}
               >
-                <div className="flex h-full w-full flex-row items-center justify-start ">
+                <div className="flex h-full w-full flex-row items-center justify-start">
                   <input
                     type="text"
                     onInput={handleNumberInput}
@@ -586,11 +586,11 @@ const GigPricingPackages = ({
         {/* Price */}
         <tr className="grid min-h-[75px] grid-cols-4">
           <td className="col-span-1 border-r bg-slate-50">
-            <span className=" h-full  w-full items-center px-[8px]  font-medium">
+            <span className="h-full w-full items-center px-[8px] font-medium">
               {packagesTranslations("price")}
               <br />
               {packageErrors.packages !== undefined ? (
-                <span className="text-ellipsis text-sm  text-red-500">
+                <span className="text-ellipsis text-sm text-red-500">
                   {packageErrors.packages?.[0]?.price?.message ||
                     packageErrors.packages?.[1]?.price?.message ||
                     packageErrors.packages?.[2]?.price?.message}
@@ -604,7 +604,7 @@ const GigPricingPackages = ({
               `${packageErrors.packages?.[0]?.price && "border border-red-500"}`,
             )}
           >
-            <div className="flex h-full w-full flex-row items-center justify-start ">
+            <div className="flex h-full w-full flex-row items-center justify-start">
               <input
                 type="text"
                 maxLength={6}
@@ -644,7 +644,7 @@ const GigPricingPackages = ({
                   `${packageErrors.packages?.[1]?.price && "border border-red-500"}`,
                 )}
               >
-                <div className="flex h-full w-full flex-row items-center justify-start ">
+                <div className="flex h-full w-full flex-row items-center justify-start">
                   <input
                     type="text"
                     maxLength={6}
@@ -682,7 +682,7 @@ const GigPricingPackages = ({
                   `${packageErrors.packages?.[2]?.price && "border border-red-500"}`,
                 )}
               >
-                <div className="flex h-full w-full flex-row items-center justify-start ">
+                <div className="flex h-full w-full flex-row items-center justify-start">
                   <input
                     type="text"
                     maxLength={6}

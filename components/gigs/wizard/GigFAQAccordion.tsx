@@ -38,7 +38,7 @@ const GigFAQAccordion = ({
       className="flex min-h-[60px] w-full flex-col justify-start border bg-white px-4 py-[2.5px] text-start"
     >
       <AccordionItem value="1">
-        <AccordionTrigger className="flex h-full w-full flex-row items-center justify-between text-start hover:no-underline ">
+        <AccordionTrigger className="flex h-full w-full flex-row items-center justify-between text-start hover:no-underline">
           <div className="flex w-full items-center justify-start gap-8">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -49,11 +49,11 @@ const GigFAQAccordion = ({
             >
               <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
             </svg>
-            <span className="text-lg font-bold text-black ">{question}</span>
+            <span className="text-lg font-bold text-black">{question}</span>
           </div>
         </AccordionTrigger>
         <AccordionContent>
-          <div className=" flex w-full flex-col gap-4">
+          <div className="flex w-full flex-col gap-4">
             <input
               type="text"
               value={currentFAQ.question}
@@ -79,11 +79,11 @@ const GigFAQAccordion = ({
                 });
               }}
             />
-            <span className=" w-full text-end">
+            <span className="w-full text-end">
               {currentFAQ.answer.length} / 300{" "}
               <span className="text-gray-400">caracteres</span>
             </span>
-            <div className=" flex w-full flex-row justify-between">
+            <div className="flex w-full flex-row justify-between">
               <button
                 type="button"
                 className={cn(

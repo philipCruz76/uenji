@@ -6,7 +6,7 @@ const FacebookButton = () => {
     <>
       {/* Facebook Button */}
       <button
-        className="flex h-[50px] w-[170px] flex-row items-center justify-center space-x-2 border text-center "
+        className="flex h-[50px] w-[170px] flex-row items-center justify-center space-x-2 border text-center"
         onClick={() =>
           toast.error(
             "Facebook login is not available at the moment! We will enable it in the future.",

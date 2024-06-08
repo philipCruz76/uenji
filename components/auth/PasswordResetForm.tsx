@@ -37,7 +37,7 @@ const PasswordResetForm: FC<PasswordResetFormProps> = ({ userEmail }) => {
     }
   };
   return (
-    <div className="flex h-full w-full flex-row items-center justify-center text-center ">
+    <div className="flex h-full w-full flex-row items-center justify-center text-center">
       <form
         className="flex h-[305px] w-full max-w-[500px] flex-col space-y-4"
         action={(data) => resetPassword(data, userEmail, validPassword)}

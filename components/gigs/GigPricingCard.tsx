@@ -32,7 +32,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
         {singlePackage ? (
           <>
             <div className="min-h-full min-w-full text-lg font-semibold">
-              <div className="grid h-[50px] w-full grid-cols-1  grid-rows-1 border-b bg-slate-50">
+              <div className="grid h-[50px] w-full grid-cols-1 grid-rows-1 border-b bg-slate-50">
                 <label
                   onClick={() => {
                     setSelectedPackage({ type: "basic", index: 0 });
@@ -53,7 +53,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                       {parsedPackages[0].title.charAt(0).toLocaleUpperCase() +
                         parsedPackages[0].title.slice(1)}
                     </h3>
-                    <span className="font-normal text-gray-500 ">
+                    <span className="font-normal text-gray-500">
                       {parsedPackages[0].description}
                     </span>
                     <span className="flex flex-row items-center justify-start gap-2 text-sm font-bold text-gray-700">
@@ -86,7 +86,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                         {t("revisions")}
                       </span>
                     </span>
-                    <span className="flex flex-row items-center  justify-end text-xl font-medium text-gray-800">
+                    <span className="flex flex-row items-center justify-end text-xl font-medium text-gray-800">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="22"
@@ -107,7 +107,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
         ) : (
           <>
             <div className="min-h-full min-w-full text-lg font-semibold">
-              <div className="grid h-[50px] w-full grid-cols-3  grid-rows-1 border-b bg-slate-50">
+              <div className="grid h-[50px] w-full grid-cols-3 grid-rows-1 border-b bg-slate-50">
                 <label
                   onClick={() => {
                     setSelectedPackage({ type: "basic", index: 0 });
@@ -153,7 +153,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                       {parsedPackages[0].title.charAt(0).toLocaleUpperCase() +
                         parsedPackages[0].title.slice(1)}
                     </h3>
-                    <span className="font-normal text-gray-500 ">
+                    <span className="font-normal text-gray-500">
                       {parsedPackages[0].description}
                     </span>
                     <span className="flex flex-row items-center justify-start gap-2 text-sm font-bold text-gray-700">
@@ -186,7 +186,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                         {t("revisions")}
                       </span>
                     </span>
-                    <span className="flex flex-row items-center  justify-end text-xl font-medium text-gray-800">
+                    <span className="flex flex-row items-center justify-end text-xl font-medium text-gray-800">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="22"
@@ -206,7 +206,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                       {parsedPackages[1].title.charAt(0).toLocaleUpperCase() +
                         parsedPackages[1].title.slice(1)}
                     </h3>
-                    <span className="font-normal text-gray-500 ">
+                    <span className="font-normal text-gray-500">
                       {parsedPackages[1].description}
                     </span>
                     <span className="flex flex-row items-center justify-start gap-2 text-sm font-bold text-gray-700">
@@ -239,7 +239,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                         {t("revisions")}
                       </span>
                     </span>
-                    <span className="flex flex-row items-center  justify-end text-xl font-medium text-gray-800">
+                    <span className="flex flex-row items-center justify-end text-xl font-medium text-gray-800">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="22"
@@ -260,7 +260,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                         {parsedPackages[2].title.charAt(0).toLocaleUpperCase() +
                           parsedPackages[2].title.slice(1)}
                       </h3>
-                      <span className="font-normal text-gray-500 ">
+                      <span className="font-normal text-gray-500">
                         {parsedPackages[2].description}
                       </span>
                       <span className="flex flex-row items-center justify-start gap-2 text-sm font-bold text-gray-700">
@@ -292,7 +292,7 @@ const GigPricingCard = ({ gig }: GigPricingCardProps) => {
                           {t("revisions")}
                         </span>
                       </span>
-                      <span className="flex flex-row items-center  justify-end text-xl font-medium text-gray-800">
+                      <span className="flex flex-row items-center justify-end text-xl font-medium text-gray-800">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="22"

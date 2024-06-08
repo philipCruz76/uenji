@@ -56,10 +56,10 @@ const UserProfileMobilePage = async ({
         isOnline={isOnline}
       />
       {isSeller ? (
-        <div className=" w-full gap-4">
+        <div className="w-full gap-4">
           <SellerInfoCard user={user} />
           <Tabs defaultValue="published" className="w-full px-4 py-[30px]">
-            <TabsList className="w-full rounded-none  bg-white">
+            <TabsList className="w-full rounded-none bg-white">
               <TabsTrigger
                 value="published"
                 className="border-none font-semibold ring-0 focus-visible:ring-0 data-[state=active]:bg-transparent data-[state=active]:text-base data-[state=active]:underline"

@@ -36,7 +36,7 @@ const MobileAuthModal = ({}: MobileAuthModalProps) => {
         className="absolute left-0 top-[-14dvh] flex min-h-[100dvh] w-[100dvw] grow px-4 focus:outline-none"
       >
         {/* Close Button*/}
-        <div className=" flex items-center justify-end ">
+        <div className="flex items-center justify-end">
           <button
             className="h-6 w-6 rounded-md p-0"
             onClick={() => {

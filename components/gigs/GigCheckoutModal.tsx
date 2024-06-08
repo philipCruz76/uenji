@@ -68,8 +68,8 @@ const GigCheckoutModal = ({
         >
           <DrawerPortal>
             <DrawerContent className={drawerStyling}>
-              <div className="flex h-full w-full flex-col items-center justify-start  p-4">
-                <div className=" flex h-[50px] w-full flex-row items-center justify-between border-b border-t">
+              <div className="flex h-full w-full flex-col items-center justify-start p-4">
+                <div className="flex h-[50px] w-full flex-row items-center justify-between border-b border-t">
                   <h1 className="font-sans text-base font-medium">
                     Checkout do pedido
                   </h1>
@@ -79,11 +79,11 @@ const GigCheckoutModal = ({
                   />
                 </div>
                 <div className="my-4 flex h-[200px] w-full flex-col items-center justify-start gap-6 rounded-lg border-2 border-black p-4">
-                  <div className="flex w-full flex-row justify-between  font-mono font-semibold ">
-                    <h3 className="w-[55%] text-start  uppercase">
+                  <div className="flex w-full flex-row justify-between font-mono font-semibold">
+                    <h3 className="w-[55%] text-start uppercase">
                       {selectedPackage.title}
                     </h3>
-                    <span className=" w-[45%] text-end text-lg text-zinc-600 ">
+                    <span className="w-[45%] text-end text-lg text-zinc-600">
                       {selectedPackage.price}.00 AOA
                     </span>
                   </div>
@@ -101,7 +101,7 @@ const GigCheckoutModal = ({
 
                 {/* Stripe Payment Elements button */}
                 <button
-                  className="h-[50px] w-full  rounded-lg border-[#495057] bg-[#7298cd] font-mono text-[#f8f9fa] transition duration-200 ease-in-out hover:scale-105"
+                  className="h-[50px] w-full rounded-lg border-[#495057] bg-[#7298cd] font-mono text-[#f8f9fa] transition duration-200 ease-in-out hover:scale-105"
                   onClick={handleCheckout}
                 >
                   Checkout

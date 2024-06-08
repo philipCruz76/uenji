@@ -30,17 +30,15 @@ const OrderColumn = ({ columnId, columnTitle, items }: OrderColumnProps) => {
         isOver ? "bg-green-400 bg-opacity-25" : null,
       )}
     >
-      <label className=" relative top-[-20px] px-4 text-lg">
-        {columnTitle}
-      </label>
+      <label className="relative top-[-20px] px-4 text-lg">{columnTitle}</label>
 
-      {columnId === "accepted" || columnId==="late" ?   (
+      {columnId === "accepted" || columnId === "late" ? (
         <div className="flex flex-col gap-2">
           {items.length > 0
             ? items.map((item) => <OrderTask order={item} />)
             : null}
         </div>
-      ): (
+      ) : (
         <SortableContext
           items={items}
           id={columnId}

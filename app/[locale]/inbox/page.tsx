@@ -21,7 +21,7 @@ const page = async () => {
   });
   return (
     <>
-      <div className="flex max-h-full w-full justify-start rounded-md tablet:hidden ">
+      <div className="flex max-h-full w-full justify-start rounded-md tablet:hidden">
         <ConversationsSidebar
           initialConversations={conversations}
           currentUserEmail={currentUser.email}

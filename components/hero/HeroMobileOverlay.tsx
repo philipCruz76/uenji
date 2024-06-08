@@ -10,9 +10,9 @@ const HeroMobileOverlay = () => {
       {/*Slogan*/}
       <div className="w-full max-w-[440px] py-6">
         <div className="flex gap-[4px] tablet:gap-2 desktop:gap-4">
-          <span className=" text-3xl font-bold text-black ">
+          <span className="text-3xl font-bold text-black">
             {t("SloganPreFix")}
-            <div className="h-[38px] overflow-hidden  font-serif text-[32px] font-medium  leading-[38px]">
+            <div className="h-[38px] overflow-hidden font-serif text-[32px] font-medium leading-[38px]">
               <span className="relative animate-rotating-text-mobile text-black">
                 {keys.map((key) => (
                   <i key={key}>

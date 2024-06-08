@@ -67,13 +67,13 @@ const GigWizardPricing = ({ username, gigName }: GigWizardPricingProps) => {
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
-      className="mx-[20%]  min-h-[100dvh] max-w-[100dvw]  items-center justify-center  px-6 py-[40px] pt-[50px]"
+      className="mx-[20%] min-h-[100dvh] max-w-[100dvw] items-center justify-center px-6 py-[40px] pt-[50px]"
     >
       <div className="flex min-w-[60dvw] flex-col gap-4">
         <div className="flex w-full flex-row justify-between">
-          <h3 className=" text-2xl "> {gigPricingText("title")}</h3>
+          <h3 className="text-2xl"> {gigPricingText("title")}</h3>
           <div className="flex items-center justify-center gap-2">
-            <Label htmlFor="offer-packages" className=" text-sm">
+            <Label htmlFor="offer-packages" className="text-sm">
               {gigPricingText("packageSwitcher")}
             </Label>
             <Switch
@@ -100,7 +100,7 @@ const GigWizardPricing = ({ username, gigName }: GigWizardPricingProps) => {
           setFormValue={setValue}
           packageErrors={errors}
         />
-        <div className="flex items-end justify-end ">
+        <div className="flex items-end justify-end">
           <div className="flex flex-col gap-2">
             <button
               type="button"

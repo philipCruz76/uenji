@@ -14,7 +14,9 @@ const DesktopOrdersPage = async ({
   currentUser,
   orders,
 }: DesktopOrdersPageProps) => {
-  const activeOrders = orders.filter((order) => order.status === "active");
+  const activeOrders = orders.filter(
+    (order) => order.status === "active" || order.status === "review",
+  );
   const orderTableText = await getTranslations("Orders.ordersTable");
   return (
     <Tabs defaultValue="active" className="w-full py-[30px]">

@@ -27,12 +27,12 @@ const UserBasicInfoMobile = ({ user }: UserBasicInfoMobileProps) => {
     month: "2-digit",
   });
   return (
-    <div className="flex h-full w-full flex-col ">
+    <div className="flex h-full w-full flex-col">
       <span className="text-lg font-bold">Informações do usuário</span>
       <div className="flex h-[60px] w-full items-center justify-start border-b border-t">
         <span className="text-sm">{description}</span>
       </div>
-      <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2 ">
+      <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"
@@ -49,7 +49,7 @@ const UserBasicInfoMobile = ({ user }: UserBasicInfoMobileProps) => {
           </span>
         </div>
       </div>
-      <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2 ">
+      <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"
@@ -64,7 +64,7 @@ const UserBasicInfoMobile = ({ user }: UserBasicInfoMobileProps) => {
           <span className="font-semibold">{memberSince}</span>
         </div>
       </div>
-      <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2 ">
+      <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"
@@ -94,7 +94,7 @@ const UserBasicInfoMobile = ({ user }: UserBasicInfoMobileProps) => {
           </span>
         </div>
       </div>
-      <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2 ">
+      <div className="flex h-fit w-full flex-row items-center justify-start gap-4 border-b py-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"
@@ -107,7 +107,7 @@ const UserBasicInfoMobile = ({ user }: UserBasicInfoMobileProps) => {
         <div className="flex flex-col justify-start gap-2 text-start text-xs">
           <span className="text-[#adb5bd]">Habilidades</span>
           <span className="font-semibold">
-            { parsedSkills === null || parsedSkills.length < 1
+            {parsedSkills === null || parsedSkills.length < 1
               ? "Unknown"
               : parsedSkills.map((skill) => {
                   return `${skill.name} `;

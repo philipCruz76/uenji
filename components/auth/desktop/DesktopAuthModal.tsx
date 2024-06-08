@@ -49,11 +49,8 @@ const DesktopAuthModal = () => {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="flex max-w-[840px] transform flex-row overflow-hidden rounded-2xl bg-white  shadow-xl transition-all">
-                <Dialog.Title
-                  as="div"
-                  className="flex h-[560px] min-w-[370px] "
-                >
+              <Dialog.Panel className="flex max-w-[840px] transform flex-row overflow-hidden rounded-2xl bg-white shadow-xl transition-all">
+                <Dialog.Title as="div" className="flex h-[560px] min-w-[370px]">
                   <Image
                     src="/images/deskWork.jpg"
                     alt="Sign-in Modal image"

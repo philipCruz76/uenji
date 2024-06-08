@@ -8,18 +8,18 @@ type PopularCategoryShowcaseMobileProps = {
   popularCategories: Category[];
 };
 
-const PopularCategoryShowcaseMobile = async({
+const PopularCategoryShowcaseMobile = async ({
   popularCategories,
 }: PopularCategoryShowcaseMobileProps) => {
   const t = await getTranslations("Dashboard.buyer");
   return (
     <div className="flex w-full flex-col gap-6">
-      <div className="flex h-fit w-full flex-row justify-between ">
-        <h2 className=" text-xl font-bold"> {t("popularCategories")}</h2>
+      <div className="flex h-fit w-full flex-row justify-between">
+        <h2 className="text-xl font-bold"> {t("popularCategories")}</h2>
 
         <Link
           href={"/categorias"}
-          className="flex flex-row items-center justify-center gap-[4px] text-sm  text-[#0000CC] underline"
+          className="flex flex-row items-center justify-center gap-[4px] text-sm text-[#0000CC] underline"
         >
           {t("seeAll")}
           <svg
@@ -33,7 +33,7 @@ const PopularCategoryShowcaseMobile = async({
           </svg>
         </Link>
       </div>
-      <ul key="categories-list" className="flex h-full w-full flex-col  gap-2">
+      <ul key="categories-list" className="flex h-full w-full flex-col gap-2">
         {popularCategories.map((category) => {
           const subcategories = SubCategoriesList.find(
             (sub) => sub.category === category.categoryName,
@@ -42,7 +42,7 @@ const PopularCategoryShowcaseMobile = async({
             <li key={category.categoryTitle}>
               <Link
                 href={`/categorias/${category.categoryName}`}
-                className="flex w-full  flex-row items-center justify-start gap-4 rounded-md border-2 px-2 py-2"
+                className="flex w-full flex-row items-center justify-start gap-4 rounded-md border-2 px-2 py-2"
                 key={category.categoryName}
               >
                 <Image

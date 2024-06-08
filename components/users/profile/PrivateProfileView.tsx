@@ -14,8 +14,8 @@ const PrivateProfileView = ({ user }: PrivateProfileViewProps) => {
   const { username, image, country, createdAt, isOnline, id, isSeller } = user;
 
   return (
-    <div className="my-20 flex min-h-[100dvh]  max-w-[100dvw] flex-row flex-wrap justify-start gap-4 ">
-      <div className="  w-[400px] gap-4 desktop:max-h-[200dvh] ">
+    <div className="my-20 flex min-h-[100dvh] max-w-[100dvw] flex-row flex-wrap justify-start gap-4">
+      <div className="w-[400px] gap-4 desktop:max-h-[200dvh]">
         <ProfileInfoCard
           userId={id}
           username={username}
@@ -26,7 +26,7 @@ const PrivateProfileView = ({ user }: PrivateProfileViewProps) => {
         />
         {isSeller ? <SellerInfoCard user={user} /> : null}
       </div>
-      <div className="max-h-[500px] rounded-md border border-[#dee2e6] tablet:min-w-[680px] ">
+      <div className="max-h-[500px] rounded-md border border-[#dee2e6] tablet:min-w-[680px]">
         {isSeller ? (
           <GigShowCaseSection profileUser={user} publicMode={false} />
         ) : (

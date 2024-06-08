@@ -23,7 +23,7 @@ export default async function layout({
     return result;
   });
   return (
-    <section className="flex max-h-[100dvh] max-w-[100dvw] flex-row bg-white px-6  py-6 text-center tablet:container">
+    <section className="flex max-h-[100dvh] max-w-[100dvw] flex-row bg-white px-6 py-6 text-center tablet:container">
       <div className="hidden max-h-full w-full justify-start rounded-md tablet:flex tablet:max-w-[350px] tablet:pr-4">
         <ConversationsSidebar
           initialConversations={conversations}

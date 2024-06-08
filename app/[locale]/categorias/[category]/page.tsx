@@ -50,8 +50,8 @@ const page = async ({ params }: pageProps) => {
   const faq = categoryFAQs.find((c) => c.category === category)?.faq;
 
   return (
-    <section className="flex min-h-[100dvh] max-w-[100dvw] flex-col gap-6 bg-white px-[24px] py-8 ">
-      <div className="flex  min-h-[240px] w-full flex-col items-center  justify-center text-center text-white">
+    <section className="flex min-h-[100dvh] max-w-[100dvw] flex-col gap-6 bg-white px-[24px] py-8">
+      <div className="flex min-h-[240px] w-full flex-col items-center justify-center text-center text-white">
         <Image
           src={
             !titlecardImage
@@ -61,15 +61,15 @@ const page = async ({ params }: pageProps) => {
           width={300}
           height={200}
           alt={categoryTitle}
-          className=" h-[200px]  w-[300px] rounded-md object-fill"
+          className="h-[200px] w-[300px] rounded-md object-fill"
         />
-        <h1 className="  text-3xl font-bold text-black ">{categoryTitle}</h1>
-        <h3 className=" items-center justify-center text-xl font-semibold text-black">
+        <h1 className="text-3xl font-bold text-black">{categoryTitle}</h1>
+        <h3 className="items-center justify-center text-xl font-semibold text-black">
           {categoryTagline}
         </h3>
       </div>
 
-      <div className="flex w-full flex-col ">
+      <div className="flex w-full flex-col">
         <span className="w-full px-6 py-4 text-xl font-bold opacity-90 desktop:px-0">
           {categoryPageText("popularGigs")}
           {categoryTitle}
@@ -87,7 +87,7 @@ const page = async ({ params }: pageProps) => {
         )}
       </div>
       <div className="flex min-w-full flex-col px-6">
-        <span className="w-full px-6 py-4  text-xl font-bold opacity-90 desktop:px-0">
+        <span className="w-full px-6 py-4 text-xl font-bold opacity-90 desktop:px-0">
           {categoryPageText("explore")}
           {categoryTitle}
         </span>
@@ -101,10 +101,10 @@ const page = async ({ params }: pageProps) => {
                 alt={sub.name}
                 className="flex max-h-[200px] max-w-[300px] rounded-lg"
               />
-              <h2 className="flex w-full py-4   text-xl font-bold opacity-90">
+              <h2 className="flex w-full py-4 text-xl font-bold opacity-90">
                 {sub.name}
               </h2>
-              <ul className="flex w-[70%] flex-col  items-center justify-start  gap-3">
+              <ul className="flex w-[70%] flex-col items-center justify-start gap-3">
                 {sub.listings.map((listing) => (
                   <Link
                     href={`/category/${category}`}
@@ -118,7 +118,7 @@ const page = async ({ params }: pageProps) => {
                       height="20"
                       fill="#000000"
                       viewBox="0 0 256 256"
-                      className="hidden group-hover:flex "
+                      className="hidden group-hover:flex"
                     >
                       <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
                     </svg>
@@ -133,19 +133,19 @@ const page = async ({ params }: pageProps) => {
             <Accordion type="multiple" key={sub.name}>
               <AccordionItem value="Subcategory">
                 <AccordionTrigger className="border-b px-6 hover:no-underline">
-                  <div className="flex w-full flex-row gap-3 ">
+                  <div className="flex w-full flex-row gap-3">
                     <Image
                       src={sub.thumbnail}
                       width={80}
                       height={50}
                       alt={sub.name}
-                      className=" max-h-[50px] max-w-[80px] rounded-lg"
+                      className="max-h-[50px] max-w-[80px] rounded-lg"
                     />
-                    <span className=" flex h-full w-full text-center text-lg font-bold  opacity-90">{`${sub.name}`}</span>
+                    <span className="flex h-full w-full text-center text-lg font-bold opacity-90">{`${sub.name}`}</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <ul className="flex flex-col items-start gap-3  bg-gray-50 py-[20px] text-lg text-gray-600">
+                  <ul className="flex flex-col items-start gap-3 bg-gray-50 py-[20px] text-lg text-gray-600">
                     {sub.listings.map((listing) => (
                       <Link
                         href={`/category/${category}`}
@@ -163,17 +163,17 @@ const page = async ({ params }: pageProps) => {
         </div>
       </div>
       <div className="flex min-w-full flex-col px-6">
-        <h2 className="w-full py-4  text-xl  font-bold opacity-90 desktop:text-center desktop:text-2xl">
+        <h2 className="w-full py-4 text-xl font-bold opacity-90 desktop:text-center desktop:text-2xl">
           {categoryPageText("faq")}
         </h2>
         {faq?.map((f) => (
-          <Accordion type="multiple" key={f.question} className=" border-b">
+          <Accordion type="multiple" key={f.question} className="border-b">
             <AccordionItem value="FAQ">
               <AccordionTrigger className="hover:no-underline">
                 <span className="flex h-full w-full text-start text-[16px] text-lg text-gray-600 opacity-90">{`${f.question}`}</span>
               </AccordionTrigger>
               <AccordionContent>
-                <span className="flex w-[80%]  flex-wrap text-left text-[16px] text-gray-600 opacity-90">
+                <span className="flex w-[80%] flex-wrap text-left text-[16px] text-gray-600 opacity-90">
                   {f.answer}
                 </span>
               </AccordionContent>

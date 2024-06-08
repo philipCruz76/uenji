@@ -10,7 +10,7 @@ const GigWizardSteps = ({}: GigWizardStepsProps) => {
   const { gigWizardSteps } = useGigWizardStepStore();
 
   return (
-    <ul className="flex h-full w-full  flex-row  justify-center  gap-2">
+    <ul className="flex h-full w-full flex-row justify-center gap-2">
       {gigWizardSteps.map((step) => (
         <li key={step.name} className="flex items-center justify-center">
           <div
