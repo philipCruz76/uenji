@@ -9,7 +9,7 @@ export function rateLimit() : Ratelimit {
 
   const ratelimit = new Ratelimit({
     redis: Redis.fromEnv(),
-    limiter: Ratelimit.slidingWindow(5, "5 s"),
+    limiter: Ratelimit.slidingWindow(50, "5 s"),
     analytics: true,
   });
   return ratelimit;
