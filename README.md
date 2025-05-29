@@ -1,190 +1,85 @@
-# Uenji - Freelancer Marketplace Platform
+# Uenji
 
-Uenji is a modern, full-stack freelancer marketplace platform that connects buyers with skilled freelancers. Built with Next.js 14 and featuring a comprehensive set of tools for managing freelance services, orders, and payments.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-green)](https://nodejs.org/)
 
-## ✨ Features
+A modern, full-stack freelancer marketplace platform that connects buyers with skilled freelancers. Built with Next.js 14 and designed for scale, featuring comprehensive tools for managing freelance services, orders, and payments.
 
-### 🏪 **Marketplace**
-- **Gig Creation**: Freelancers can create detailed service listings with packages, pricing, and delivery times
-- **Advanced Search**: Category-based browsing and search functionality
-- **User Profiles**: Comprehensive freelancer profiles with skills, education, and portfolio
+## Table of Contents
 
-### 💼 **Dual Dashboard System**
-- **Buyer Dashboard**: Order management, messaging, and service discovery
-- **Seller Dashboard**: Gig management, order tracking, and analytics
-- **View Switching**: Users can seamlessly switch between buyer and seller perspectives
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Environment Setup](#environment-setup)
+- [Database Setup](#database-setup)
+- [Project Structure](#project-structure)
+- [Development](#development)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
 
-### 💳 **Payment & Orders**
-- **Stripe Integration**: Secure payment processing with PaymentIntents
-- **Order Management**: Complete order lifecycle from creation to delivery
-- **Review System**: Post-completion rating and feedback system
+## Features
 
-### 💬 **Communication**
-- **Real-time Messaging**: Instant messaging system powered by Pusher
-- **Inbox Management**: Organized conversations between buyers and sellers
-- **Notifications**: Push notifications for important updates
+### Core Platform
+- **Marketplace**: Complete gig creation and discovery system with advanced search and categorization
+- **Dual Dashboard**: Seamless switching between buyer and seller perspectives with role-based interfaces
+- **Order Management**: Full lifecycle management from creation to completion with milestone tracking
+- **Review System**: Comprehensive rating and feedback system with quality metrics
 
-### 🌍 **Internationalization**
-- **Multi-language Support**: Ready for Portuguese (default) and English
-- **Extensible**: Support for 18+ languages (configurable)
-- **RTL Support**: Right-to-left language support for Arabic and Persian
+### Payment & Commerce
+- **Stripe Integration**: Secure payment processing with support for multiple currencies
+- **Subscription Management**: Flexible subscription models with automatic billing
+- **Revenue Analytics**: Detailed financial reporting and commission tracking
 
-### 🔐 **Authentication & Security**
+### Communication
+- **Real-time Messaging**: Instant messaging powered by Pusher with file sharing capabilities
+- **Notification System**: Multi-channel notifications for order updates and communications
+- **Video Conferencing**: Integrated video calls for project consultations
+
+### Security & Authentication
 - **NextAuth Integration**: Secure authentication with multiple providers
-- **Rate Limiting**: Upstash Redis-based rate limiting
-- **Email Verification**: Account activation via email tokens
-- **Password Reset**: Secure password recovery system
+- **Rate Limiting**: Redis-based rate limiting to prevent abuse
+- **Email Verification**: Secure account activation and password recovery
+- **Role-based Access Control**: Granular permissions system
 
-## 🛠️ Tech Stack
+### Internationalization
+- **Multi-language Support**: Currently supporting Portuguese (default) and English
+- **Extensible Localization**: Ready for 18+ additional languages
+- **RTL Support**: Right-to-left language support for Arabic and Persian markets
 
-### **Frontend**
-- **Next.js 14** - React framework with App Router
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first CSS framework
-- **Radix UI** - Accessible component primitives
-- **Framer Motion** - Smooth animations
-- **React Hook Form** - Form handling with Zod validation
+## Tech Stack
 
-### **Backend**
-- **Next.js API Routes** - Serverless backend functions
-- **Prisma** - Type-safe database ORM
-- **MongoDB** - NoSQL database
-- **NextAuth** - Authentication library
+**Frontend**
+- [Next.js 14](https://nextjs.org/) - React framework with App Router
+- [TypeScript](https://www.typescriptlang.org/) - Type-safe development
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Radix UI](https://www.radix-ui.com/) - Accessible component primitives
+- [Framer Motion](https://www.framer.com/motion/) - Animation library
 
-### **Integrations**
-- **Stripe** - Payment processing
-- **Pusher** - Real-time communications
-- **Cloudinary** - Image and file management
-- **AWS S3** - File storage
-- **Upstash Redis** - Caching and rate limiting
-- **Nodemailer** - Email services
+**Backend**
+- [Next.js API Routes](https://nextjs.org/docs/api-routes/introduction) - Serverless backend
+- [Prisma](https://www.prisma.io/) - Type-safe database ORM
+- [MongoDB](https://www.mongodb.com/) - NoSQL database
+- [NextAuth.js](https://next-auth.js.org/) - Authentication library
 
-## 🚀 Getting Started
+**Services & Integrations**
+- [Stripe](https://stripe.com/) - Payment processing
+- [Pusher](https://pusher.com/) - Real-time communications
+- [Cloudinary](https://cloudinary.com/) - Media management
+- [AWS S3](https://aws.amazon.com/s3/) - File storage
+- [Upstash Redis](https://upstash.com/) - Caching and rate limiting
+- [Nodemailer](https://nodemailer.com/) - Email services
 
-### Prerequisites
-- Node.js 18+ 
-- npm/yarn/pnpm
-- MongoDB database
-- Redis instance (Upstash recommended)
 
-### Installation
 
-1. **Clone the repository**
-```bash
-git clone <repository-url>
-cd uenji
-```
 
-2. **Install dependencies**
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-```
+## License
 
-3. **Environment Setup**
-Create a `.env.local` file with the following variables:
-```env
-# Database
-DATABASE_URL="your-mongodb-connection-string"
-
-# NextAuth
-NEXTAUTH_SECRET="your-nextauth-secret"
-NEXTAUTH_URL="http://localhost:3000"
-
-# Stripe
-STRIPE_SECRET_KEY="your-stripe-secret-key"
-STRIPE_PUBLISHABLE_KEY="your-stripe-publishable-key"
-
-# Pusher
-PUSHER_APP_ID="your-pusher-app-id"
-PUSHER_KEY="your-pusher-key"
-PUSHER_SECRET="your-pusher-secret"
-PUSHER_CLUSTER="your-pusher-cluster"
-
-# Upstash Redis
-UPSTASH_REDIS_REST_URL="your-upstash-url"
-UPSTASH_REDIS_REST_TOKEN="your-upstash-token"
-
-# Email
-EMAIL_FROM="your-email"
-EMAIL_SERVER_HOST="your-smtp-host"
-EMAIL_SERVER_PORT="587"
-EMAIL_SERVER_USER="your-email-user"
-EMAIL_SERVER_PASSWORD="your-email-password"
-
-# File Storage
-CLOUDINARY_CLOUD_NAME="your-cloudinary-name"
-CLOUDINARY_API_KEY="your-cloudinary-key"
-CLOUDINARY_API_SECRET="your-cloudinary-secret"
-```
-
-4. **Database Setup**
-```bash
-npx prisma generate
-npx prisma db push
-```
-
-5. **Run the development server**
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to view the application.
-
-## 📁 Project Structure
-
-```
-uenji/
-├── app/                    # Next.js App Router
-│   ├── [locale]/          # Internationalized routes
-│   │   ├── [username]/    # User profiles
-│   │   ├── categorias/    # Categories
-│   │   ├── checkout/      # Payment flow
-│   │   ├── inbox/         # Messaging
-│   │   ├── orders/        # Order management
-│   │   └── search/        # Search functionality
-│   └── api/               # API routes
-├── components/             # Reusable UI components
-│   ├── auth/              # Authentication components
-│   ├── dashboard/         # Buyer/Seller dashboards
-│   ├── gigs/              # Gig-related components
-│   ├── orders/            # Order management
-│   ├── ui/                # Base UI components
-│   └── ...
-├── lib/                   # Utility functions and configurations
-├── prisma/                # Database schema and migrations
-├── i18n/                  # Internationalization config
-├── types/                 # TypeScript type definitions
-└── constants/             # Application constants
-```
-
-## 🧪 Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build production application
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-- `npm run analyze` - Analyze bundle size
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is private and proprietary.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
 
-Built with ❤️ using Next.js and modern web technologies.
+Built with Next.js and modern web technologies.
